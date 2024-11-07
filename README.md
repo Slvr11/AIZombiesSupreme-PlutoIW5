@@ -87,7 +87,6 @@ After this, you can build the full patch_mp.ff file for the mod by running the O
 --load "<mw3InstallFolder>\zone\english\castle.ff"
 --load "<mw3InstallFolder>\zone\english\ny_harbor.ff"
 --load "<mw3InstallFolder>\zone\english\so_timetrial_london.ff"
---load "<mw3InstallFolder>\zone\dlc\so_rooftop_dubai_specops.ff"
 --load "<mw3InstallFolder>\zone\english\so_nyse_ny_manhattan.ff"
 --load "<mw3InstallFolder>\zone\english\so_rescue_hijack.ff"
 --load "<mw3InstallFolder>\zone\english\rescue_2.ff"
@@ -101,7 +100,7 @@ After this, you can build the full patch_mp.ff file for the mod by running the O
 --menu-no-optimization
 aizombies
 ```
-Replace `<mw3InstallFolder>` with your game folder path. Building this mod requires one DLC file (`so_rooftop_dubai_specops.ff`) to be installed in your MW3 folder. If you do not have this DLC file, OAT will fail to build.
+Replace `<mw3InstallFolder>` with your game folder path.
 
 To build the common_mp.ff file for the mod (which is just a stripped down version of the base game's file), you can just use OAT with these parameters:
 ```
