@@ -1,0 +1,29 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 2,
+    "constantTable": null,
+    "gameFlags": 0,
+    "maps": [
+        {
+            "firstCharacter": 99,
+            "image": "sparks_rndhit_64",
+            "lastCharacter": 112,
+            "sampleState": 2,
+            "semantic": 2,
+            "typeHash": 2695565377
+        }
+    ],
+    "name": "cloud_spark_rndhit_64_sort_outdoor",
+    "sortKey": 51,
+    "stateFlags": 19,
+    "stateMap": [
+        [
+            421628194,
+            12
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "particle_cloud_outdoor_add",
+    "unknown": 0
+}

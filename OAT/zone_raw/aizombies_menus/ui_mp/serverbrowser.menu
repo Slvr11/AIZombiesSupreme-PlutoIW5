@@ -1,0 +1,2780 @@
+{
+    menuDef
+    {
+        name                        "serverbrowser"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_mainmenu_mp"
+        onOpen
+        {
+            if (dvarbool(kill_dedicatedserver) == 0)
+            {
+                setdvar ui_sbHasServerSelected 0;
+                setdvar ui_sbEnableAddToFavorite 0;
+                uiScript loadArenas;
+                setLocalVarInt ui_sbFilterPanel 0;
+                setLocalVarString ui_sb_toolTip "";
+                setLocalVarString ui_internetFilterDesc "";
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_tempMapFilterKey dvarstring(ui_filterMapKey);
+                setLocalVarString ui_tempMapFilterName dvarstring(ui_filterMapName);
+                setLocalVarString ui_tempGameTypeFilterKey dvarstring(ui_joinGameTypeKey);
+                setLocalVarString ui_tempGameTypeFilterName dvarstring(ui_joinGameTypeName);
+                setLocalVarString ui_tempMaxPingName dvarstring(ui_maxPingName);
+                setLocalVarString ui_internetFilterDesc FUNC_130();
+                uiScript UpdateFilter;
+            }
+            else
+            {
+                close self;
+            }
+        }
+        onESC
+        {
+            close self;
+            close serverinfo_popmenu;
+        }
+        execKeyInt 167
+        {
+            open serverFilters;
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        240 372 540 16 1 1
+            style                       3
+            decoration                  
+            visible                     when(0);
+            textscale                   0.55
+            background                  "motd_ticker_bg"
+        }
+        itemDef
+        {
+            rect                        250 372 500 16 1 1
+            decoration                  
+            type                        20
+            visible                     when(0);
+            textscale                   0.34
+            speed                       50
+            newsfeed                    1
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        237.5 -36 640 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "background_image_blur_less_dest_alpha_masked"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_SERVERS_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_SERVERS_CAPS"), 9, 0.5) <= 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_SERVERS_CAPS");
+            exp forecolor a             select(((getTextWidth(locstring("@MENU_SERVERS_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_SERVERS_CAPS"), 9, 0.4) <= 200)), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 1 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_SERVERS_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_SERVERS_CAPS"), 9, 0.4) > 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -63.933 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when((("USE_SMALLER_TITLE_TEXT")));
+            textalign                   10
+            textscale                   0.4
+            textfont                    9
+            exp text                    "@MENU_SERVERS_CAPS";
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -426.667 -36 853.333 480 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -141.667 25.667 283.333 1.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "linedoublesided"
+        }
+        itemDef
+        {
+            text                        "@MENU_SERVERS_CAPS"
+            rect                        -138.333 3 276.667 24.233 2 1
+            style                       1
+            decoration                  
+            visible                     1
+            textalign                   9
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "dedicatedPlayerCount"
+            rect                        6 24 70 20 0 0
+            decoration                  
+            type                        8
+            border                      1
+            visible                     1
+            ownerdraw                   383
+            textaligny                  18
+            textscale                   0.35
+            textfont                    1
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_PLAYER_COUNT";
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+        }
+        itemDef
+        {
+            name                        "dedicatedServerCount"
+            rect                        6 44 70 20 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   382
+            textaligny                  18
+            textscale                   0.35
+            textfont                    1
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_SERVER_COUNT";
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+        }
+        itemDef
+        {
+            rect                        0 97 640 2 4 4
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            text                        "@MENU_INTERNET_CAPS"
+            rect                        8 70 120 24 0 0
+            style                       1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textalignx                  2
+            textscale                   0.35
+            textfont                    1
+            backcolor                   0.45 0.45 0.45 0.45
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_TAB_INTERNET_SERVERS";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                if (dvarint(ui_netSource) != 1)
+                {
+                    play mouse_click;
+                    if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                    {
+                        setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                        setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                    {
+                        setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                        setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                    {
+                        setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                        uiScript RefreshFilter;
+                    }
+                    setdvar ui_netSource 1;
+                    setdvar ui_sbHasServerSelected 0;
+                    setdvar ui_sbEnableAddToFavorite 0;
+                    setLocalVarString ui_internetFilterDesc FUNC_130();
+                    uiScript UpdateFilter;
+                }
+            }
+            exp backcolor r             select((dvarint(ui_netSource) == 1), 0.3686, 0.45);
+            exp backcolor g             select((dvarint(ui_netSource) == 1), 0.4431, 0.45);
+            exp backcolor b             select((dvarint(ui_netSource) == 1), 0.3333, 0.45);
+            exp backcolor a             select((dvarint(ui_netSource) == 1), 1, 0.45);
+        }
+        itemDef
+        {
+            rect                        8 94 120 3 0 0
+            style                       1
+            decoration                  
+            visible                     when(dvarint(ui_netSource) == 1);
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            text                        "@MENU_FAVORITES_CAPS"
+            rect                        134 70 120 24 0 0
+            style                       1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textalignx                  2
+            textscale                   0.35
+            textfont                    1
+            backcolor                   0.45 0.45 0.45 0.45
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_TAB_FAVORITE_SERVERS";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                if (dvarint(ui_netSource) != 2)
+                {
+                    play mouse_click;
+                    if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                    {
+                        setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                        setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                    {
+                        setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                        setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                    {
+                        setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                        uiScript RefreshFilter;
+                    }
+                    setdvar ui_netSource 2;
+                    setdvar ui_sbHasServerSelected 0;
+                    setdvar ui_sbEnableAddToFavorite 0;
+                    setLocalVarString ui_internetFilterDesc FUNC_130();
+                    uiScript UpdateFilter;
+                }
+            }
+            exp backcolor r             select((dvarint(ui_netSource) == 2), 0.3686, 0.45);
+            exp backcolor g             select((dvarint(ui_netSource) == 2), 0.4431, 0.45);
+            exp backcolor b             select((dvarint(ui_netSource) == 2), 0.3333, 0.45);
+            exp backcolor a             select((dvarint(ui_netSource) == 2), 1, 0.45);
+        }
+        itemDef
+        {
+            rect                        134 94 120 3 0 0
+            style                       1
+            decoration                  
+            visible                     when(dvarint(ui_netSource) == 2);
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            text                        "@MENU_HISTORY_CAPS"
+            rect                        260 70 120 24 0 0
+            style                       1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textalignx                  2
+            textscale                   0.35
+            textfont                    1
+            backcolor                   0.45 0.45 0.45 0.45
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_TAB_HISTORY_SERVERS";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                if (dvarint(ui_netSource) != 3)
+                {
+                    play mouse_click;
+                    if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                    {
+                        setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                        setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                    {
+                        setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                        setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                    {
+                        setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                        uiScript RefreshFilter;
+                    }
+                    setdvar ui_netSource 3;
+                    setdvar ui_sbHasServerSelected 0;
+                    setdvar ui_sbEnableAddToFavorite 0;
+                    setLocalVarString ui_internetFilterDesc FUNC_130();
+                    uiScript UpdateFilter;
+                }
+            }
+            exp backcolor r             select((dvarint(ui_netSource) == 3), 0.3686, 0.45);
+            exp backcolor g             select((dvarint(ui_netSource) == 3), 0.4431, 0.45);
+            exp backcolor b             select((dvarint(ui_netSource) == 3), 0.3333, 0.45);
+            exp backcolor a             select((dvarint(ui_netSource) == 3), 1, 0.45);
+        }
+        itemDef
+        {
+            rect                        260 94 120 3 0 0
+            style                       1
+            decoration                  
+            visible                     when(dvarint(ui_netSource) == 3);
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            text                        "@MENU_LAN"
+            rect                        386 70 120 24 0 0
+            style                       1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textalignx                  2
+            textscale                   0.35
+            textfont                    1
+            backcolor                   0.45 0.45 0.45 0.45
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_TAB_LAN_SERVERS";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                if (dvarint(ui_netSource) != 0)
+                {
+                    play mouse_click;
+                    if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                    {
+                        setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                        setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                    {
+                        setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                        setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                    {
+                        setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                        uiScript RefreshFilter;
+                    }
+                    setdvar ui_netSource 0;
+                    setdvar ui_sbHasServerSelected 0;
+                    setdvar ui_sbEnableAddToFavorite 0;
+                    setLocalVarString ui_internetFilterDesc FUNC_130();
+                    uiScript UpdateFilter;
+                }
+            }
+            exp backcolor r             select((dvarint(ui_netSource) == 0), 0.3686, 0.45);
+            exp backcolor g             select((dvarint(ui_netSource) == 0), 0.4431, 0.45);
+            exp backcolor b             select((dvarint(ui_netSource) == 0), 0.3333, 0.45);
+            exp backcolor a             select((dvarint(ui_netSource) == 0), 1, 0.45);
+        }
+        itemDef
+        {
+            rect                        386 94 120 3 0 0
+            style                       1
+            decoration                  
+            visible                     when(dvarint(ui_netSource) == 0);
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            text                        "@MENU_FRIENDS_CAP"
+            rect                        512 70 120 24 0 0
+            style                       1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textalignx                  2
+            textscale                   0.35
+            textfont                    1
+            backcolor                   0.45 0.45 0.45 0.45
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_TAB_FRIEND_SERVERS";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                if (dvarint(ui_netSource) != 4)
+                {
+                    play mouse_click;
+                    if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                    {
+                        setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                        setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                    {
+                        setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                        setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                        uiScript RefreshFilter;
+                    }
+                    if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                    {
+                        setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                        uiScript RefreshFilter;
+                    }
+                    setdvar ui_netSource 4;
+                    setdvar ui_sbHasServerSelected 0;
+                    setdvar ui_sbEnableAddToFavorite 0;
+                    setLocalVarString ui_internetFilterDesc FUNC_130();
+                    uiScript UpdateFilter;
+                }
+            }
+            exp backcolor r             select((dvarint(ui_netSource) == 4), 0.3686, 0.45);
+            exp backcolor g             select((dvarint(ui_netSource) == 4), 0.4431, 0.45);
+            exp backcolor b             select((dvarint(ui_netSource) == 4), 0.3333, 0.45);
+            exp backcolor a             select((dvarint(ui_netSource) == 4), 1, 0.45);
+        }
+        itemDef
+        {
+            rect                        512 94 120 3 0 0
+            style                       1
+            decoration                  
+            visible                     when(dvarint(ui_netSource) == 4);
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            name                        "password"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_PASSWORD_PROTECTION";
+                setitemcolor passwordColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor passwordColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 0;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor passwordColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  6;
+            exp rect w                  22;
+        }
+        itemDef
+        {
+            name                        "passwordicon"
+            rect                        0 103 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "sb_password_protected"
+            exp rect x                  6 + ((22 - 16) / 2);
+        }
+        itemDef
+        {
+            name                        "server"
+            text                        "@MENU_SERVER NAME"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_SERVER_NAME";
+                setitemcolor serverColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor serverColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 1;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor serverColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  (6 + 22);
+            exp rect w                  249;
+        }
+        itemDef
+        {
+            name                        "map"
+            text                        "@MENU_MAP_NAME"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_MAP_NAME";
+                setitemcolor mapColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor mapColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 2;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor mapColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  ((6 + 22) + 249);
+            exp rect w                  90;
+        }
+        itemDef
+        {
+            name                        "players"
+            text                        "@MENU_NUMPLAYERS"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_PLAYER_COUNT";
+                setitemcolor playerColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor playerColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 3;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor playerColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  (((6 + 22) + 249) + 90);
+            exp rect w                  48;
+        }
+        itemDef
+        {
+            name                        "type"
+            text                        "@MENU_GAME_TYPE1"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_GAME_MODE";
+                setitemcolor typeColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor typeColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 4;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor typeColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  ((((6 + 22) + 249) + 90) + 48);
+            exp rect w                  151;
+        }
+        itemDef
+        {
+            name                        "voice"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_TEAM_CHAT";
+                setitemcolor voiceColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor voiceColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 5;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor voiceColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  (((((6 + 22) + 249) + 90) + 48) + 151);
+            exp rect w                  24;
+        }
+        itemDef
+        {
+            name                        "voiceicon"
+            rect                        0 103 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "sb_voice"
+            exp rect x                  (((((6 + 22) + 249) + 90) + 48) + 151) + ((24 - 16) / 2);
+        }
+        itemDef
+        {
+            name                        "ping"
+            text                        "@MENU_PING"
+            group                       "grpListHeader"
+            rect                        0 103 10 16 0 0
+            style                       1
+            type                        1
+            border                      1
+            visible                     1
+            textalign                   8
+            textalignx                  2
+            textscale                   0.25
+            textfont                    1
+            backcolor                   0.3 0.5 0.2 0.3
+            bordercolor                 0.1 0.1 0.1 0.25
+            onFocus
+            {
+                setLocalVarInt ui_mouseOverRow - 1;
+                setLocalVarInt ui_mouseOverColumn - 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_COL_HEADER_PING";
+                setitemcolor pingColumn bordercolor 1 1 1 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+                setitemcolor pingColumn bordercolor ".5" ".5" ".5" ".5";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                uiScript ServerSort 6;
+                setitemcolor grpListHeader backcolor ".3" ".5" ".2" ".3";
+                setitemcolor self backcolor ".6039" ".6353" ".6039" 1;
+                setitemcolor grpColumn backcolor 0 0 0 0;
+                setitemcolor pingColumn backcolor 0 0 0 ".2";
+            }
+            exp rect x                  ((((((6 + 22) + 249) + 90) + 48) + 151) + 24);
+            exp rect w                  40;
+        }
+        itemDef
+        {
+            name                        "serverbrowserlist"
+            rect                        6 121 624 66 0 0
+            type                        6
+            border                      1
+            borderSize                  2
+            visible                     1
+            textalign                   1
+            textscale                   0.25
+            textfont                    1
+            bordercolor                 0.5 0.5 0.5 0.5
+            outlinecolor                0.3686 0.4431 0.3333 1
+            mouseExit
+            {
+                setitemcolor serverbrowserlist forecolor 1 1 1 1;
+            }
+            action
+            {
+                play mouse_click;
+            }
+            exp rect h                  FUNC_131();
+            elementwidth                120
+            elementheight               15
+            feeder                      2
+            columns                     7
+                                        6 0 22 0 10 0
+                                        28 0 249 0 100 0
+                                        277 0 90 0 50 0
+                                        367 0 48 0 10 0
+                                        415 0 151 0 50 0
+                                        568 0 22 0 14 0
+                                        590 0 40 0 20 0
+            doubleclick
+            {
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                if (getFeederData("serverbrowserlist", "locked") == 1)
+                {
+                    setLocalVarString sb_password_title "@MENU_PASSWORD";
+                    setLocalVarInt server_browser_password_required 1;
+                }
+                else
+                {
+                    if (getFeederData("serverbrowserlist", "locked") == 2)
+                    {
+                        setLocalVarString sb_password_title "@MENU_PRIVATE_PASSWORD";
+                        setLocalVarInt server_browser_password_required 1;
+                    }
+                    else
+                    {
+                        setLocalVarInt server_browser_password_required 0;
+                    }
+                }
+                if (getFeederData("serverbrowserlist", "selected") == 1 && getTimeSinceLastDoubleClick() < 500)
+                {
+                    if (getFeederData("serverbrowserlist", "locked") == 1)
+                    {
+                        setLocalVarString sb_password_title "@MENU_PASSWORD";
+                        open popup_server_browser_password;
+                    }
+                    else
+                    {
+                        if (getFeederData("serverbrowserlist", "locked") == 2)
+                        {
+                            setLocalVarString sb_password_title "@MENU_PRIVATE_PASSWORD";
+                            open popup_server_browser_password;
+                        }
+                        else
+                        {
+                            uiScript JoinServer;
+                        }
+                    }
+                }
+                setdvar ui_sbHasServerSelected 1;
+                setdvar ui_sbEnableAddToFavorite 0;
+                if (dvarint(ui_netSource) != 0)
+                {
+                    if (getFeederData("serverbrowserlist", "isSelectedLANServer"))
+                    {
+                        setdvar ui_sbEnableAddToFavorite 0;
+                    }
+                    else
+                    {
+                        setdvar ui_sbEnableAddToFavorite 1;
+                    }
+                }
+                uiScript SelectServer;
+            }
+        }
+        itemDef
+        {
+            name                        "passwordColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (0 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 0;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  6;
+            exp rect w                  22;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            name                        "serverColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (1 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 1;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  (6 + 22);
+            exp rect w                  249;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            name                        "mapColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (2 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 2;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  ((6 + 22) + 249);
+            exp rect w                  90;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            name                        "playerColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (3 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 3;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  (((6 + 22) + 249) + 90);
+            exp rect w                  48;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            name                        "typeColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (4 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 4;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  ((((6 + 22) + 249) + 90) + 48);
+            exp rect w                  151;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            name                        "voiceColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (5 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 5;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  (((((6 + 22) + 249) + 90) + 48) + 151);
+            exp rect w                  24;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            name                        "pingColumn"
+            group                       "grpColumn"
+            rect                        0 121 10 70 0 0
+            style                       1
+            decoration                  
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            bordercolor                 0.5 0.5 0.5 0.5
+            mouseEnter
+            {
+                if (6 != localvarint("ui_mouseOverColumn"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverColumn 6;
+                if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                {
+                    if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                    {
+                        uiScript ShowCurrentServerTooltip;
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+                else
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+            }
+            exp rect x                  ((((((6 + 22) + 249) + 90) + 48) + 151) + 24);
+            exp rect w                  40;
+            exp rect h                  FUNC_131();
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (0 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 0;
+                if (0 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 0) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (1 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 1;
+                if (1 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 1) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (2 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 2;
+                if (2 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 2) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (3 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 3;
+                if (3 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 3) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (4 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 4;
+                if (4 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 4) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (5 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 5;
+                if (5 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 5) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (6 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 6;
+                if (6 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 6) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (7 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 7;
+                if (7 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 7) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (8 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 8;
+                if (8 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 8) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (9 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 9;
+                if (9 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 9) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (10 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 10;
+                if (10 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 10) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (11 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 11;
+                if (11 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 11) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (12 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 12;
+                if (12 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 12) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (13 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 13;
+                if (13 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 13) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (14 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 14;
+                if (14 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 14) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (15 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 15;
+                if (15 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 15) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (16 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 16;
+                if (16 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 16) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (17 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 17;
+                if (17 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 17) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (18 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 18;
+                if (18 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 18) + 2);
+        }
+        itemDef
+        {
+            group                       "grpRows"
+            rect                        6 121 624 15 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            mouseEnter
+            {
+                if (19 != localvarint("ui_mouseOverRow"))
+                {
+                    setLocalVarInt sb_cellTimer milliseconds();
+                }
+                setLocalVarInt ui_mouseOverRow 19;
+                if (19 > int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start")))))
+                {
+                    setLocalVarString ui_sb_toolTip "";
+                }
+                else
+                {
+                    if ((int(getFeederData("serverbrowserlist", "count")) > 0) && (localvarint("ui_mouseOverRow") >= 0))
+                    {
+                        if (localvarint("ui_mouseOverRow") <= (int(getFeederData("serverbrowserlist", "end")) - int(getFeederData("serverbrowserlist", "start"))))
+                        {
+                            uiScript ShowCurrentServerTooltip;
+                        }
+                        else
+                        {
+                            setLocalVarString ui_sb_toolTip "";
+                        }
+                    }
+                    else
+                    {
+                        setLocalVarString ui_sb_toolTip "";
+                    }
+                }
+            }
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + (15 * 19) + 2);
+        }
+        itemDef
+        {
+            name                        "background_bottom_bar"
+            rect                        0 421 640 2 4 4
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+            exp rect y                  (((70 + 24 + 3 + 6) + 16 + 2) + FUNC_131()) + 3;
+        }
+        itemDef
+        {
+            name                        "changeFilters"
+            text                        "@PLATFORM_FILTER_SHORTCUT"
+            rect                        6 422 96 22 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_BTN_FILTERS";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_BTN_FILTERS";
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                open serverFilters;
+            }
+            exp backcolor r             select(localvarint("ui_sbFilterPanel"), 0.6039, 0.3686);
+            exp backcolor g             select(localvarint("ui_sbFilterPanel"), 0.6353, 0.4431);
+            exp backcolor b             select(localvarint("ui_sbFilterPanel"), 0.6039, 0.3333);
+            exp backcolor a             select(localvarint("ui_sbFilterPanel"), 1, 1);
+        }
+        itemDef
+        {
+            name                        "refreshSource"
+            rect                        106 422 96 22 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip select(isServerListRefreshing(), "@MENU_SB_TOOLTIP_BTN_CANCEL_REFRESHING", "@MENU_SB_TOOLTIP_BTN_REFRESH");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip select(isServerListRefreshing(), "@MENU_SB_TOOLTIP_BTN_CANCEL_REFRESHING", "@MENU_SB_TOOLTIP_BTN_REFRESH");
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (isServerListRefreshing())
+                {
+                    uiScript StopRefresh;
+                }
+                else
+                {
+                    setLocalVarString ui_internetFilterDesc FUNC_130();
+                    uiScript RefreshServers;
+                }
+                setLocalVarString ui_sb_toolTip "";
+            }
+            exp text                    select(isServerListRefreshing(), "@MENU_CANCEL_REFRESH", "@MENU_REFRESH");
+        }
+        itemDef
+        {
+            name                        "serverinfo"
+            text                        "@MENU_SERVER_INFO"
+            rect                        206 422 96 22 0 0
+            style                       1
+            type                        1
+            visible                     1
+            disabled                    when(!dvarbool(ui_sbHasServerSelected));
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip select(dvarbool(ui_sbHasServerSelected), "@MENU_SB_TOOLTIP_BTN_SERVER_INFO_ENABLED", "@MENU_SB_TOOLTIP_BTN_SERVER_INFO_DISABLED");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip select(dvarbool(ui_sbHasServerSelected), "@MENU_SB_TOOLTIP_BTN_SERVER_INFO_ENABLED", "@MENU_SB_TOOLTIP_BTN_SERVER_INFO_DISABLED");
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                open serverinfo_popmenu;
+            }
+            dvarTest                    "ui_sbHasServerSelected"
+            disableDvar                 { "0" }
+            exp disabled                !dvarbool(ui_sbHasServerSelected);
+            exp backcolor r             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.3686);
+            exp backcolor g             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.4431);
+            exp backcolor b             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.3333);
+            exp backcolor a             select(!dvarbool(ui_sbHasServerSelected), 0.45, 1);
+        }
+        itemDef
+        {
+            name                        "createFavorite"
+            text                        "@MENU_ADD_TO_FAVORITES"
+            rect                        306 422 96 22 0 0
+            style                       1
+            type                        1
+            visible                     when(dvarint(ui_netSource) != 2);
+            disabled                    when(!dvarbool(ui_sbEnableAddToFavorite));
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip select(!(dvarbool(ui_sbEnableAddToFavorite)), "@MENU_SB_TOOLTIP_BTN_ADD_TO_FAVORITES_DISABLED", "@MENU_SB_TOOLTIP_BTN_ADD_TO_FAVORITES_ENABLED");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip select(!(dvarbool(ui_sbEnableAddToFavorite)), "@MENU_SB_TOOLTIP_BTN_ADD_TO_FAVORITES_DISABLED", "@MENU_SB_TOOLTIP_BTN_ADD_TO_FAVORITES_ENABLED");
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                uiScript addFavorite;
+                open add_fav_message_popmenu;
+            }
+            dvarTest                    "ui_sbEnableAddToFavorite"
+            disableDvar                 { "0" }
+            exp disabled                !dvarbool(ui_sbEnableAddToFavorite);
+            exp backcolor r             select(!dvarbool(ui_sbEnableAddToFavorite), 0.45, 0.3686);
+            exp backcolor g             select(!dvarbool(ui_sbEnableAddToFavorite), 0.45, 0.4431);
+            exp backcolor b             select(!dvarbool(ui_sbEnableAddToFavorite), 0.45, 0.3333);
+            exp backcolor a             select(!dvarbool(ui_sbEnableAddToFavorite), 0.45, 1);
+        }
+        itemDef
+        {
+            name                        "removeFavorite"
+            text                        "@MENU_REMOVE"
+            rect                        306 422 96 22 0 0
+            style                       1
+            type                        1
+            visible                     when(dvarint(ui_netSource) == 2);
+            disabled                    when(!dvarbool(ui_sbHasServerSelected));
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip select((!(dvarbool(ui_sbHasServerSelected))), "@MENU_SB_TOOLTIP_BTN_REMOVE_FROM_FAVORITES_DISABLED", "@MENU_SB_TOOLTIP_BTN_REMOVE_FROM_FAVORITES_ENABLED");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip select((!(dvarbool(ui_sbHasServerSelected))), "@MENU_SB_TOOLTIP_BTN_REMOVE_FROM_FAVORITES_DISABLED", "@MENU_SB_TOOLTIP_BTN_REMOVE_FROM_FAVORITES_ENABLED");
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                uiScript deleteFavorite;
+                open del_fav_message_popmenu setdvar ui_sbHasServerSelected 0;
+                setdvar ui_sbEnableAddToFavorite 0;
+            }
+            dvarTest                    "ui_sbHasServerSelected"
+            disableDvar                 { "0" }
+            exp disabled                !dvarbool(ui_sbHasServerSelected);
+            exp backcolor r             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.3686);
+            exp backcolor g             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.4431);
+            exp backcolor b             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.3333);
+            exp backcolor a             select(!dvarbool(ui_sbHasServerSelected), 0.45, 1);
+        }
+        itemDef
+        {
+            name                        "connect"
+            text                        "@MENU_CONNECT"
+            rect                        406 422 96 22 0 0
+            style                       1
+            type                        1
+            visible                     1
+            disabled                    when(!dvarbool(ui_sbHasServerSelected));
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip select(!(dvarbool(ui_sbHasServerSelected)), "@MENU_SB_TOOLTIP_BTN_CONNECT_DISABLED", "@MENU_SB_TOOLTIP_BTN_CONNECT_ENABLED");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip select(!(dvarbool(ui_sbHasServerSelected)), "@MENU_SB_TOOLTIP_BTN_CONNECT_DISABLED", "@MENU_SB_TOOLTIP_BTN_CONNECT_ENABLED");
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarint("server_browser_password_required") == 1)
+                {
+                    open popup_server_browser_password;
+                }
+                else
+                {
+                    uiScript JoinServer;
+                }
+            }
+            dvarTest                    "ui_sbHasServerSelected"
+            disableDvar                 { "0" }
+            exp disabled                !dvarbool(ui_sbHasServerSelected);
+            exp backcolor r             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.3686);
+            exp backcolor g             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.4431);
+            exp backcolor b             select(!dvarbool(ui_sbHasServerSelected), 0.45, 0.3333);
+            exp backcolor a             select(!dvarbool(ui_sbHasServerSelected), 0.45, 1);
+        }
+        itemDef
+        {
+            rect                        367 0 262 180.519 0 0
+            style                       1
+            decoration                  
+            visible                     when((!(((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")) && (int(getFeederData("serverbrowserlist", "count")) > 0) && (((milliseconds() - localvarint("sb_cellTimer")) > 1000) && (localvarint("ui_mouseOverColumn") == 2) && ("SB_PREVIEW_TOOLTIP_MAP_MAGE_MATERIAL" != "") && (((localvarint("ui_mouseOverRow")) == 0) || ((int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start"))))) == (localvarint("ui_mouseOverRow")))))));
+            textscale                   0.55
+            backcolor                   0.2039 0.2235 0.2118 1
+            exp rect y                  int(FUNC_134()) - 2;
+        }
+        itemDef
+        {
+            name                        "mapImageBox"
+            rect                        369 0 258 146.519 0 0
+            style                       3
+            decoration                  
+            visible                     when((!(((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")) && (int(getFeederData("serverbrowserlist", "count")) > 0) && (((milliseconds() - localvarint("sb_cellTimer")) > 1000) && (localvarint("ui_mouseOverColumn") == 2) && ("SB_PREVIEW_TOOLTIP_MAP_MAGE_MATERIAL" != "") && (((localvarint("ui_mouseOverRow")) == 0) || ((int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start"))))) == (localvarint("ui_mouseOverRow")))))));
+            textscale                   0.55
+            exp material                (getFeederData("serverbrowserlist", "currentMapImageName"));
+            exp rect y                  int(FUNC_134());
+        }
+        itemDef
+        {
+            name                        "mapPreviewDesc"
+            rect                        369 0 258 30 0 0
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when((!(((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")) && (int(getFeederData("serverbrowserlist", "count")) > 0) && (((milliseconds() - localvarint("sb_cellTimer")) > 1000) && (localvarint("ui_mouseOverColumn") == 2) && ("SB_PREVIEW_TOOLTIP_MAP_MAGE_MATERIAL" != "") && (((localvarint("ui_mouseOverRow")) == 0) || ((int((int(getFeederData("serverbrowserlist", "selection"))) - (int(getFeederData("serverbrowserlist", "start"))))) == (localvarint("ui_mouseOverRow")))))));
+            textalign                   4
+            textscale                   0.25
+            textfont                    3
+            backcolor                   0.2039 0.2235 0.2118 1
+            exp text                    "@" + getFeederData("serverbrowserlist", "currentMapLongDesc");
+            exp rect y                  int(FUNC_134()) + (184 * (258 / 324));
+        }
+        itemDef
+        {
+            name                        "tooltipBox"
+            rect                        7 460 520 20 0 0
+            decoration                  
+            visible                     when(localvarstring("ui_sb_toolTip") != "");
+            textscale                   0.3
+            textfont                    3
+            exp text                    localvarstring("ui_sb_toolTip");
+        }
+        itemDef
+        {
+            name                        "refreshdate"
+            rect                        7 472 520 10 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   347
+            textscale                   0.25
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "serverQueryMsg"
+            rect                        206 464 170 10 0 0
+            decoration                  
+            visible                     when((dvarint(ui_netSource) == 1));
+            textaligny                  8
+            textscale                   0.25
+            textfont                    3
+            mouseEnter
+            {
+                setLocalVarString ui_sb_toolTip select((localvarstring("ui_internetFilterDesc") == ""), "", "@MENU_SB_TOOLTIP_INTERNET_FILTER");
+                play mouse_over;
+            }
+            mouseExit
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            exp text                    localvarstring("ui_internetFilterDesc");
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "serverbrowser";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "serverbrowser"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "serverbrowser"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "serverbrowser"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "serverbrowser"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "serverbrowser"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+    }
+}

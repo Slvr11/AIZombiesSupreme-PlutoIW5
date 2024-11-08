@@ -1,0 +1,31 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 4,
+    "constantTable": [
+        {
+            "literal": [
+                1.0,
+                1.0,
+                0.0,
+                0.0
+            ],
+            "name": "uvScale",
+            "nameHash": 3809220315
+        }
+    ],
+    "gameFlags": 0,
+    "maps": null,
+    "name": "blur_apply_film",
+    "sortKey": 47,
+    "stateFlags": 3,
+    "stateMap": [
+        [
+            403870053,
+            3759013890
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "blur_apply_film",
+    "unknown": 0
+}

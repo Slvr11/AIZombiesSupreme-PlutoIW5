@@ -1,0 +1,63 @@
+{
+    "_type": "attachment",
+    "_version": 1,
+    "addOns": {
+        "motionTracker": false,
+        "silenced": true
+    },
+    "adsSettingsScale": 0.0,
+    "adsSettingsScaleMain": 0.0,
+    "ammunitionScale": 0.0,
+    "damageScale": 0.75,
+    "damageScaleMin": 0.75,
+    "displayName": "WEAPON_SILENCER_ATTACHMENT",
+    "fireTimersScale": 1.0,
+    "gunKickScale": 0.0,
+    "hideIronSightsWithThisAttachment": false,
+    "hipSpreadScale": 0.0,
+    "idleSettingsScale": 0.0,
+    "loadIndex": 0,
+    "reticleViewModels": [],
+    "rumbles": {
+        "fireRumble": "silencer_fire"
+    },
+    "shareAmmoWithAlt": false,
+    "stateTimersScale": 1.0,
+    "type": "other",
+    "viewCenterScale": 0.0,
+    "viewKickScale": 0.0,
+    "viewModels": [
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01",
+        "viewmodel_silencer_01"
+    ],
+    "weapClass": "rifle",
+    "weaponType": "none",
+    "worldModels": [
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01",
+        "weapon_silencer_01"
+    ]
+}

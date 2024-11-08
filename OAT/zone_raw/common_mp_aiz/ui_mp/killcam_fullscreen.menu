@@ -1,0 +1,220 @@
+{
+    menuDef
+    {
+        name                        "killcam_fullscreen"
+        rect                        0 0 640 480 4 4
+        visible                     when(FUNC_85());
+        itemDef
+        {
+            rect                        0 -84 640 138 4 8
+            style                       3
+            decoration                  
+            visible                     when(FUNC_70() && (FUNC_82() || (FUNC_81() && FUNC_83())));
+            textscale                   0.55
+            forecolor                   0.49 0.05 0.03 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -65 640 138 4 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_70() && (FUNC_82() || (FUNC_81() && FUNC_83())));
+            textscale                   0.55
+            forecolor                   0.49 0.05 0.03 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -64 640 138 4 8
+            style                       3
+            decoration                  
+            visible                     when(FUNC_70() && FUNC_81() && FUNC_84());
+            textscale                   0.55
+            forecolor                   0.49 0.05 0.03 0.5
+            background                  "killcam_blur"
+        }
+        itemDef
+        {
+            rect                        0 -85 640 -138 4 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_70() && FUNC_81() && FUNC_84());
+            textscale                   0.55
+            forecolor                   0.49 0.05 0.03 0.5
+            background                  "killcam_blur"
+        }
+        itemDef
+        {
+            rect                        0 -84 640 138 4 8
+            style                       3
+            decoration                  
+            visible                     when(FUNC_69() && (FUNC_82() || (FUNC_81() && FUNC_83())));
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -65 640 138 4 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_69() && (FUNC_82() || (FUNC_81() && FUNC_83())));
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -64 640 138 4 8
+            style                       3
+            decoration                  
+            visible                     when(FUNC_69() && FUNC_81() && FUNC_84());
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            background                  "killcam_blur"
+        }
+        itemDef
+        {
+            rect                        0 -85 640 -138 4 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_69() && FUNC_81() && FUNC_84());
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            background                  "killcam_blur"
+        }
+        itemDef
+        {
+            text                        "@MP_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 0 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_HEADSHOT_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 1 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_MELEE_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 2 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_HIPFIRE_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 3 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_ADS_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 4 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_GL_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 5 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_GL_IMPACT_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 6 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_CAMPER_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_71() == 7 && FUNC_70() && FUNC_82());
+            textalign                   1
+            textscale                   0.9
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_FINAL_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_69() == 1 && FUNC_82());
+            textalign                   1
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_ROUND_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_69() == 2 && FUNC_82());
+            textalign                   1
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_TIMELIMIT_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_69() == 3 && FUNC_82());
+            textalign                   1
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@MP_SCORELIMIT_KILLCAM"
+            rect                        0 36 1 1 2 8
+            decoration                  
+            visible                     when(FUNC_69() == 4 && FUNC_82());
+            textalign                   1
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    9
+        }
+    }
+}

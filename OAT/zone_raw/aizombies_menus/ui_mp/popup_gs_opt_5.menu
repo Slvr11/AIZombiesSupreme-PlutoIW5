@@ -1,0 +1,493 @@
+{
+    menuDef
+    {
+        name                        "popup_gs_opt_5"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  localvarfloat("ui_gameOptX");
+        exp rect Y                  localvarfloat("ui_gameOptY");
+        exp rect W                  130;
+        exp rect H                  (((23 * 0) + (16.367 * 0)) + (5 * (20 + 2)) + 5);
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset_local 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_local 0;
+            setLocalVarString ui_buttonNavGroupName_local "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis_local 0;
+            setLocalVarBool ui_swfSelectionBarVis_local 0;
+            setLocalVarBool ui_swfSelectionDisabled_local 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis_local 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis_local 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled_local 0;
+            setLocalVarString ui_swfPopupContext_local "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus popup_gs_opt_5_0;
+            focusfirst;
+            if (localvarint("ui_gameOptKind") == 1)
+            {
+                setLocalVarInt ui_gameOptCurrent getmatchrulesdata(localvarstring("ui_gameOptClass"), localvarstring("ui_gameOptMember"));
+                if (localvarint("ui_gameOptCurrent") == localvarint("ui_gameOptVal_1"))
+                {
+                    setFocus popup_gs_opt_5_0;
+                }
+                if (localvarint("ui_gameOptCurrent") == localvarint("ui_gameOptVal_2"))
+                {
+                    setFocus popup_gs_opt_5_1;
+                }
+                if (localvarint("ui_gameOptCurrent") == localvarint("ui_gameOptVal_3"))
+                {
+                    setFocus popup_gs_opt_5_2;
+                }
+                if (localvarint("ui_gameOptCurrent") == localvarint("ui_gameOptVal_4"))
+                {
+                    setFocus popup_gs_opt_5_3;
+                }
+                if (localvarint("ui_gameOptCurrent") == localvarint("ui_gameOptVal_5"))
+                {
+                    setFocus popup_gs_opt_5_4;
+                }
+            }
+            if (localvarint("ui_gameOptKind") == 2)
+            {
+                setLocalVarFloat ui_gameOptCurrent getmatchrulesdata(localvarstring("ui_gameOptClass"), localvarstring("ui_gameOptMember"));
+                if (localvarfloat("ui_gameOptCurrent") == localvarfloat("ui_gameOptVal_1"))
+                {
+                    setFocus popup_gs_opt_5_0;
+                }
+                if (localvarfloat("ui_gameOptCurrent") == localvarfloat("ui_gameOptVal_2"))
+                {
+                    setFocus popup_gs_opt_5_1;
+                }
+                if (localvarfloat("ui_gameOptCurrent") == localvarfloat("ui_gameOptVal_3"))
+                {
+                    setFocus popup_gs_opt_5_2;
+                }
+                if (localvarfloat("ui_gameOptCurrent") == localvarfloat("ui_gameOptVal_4"))
+                {
+                    setFocus popup_gs_opt_5_3;
+                }
+                if (localvarfloat("ui_gameOptCurrent") == localvarfloat("ui_gameOptVal_5"))
+                {
+                    setFocus popup_gs_opt_5_4;
+                }
+            }
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_gs_opt_5"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.6
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  210;
+            exp rect h                  (((23 * 0) + (16.367 * 0)) + (5 * (20 + 2)) + 5) + 0;
+            exp rect x                  7.5;
+            exp rect w                  130;
+        }
+        itemDef
+        {
+            rect                        0 0 130 1 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (7.5 + 0);
+            exp rect y                  (0 - 3.5) + (0 * (20 + 2)) + ((210 + 4) + ((23 * 0) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 5) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis_local") && (localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5") && (localvarstring("ui_swfPopupContext_local") == "popup_gs_opt_5"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (7.5 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_local") - localvarint("ui_buttonNavGroupOffset_local")) * (20 + 2)) + ((210 + 4) + ((23 * 0) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  130;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis_local") && (localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5") && (localvarstring("ui_swfPopupContext_local") == "popup_gs_opt_5"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (7.5 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_local") - localvarint("ui_buttonNavGroupOffset_local")) * (20 + 2)) + ((210 + 4) + ((23 * 0) + (16.367 * 0)));
+            exp rect w                  130;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis_local") && (localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5") && (localvarstring("ui_swfPopupContext_local") == "popup_gs_opt_5"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (7.5 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_local") - localvarint("ui_buttonNavGroupOffset_local")) * (20 + 2)) + ((210 + 4) + ((23 * 0) + (16.367 * 0)));
+            exp rect w                  130;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis_local") && (localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5") && (localvarstring("ui_swfPopupContext_local") == "popup_gs_opt_5"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (7.5 + 130 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_local") - localvarint("ui_buttonNavGroupOffset_local")) * (20 + 2)) + ((210 + 4) + ((23 * 0) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            name                        "popup_gs_opt_5_0"
+            rect                        19.167 0 130 22 2 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_local 0;
+                setLocalVarString ui_buttonNavGroupName_local "popup_gs_opt_5";
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis_local (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled_local (0);
+                setLocalVarString ui_swfPopupContext_local "popup_gs_opt_5";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled_local 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarint("ui_gameOptKind") == 1)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarInt ( ui_gameOptVal_1 ) );
+                }
+                if (localvarint("ui_gameOptKind") == 2)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarFloat ( ui_gameOptVal_1 ) );
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((0 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  130 - 0;
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            rect                        19.167 0 130 19.567 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_gameOptStr_1");
+            exp rect y                  (((0 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  130;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_gs_opt_5_1"
+            rect                        19.167 0 130 22 2 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_local 1;
+                setLocalVarString ui_buttonNavGroupName_local "popup_gs_opt_5";
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis_local (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled_local (0);
+                setLocalVarString ui_swfPopupContext_local "popup_gs_opt_5";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled_local 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarint("ui_gameOptKind") == 1)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarInt ( ui_gameOptVal_2 ) );
+                }
+                if (localvarint("ui_gameOptKind") == 2)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarFloat ( ui_gameOptVal_2 ) );
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((1 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  130 - 0;
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            rect                        19.167 0 130 19.567 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_gameOptStr_2");
+            exp rect y                  (((1 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  130;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_gs_opt_5_2"
+            rect                        19.167 0 130 22 2 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)";
+                setLocalVarInt ui_buttonNavGroupCurrent_local 2;
+                setLocalVarString ui_buttonNavGroupName_local "popup_gs_opt_5";
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis_local (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled_local (0);
+                setLocalVarString ui_swfPopupContext_local "popup_gs_opt_5";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled_local 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarint("ui_gameOptKind") == 1)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarInt ( ui_gameOptVal_3 ) );
+                }
+                if (localvarint("ui_gameOptKind") == 2)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarFloat ( ui_gameOptVal_3 ) );
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((2 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  130 - 0;
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            rect                        19.167 0 130 19.567 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_gameOptStr_3");
+            exp rect y                  (((2 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  130;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_gs_opt_5_3"
+            rect                        19.167 0 130 22 2 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)";
+                setLocalVarInt ui_buttonNavGroupCurrent_local 3;
+                setLocalVarString ui_buttonNavGroupName_local "popup_gs_opt_5";
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis_local (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled_local (0);
+                setLocalVarString ui_swfPopupContext_local "popup_gs_opt_5";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled_local 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarint("ui_gameOptKind") == 1)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarInt ( ui_gameOptVal_4 ) );
+                }
+                if (localvarint("ui_gameOptKind") == 2)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarFloat ( ui_gameOptVal_4 ) );
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((3 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  130 - 0;
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            rect                        19.167 0 130 19.567 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_gameOptStr_4");
+            exp rect y                  (((3 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  130;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_gs_opt_5_4"
+            rect                        19.167 0 130 22 2 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)";
+                setLocalVarInt ui_buttonNavGroupCurrent_local 4;
+                setLocalVarString ui_buttonNavGroupName_local "popup_gs_opt_5";
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis_local (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled_local (0);
+                setLocalVarString ui_swfPopupContext_local "popup_gs_opt_5";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis_local 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled_local 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarint("ui_gameOptKind") == 1)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarInt ( ui_gameOptVal_5 ) );
+                }
+                if (localvarint("ui_gameOptKind") == 2)
+                {
+                    setMatchRulesData ( localVarString ( ui_gameOptClass ) , localVarString ( ui_gameOptMember ) , localVarFloat ( ui_gameOptVal_5 ) );
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((4 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  130 - 0;
+            exp rect x                  (0 + (7.5 + 8));
+        }
+        itemDef
+        {
+            rect                        19.167 0 130 19.567 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_gameOptStr_5");
+            exp rect y                  (((4 * (20 + 2)) + (210 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  130;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_gs_opt_5,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis_local"), localvarbool("ui_swfSelectionBarVis_local")) && localvarstring("ui_buttonNavGroupName_local") == "popup_gs_opt_5", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (7.5 + 8));
+        }
+    }
+}

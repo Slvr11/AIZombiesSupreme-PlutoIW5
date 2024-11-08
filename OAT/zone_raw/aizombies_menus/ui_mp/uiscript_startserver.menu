@@ -1,0 +1,13 @@
+{
+    menuDef
+    {
+        name                        "uiscript_startserver"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        onOpen
+        {
+            uiScript StartServer;
+            close uiscript_startserver;
+        }
+    }
+}

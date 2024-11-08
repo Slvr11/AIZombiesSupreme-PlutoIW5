@@ -1,0 +1,197 @@
+{
+    menuDef
+    {
+        name                        "remote_tank_overlay_hd"
+        rect                        0 0 640 480 0 0
+        visible                     when(FUNC_62() && !inkillcamnpc() && FUNC_82() && FUNC_107());
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.65
+            background                  "remote_tank_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "javelin_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("ugvDamageFade") < 1 && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "javelin_overlay_grain"
+            exp forecolor g             getplayerdata("ugvDamageFade");
+            exp forecolor b             getplayerdata("ugvDamageFade");
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("ugvDamageFade") < 1 && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "javelin_overlay_tearing"
+            exp forecolor a             ((cos(localclientuimilliseconds()) + 1) * 0.5) * (1 - 0.1) + 0.1;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("ugvDamageState") >= 7 && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "javelin_overlay_tearing"
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             ((cos(localclientuimilliseconds()) + 1) * 0.5) * (1 - 0.1) + 0.1;
+        }
+        itemDef
+        {
+            rect                        -100 0 0 0 10 10
+            decoration                  
+            visible                     1
+            textalign                   14
+            textscale                   0.4
+            exp text                    secondsascountdown(FUNC_22());
+        }
+        itemDef
+        {
+            rect                        -220 -60 60 26 3 3
+            decoration                  
+            visible                     when(FUNC_86() && FUNC_90() && FUNC_106());
+            textalign                   14
+            textscale                   0.3333
+            textstyle                   6
+            textfont                    10
+            exp text                    "@MPUI_REMOTE_TANK_MISSILES";
+        }
+        itemDef
+        {
+            rect                        -30 -20 60 26 2 3
+            decoration                  
+            visible                     when(FUNC_106() && FUNC_90());
+            textalign                   13
+            textscale                   0.3333
+            textstyle                   6
+            textfont                    10
+            exp text                    "@MP_EARLY_EXIT";
+        }
+        itemDef
+        {
+            rect                        230 -15 24 24 2 2
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("ugvBullets") && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "viper_ammo_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        170 -15 60 26 2 2
+            decoration                  
+            visible                     when(getplayerdata("ugvBullets") && FUNC_86() && FUNC_90());
+            textalign                   10
+            textscale                   0.32
+            exp text                    getplayerdata("ugvBullets") + ":" + getplayerdata("ugvMaxBullets");
+        }
+        itemDef
+        {
+            rect                        230 -15 24 24 2 2
+            style                       3
+            decoration                  
+            visible                     when(!getplayerdata("ugvBullets") && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "viper_ammo_overlay_mp"
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            rect                        170 -15 60 26 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ugvBullets") && FUNC_86() && FUNC_90());
+            textalign                   10
+            textscale                   0.32
+            exp text                    getplayerdata("ugvBullets") + ":" + getplayerdata("ugvMaxBullets");
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            text                        "@AC130_RELOADING"
+            rect                        180 -36 60 26 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ugvBullets") && FUNC_86() && FUNC_90());
+            textalign                   10
+            textscale                   0.32
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            rect                        230 30 24 24 2 2
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("ugvMissile") && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "viper_missile_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        170 30 60 26 2 2
+            decoration                  
+            visible                     when(getplayerdata("ugvMissile") && FUNC_86() && FUNC_90());
+            textalign                   10
+            textscale                   0.32
+            exp text                    getplayerdata("ugvMissile") + ":1";
+        }
+        itemDef
+        {
+            rect                        230 30 24 24 2 2
+            style                       3
+            decoration                  
+            visible                     when(!getplayerdata("ugvMissile") && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "viper_missile_overlay_mp"
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            rect                        170 30 60 26 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ugvMissile") && FUNC_86() && FUNC_90());
+            textalign                   10
+            textscale                   0.32
+            exp text                    getplayerdata("ugvMissile") + ":1";
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            text                        "@AC130_RELOADING"
+            rect                        180 8 60 26 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ugvMissile") && FUNC_86() && FUNC_90());
+            textalign                   10
+            textscale                   0.32
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+    }
+}

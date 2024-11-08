@@ -1,0 +1,773 @@
+{
+    menuDef
+    {
+        name                        "killstreaks_hd"
+        rect                        0 0 640 480 10 10
+        visible                     when(FUNC_109() && !FUNC_103() && FUNC_96() && FUNC_88() && FUNC_99());
+        itemDef
+        {
+            rect                        -14.6667 -66.6667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 0) && (FUNC_273() < 1));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -66.6667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 0) && (FUNC_272() > 0));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -72 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 1) && (FUNC_273() < 2));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -72 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 1) && (FUNC_272() > 1));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -77.3333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 2) && (FUNC_273() < 3));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -77.3333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 2) && (FUNC_272() > 2));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -82.6667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 3) && (FUNC_273() < 4));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -82.6667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 3) && (FUNC_272() > 3));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -88 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 4) && (FUNC_273() < 5));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -88 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 4) && (FUNC_272() > 4));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -93.3333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 5) && (FUNC_273() < 6));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -93.3333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 5) && (FUNC_272() > 5));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -98.6667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 6) && (FUNC_273() < 7));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -98.6667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 6) && (FUNC_272() > 6));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -104 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 7) && (FUNC_273() < 8));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -104 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 7) && (FUNC_272() > 7));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -109.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 8) && (FUNC_273() < 9));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -109.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 8) && (FUNC_272() > 8));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -114.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 9) && (FUNC_273() < 10));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -114.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 9) && (FUNC_272() > 9));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -120 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 10) && (FUNC_273() < 11));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -120 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 10) && (FUNC_272() > 10));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -125.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 11) && (FUNC_273() < 12));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -125.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 11) && (FUNC_272() > 11));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -130.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 12) && (FUNC_273() < 13));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -130.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 12) && (FUNC_272() > 12));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -136 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 13) && (FUNC_273() < 14));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -136 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 13) && (FUNC_272() > 13));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -141.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 14) && (FUNC_273() < 15));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -141.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 14) && (FUNC_272() > 14));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -146.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 15) && (FUNC_273() < 16));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -146.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 15) && (FUNC_272() > 15));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -152 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 16) && (FUNC_273() < 17));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -152 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 16) && (FUNC_272() > 16));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -157.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 17) && (FUNC_273() < 18));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -157.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 17) && (FUNC_272() > 17));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -162.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 18) && (FUNC_273() < 19));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -162.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 18) && (FUNC_272() > 18));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -168 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 19) && (FUNC_273() < 20));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -168 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 19) && (FUNC_272() > 19));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -173.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 20) && (FUNC_273() < 21));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -173.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 20) && (FUNC_272() > 20));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -178.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 21) && (FUNC_273() < 22));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -178.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 21) && (FUNC_272() > 21));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -184 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 22) && (FUNC_273() < 23));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -184 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 22) && (FUNC_272() > 22));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -189.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 23) && (FUNC_273() < 24));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -189.333 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 23) && (FUNC_272() > 23));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -194.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_272() > 24) && (FUNC_273() < 25));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_empty"
+        }
+        itemDef
+        {
+            rect                        -14.6667 -194.667 13.3333 6.66667 10 10
+            style                       3
+            decoration                  
+            visible                     when((FUNC_273() > 24) && (FUNC_272() > 24));
+            textscale                   0.55
+            background                  "hud_killstreak_bar_full"
+        }
+        itemDef
+        {
+            rect                        -14.6667 0 13.3333 0 10 10
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "hud_killstreak_frame_fade_top"
+            exp rect h                  (FUNC_272()) * (9 * 0.666);
+            exp rect y                  (- 65) - ((FUNC_272() - 1) * (9 * 0.666));
+        }
+        itemDef
+        {
+            rect                        -42.6667 -80 20 20 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_274() == 1 && FUNC_272() > 0);
+            textscale                   0.55
+            background                  "hud_killstreak_frame"
+        }
+        itemDef
+        {
+            rect                        -42.6667 -100 20 20 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_274() == 2 && FUNC_272() > 0);
+            textscale                   0.55
+            background                  "hud_killstreak_frame"
+        }
+        itemDef
+        {
+            rect                        -42.6667 -120 20 20 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_274() == 3 && FUNC_272() > 0);
+            textscale                   0.55
+            background                  "hud_killstreak_frame"
+        }
+        itemDef
+        {
+            rect                        -23.3333 -74.6667 9.33333 9.33333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_274() == 1 && FUNC_272() > 0);
+            textscale                   0.55
+            background                  "hud_killstreak_bridge"
+        }
+        itemDef
+        {
+            rect                        -23.3333 -94.6667 9.33333 9.33333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_274() == 2 && FUNC_272() > 0);
+            textscale                   0.55
+            background                  "hud_killstreak_bridge"
+        }
+        itemDef
+        {
+            rect                        -23.3333 -114.667 9.33333 9.33333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_274() == 3 && FUNC_272() > 0);
+            textscale                   0.55
+            background                  "hud_killstreak_bridge"
+        }
+        itemDef
+        {
+            rect                        -45.3333 -62.6667 25.3333 25.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_277());
+            textscale                   0.55
+            background                  "hud_killstreak_highlight"
+        }
+        itemDef
+        {
+            rect                        -45.3333 -82.6667 25.3333 25.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_279());
+            textscale                   0.55
+            background                  "hud_killstreak_highlight"
+        }
+        itemDef
+        {
+            rect                        -45.3333 -102.667 25.3333 25.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_281());
+            textscale                   0.55
+            background                  "hud_killstreak_highlight"
+        }
+        itemDef
+        {
+            rect                        -45.3333 -122.667 25.3333 25.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_283());
+            textscale                   0.55
+            background                  "hud_killstreak_highlight"
+        }
+        itemDef
+        {
+            rect                        -41.3333 -58.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_277());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_286(), 16);
+            exp rect x                  (- 49 + ((sin(milliseconds() / 90)) * 0.65)) + 7;
+            exp rect y                  (- 75 + ((sin(milliseconds() / 90)) * 0.65)) + 18;
+            exp rect w                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+            exp rect h                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+        }
+        itemDef
+        {
+            rect                        -41.3333 -58.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_277());
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "hud_iw5_killstreak_box"
+        }
+        itemDef
+        {
+            rect                        -41.3333 -78.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_279() && FUNC_287() != 0);
+            textscale                   0.55
+            forecolor                   1 1 1 0.35
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_287(), 17);
+        }
+        itemDef
+        {
+            rect                        -41.3333 -78.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_279() && FUNC_287() != 0 && !FUNC_290());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_287(), 16);
+            exp rect x                  (- 49 + ((sin(milliseconds() / 90)) * 0.65)) + 7;
+            exp rect y                  ((- 75 + ((sin(milliseconds() / 90)) * 0.65)) - 0 - 26 - 4) + 28;
+            exp rect w                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+            exp rect h                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+        }
+        itemDef
+        {
+            rect                        -41.3333 -78.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_279() && FUNC_287() != 0 && FUNC_290());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_287(), 14);
+        }
+        itemDef
+        {
+            rect                        -41.3333 -78.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_279());
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "hud_iw5_killstreak_box"
+        }
+        itemDef
+        {
+            rect                        -41.3333 -98.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_281() && FUNC_288() != 0);
+            textscale                   0.55
+            forecolor                   1 1 1 0.35
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_288(), 17);
+        }
+        itemDef
+        {
+            rect                        -41.3333 -98.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_281() && FUNC_288() != 0 && !FUNC_290());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_288(), 16);
+            exp rect x                  (- 49 + ((sin(milliseconds() / 90)) * 0.65)) + 7;
+            exp rect y                  ((- 75 - 0 - 26 * 2 - 4 * 2) + ((sin(milliseconds() / 90)) * 0.65)) + 38;
+            exp rect w                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+            exp rect h                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+        }
+        itemDef
+        {
+            rect                        -41.3333 -98.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_281() && FUNC_288() != 0 && FUNC_290());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_288(), 14);
+        }
+        itemDef
+        {
+            rect                        -41.3333 -98.6667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_281());
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "hud_iw5_killstreak_box"
+        }
+        itemDef
+        {
+            rect                        -41.3333 -118.667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_283() && FUNC_289() != 0);
+            textscale                   0.55
+            forecolor                   1 1 1 0.35
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_289(), 17);
+        }
+        itemDef
+        {
+            rect                        -41.3333 -118.667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_283() && FUNC_289() != 0 && !FUNC_290());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_289(), 16);
+            exp rect x                  (- 49 + ((sin(milliseconds() / 90)) * 0.65)) + 7;
+            exp rect y                  ((- 75 - 0 - 26 * 3 - 4 * 3) + ((sin(milliseconds() / 90)) * 0.65)) + 48;
+            exp rect w                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+            exp rect h                  (26 + ((sin(milliseconds() / 90)) * 0.65)) - 10;
+        }
+        itemDef
+        {
+            rect                        -41.3333 -118.667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_283() && FUNC_289() != 0 && FUNC_290());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 0, FUNC_289(), 14);
+        }
+        itemDef
+        {
+            rect                        -41.3333 -118.667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(!FUNC_283());
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "hud_iw5_killstreak_box"
+        }
+        itemDef
+        {
+            rect                        -41.3333 -138.667 17.3333 17.3333 10 10
+            style                       3
+            decoration                  
+            visible                     when(FUNC_285());
+            textscale                   0.55
+            background                  "specialty_perks_all"
+        }
+        itemDef
+        {
+            rect                        -26.6667 -57 6.66667 14 10 10
+            decoration                  
+            visible                     when(FUNC_277());
+            textalign                   2
+            textalignx                  -5
+            textaligny                  15
+            textscale                   0.25
+            textstyle                   6
+            textfont                    6
+            forecolor                   1 1 0 1
+            exp text                    "^3" + keybinding("+actionslot 4");
+        }
+        itemDef
+        {
+            rect                        -26.6667 -77 6.66667 14 10 10
+            decoration                  
+            visible                     when(FUNC_279() && !FUNC_290());
+            textalign                   2
+            textalignx                  -5
+            textaligny                  15
+            textscale                   0.25
+            textstyle                   6
+            textfont                    6
+            forecolor                   1 1 0 1
+            exp text                    "^3" + keybinding("+actionslot 5");
+        }
+        itemDef
+        {
+            rect                        -26.6667 -97 6.66667 14 10 10
+            decoration                  
+            visible                     when(FUNC_281() && !FUNC_290());
+            textalign                   2
+            textalignx                  -5
+            textaligny                  15
+            textscale                   0.25
+            textstyle                   6
+            textfont                    6
+            forecolor                   1 1 0 1
+            exp text                    "^3" + keybinding("+actionslot 6");
+        }
+        itemDef
+        {
+            rect                        -26.6667 -117 6.66667 14 10 10
+            decoration                  
+            visible                     when(FUNC_283() && !FUNC_290());
+            textalign                   2
+            textalignx                  -5
+            textaligny                  15
+            textscale                   0.25
+            textstyle                   6
+            textfont                    6
+            forecolor                   1 1 0 1
+            exp text                    "^3" + keybinding("+actionslot 7");
+        }
+    }
+}

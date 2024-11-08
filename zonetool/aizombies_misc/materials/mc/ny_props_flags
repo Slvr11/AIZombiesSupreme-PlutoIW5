@@ -1,0 +1,92 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 1,
+    "constantTable": [
+        {
+            "literal": [
+                0.100000001490116,
+                1.25,
+                6,
+                1.92307686805725
+            ],
+            "name": "envMapParms",
+            "nameHash": 1033475292
+        },
+        {
+            "literal": [
+                0.5,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "flagParms",
+            "nameHash": 2292903761
+        },
+        {
+            "literal": [
+                1,
+                1,
+                1,
+                1
+            ],
+            "name": "colorTint",
+            "nameHash": 3054254906
+        }
+    ],
+    "gameFlags": -112,
+    "maps": [
+        {
+            "firstCharacter": 115,
+            "image": "~banner_signs_ny_manhattan_sp~77d8b23e",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 8,
+            "typeHash": 887934131
+        },
+        {
+            "firstCharacter": 110,
+            "image": "banner_signs_ny_manhattan_nml",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 5,
+            "typeHash": 1507003663
+        },
+        {
+            "firstCharacter": 99,
+            "image": "banner_signs_ny_manhattan_col",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 2,
+            "typeHash": 2695565377
+        }
+    ],
+    "name": "mc/ny_props_flags",
+    "sortKey": 14,
+    "stateFlags": 56,
+    "stateMap": [
+        [
+            1208338,
+            61
+        ],
+        [
+            403861522,
+            13
+        ],
+        [
+            1477603346,
+            13
+        ],
+        [
+            1477603618,
+            3758358600
+        ],
+        [
+            2282915858,
+            3835578668
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "mc_l_sm_flag_t0c0n0s0_sat",
+    "unknown": 8
+}

@@ -1,0 +1,200 @@
+{
+    menuDef
+    {
+        name                        "javelin_overlay_hd"
+        rect                        0 0 960 480 2 2
+        visible                     when(FUNC_68() && FUNC_100() && FUNC_107());
+        itemDef
+        {
+            name                        "target_line_horz_bg"
+            rect                        0 0 4000 4 5 5
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(15) && FUNC_105());
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.95
+            background                  "white"
+            exp rect y                  weaplockscreenposy() - 1;
+        }
+        itemDef
+        {
+            name                        "target_line_vert_bg"
+            rect                        0 0 6 4000 5 5
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(15) && FUNC_105());
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.95
+            background                  "white"
+            exp rect x                  weaplockscreenposx() - 2;
+        }
+        itemDef
+        {
+            name                        "target_line_horz"
+            rect                        0 239 4000 2 5 5
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(15) && FUNC_105());
+            textscale                   0.55
+            forecolor                   0.95 1 0.95 0.95
+            background                  "white"
+            exp rect y                  weaplockscreenposy();
+        }
+        itemDef
+        {
+            name                        "target_line_vert"
+            rect                        319 0 2 4000 5 5
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(15) && FUNC_105());
+            textscale                   0.55
+            forecolor                   0.95 1 0.95 0.95
+            background                  "white"
+            exp rect x                  weaplockscreenposx();
+        }
+        itemDef
+        {
+            name                        "prompt_tooCloseWarning"
+            text                        "@MP_TOO_CLOSE_NOFIRE"
+            rect                        0 -60 0 0 2 2
+            decoration                  
+            visible                     when((weaplocking() || weaplocked()) && weaplocktooclose() && FUNC_105());
+            textalign                   9
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    6
+            forecolor                   1 0.6 0.65 1
+        }
+        itemDef
+        {
+            name                        "prompt_tooCloseWarningPreLock"
+            text                        "@MP_TOO_CLOSE_NOLOCK"
+            rect                        0 -60 0 0 2 2
+            decoration                  
+            visible                     when(!weaplocking() && !weaplocked() && weaplocktooclose() && FUNC_105());
+            textalign                   9
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    6
+            forecolor                   1 0.6 0.65 1
+        }
+        itemDef
+        {
+            name                        "prompt_holdForTarget"
+            rect                        0 -60 0 0 2 2
+            decoration                  
+            visible                     when(!weaplocking() && !weaplocked() && !weaplocktooclose() && FUNC_105());
+            textalign                   9
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    6
+            forecolor                   0.95 1 0.95 1
+        }
+        itemDef
+        {
+            name                        "prompt_test"
+            rect                        0 60 0 0 2 2
+            decoration                  
+            textalign                   9
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    6
+            exp text                    (sin(milliseconds() / 90)) && FUNC_105();
+        }
+        itemDef
+        {
+            name                        "javelinlockbox"
+            rect                        -40 -20 80 40 0 0
+            style                       3
+            decoration                  
+            visible                     when(!weaplocking() && !weaplocked() && FUNC_105());
+            textscale                   0.55
+            forecolor                   0.95 1 0.95 0.95
+            background                  "hud_javelin_lock_box"
+            exp rect x                  - 40 + (sin(milliseconds() / 90)) * 2;
+            exp rect y                  - 20 + (sin(milliseconds() / 90)) * 1;
+            exp rect w                  80 + (sin(milliseconds() / 90)) * 4;
+            exp rect h                  40 + (sin(milliseconds() / 90)) * 2;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.9 1 1 0.3
+            background                  "ac130_overlay_grain"
+        }
+        itemDef
+        {
+            name                        "WeaponJavelinBG_mp"
+            rect                        -427 -240 854 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "hud_javelin_bg"
+        }
+        itemDef
+        {
+            name                        "javelinlockon"
+            rect                        154 -198 64 64 0 0
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(4.5) && FUNC_105());
+            textscale                   0.55
+            background                  "hud_javelin_lock_on"
+        }
+        itemDef
+        {
+            name                        "javelincluon"
+            rect                        -300 -28 64 64 0 0
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(0) && !weapattacktop() && !weapattackdirect() && FUNC_105());
+            textscale                   0.55
+            background                  "hud_javelin_clu_on"
+        }
+        itemDef
+        {
+            name                        "javelintopoff"
+            rect                        228 -124 64 64 0 0
+            style                       3
+            decoration                  
+            visible                     when(weapattacktop() && FUNC_105());
+            textscale                   0.55
+            background                  "hud_javelin_top_on"
+        }
+        itemDef
+        {
+            name                        "javelindiroff"
+            rect                        228 -28 64 64 0 0
+            style                       3
+            decoration                  
+            visible                     when(weapattackdirect() && FUNC_105());
+            textscale                   0.55
+            background                  "hud_javelin_dir_on"
+        }
+        itemDef
+        {
+            name                        "javelinrocket_on"
+            rect                        30 144 64 64 0 0
+            style                       3
+            decoration                  
+            visible                     when(player("clipammo") && FUNC_105());
+            textscale                   0.55
+            background                  "hud_javelin_rocket_on"
+        }
+        itemDef
+        {
+            name                        "javelinnorocket_on"
+            rect                        154 144 64 64 0 0
+            style                       3
+            decoration                  
+            visible                     when(!player("clipammo") && FUNC_105());
+            textscale                   0.55
+            background                  "hud_javelin_norocket_on"
+        }
+    }
+}

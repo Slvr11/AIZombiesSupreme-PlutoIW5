@@ -1,0 +1,108 @@
+{
+    menuDef
+    {
+        name                        "combopinglist"
+        rect                        0 0 102.667 142 0 0
+        style                       1
+        backcolor                   0.2 0.2 0.2 1
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        soundLoop                   "music_mainmenu_mp"
+        popup                       
+        exp rect X                  ((((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4) + ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * (1 - 0.5)) + (((96 + 4) * 0) + 6));
+        exp rect Y                  (((((70 + 24 + 3 + 6) + 16 + 2) + FUNC_131()) + 9) + (4 + ((20 + 4) * 3)) - (((20 - 1) * 7) + 6) - 2);
+        onESC
+        {
+            if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+            {
+                setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                uiScript RefreshFilter;
+            }
+            close self;
+        }
+        itemDef
+        {
+            rect                        -2560 -1600 5120 3200 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("comboPingList"));
+            textscale                   0.55
+            forecolor                   0.1 0.1 0.1 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 100 1 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+            exp rect w                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.5);
+        }
+        itemDef
+        {
+            rect                        0 0 100 2 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+            exp rect y                  (((20 - 1) * 7) + 6) + 1;
+            exp rect w                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.5);
+        }
+        itemDef
+        {
+            rect                        0 0 82.6667 19 0 0
+            style                       3
+            decoration                  
+            visible                     when(((1) && (int(getFeederData("listboxPingFilter", "selection")) >= int(getFeederData("listboxPingFilter", "start"))) && (int(getFeederData("listboxPingFilter", "selection")) < (int(getFeederData("listboxPingFilter", "start")) + 7))));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  (((int(getFeederData("listboxPingFilter", "selection")) - int(getFeederData("listboxPingFilter", "start"))) * (20 - 1)) + 3) + ((20 - 1)) - 3;
+            exp rect w                  select((int(getFeederData(41, "count")) > 7), (((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.5) - 20), ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.5));
+        }
+        itemDef
+        {
+            rect                        0 0 82.6667 19 0 0
+            style                       3
+            decoration                  
+            visible                     when(((1) && (int(getFeederData("listboxPingFilter", "selection")) >= int(getFeederData("listboxPingFilter", "start"))) && (int(getFeederData("listboxPingFilter", "selection")) < (int(getFeederData("listboxPingFilter", "start")) + 7))));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  (((int(getFeederData("listboxPingFilter", "selection")) - int(getFeederData("listboxPingFilter", "start"))) * (20 - 1)) + 3);
+            exp rect w                  select((int(getFeederData(41, "count")) > 7), (((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.5) - 20), ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.5));
+        }
+        itemDef
+        {
+            name                        "listboxPingFilter"
+            rect                        0 1 102.667 139 0 0
+            style                       1
+            type                        6
+            visible                     1
+            textalignx                  4
+            textscale                   0.375
+            textstyle                   9
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                play mouse_over;
+            }
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            elementwidth                102.667
+            elementheight               19
+            feeder                      41
+            columns                     1
+                                        3 0 0 0 64 0
+            doubleclick
+            {
+                play mouse_click;
+                setLocalVarString ui_tempMaxPingName dvarstring(ui_maxPingName);
+                close self;
+            }
+        }
+    }
+}

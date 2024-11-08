@@ -1,0 +1,26 @@
+{
+    menuDef
+    {
+        name                        "popup_unmutable"
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        popup                       
+        visible                     1
+        onESC
+        {
+            close popup_unmutable;
+        }
+        itemDef
+        {
+            text                        "@MENU_DOWNLOADING"
+            rect                        320 254 0 0 0 0
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   0.4583
+            textfont                    1
+            forecolor                   0.4823 0.4823 0.4823 1
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 4,
+    "constantTable": [
+        {
+            "literal": [
+                1.0,
+                1.0,
+                0.0,
+                0.0
+            ],
+            "name": "uvScale",
+            "nameHash": 3809220315
+        }
+    ],
+    "gameFlags": -128,
+    "maps": null,
+    "name": "depthprepass",
+    "sortKey": 34,
+    "stateFlags": 27,
+    "stateMap": [
+        [
+            1214482,
+            3835578637
+        ],
+        [
+            403867666,
+            13
+        ],
+        [
+            1198098,
+            61
+        ],
+        [
+            403851282,
+            13
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "depthprepass",
+    "unknown": 0
+}

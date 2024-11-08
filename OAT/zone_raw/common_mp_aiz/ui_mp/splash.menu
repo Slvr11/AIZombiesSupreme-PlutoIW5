@@ -1,0 +1,88 @@
+{
+    menuDef
+    {
+        name                        "splash"
+        decoration                  
+        rect                        0 0 640 480 1 1
+        exp rect Y                  FUNC_185() * (0 - 40) * FUNC_162();
+        onOpen
+        {
+            lerp alpha from 0 to 1 over "0.15";
+            setLocalVarInt defcon_update_time (milliseconds() + 1000);
+            forceClose challenge;
+            forceClose defcon;
+            forceClose killstreak_pickup;
+            forceClose killstreak;
+            forceClose perk_challenge;
+            forceClose promotion;
+            forceClose killstreak_minisplash;
+        }
+        onRequestClose
+        {
+            lerp alpha from 1 to 0 over "0.15";
+        }
+        itemDef
+        {
+            name                        "splash_title"
+            rect                        0 -110 0 0 2 2
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   1
+            textscale                   0.48611
+            textstyle                   3
+            textfont                    4
+            exp text                    getsplashtext(0);
+            exp glowcolor r             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 8);
+        }
+        itemDef
+        {
+            name                        "splash_description"
+            rect                        0 -90 0 0 2 2
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            exp text                    getsplashdescription(0);
+        }
+        itemDef
+        {
+            name                        "splash_icon"
+            rect                        -18 -170 36 36 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_162() && splashhasicon(0));
+            textscale                   0.55
+            exp material                getsplashmaterial(0);
+        }
+        itemDef
+        {
+            name                        "splash_title_ss"
+            rect                        0 -135 0 0 2 2
+            decoration                  
+            visible                     when(FUNC_161());
+            textalign                   1
+            textscale                   0.729165
+            textstyle                   3
+            textfont                    4
+            exp text                    getsplashtext(0);
+            exp glowcolor r             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 8);
+        }
+        itemDef
+        {
+            name                        "splash_icon_ss"
+            rect                        -36 -135 72 72 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_161() && FUNC_186() && splashhasicon(0));
+            textscale                   0.55
+            exp material                getsplashmaterial(0);
+        }
+    }
+}

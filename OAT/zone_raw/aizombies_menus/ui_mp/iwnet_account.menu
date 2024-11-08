@@ -1,0 +1,105 @@
+{
+    menuDef
+    {
+        name                        "iwnet_account"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_mainmenu_mp"
+        visible                     1
+        onOpen
+        {
+            close main_text;
+            setdvar ui_separator_show 1;
+            setdvar ui_version_show 0;
+            open iwnet_login_popmenu;
+        }
+        onClose
+        {
+            setdvar ui_separator_show 1;
+            setdvar ui_version_show 1;
+            open main_text;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "mw2_main_background"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarstring(gameMode) == "sp");
+            textscale                   0.55
+            background                  "mw2_main_sp_image"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarstring(gameMode) == "so");
+            textscale                   0.55
+            background                  "mw2_main_co_image"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            background                  "mw2_main_mp_image"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0
+            background                  "mockup_bg_glow"
+            exp forecolor a             ((sin(milliseconds() / 1500) + 1) * 0.25) + 0.25;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0
+            background                  "mockup_bg_glow"
+            exp forecolor a             ((sin(milliseconds() / 480) + 1) * 0.25) + 0.25;
+        }
+    }
+}

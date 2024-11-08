@@ -1,0 +1,151 @@
+{
+    menuDef
+    {
+        name                        "scoreboard"
+        rect                        0 0 640 480 0 0
+        onESC
+        {
+        }
+        itemDef
+        {
+            rect                        0 3 -640 22 4 1
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 0.75
+            background                  "gradient_fadein"
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_ALLIES" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_FREE" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        36 22 1 1 1 1
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES") && !dvarint(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    team("score");
+        }
+        itemDef
+        {
+            rect                        95 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis);
+        }
+        itemDef
+        {
+            rect                        95 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_ALLIES" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis);
+        }
+        itemDef
+        {
+            rect                        0 22 0 0 9 1
+            decoration                  
+            visible                     when((dvarint(ui_bomb_timer) || timeleft() % 8 < 4 || timeleft() < 0) && !dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@MPUI_AIZ";
+            exp rect x                  (!dvarbool(widescreen) * 64);
+        }
+        itemDef
+        {
+            rect                        0 -180 100 20 9 2
+            decoration                  
+            visible                     when((timeleft() % 8 < 4 || timeleft() < 0) && dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.6666
+            textstyle                   3
+            textfont                    9
+            exp text                    "@MPUI_AIZ";
+        }
+        itemDef
+        {
+            rect                        36 22 1 1 1 1
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarbool(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    marinesfield("score");
+        }
+        itemDef
+        {
+            rect                        0 225 640 60 4 0
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "line_horizontal_scorebar"
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+        itemDef
+        {
+            rect                        0 225 640 2 4 0
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            background                  "line_horizontal_scorebar"
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+        itemDef
+        {
+            rect                        0 285 640 2 4 0
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            background                  "line_horizontal_scorebar"
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+        itemDef
+        {
+            text                        "@XBOXLIVE_EXTERNALMUTE_TITLE"
+            rect                        320 264 0 0 0 0
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    1
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+    }
+}

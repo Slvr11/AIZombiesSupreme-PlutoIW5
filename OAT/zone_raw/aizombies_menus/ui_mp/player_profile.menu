@@ -1,0 +1,430 @@
+{
+    menuDef
+    {
+        name                        "player_profile"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_opening"
+        onOpen
+        {
+            close main_selection;
+            setdvar ui_separator_show 1;
+            setdvar ui_version_show 0;
+            uiScript closeMenuOnDvar ui_playerProfileAlreadyChosen 1 player_profile;
+            uiScript addPlayerProfiles;
+            uiScript selectActivePlayerProfile;
+            uiScript openMenuOnDvar ui_playerProfileCount 0 profile_create_popmenu;
+            setfocus profilelist;
+        }
+        onClose
+        {
+            setdvar ui_separator_show 1;
+            setdvar ui_version_show 1;
+            open main_selection;
+        }
+        onESC
+        {
+            setdvar ui_playerProfileAlreadyChosen 1;
+            uiScript closeMenuOnDvarNot com_playerProfile "" player_profile;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "mw2_main_background"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "mw2_main_sp_image"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0
+            background                  "mockup_bg_glow"
+            exp forecolor a             ((sin(milliseconds() / 1500) + 1) * 0.25) + 0.25;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0
+            background                  "mockup_bg_glow"
+            exp forecolor a             ((sin(milliseconds() / 480) + 1) * 0.25) + 0.25;
+        }
+        itemDef
+        {
+            rect                        -256 -198 512 128 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "logo_cod2"
+        }
+        itemDef
+        {
+            rect                        0 170 640 156 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.2
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -160 170 320 156 2 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 0.65
+            background                  "white"
+            exp rect x                  0 - 320 * 1.5 - 4;
+        }
+        itemDef
+        {
+            rect                        -160 170 320 156 2 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 0.65
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -160 170 320 156 2 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 0.65
+            background                  "white"
+            exp rect x                  320 * 0.5 + 4;
+        }
+        itemDef
+        {
+            rect                        -32 138 32 32 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_tl"
+        }
+        itemDef
+        {
+            rect                        0 138 640 32 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_t"
+        }
+        itemDef
+        {
+            rect                        640 138 32 32 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_tr"
+        }
+        itemDef
+        {
+            rect                        640 170 32 156 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_r"
+        }
+        itemDef
+        {
+            rect                        640 326 32 32 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_br"
+        }
+        itemDef
+        {
+            rect                        0 326 640 32 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_b"
+        }
+        itemDef
+        {
+            rect                        -32 326 32 32 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_bl"
+        }
+        itemDef
+        {
+            rect                        -32 170 32 156 4 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "drop_shadow_l"
+        }
+        itemDef
+        {
+            name                        "profile_box"
+            text                        "@MENU_SELECT_PROFILE"
+            rect                        -160 170 320 156 2 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    9
+            backcolor                   0 0 0 0.375
+            background                  "white"
+        }
+        itemDef
+        {
+            name                        "profilelist"
+            rect                        -160 190 320 136 2 1
+            style                       1
+            type                        6
+            visible                     1
+            textalignx                  6
+            textscale                   0.375
+            outlinecolor                0 0 0 0.5
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            mouseExit
+            {
+            }
+            execKeyInt 13
+            {
+                play mouse_click;
+                setdvar ui_playerProfileAlreadyChosen 1;
+                uiScript loadPlayerProfile;
+                if (!getprofiledata("hasEverPlayed_MainMenu"))
+                {
+                    close self;
+                    open brightness_adjust;
+                }
+                else
+                {
+                    close self;
+                    open main_selection;
+                }
+                close player_profile;
+            }
+            elementwidth                120
+            elementheight               22
+            feeder                      22
+            doubleclick
+            {
+                play mouse_click;
+                setdvar ui_playerProfileAlreadyChosen 1;
+                uiScript loadPlayerProfile;
+                if (!getprofiledata("hasEverPlayed_MainMenu"))
+                {
+                    close self;
+                    open brightness_adjust;
+                }
+                else
+                {
+                    close self;
+                    open main_selection;
+                }
+                close player_profile;
+            }
+        }
+        itemDef
+        {
+            name                        "create"
+            text                        "@MENU_NEW"
+            rect                        -160 326 106.667 20 2 1
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            disablecolor                0.55 0.55 0.55 1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor 0 0 0 1;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            action
+            {
+                play mouse_click;
+                open profile_create_popmenu;
+            }
+        }
+        itemDef
+        {
+            name                        "del"
+            text                        "@MENU_DELETE"
+            rect                        -53.3333 326 106.667 20 2 1
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            disablecolor                0.55 0.55 0.55 1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor 0 0 0 1;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            action
+            {
+                play mouse_click;
+                open profile_del_sure_popmenu;
+            }
+        }
+        itemDef
+        {
+            name                        "load"
+            text                        "@MENU_OK"
+            rect                        53.3333 326 106.667 20 2 1
+            style                       1
+            type                        1
+            visible                     1
+            disabled                    when(dvarstring(ui_playerProfileSelected) == "");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            disablecolor                0.55 0.55 0.55 1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor 0 0 0 1;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            action
+            {
+                play mouse_click;
+                setdvar ui_playerProfileAlreadyChosen 1;
+                uiScript loadPlayerProfile;
+                if (!getprofiledata("hasEverPlayed_MainMenu"))
+                {
+                    close self;
+                    open brightness_adjust;
+                }
+                else
+                {
+                    close self;
+                    open main_selection;
+                }
+                close player_profile;
+            }
+            exp disabled                dvarstring(ui_playerProfileSelected) == "";
+        }
+        itemDef
+        {
+            name                        "quit"
+            text                        "@MENU_QUIT"
+            rect                        -85 0 170 20 2 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor 0 0 0 1;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            action
+            {
+                play mouse_click;
+                open quit_popmenu;
+            }
+        }
+    }
+}

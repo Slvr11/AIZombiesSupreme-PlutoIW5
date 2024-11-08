@@ -1,0 +1,188 @@
+{
+    menuDef
+    {
+        name                        "vault_task_in_progress"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((((23 * 1) + (16.367 * 0)) + (1 * (20 + 2)) + 5) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (((23 * 1) + (16.367 * 0)) + (1 * (20 + 2)) + 5);
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            uiScript OnlineVault Abort;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("vault_task_in_progress"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (((23 * 1) + (16.367 * 0)) + (1 * (20 + 2)) + 5) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(isContentServerTaskInProgress("writefile"));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_ONLINEVAULT_UPLOADING_PERCENT", getContentServerTaskProgress("upload"));
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(isContentServerTaskInProgress("uploadsummary"));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_ONLINEVAULT_UPLOADING_PERCENT", 100);
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(isContentServerTaskInProgress("readfile"));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_ONLINEVAULT_DOWNLOADING_PERCENT", getContentServerTaskProgress("download"));
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(isContentServerTaskInProgress("copyotherfile"));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@PATCH_MENU_ONLINEVAULT_COPYING";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.25 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.5));
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    ".";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.5 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.75);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    "..";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.75);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    "...";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+    }
+}

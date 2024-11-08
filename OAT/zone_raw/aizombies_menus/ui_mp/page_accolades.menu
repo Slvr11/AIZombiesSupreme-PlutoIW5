@@ -1,0 +1,1009 @@
+{
+    menuDef
+    {
+        name                        "page_accolades"
+        rect                        0 26 533.333 357 2 1
+        style                       1
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        exp rect X                  - (533.333 / 2);
+        onOpen
+        {
+            setLocalVarString ui_currentPage "page_accolades";
+            if ("page_accolades" == "page_summary")
+            {
+                setLocalVarInt ui_leftArrow 0;
+                if ((getclientmatchdatadef() != ""))
+                {
+                    setLocalVarInt ui_rightArrow 1;
+                }
+                else
+                {
+                    setLocalVarInt ui_rightArrow 0;
+                }
+            }
+            if ("page_accolades" == "page_progress" || "page_accolades" == "page_accolades" || "page_accolades" == "page_highlights" || "page_accolades" == "page_weapon_xp" || "page_accolades" == "page_challenges")
+            {
+                setLocalVarInt ui_leftArrow 1;
+                if ((getclientmatchdatadef() != ""))
+                {
+                    setLocalVarInt ui_rightArrow 1;
+                }
+                else
+                {
+                    setLocalVarInt ui_rightArrow 0;
+                }
+            }
+            if ("page_accolades" == "page_scoreboard")
+            {
+                if (dvarbool(xblive_privatematch))
+                {
+                    setLocalVarInt ui_leftArrow 0;
+                }
+                else
+                {
+                    setLocalVarInt ui_leftArrow 1;
+                }
+                setLocalVarInt ui_rightArrow 0;
+            }
+        }
+        onRequestClose
+        {
+        }
+        onESC
+        {
+            close self;
+            close popup_summary;
+        }
+        execKeyInt 13
+        {
+            setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+            if ((getclientmatchdatadef() != ""))
+            {
+                if ("page_accolades" == "page_summary")
+                {
+                    close self;
+                    open page_progress;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_progress")
+                {
+                    close self;
+                    open page_accolades;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_accolades")
+                {
+                    close self;
+                    open page_highlights;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_highlights")
+                {
+                    close self;
+                    open page_weapon_xp;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_weapon_xp")
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_challenges")
+                {
+                    close self;
+                    open page_scoreboard;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 157
+        {
+            setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+            if ((getclientmatchdatadef() != ""))
+            {
+                if ("page_accolades" == "page_summary")
+                {
+                    close self;
+                    open page_progress;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_progress")
+                {
+                    close self;
+                    open page_accolades;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_accolades")
+                {
+                    close self;
+                    open page_highlights;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_highlights")
+                {
+                    close self;
+                    open page_weapon_xp;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_weapon_xp")
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_challenges")
+                {
+                    close self;
+                    open page_scoreboard;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 186
+        {
+            setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+            if ((getclientmatchdatadef() != ""))
+            {
+                if ("page_accolades" == "page_summary")
+                {
+                    close self;
+                    open page_progress;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_progress")
+                {
+                    close self;
+                    open page_accolades;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_accolades")
+                {
+                    close self;
+                    open page_highlights;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_highlights")
+                {
+                    close self;
+                    open page_weapon_xp;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_weapon_xp")
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_challenges")
+                {
+                    close self;
+                    open page_scoreboard;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 23
+        {
+            setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+            if ((getclientmatchdatadef() != ""))
+            {
+                if ("page_accolades" == "page_summary")
+                {
+                    close self;
+                    open page_progress;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_progress")
+                {
+                    close self;
+                    open page_accolades;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_accolades")
+                {
+                    close self;
+                    open page_highlights;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_highlights")
+                {
+                    close self;
+                    open page_weapon_xp;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_weapon_xp")
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_challenges")
+                {
+                    close self;
+                    open page_scoreboard;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 31
+        {
+            setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+            if ((getclientmatchdatadef() != ""))
+            {
+                if ("page_accolades" == "page_summary")
+                {
+                    close self;
+                    open page_progress;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_progress")
+                {
+                    close self;
+                    open page_accolades;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_accolades")
+                {
+                    close self;
+                    open page_highlights;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_highlights")
+                {
+                    close self;
+                    open page_weapon_xp;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_weapon_xp")
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+                if ("page_accolades" == "page_challenges")
+                {
+                    close self;
+                    open page_scoreboard;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 156
+        {
+            setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+            if ("page_accolades" == "page_scoreboard")
+            {
+                if (!dvarbool(xblive_privatematch))
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_accolades" == "page_challenges")
+            {
+                close self;
+                open page_weapon_xp;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_weapon_xp")
+            {
+                close self;
+                open page_highlights;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_highlights")
+            {
+                close self;
+                open page_accolades;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_accolades")
+            {
+                close self;
+                open page_progress;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_progress")
+            {
+                close self;
+                open page_summary;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+        }
+        execKeyInt 185
+        {
+            setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+            if ("page_accolades" == "page_scoreboard")
+            {
+                if (!dvarbool(xblive_privatematch))
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_accolades" == "page_challenges")
+            {
+                close self;
+                open page_weapon_xp;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_weapon_xp")
+            {
+                close self;
+                open page_highlights;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_highlights")
+            {
+                close self;
+                open page_accolades;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_accolades")
+            {
+                close self;
+                open page_progress;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_progress")
+            {
+                close self;
+                open page_summary;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+        }
+        execKeyInt 22
+        {
+            setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+            if ("page_accolades" == "page_scoreboard")
+            {
+                if (!dvarbool(xblive_privatematch))
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_accolades" == "page_challenges")
+            {
+                close self;
+                open page_weapon_xp;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_weapon_xp")
+            {
+                close self;
+                open page_highlights;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_highlights")
+            {
+                close self;
+                open page_accolades;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_accolades")
+            {
+                close self;
+                open page_progress;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_progress")
+            {
+                close self;
+                open page_summary;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+        }
+        execKeyInt 30
+        {
+            setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+            if ("page_accolades" == "page_scoreboard")
+            {
+                if (!dvarbool(xblive_privatematch))
+                {
+                    close self;
+                    open page_challenges;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_accolades" == "page_challenges")
+            {
+                close self;
+                open page_weapon_xp;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_weapon_xp")
+            {
+                close self;
+                open page_highlights;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_highlights")
+            {
+                close self;
+                open page_accolades;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_accolades")
+            {
+                close self;
+                open page_progress;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+            if ("page_accolades" == "page_progress")
+            {
+                close self;
+                open page_summary;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir 1;
+            }
+        }
+        execKeyInt 1
+        {
+            close self;
+            close popup_summary;
+        }
+        itemDef
+        {
+            text                        "@MPUI_YOUR_ACCOLADES_CAPS"
+            rect                        0 0 533.333 48 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textalign                   9
+            textscale                   0.55
+            textstyle                   9
+            textfont                    9
+            backcolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 48 533.333 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 24 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  357 - 24;
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  357 - 24 - 21.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "page_accolades";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 1;
+            }
+            exp rect x                  ((533.333)) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 0 0
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_accolades"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_accolades"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CONTINUE";
+            exp rect x                  ((533.333)) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_accolades"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_accolades"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_accolades"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            group                       "left_arrow"
+            rect                        0 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_leftArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_left"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor left_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor left_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_leftArrow"))
+                {
+                    play mouse_click;
+                    setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+                    if ("page_accolades" == "page_scoreboard")
+                    {
+                        if (!dvarbool(xblive_privatematch))
+                        {
+                            close self;
+                            open page_challenges;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                    }
+                    if ("page_accolades" == "page_challenges")
+                    {
+                        close self;
+                        open page_weapon_xp;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("page_accolades" == "page_weapon_xp")
+                    {
+                        close self;
+                        open page_highlights;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("page_accolades" == "page_highlights")
+                    {
+                        close self;
+                        open page_accolades;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("page_accolades" == "page_accolades")
+                    {
+                        close self;
+                        open page_progress;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("page_accolades" == "page_progress")
+                    {
+                        close self;
+                        open page_summary;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            group                       "right_arrow"
+            rect                        485.333 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_rightArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_right"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor right_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor right_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_rightArrow"))
+                {
+                    play mouse_click;
+                    setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+                    if ((getclientmatchdatadef() != ""))
+                    {
+                        if ("page_accolades" == "page_summary")
+                        {
+                            close self;
+                            open page_progress;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("page_accolades" == "page_progress")
+                        {
+                            close self;
+                            open page_accolades;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("page_accolades" == "page_accolades")
+                        {
+                            close self;
+                            open page_highlights;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("page_accolades" == "page_highlights")
+                        {
+                            close self;
+                            open page_weapon_xp;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("page_accolades" == "page_weapon_xp")
+                        {
+                            close self;
+                            open page_challenges;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("page_accolades" == "page_challenges")
+                        {
+                            close self;
+                            open page_scoreboard;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                    }
+                    focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            rect                        58.6665 98 56 56 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < getplayerdata("round", "awardCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 0, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        18.6665 156 136 -16 2 1
+            decoration                  
+            visible                     when((0 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textaligny                  -16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 0, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        18.6665 152 136 36 2 1
+            decoration                  
+            autowrapped                 
+            visible                     when((0 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 0, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        238.667 98 56 56 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < getplayerdata("round", "awardCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 1, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        198.667 156 136 -16 2 1
+            decoration                  
+            visible                     when((1 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textaligny                  -16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 1, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        198.667 152 136 36 2 1
+            decoration                  
+            autowrapped                 
+            visible                     when((1 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 1, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        418.667 98 56 56 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < getplayerdata("round", "awardCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 2, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        378.667 156 136 -16 2 1
+            decoration                  
+            visible                     when((2 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textaligny                  -16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 2, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        378.667 152 136 36 2 1
+            decoration                  
+            autowrapped                 
+            visible                     when((2 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 2, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        148.667 208 56 56 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < getplayerdata("round", "awardCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 3, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        108.667 266 136 -16 2 1
+            decoration                  
+            visible                     when((3 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textaligny                  -16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 3, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        108.667 262 136 36 2 1
+            decoration                  
+            autowrapped                 
+            visible                     when((3 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 3, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        328.667 208 56 56 2 1
+            style                       3
+            decoration                  
+            visible                     when((4 < getplayerdata("round", "awardCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 4, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        288.667 266 136 -16 2 1
+            decoration                  
+            visible                     when((4 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textaligny                  -16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 4, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        288.667 262 136 36 2 1
+            decoration                  
+            autowrapped                 
+            visible                     when((4 < getplayerdata("round", "awardCount")));
+            textalign                   5
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdata("round", "awards", 4, "award"), 4);
+        }
+    }
+}

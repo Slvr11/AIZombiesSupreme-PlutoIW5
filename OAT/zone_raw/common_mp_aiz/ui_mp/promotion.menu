@@ -1,0 +1,90 @@
+{
+    menuDef
+    {
+        name                        "promotion"
+        decoration                  
+        rect                        0 0 640 480 1 1
+        exp rect Y                  (FUNC_185() || FUNC_86()) * (0 - 40) * FUNC_162();
+        onOpen
+        {
+            lerp alpha from 0 to 1 over "0.15";
+            lerp x from 640 to 370 over "0.15";
+            forceClose splash;
+            forceClose challenge;
+            forceClose defcon;
+            forceClose killstreak_pickup;
+            forceClose killstreak;
+            forceClose perk_challenge;
+            forceClose promotion_weapon;
+            forceClose killstreak_minisplash;
+            forceClose daily_challenge;
+            forceClose weekly_challenge;
+        }
+        onRequestClose
+        {
+            lerp alpha from 1 to 0 over "0.15";
+            lerp x from 370 to 640 over "0.15";
+        }
+        itemDef
+        {
+            name                        "promotion_text"
+            text                        "@RANK_PROMOTED"
+            rect                        -580 60 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   2
+            textscale                   0.2916
+            textstyle                   3
+            textfont                    4
+            glowcolor                   0.25 0.75 0.25 1
+            decodeEffect                100 4000 500
+        }
+        itemDef
+        {
+            name                        "promotion_rank_text"
+            rect                        -580 80 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   2
+            textscale                   0.375
+            textstyle                   3
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    "@" + tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdata("experience")), 5);
+            decodeEffect                100 4000 500
+        }
+        itemDef
+        {
+            name                        "promotion_rank_icon"
+            rect                        -430 80 48 48 10 8
+            style                       3
+            decoration                  
+            visible                     when(FUNC_162());
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdata("experience")), getplayerdata("prestige") + 1);
+        }
+        itemDef
+        {
+            name                        "promotion_rank_text_ss"
+            rect                        -580 60 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_161());
+            textalign                   2
+            textscale                   0.729165
+            textstyle                   3
+            textfont                    4
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    "@" + tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdata("experience")), 5);
+            decodeEffect                100 4000 500
+        }
+        itemDef
+        {
+            name                        "promotion_rank_icon_ss"
+            rect                        -440 70 60 60 10 8
+            style                       3
+            decoration                  
+            visible                     when(FUNC_161() && FUNC_186());
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdata("experience")), getplayerdata("prestige") + 1);
+        }
+    }
+}

@@ -1,0 +1,943 @@
+{
+    menuDef
+    {
+        name                        "options_graphics_texture"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        onOpen
+        {
+            setLocalVarBool ui_hideBack 1;
+            setLocalVarBool ui_showApply 0;
+            exec "setfromdvar ui_r_picmip			r_picmip";
+            exec "setfromdvar ui_r_picmip_bump		r_picmip_bump";
+            exec "setfromdvar ui_r_picmip_spec		r_picmip_spec";
+            exec "setfromdvar ui_r_picmip_manual	r_picmip_manual";
+            ExecNow "profile_menuDvarsSetup; resetViewport";
+            if (isfacebookallowed(1) && !dvarbool(cl_ingame) && !dvarbool(sv_running))
+            {
+                if (dvarfloat(facebook_delay) < 0)
+                {
+                    exec startfacebook;
+                }
+            }
+        }
+        onClose
+        {
+            setLocalVarBool ui_hideBack 0;
+        }
+        onESC
+        {
+            close self;
+            if (!(menuisopen("pc_options_advanced_video") || menuisopen("pc_options_video") || menuisopen("pc_options_audio") || menuisopen("pc_options_controls") || menuisopen("pc_options_voice")) && localvarbool("ui_showPicApply") && !localvarbool("ui_showApply") && !localvarbool("ui_showAudioApply"))
+            {
+                execnow "setfromdvar r_picmip ui_r_picmip";
+                execnow "setfromdvar r_picmip_bump ui_r_picmip_bump";
+                execnow "setfromdvar r_picmip_spec ui_r_picmip_spec";
+                execnow "setfromdvar r_picmip_manual ui_r_picmip_manual";
+                exec "wait; wait; r_applyPicmip";
+                setLocalVarBool ui_showPicApply 0;
+            }
+            if (!(menuisopen("pc_options_advanced_video") || menuisopen("pc_options_video") || menuisopen("pc_options_audio") || menuisopen("pc_options_controls") || menuisopen("pc_options_voice")) && localvarbool("ui_showApply") || localvarbool("ui_showAudioApply"))
+            {
+                open all_restart_popmenu;
+            }
+            ExecNow "profile_menuDvarsFinish; updategamerprofile; resetViewport";
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -264 -236 501.5 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   10
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_OPTIONS_UPPER_CASE";
+        }
+        itemDef
+        {
+            rect                        -88 34.667 325.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + (0.667);
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_0"
+            rect                        -68 34.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_0";
+                setLocalVarInt ui_buttonNavGroupCurrent 0;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    close pc_options_video;
+                    close pc_options_voice;
+                    close PC_OPTIONS_ADANCED_VIDEO_NAME;
+                    close options_texture_quality;
+                    close pc_options_audio;
+                    close PC_OPTIONS_MOVEMENT_NAME;
+                    close pc_options_controls;
+                    close options_look;
+                    close options_move;
+                    close options_shoot;
+                    close options_misc;
+                    close options_graphics;
+                    close options_sound;
+                    close options_game;
+                    close options_view;
+                    close options_defaults;
+                    close options_driverinfo;
+                    close options_credits;
+                    close options_graphics_defaults;
+                    close options_graphics_texture;
+                    close options_control_defaults;
+                    close options_voice;
+                    close controls_multi;
+                    close main_options;
+                    close main_controls;
+                    open pc_options_video;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 33.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (0) && (((0) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_VIDEO";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_1"
+            rect                        -68 54.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_1";
+                setLocalVarInt ui_buttonNavGroupCurrent 1;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    close pc_options_video;
+                    close pc_options_voice;
+                    close PC_OPTIONS_ADANCED_VIDEO_NAME;
+                    close options_texture_quality;
+                    close pc_options_audio;
+                    close PC_OPTIONS_MOVEMENT_NAME;
+                    close pc_options_controls;
+                    close options_look;
+                    close options_move;
+                    close options_shoot;
+                    close options_misc;
+                    close options_graphics;
+                    close options_sound;
+                    close options_game;
+                    close options_view;
+                    close options_defaults;
+                    close options_driverinfo;
+                    close options_credits;
+                    close options_graphics_defaults;
+                    close options_graphics_texture;
+                    close options_control_defaults;
+                    close options_voice;
+                    close controls_multi;
+                    close main_options;
+                    close main_controls;
+                    open pc_options_audio;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 53.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (1) && (((1) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_AUDIO";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_2"
+            rect                        -68 74.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_2";
+                setLocalVarInt ui_buttonNavGroupCurrent 2;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    close pc_options_video;
+                    close pc_options_voice;
+                    close PC_OPTIONS_ADANCED_VIDEO_NAME;
+                    close options_texture_quality;
+                    close pc_options_audio;
+                    close PC_OPTIONS_MOVEMENT_NAME;
+                    close pc_options_controls;
+                    close options_look;
+                    close options_move;
+                    close options_shoot;
+                    close options_misc;
+                    close options_graphics;
+                    close options_sound;
+                    close options_game;
+                    close options_view;
+                    close options_defaults;
+                    close options_driverinfo;
+                    close options_credits;
+                    close options_graphics_defaults;
+                    close options_graphics_texture;
+                    close options_control_defaults;
+                    close options_voice;
+                    close controls_multi;
+                    close main_options;
+                    close main_controls;
+                    open pc_options_controls;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 73.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (2) && (((2) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_CONTROLS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_3"
+            rect                        -68 94.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_3";
+                setLocalVarInt ui_buttonNavGroupCurrent 3;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so"));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so");
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so"))
+                {
+                    play mouse_click;
+                    close pc_options_video;
+                    close pc_options_voice;
+                    close PC_OPTIONS_ADANCED_VIDEO_NAME;
+                    close options_texture_quality;
+                    close pc_options_audio;
+                    close PC_OPTIONS_MOVEMENT_NAME;
+                    close pc_options_controls;
+                    close options_look;
+                    close options_move;
+                    close options_shoot;
+                    close options_misc;
+                    close options_graphics;
+                    close options_sound;
+                    close options_game;
+                    close options_view;
+                    close options_defaults;
+                    close options_driverinfo;
+                    close options_credits;
+                    close options_graphics_defaults;
+                    close options_graphics_texture;
+                    close options_control_defaults;
+                    close options_voice;
+                    close controls_multi;
+                    close main_options;
+                    close main_controls;
+                    open pc_options_voice;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 93.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (3) && (((3) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_VOICE";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+            exp forecolor r             select(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so", select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so", select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so", select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_4"
+            rect                        -68 114.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarbool(kill_dedicatedserver) == 0));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_4";
+                setLocalVarInt ui_buttonNavGroupCurrent 4;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarbool(kill_dedicatedserver) == 0)) && !(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so" || FUNC_32()));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarbool(kill_dedicatedserver) == 0));
+                setLocalVarBool ui_swfSelectionDisabled (dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so" || FUNC_32());
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so" || FUNC_32()))
+                {
+                    play mouse_click;
+                    close pc_options_video;
+                    close pc_options_voice;
+                    close PC_OPTIONS_ADANCED_VIDEO_NAME;
+                    close options_texture_quality;
+                    close pc_options_audio;
+                    close PC_OPTIONS_MOVEMENT_NAME;
+                    close pc_options_controls;
+                    close options_look;
+                    close options_move;
+                    close options_shoot;
+                    close options_misc;
+                    close options_graphics;
+                    close options_sound;
+                    close options_game;
+                    close options_view;
+                    close options_defaults;
+                    close options_driverinfo;
+                    close options_credits;
+                    close options_graphics_defaults;
+                    close options_graphics_texture;
+                    close options_control_defaults;
+                    close options_voice;
+                    close controls_multi;
+                    close main_options;
+                    close main_controls;
+                    open pc_options_dedicateserver;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 113.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(kill_dedicatedserver) == 0)) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (4) && (((4) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_DEDICATED_SERVER";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+            exp forecolor r             select(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so" || FUNC_32(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so" || FUNC_32(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(dvarstring(gameMode) == "sp" || dvarstring(gameMode) == "so" || FUNC_32(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when(((isfacebookallowed(1) && !dvarbool(cl_ingame) && !dvarbool(sv_running))) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "facebook"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  ((253 - getTextWidthModCase(getfacebookstatustext(), 3, 0.375, 9))) + (((0 - 64) + 0)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_5"
+            rect                        -68 134.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when((isfacebookallowed(1) && !dvarbool(cl_ingame) && !dvarbool(sv_running)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_5";
+                setLocalVarInt ui_buttonNavGroupCurrent 5;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis (((isfacebookallowed(1) && !dvarbool(cl_ingame) && !dvarbool(sv_running))) && !(isfacebookchecking()));
+                setLocalVarBool ui_swfSelectionBarVis ((isfacebookallowed(1) && !dvarbool(cl_ingame) && !dvarbool(sv_running)));
+                setLocalVarBool ui_swfSelectionDisabled (isfacebookchecking());
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(isfacebookchecking()))
+                {
+                    play mouse_click;
+                    if (isfacebookloggedin())
+                    {
+                        open popup_facebook_unregister;
+                    }
+                    else
+                    {
+                        open popup_facebook_legal;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 133.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((isfacebookallowed(1) && !dvarbool(cl_ingame) && !dvarbool(sv_running))) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    getfacebookstatustext();
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+            exp forecolor r             select(isfacebookchecking(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(isfacebookchecking(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(isfacebookchecking(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -46.5 133.334 283.333 3.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "navbar_tick"
+            exp rect x                  (0) + (((0 - 64) + 0)) + 0.667 + 17.5;
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 2.3333));
+        }
+        itemDef
+        {
+            name                        "OPTIONS_LIST_6"
+            rect                        -68 154.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "OPTIONS_LIST_6";
+                setLocalVarInt ui_buttonNavGroupCurrent 6;
+                setLocalVarString ui_buttonNavGroupName "OPTIONS_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(FUNC_32()));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (FUNC_32());
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(FUNC_32()))
+                {
+                    play mouse_click;
+                    open options_graphics_defaults;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 153.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (6) && (((6) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_RESET_SYSTEM_DEFAULTS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+            exp forecolor r             select(FUNC_32(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(FUNC_32(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(FUNC_32(), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -46.5 173.334 283.333 3.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (7) && (((7) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "navbar_tick"
+            exp rect x                  (0) + (((0 - 64) + 0)) + 0.667 + 17.5;
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 7))) + ((0 - 2.3333));
+        }
+        itemDef
+        {
+            rect                        -64 173.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (7) && (((7) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && (0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_options_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 7))) + ((0 - 1.333));
+            exp rect x                  ((276.667 * 0.25)) + (((0 - 64) + 0));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0.882 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.882));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0.655 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.655));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0.173 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.173));
+            exp rect w                  276.667 * 0.75;
+        }
+        itemDef
+        {
+            rect                        -64 173.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (20 - 1)) >= (7) && (((7) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && !(0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_options_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 7))) + ((0 - 1.333));
+            exp rect x                  ((276.667 * 0.25)) + (((0 - 64) + 0));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "OPTIONS_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect w                  276.667 * 0.75;
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "OPTIONS_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "leftside_options";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                escape self;
+                if (!(menuisopen("pc_options_advanced_video") || menuisopen("pc_options_video") || menuisopen("pc_options_audio") || menuisopen("pc_options_controls") || menuisopen("pc_options_voice")))
+                {
+                    if (localvarbool("ui_showPicApply") && !localvarbool("ui_showApply"))
+                    {
+                        execnow "setfromdvar r_picmip ui_r_picmip";
+                        execnow "setfromdvar r_picmip_bump ui_r_picmip_bump";
+                        execnow "setfromdvar r_picmip_spec ui_r_picmip_spec";
+                        execnow "setfromdvar r_picmip_manual ui_r_picmip_manual";
+                        exec "wait; wait; r_applyPicmip";
+                        setLocalVarBool ui_showPicApply 0;
+                    }
+                    if (localvarbool("ui_showApply") || localvarbool("ui_showAudioApply"))
+                    {
+                        open all_restart_popmenu;
+                    }
+                }
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "leftside_options"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "leftside_options"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "leftside_options"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "leftside_options"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "leftside_options"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            text                        "@MENU_TEXTURE_SETTINGS"
+            rect                        253.5 5 344 34 1 1
+            decoration                  
+            visible                     1
+            textalign                   4
+            textscale                   0.45
+            textstyle                   9
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "graphic_warning"
+            text                        "@MENU_GRAPHICS_WARNING"
+            rect                        10 -160 206 240 1 3
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        1
+            visible                     1
+            textscale                   0.375
+            mouseEnter
+            {
+                play mouse_over;
+            }
+        }
+    }
+}

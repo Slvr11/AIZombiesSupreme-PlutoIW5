@@ -1,0 +1,2478 @@
+{
+    functionDef
+    {
+        name                        "FUNC_0"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_1"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_2"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_3"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_4"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_5"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_6"
+        value                       team("name") == "TEAM_ALLIES";
+    }
+    functionDef
+    {
+        name                        "FUNC_7"
+        value                       team("name") == "TEAM_AXIS";
+    }
+    functionDef
+    {
+        name                        "FUNC_8"
+        value                       ((team("name") == "TEAM_AXIS") * 1) + ((team("name") == "TEAM_ALLIES") * 2);
+    }
+    functionDef
+    {
+        name                        "FUNC_9"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14);
+    }
+    functionDef
+    {
+        name                        "FUNC_10"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15);
+    }
+    functionDef
+    {
+        name                        "FUNC_11"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16);
+    }
+    functionDef
+    {
+        name                        "FUNC_12"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14);
+    }
+    functionDef
+    {
+        name                        "FUNC_13"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15);
+    }
+    functionDef
+    {
+        name                        "FUNC_14"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16);
+    }
+    functionDef
+    {
+        name                        "FUNC_15"
+        value                       (FUNC_12() * FUNC_7()) + (FUNC_9() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_16"
+        value                       (FUNC_13() * FUNC_7()) + (FUNC_10() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_17"
+        value                       (FUNC_14() * FUNC_7()) + (FUNC_11() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_18"
+        value                       (FUNC_12() * !(FUNC_7())) + (FUNC_9() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_19"
+        value                       (FUNC_13() * !(FUNC_7())) + (FUNC_10() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_20"
+        value                       (FUNC_14() * !(FUNC_7())) + (FUNC_11() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_21"
+        value                       max(0, (localvarint("ui_ac130timer") - milliseconds()) / 1000);
+    }
+    functionDef
+    {
+        name                        "FUNC_22"
+        value                       max(0, (localvarint("ui_remoteTankTimer") - milliseconds()) / 1000);
+    }
+    functionDef
+    {
+        name                        "FUNC_23"
+        value                       (getplayercardinfo(0, 0, 7) != 0) && (getplayercardinfo(8, 0, 7) && getplayercardinfo(8, 0, 7) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_24"
+        value                       (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(8, 0, 8) && getplayercardinfo(8, 0, 8) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_25"
+        value                       (getplayercardinfo(0, 0, 5) != 0) && (getplayercardinfo(8, 0, 5) && getplayercardinfo(8, 0, 5) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_26"
+        value                       (getplayercardinfo(0, 0, 7) != 0) && (!getplayercardinfo(8, 0, 7) || getplayercardinfo(8, 0, 7) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_27"
+        value                       (getplayercardinfo(0, 0, 8) != 0) && (!getplayercardinfo(8, 0, 8) || getplayercardinfo(8, 0, 8) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_28"
+        value                       (getplayercardinfo(0, 0, 5) != 0) && (!getplayercardinfo(8, 0, 5) || getplayercardinfo(8, 0, 5) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_29"
+        value                       !isusingmatchrulesdata() || getmatchrulesdata("commonOption", "allowCustomClasses");
+    }
+    functionDef
+    {
+        name                        "FUNC_30"
+        value                       dvarbool(ui_multiplayer) && (dvarbool(cl_ingame) || dvarbool(sv_running));
+    }
+    functionDef
+    {
+        name                        "FUNC_31"
+        value                       dvarbool(cl_ingame) || dvarbool(sv_running) || inlobby();
+    }
+    functionDef
+    {
+        name                        "FUNC_32"
+        value                       (dvarstring(gameMode) == "so" && FUNC_31()) || (dvarstring(gameMode) == "mp" && FUNC_31());
+    }
+    functionDef
+    {
+        name                        "FUNC_33"
+        value                       FUNC_29() && (getplayerdata(localvarstring("ui_customClassLoc"), 0, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 1, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 2, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 3, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 4, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 5, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 6, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 7, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 8, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 9, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 10, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 11, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 12, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 13, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 14, "inUse"));
+    }
+    functionDef
+    {
+        name                        "FUNC_34"
+        value                       localvarbool("ui_swfSelectionBarVis") || localvarbool("ui_swfPopupSelectionBarVis");
+    }
+    functionDef
+    {
+        name                        "FUNC_35"
+        value                       sin(localclientuimilliseconds() / 80) * 0.3 + 1;
+    }
+    functionDef
+    {
+        name                        "FUNC_36"
+        value                       sin(milliseconds() / 80) * 0.3 + 1;
+    }
+    functionDef
+    {
+        name                        "FUNC_37"
+        value                       sin(localclientuimilliseconds() / 90) * (0 - 0.35);
+    }
+    functionDef
+    {
+        name                        "FUNC_38"
+        value                       sin(milliseconds() / 90) * (0 - 0.35);
+    }
+    functionDef
+    {
+        name                        "FUNC_39"
+        value                       0.3 + (sin(milliseconds() / 80) + 1) * 0.7;
+    }
+    functionDef
+    {
+        name                        "FUNC_40"
+        value                       localvarstring("loadoutPerk1") == "specialty_twoprimaries" || localvarstring("loadoutPerk2") == "specialty_twoprimaries" || localvarstring("loadoutPerk3") == "specialty_twoprimaries";
+    }
+    functionDef
+    {
+        name                        "FUNC_41"
+        value                       ((dvarstring(ui_gametype) == "infect") && (localvarstring("ui_editingTeam") == "axis")) || ((dvarstring(ui_gametype) == "jugg")) || ((localvarint("ui_editingClassIndex") == 5) && ((dvarstring(ui_gametype) == "sd") || (dvarstring(ui_gametype) == "sab") || (dvarstring(ui_gametype) == "ctf") || (dvarstring(ui_gametype) == "tdef") || (dvarstring(ui_gametype) == "tjugg")));
+    }
+    functionDef
+    {
+        name                        "FUNC_42"
+        value                       ((dvarstring(ui_gametype) == "infect") && (localvarstring("ui_editingTeam") == "allies")) || ((localvarint("ui_editingClassIndex") == 5) && ((dvarstring(ui_gametype) == "tjugg") || (dvarstring(ui_gametype) == "sab") || (dvarstring(ui_gametype) == "ctf") || (dvarstring(ui_gametype) == "tdef") || (dvarstring(ui_gametype) == "sd") || (dvarstring(ui_gametype) == "jugg")));
+    }
+    functionDef
+    {
+        name                        "FUNC_43"
+        value                       (dvarstring(ui_gametype) == "jugg") || (dvarstring(ui_gametype) == "tjugg");
+    }
+    functionDef
+    {
+        name                        "FUNC_44"
+        value                       getmatchrulesdata("defaultClasses", localvarstring("ui_editingTeam"), localvarint("ui_editingClassIndex"), "juggernaut");
+    }
+    functionDef
+    {
+        name                        "FUNC_45"
+        value                       select((FUNC_44() == 0), "@MENU_DISABLED", select((FUNC_44() == 1), "@MENU_ENABLED", "JUGG_STR3"));
+    }
+    functionDef
+    {
+        name                        "FUNC_46"
+        value                       select((FUNC_44() == 0), 1, select((FUNC_44() == 1), "JUGG_VAL3", 0));
+    }
+    functionDef
+    {
+        name                        "FUNC_47"
+        value                       select((FUNC_44() == 0), "JUGG_VAL3", select((FUNC_44() == 1), 0, 1));
+    }
+    functionDef
+    {
+        name                        "FUNC_48"
+        value                       select((localvarint("ui_editingClassIndex") == 0), locstring("@MPUI_CLASS_1"), select((localvarint("ui_editingClassIndex") == 1), locstring("@MPUI_CLASS_2"), select((localvarint("ui_editingClassIndex") == 2), locstring("@MPUI_CLASS_3"), select((localvarint("ui_editingClassIndex") == 3), locstring("@MPUI_CLASS_4"), select((localvarint("ui_editingClassIndex") == 4), locstring("@MPUI_CLASS_5"), locstring(localvarstring("ui_specialClassName")))))));
+    }
+    functionDef
+    {
+        name                        "FUNC_49"
+        value                       select(getmatchrulesdata("defaultClasses", localvarstring("ui_editingTeam"), localvarint("ui_editingClassIndex"), "class", "name") == "", FUNC_48(), getmatchrulesdata("defaultClasses", localvarstring("ui_editingTeam"), localvarint("ui_editingClassIndex"), "class", "name"));
+    }
+    functionDef
+    {
+        name                        "FUNC_50"
+        value                       0;
+    }
+    functionDef
+    {
+        name                        "FUNC_51"
+        value                       getplayerdata("weaponNew", "iw5_m4") || getplayerdataanybooltrue("camoNew", "iw5_m4") || getplayerdataanybooltrue("attachmentNew", "iw5_m4");
+    }
+    functionDef
+    {
+        name                        "FUNC_52"
+        value                       getplayerdata("weaponNew", "iw5_m16") || getplayerdataanybooltrue("camoNew", "iw5_m16") || getplayerdataanybooltrue("attachmentNew", "iw5_m16");
+    }
+    functionDef
+    {
+        name                        "FUNC_53"
+        value                       getplayerdata("weaponNew", "iw5_scar") || getplayerdataanybooltrue("camoNew", "iw5_scar") || getplayerdataanybooltrue("attachmentNew", "iw5_scar");
+    }
+    functionDef
+    {
+        name                        "FUNC_54"
+        value                       getplayerdata("weaponNew", "iw5_cm901") || getplayerdataanybooltrue("camoNew", "iw5_cm901") || getplayerdataanybooltrue("attachmentNew", "iw5_cm901");
+    }
+    functionDef
+    {
+        name                        "FUNC_55"
+        value                       getplayerdata("weaponNew", "iw5_type95") || getplayerdataanybooltrue("camoNew", "iw5_type95") || getplayerdataanybooltrue("attachmentNew", "iw5_type95");
+    }
+    functionDef
+    {
+        name                        "FUNC_56"
+        value                       getplayerdata("weaponNew", "iw5_g36c") || getplayerdataanybooltrue("camoNew", "iw5_g36c") || getplayerdataanybooltrue("attachmentNew", "iw5_g36c");
+    }
+    functionDef
+    {
+        name                        "FUNC_57"
+        value                       getplayerdata("weaponNew", "iw5_acr") || getplayerdataanybooltrue("camoNew", "iw5_acr") || getplayerdataanybooltrue("attachmentNew", "iw5_acr");
+    }
+    functionDef
+    {
+        name                        "FUNC_58"
+        value                       getplayerdata("weaponNew", "iw5_mk14") || getplayerdataanybooltrue("camoNew", "iw5_mk14") || getplayerdataanybooltrue("attachmentNew", "iw5_mk14");
+    }
+    functionDef
+    {
+        name                        "FUNC_59"
+        value                       getplayerdata("weaponNew", "iw5_ak47") || getplayerdataanybooltrue("camoNew", "iw5_ak47") || getplayerdataanybooltrue("attachmentNew", "iw5_ak47");
+    }
+    functionDef
+    {
+        name                        "FUNC_60"
+        value                       getplayerdata("weaponNew", "iw5_fad") || getplayerdataanybooltrue("camoNew", "iw5_fad") || getplayerdataanybooltrue("attachmentNew", "iw5_fad");
+    }
+    functionDef
+    {
+        name                        "FUNC_61"
+        value                       getplayerdata("weaponNew", "iw5_mp5") || getplayerdataanybooltrue("camoNew", "iw5_mp5") || getplayerdataanybooltrue("attachmentNew", "iw5_mp5");
+    }
+    functionDef
+    {
+        name                        "FUNC_62"
+        value                       getplayerdata("weaponNew", "iw5_ump45") || getplayerdataanybooltrue("camoNew", "iw5_ump45") || getplayerdataanybooltrue("attachmentNew", "iw5_ump45");
+    }
+    functionDef
+    {
+        name                        "FUNC_63"
+        value                       getplayerdata("weaponNew", "iw5_pp90m1") || getplayerdataanybooltrue("camoNew", "iw5_pp90m1") || getplayerdataanybooltrue("attachmentNew", "iw5_pp90m1");
+    }
+    functionDef
+    {
+        name                        "FUNC_64"
+        value                       getplayerdata("weaponNew", "iw5_p90") || getplayerdataanybooltrue("camoNew", "iw5_p90") || getplayerdataanybooltrue("attachmentNew", "iw5_p90");
+    }
+    functionDef
+    {
+        name                        "FUNC_65"
+        value                       getplayerdata("weaponNew", "iw5_m9") || getplayerdataanybooltrue("camoNew", "iw5_m9") || getplayerdataanybooltrue("attachmentNew", "iw5_m9");
+    }
+    functionDef
+    {
+        name                        "FUNC_66"
+        value                       getplayerdata("weaponNew", "iw5_mp7") || getplayerdataanybooltrue("camoNew", "iw5_mp7") || getplayerdataanybooltrue("attachmentNew", "iw5_mp7");
+    }
+    functionDef
+    {
+        name                        "FUNC_67"
+        value                       getplayerdata("weaponNew", "iw5_sa80") || getplayerdataanybooltrue("camoNew", "iw5_sa80") || getplayerdataanybooltrue("attachmentNew", "iw5_sa80");
+    }
+    functionDef
+    {
+        name                        "FUNC_68"
+        value                       getplayerdata("weaponNew", "iw5_mg36") || getplayerdataanybooltrue("camoNew", "iw5_mg36") || getplayerdataanybooltrue("attachmentNew", "iw5_mg36");
+    }
+    functionDef
+    {
+        name                        "FUNC_69"
+        value                       getplayerdata("weaponNew", "iw5_pecheneg") || getplayerdataanybooltrue("camoNew", "iw5_pecheneg") || getplayerdataanybooltrue("attachmentNew", "iw5_pecheneg");
+    }
+    functionDef
+    {
+        name                        "FUNC_70"
+        value                       getplayerdata("weaponNew", "iw5_mk46") || getplayerdataanybooltrue("camoNew", "iw5_mk46") || getplayerdataanybooltrue("attachmentNew", "iw5_mk46");
+    }
+    functionDef
+    {
+        name                        "FUNC_71"
+        value                       getplayerdata("weaponNew", "iw5_m60") || getplayerdataanybooltrue("camoNew", "iw5_m60") || getplayerdataanybooltrue("attachmentNew", "iw5_m60");
+    }
+    functionDef
+    {
+        name                        "FUNC_72"
+        value                       getplayerdata("weaponNew", "iw5_barrett") || getplayerdataanybooltrue("camoNew", "iw5_barrett") || getplayerdataanybooltrue("attachmentNew", "iw5_barrett");
+    }
+    functionDef
+    {
+        name                        "FUNC_73"
+        value                       getplayerdata("weaponNew", "iw5_l96a1") || getplayerdataanybooltrue("camoNew", "iw5_l96a1") || getplayerdataanybooltrue("attachmentNew", "iw5_l96a1");
+    }
+    functionDef
+    {
+        name                        "FUNC_74"
+        value                       getplayerdata("weaponNew", "iw5_dragunov") || getplayerdataanybooltrue("camoNew", "iw5_dragunov") || getplayerdataanybooltrue("attachmentNew", "iw5_dragunov");
+    }
+    functionDef
+    {
+        name                        "FUNC_75"
+        value                       getplayerdata("weaponNew", "iw5_as50") || getplayerdataanybooltrue("camoNew", "iw5_as50") || getplayerdataanybooltrue("attachmentNew", "iw5_as50");
+    }
+    functionDef
+    {
+        name                        "FUNC_76"
+        value                       getplayerdata("weaponNew", "iw5_rsass") || getplayerdataanybooltrue("camoNew", "iw5_rsass") || getplayerdataanybooltrue("attachmentNew", "iw5_rsass");
+    }
+    functionDef
+    {
+        name                        "FUNC_77"
+        value                       getplayerdata("weaponNew", "iw5_msr") || getplayerdataanybooltrue("camoNew", "iw5_msr") || getplayerdataanybooltrue("attachmentNew", "iw5_msr");
+    }
+    functionDef
+    {
+        name                        "FUNC_78"
+        value                       getplayerdata("weaponNew", "iw5_usas12") || getplayerdataanybooltrue("camoNew", "iw5_usas12") || getplayerdataanybooltrue("attachmentNew", "iw5_usas12");
+    }
+    functionDef
+    {
+        name                        "FUNC_79"
+        value                       getplayerdata("weaponNew", "iw5_ksg") || getplayerdataanybooltrue("camoNew", "iw5_ksg") || getplayerdataanybooltrue("attachmentNew", "iw5_ksg");
+    }
+    functionDef
+    {
+        name                        "FUNC_80"
+        value                       getplayerdata("weaponNew", "iw5_spas12") || getplayerdataanybooltrue("camoNew", "iw5_spas12") || getplayerdataanybooltrue("attachmentNew", "iw5_spas12");
+    }
+    functionDef
+    {
+        name                        "FUNC_81"
+        value                       getplayerdata("weaponNew", "iw5_aa12") || getplayerdataanybooltrue("camoNew", "iw5_aa12") || getplayerdataanybooltrue("attachmentNew", "iw5_aa12");
+    }
+    functionDef
+    {
+        name                        "FUNC_82"
+        value                       getplayerdata("weaponNew", "iw5_striker") || getplayerdataanybooltrue("camoNew", "iw5_striker") || getplayerdataanybooltrue("attachmentNew", "iw5_striker");
+    }
+    functionDef
+    {
+        name                        "FUNC_83"
+        value                       getplayerdata("weaponNew", "iw5_1887") || getplayerdataanybooltrue("camoNew", "iw5_1887") || getplayerdataanybooltrue("attachmentNew", "iw5_1887");
+    }
+    functionDef
+    {
+        name                        "FUNC_84"
+        value                       getplayerdata("weaponNew", "riotshield") || getplayerdataanybooltrue("camoNew", "riotshield") || getplayerdataanybooltrue("attachmentNew", "riotshield");
+    }
+    functionDef
+    {
+        name                        "FUNC_85"
+        value                       getplayerdata("weaponNew", "iw5_fmg9") || getplayerdataanybooltrue("camoNew", "iw5_fmg9") || getplayerdataanybooltrue("attachmentNew", "iw5_fmg9");
+    }
+    functionDef
+    {
+        name                        "FUNC_86"
+        value                       getplayerdata("weaponNew", "iw5_mp9") || getplayerdataanybooltrue("camoNew", "iw5_mp9") || getplayerdataanybooltrue("attachmentNew", "iw5_mp9");
+    }
+    functionDef
+    {
+        name                        "FUNC_87"
+        value                       getplayerdata("weaponNew", "iw5_skorpion") || getplayerdataanybooltrue("camoNew", "iw5_skorpion") || getplayerdataanybooltrue("attachmentNew", "iw5_skorpion");
+    }
+    functionDef
+    {
+        name                        "FUNC_88"
+        value                       getplayerdata("weaponNew", "iw5_g18") || getplayerdataanybooltrue("camoNew", "iw5_g18") || getplayerdataanybooltrue("attachmentNew", "iw5_g18");
+    }
+    functionDef
+    {
+        name                        "FUNC_89"
+        value                       getplayerdata("weaponNew", "iw5_usp45") || getplayerdataanybooltrue("camoNew", "iw5_usp45") || getplayerdataanybooltrue("attachmentNew", "iw5_usp45");
+    }
+    functionDef
+    {
+        name                        "FUNC_90"
+        value                       getplayerdata("weaponNew", "iw5_p99") || getplayerdataanybooltrue("camoNew", "iw5_p99") || getplayerdataanybooltrue("attachmentNew", "iw5_p99");
+    }
+    functionDef
+    {
+        name                        "FUNC_91"
+        value                       getplayerdata("weaponNew", "iw5_mp412") || getplayerdataanybooltrue("camoNew", "iw5_mp412") || getplayerdataanybooltrue("attachmentNew", "iw5_mp412");
+    }
+    functionDef
+    {
+        name                        "FUNC_92"
+        value                       getplayerdata("weaponNew", "iw5_44magnum") || getplayerdataanybooltrue("camoNew", "iw5_44magnum") || getplayerdataanybooltrue("attachmentNew", "iw5_44magnum");
+    }
+    functionDef
+    {
+        name                        "FUNC_93"
+        value                       getplayerdata("weaponNew", "iw5_fnfiveseven") || getplayerdataanybooltrue("camoNew", "iw5_fnfiveseven") || getplayerdataanybooltrue("attachmentNew", "iw5_fnfiveseven");
+    }
+    functionDef
+    {
+        name                        "FUNC_94"
+        value                       getplayerdata("weaponNew", "iw5_deserteagle") || getplayerdataanybooltrue("camoNew", "iw5_deserteagle") || getplayerdataanybooltrue("attachmentNew", "iw5_deserteagle");
+    }
+    functionDef
+    {
+        name                        "FUNC_95"
+        value                       getplayerdata("weaponNew", "iw5_smaw") || getplayerdataanybooltrue("camoNew", "iw5_smaw") || getplayerdataanybooltrue("attachmentNew", "iw5_smaw");
+    }
+    functionDef
+    {
+        name                        "FUNC_96"
+        value                       getplayerdata("weaponNew", "javelin") || getplayerdataanybooltrue("camoNew", "javelin") || getplayerdataanybooltrue("attachmentNew", "javelin");
+    }
+    functionDef
+    {
+        name                        "FUNC_97"
+        value                       getplayerdata("weaponNew", "stinger") || getplayerdataanybooltrue("camoNew", "stinger") || getplayerdataanybooltrue("attachmentNew", "stinger");
+    }
+    functionDef
+    {
+        name                        "FUNC_98"
+        value                       getplayerdata("weaponNew", "xm25") || getplayerdataanybooltrue("camoNew", "xm25") || getplayerdataanybooltrue("attachmentNew", "xm25");
+    }
+    functionDef
+    {
+        name                        "FUNC_99"
+        value                       getplayerdata("weaponNew", "m320") || getplayerdataanybooltrue("camoNew", "m320") || getplayerdataanybooltrue("attachmentNew", "m320");
+    }
+    functionDef
+    {
+        name                        "FUNC_100"
+        value                       getplayerdata("weaponNew", "rpg") || getplayerdataanybooltrue("camoNew", "rpg") || getplayerdataanybooltrue("attachmentNew", "rpg");
+    }
+    functionDef
+    {
+        name                        "FUNC_101"
+        value                       FUNC_51() || FUNC_52() || FUNC_53() || FUNC_54() || FUNC_55() || FUNC_56() || FUNC_57() || FUNC_58() || FUNC_59() || FUNC_60();
+    }
+    functionDef
+    {
+        name                        "FUNC_102"
+        value                       FUNC_61() || FUNC_62() || FUNC_63() || FUNC_64() || FUNC_65() || FUNC_66();
+    }
+    functionDef
+    {
+        name                        "FUNC_103"
+        value                       FUNC_67() || FUNC_68() || FUNC_69() || FUNC_70() || FUNC_71();
+    }
+    functionDef
+    {
+        name                        "FUNC_104"
+        value                       FUNC_72() || FUNC_73() || FUNC_74() || FUNC_75() || FUNC_76() || FUNC_77();
+    }
+    functionDef
+    {
+        name                        "FUNC_105"
+        value                       FUNC_78() || FUNC_79() || FUNC_80() || FUNC_81() || FUNC_82() || FUNC_83();
+    }
+    functionDef
+    {
+        name                        "FUNC_106"
+        value                       FUNC_84();
+    }
+    functionDef
+    {
+        name                        "FUNC_107"
+        value                       FUNC_85() || FUNC_86() || FUNC_87() || FUNC_88();
+    }
+    functionDef
+    {
+        name                        "FUNC_108"
+        value                       FUNC_89() || FUNC_90() || FUNC_91() || FUNC_92() || FUNC_93() || FUNC_94();
+    }
+    functionDef
+    {
+        name                        "FUNC_109"
+        value                       FUNC_95() || FUNC_96() || FUNC_97() || FUNC_98() || FUNC_99() || FUNC_100();
+    }
+    functionDef
+    {
+        name                        "FUNC_110"
+        value                       getplayerdata("featureNew", "token_1") || getplayerdata("featureNew", "token_2") || getplayerdata("featureNew", "token_3") || getplayerdata("featureNew", "token_4") || getplayerdata("featureNew", "token_5") || getplayerdata("featureNew", "token_6") || getplayerdata("featureNew", "token_7") || getplayerdata("featureNew", "token_8") || getplayerdata("featureNew", "token_9") || getplayerdata("featureNew", "token_10") || getplayerdata("featureNew", "token_11") || getplayerdata("featureNew", "token_12") || getplayerdata("featureNew", "token_13") || getplayerdata("featureNew", "token_14") || getplayerdata("featureNew", "token_15") || getplayerdata("featureNew", "token_16") || getplayerdata("featureNew", "token_17") || getplayerdata("featureNew", "token_18") || getplayerdata("featureNew", "token_19") || getplayerdata("featureNew", "token_20") || getplayerdata("featureNew", "token_21") || getplayerdata("featureNew", "token_22") || getplayerdata("featureNew", "token_23");
+    }
+    functionDef
+    {
+        name                        "FUNC_111"
+        value                       getplayerdata("killstreakNew", "uav") || getplayerdata("killstreakNew", "airdrop_assault") || getplayerdata("killstreakNew", "ims") || getplayerdata("killstreakNew", "predator_missile") || getplayerdata("killstreakNew", "airdrop_sentry_minigun") || getplayerdata("killstreakNew", "precision_airstrike") || getplayerdata("killstreakNew", "helicopter") || getplayerdata("killstreakNew", "littlebird_flock") || getplayerdata("killstreakNew", "littlebird_support") || getplayerdata("killstreakNew", "remote_mortar") || getplayerdata("killstreakNew", "airdrop_remote_tank") || getplayerdata("killstreakNew", "ac130") || getplayerdata("killstreakNew", "helicopter_flares") || getplayerdata("killstreakNew", "airdrop_juggernaut") || getplayerdata("killstreakNew", "osprey_gunner");
+    }
+    functionDef
+    {
+        name                        "FUNC_112"
+        value                       getplayerdata("killstreakNew", "uav_support") || getplayerdata("killstreakNew", "counter_uav") || getplayerdata("killstreakNew", "deployable_vest") || getplayerdata("killstreakNew", "airdrop_trap") || getplayerdata("killstreakNew", "sam_turret") || getplayerdata("killstreakNew", "remote_uav") || getplayerdata("killstreakNew", "triple_uav") || getplayerdata("killstreakNew", "remote_mg_turret") || getplayerdata("killstreakNew", "stealth_airstrike") || getplayerdata("killstreakNew", "emp") || getplayerdata("killstreakNew", "airdrop_juggernaut_recon") || getplayerdata("killstreakNew", "escort_airdrop");
+    }
+    functionDef
+    {
+        name                        "FUNC_113"
+        value                       getplayerdata("killstreakNew", "specialty_longersprint_ks") || getplayerdata("killstreakNew", "specialty_fastreload_ks") || getplayerdata("killstreakNew", "specialty_scavenger_ks") || getplayerdata("killstreakNew", "specialty_blindeye_ks") || getplayerdata("killstreakNew", "specialty_paint_ks") || getplayerdata("killstreakNew", "specialty_hardline_ks") || getplayerdata("killstreakNew", "specialty_coldblooded_ks") || getplayerdata("killstreakNew", "specialty_quickdraw_ks") || getplayerdata("killstreakNew", "_specialty_blastshield_ks") || getplayerdata("killstreakNew", "specialty_detectexplosive_ks") || getplayerdata("killstreakNew", "specialty_autospot_ks") || getplayerdata("killstreakNew", "specialty_bulletaccuracy_ks") || getplayerdata("killstreakNew", "specialty_quieter_ks") || getplayerdata("killstreakNew", "specialty_stalker_ks");
+    }
+    functionDef
+    {
+        name                        "FUNC_114"
+        value                       getplayerdata("killstreakNew", "specialty_longersprint_ks_pro") || getplayerdata("killstreakNew", "specialty_fastreload_ks_pro") || getplayerdata("killstreakNew", "specialty_scavenger_ks_pro") || getplayerdata("killstreakNew", "specialty_blindeye_ks_pro") || getplayerdata("killstreakNew", "specialty_paint_ks_pro") || getplayerdata("killstreakNew", "specialty_hardline_ks_pro") || getplayerdata("killstreakNew", "specialty_coldblooded_ks_pro") || getplayerdata("killstreakNew", "specialty_quickdraw_ks_pro") || getplayerdata("killstreakNew", "_specialty_blastshield_ks_pro") || getplayerdata("killstreakNew", "specialty_detectexplosive_ks_pro") || getplayerdata("killstreakNew", "specialty_autospot_ks_pro") || getplayerdata("killstreakNew", "specialty_bulletaccuracy_ks_pro") || getplayerdata("killstreakNew", "specialty_quieter_ks_pro") || getplayerdata("killstreakNew", "specialty_stalker_ks_pro");
+    }
+    functionDef
+    {
+        name                        "FUNC_115"
+        value                       FUNC_113() || FUNC_114();
+    }
+    functionDef
+    {
+        name                        "FUNC_116"
+        value                       (localvarstring("ui_team") == "marines") || (team("name") == "TEAM_ALLIES");
+    }
+    functionDef
+    {
+        name                        "FUNC_117"
+        value                       (localvarstring("ui_team") == "opfor") || (team("name") == "TEAM_AXIS");
+    }
+    functionDef
+    {
+        name                        "FUNC_118"
+        value                       isusingmatchrulesdata() && ((FUNC_117() && getmatchrulesdata("defaultClasses", "axis", 0, "class", "inUse")) || (FUNC_116() && getmatchrulesdata("defaultClasses", "allies", 0, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_119"
+        value                       isusingmatchrulesdata() && ((FUNC_117() && getmatchrulesdata("defaultClasses", "axis", 1, "class", "inUse")) || (FUNC_116() && getmatchrulesdata("defaultClasses", "allies", 1, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_120"
+        value                       isusingmatchrulesdata() && ((FUNC_117() && getmatchrulesdata("defaultClasses", "axis", 2, "class", "inUse")) || (FUNC_116() && getmatchrulesdata("defaultClasses", "allies", 2, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_121"
+        value                       isusingmatchrulesdata() && ((FUNC_117() && getmatchrulesdata("defaultClasses", "axis", 3, "class", "inUse")) || (FUNC_116() && getmatchrulesdata("defaultClasses", "allies", 3, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_122"
+        value                       isusingmatchrulesdata() && ((FUNC_117() && getmatchrulesdata("defaultClasses", "axis", 4, "class", "inUse")) || (FUNC_116() && getmatchrulesdata("defaultClasses", "allies", 4, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_123"
+        value                       isusingmatchrulesdata() && (FUNC_118() || FUNC_119() || FUNC_120() || FUNC_121() || FUNC_122());
+    }
+    functionDef
+    {
+        name                        "FUNC_124"
+        value                       (localvarstring("ui_attachment1Name") == "silencer") || (localvarstring("ui_attachment2Name") == "silencer") || (localvarstring("ui_attachment3Name") == "silencer") || (localvarstring("ui_attachment4Name") == "silencer") || (localvarstring("ui_attachment5Name") == "silencer") || (localvarstring("ui_attachment6Name") == "silencer") || (localvarstring("ui_attachment8Name") == "silencer") || (localvarstring("ui_attachment9Name") == "silencer") || (localvarstring("ui_attachment10Name") == "silencer") || (localvarstring("ui_attachment11Name") == "silencer") || (localvarstring("ui_attachment12Name") == "silencer") || (localvarstring("ui_attachment13Name") == "silencer") || (localvarstring("ui_attachment14Name") == "silencer") || (localvarstring("ui_attachment15Name") == "silencer");
+    }
+    functionDef
+    {
+        name                        "FUNC_125"
+        value                       (inprivateparty() && !privatepartyhost()) || ispartyhostwaitingonmembers();
+    }
+    functionDef
+    {
+        name                        "FUNC_126"
+        value                       getOnlineVaultSelectedItemData("gametype_raw");
+    }
+    functionDef
+    {
+        name                        "FUNC_127"
+        value                       select(FUNC_126() == "jugg", "playlist_standard", select(FUNC_126() == "gun", "playlist_standard", select(FUNC_126() == "infect", "playlist_dogtags", select(FUNC_126() == "oic", "playlist_standard", "playlist_standard"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_128"
+        value                       select(FUNC_126() == "ctf", "playlist_standard", select(FUNC_126() == "dd", "playlist_standard", select(FUNC_126() == "tdef", "playlist_objectives", select(FUNC_126() == "conf", "playlist_dogtags", select(FUNC_126() == "grnd", "playlist_objectives", select(FUNC_126() == "tjugg", "playlist_standard", FUNC_127()))))));
+    }
+    functionDef
+    {
+        name                        "FUNC_129"
+        value                       select(FUNC_126() == "dm", "playlist_dogtags", select(FUNC_126() == "war", "playlist_dogtags", select(FUNC_126() == "sd", "playlist_objectives", select(FUNC_126() == "sab", "playlist_objectives", select(FUNC_126() == "dom", "playlist_objectives", select(FUNC_126() == "koth", "playlist_standard", FUNC_128()))))));
+    }
+    functionDef
+    {
+        name                        "FUNC_130"
+        value                       select((dvarint(ui_netSource) == 1), (select(dvarbool(ui_browserShowFull), (select(dvarbool(ui_browserShowEmpty), "", "@MENU_SB_INTERNET_FILTER_EMPTY")), (select(dvarbool(ui_browserShowEmpty), "@MENU_SB_INTERNET_FILTER_FULL", "@MENU_SB_INTERNET_FILTER_FULL_AND_EMPTY")))), "");
+    }
+    functionDef
+    {
+        name                        "FUNC_131"
+        value                       select((localvarint("ui_sbFilterPanel") == 0), (480 - ((70 + 24 + 3 + 6) + 16 + 2) - 62 - 3 - 3), (select((localvarint("ui_sbFilterPanel") == 1), (480 - ((70 + 24 + 3 + 6) + 16 + 2) - 62 - 100 - 3 - 5), (480 - ((70 + 24 + 3 + 6) + 16 + 2) - 62 - 100 - 100 - 3))));
+    }
+    functionDef
+    {
+        name                        "FUNC_132"
+        value                       dvarstring(ui_favorite_message);
+    }
+    functionDef
+    {
+        name                        "FUNC_133"
+        value                       select((localvarint("ui_sbFilterPanel") == 0), 0, (select((localvarint("ui_sbFilterPanel") == 1), 100, (100 + 100))));
+    }
+    functionDef
+    {
+        name                        "FUNC_134"
+        value                       select((((((70 + 24 + 3 + 6) + 16 + 2) + (15 * localvarint("ui_mouseOverRow")) + 2) + ((184 * (258 / 324)) + 30 + (2 * 2))) > (((70 + 24 + 3 + 6) + 16 + 2) + FUNC_131())), ((((70 + 24 + 3 + 6) + 16 + 2) + FUNC_131()) - ((184 * (258 / 324)) + 30 + (2 * 2))), ((((70 + 24 + 3 + 6) + 16 + 2) + (15 * localvarint("ui_mouseOverRow")) + 2) + 2));
+    }
+    functionDef
+    {
+        name                        "FUNC_135"
+        value                       int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_streak1Name"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4));
+    }
+    functionDef
+    {
+        name                        "FUNC_136"
+        value                       int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_streak2Name"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4));
+    }
+    functionDef
+    {
+        name                        "FUNC_137"
+        value                       int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_streak3Name"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4));
+    }
+    functionDef
+    {
+        name                        "FUNC_138"
+        value                       (localvarstring("ui_assaultStreak1") != "none") && (localvarstring("ui_assaultStreak2") != "none") && (localvarstring("ui_assaultStreak3") != "none");
+    }
+    functionDef
+    {
+        name                        "FUNC_139"
+        value                       (localvarstring("ui_supportStreak1") != "none") && (localvarstring("ui_supportStreak2") != "none") && (localvarstring("ui_supportStreak3") != "none");
+    }
+    functionDef
+    {
+        name                        "FUNC_140"
+        value                       ((localvarstring("ui_specialistStreak3") == "none") || (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1) + "_ks" == localvarstring("ui_specialistStreak3") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2) + "_ks" == localvarstring("ui_specialistStreak3") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3) + "_ks" == localvarstring("ui_specialistStreak3"))) || ((localvarstring("ui_specialistStreak2") == "none") || (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1) + "_ks" == localvarstring("ui_specialistStreak2") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2) + "_ks" == localvarstring("ui_specialistStreak2") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3) + "_ks" == localvarstring("ui_specialistStreak2"))) || ((localvarstring("ui_specialistStreak1") == "none") || (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1) + "_ks" == localvarstring("ui_specialistStreak1") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2) + "_ks" == localvarstring("ui_specialistStreak1") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3) + "_ks" == localvarstring("ui_specialistStreak1")));
+    }
+    functionDef
+    {
+        name                        "FUNC_141"
+        value                       ((localvarstring("ui_specialistStreak3") == "none") || (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1) + "_ks" == localvarstring("ui_specialistStreak3") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2) + "_ks" == localvarstring("ui_specialistStreak3") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3) + "_ks" == localvarstring("ui_specialistStreak3"))) && ((localvarstring("ui_specialistStreak2") == "none") || (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1) + "_ks" == localvarstring("ui_specialistStreak2") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2) + "_ks" == localvarstring("ui_specialistStreak2") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3) + "_ks" == localvarstring("ui_specialistStreak2"))) && ((localvarstring("ui_specialistStreak1") == "none") || (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1) + "_ks" == localvarstring("ui_specialistStreak1") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2) + "_ks" == localvarstring("ui_specialistStreak1") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3) + "_ks" == localvarstring("ui_specialistStreak1")));
+    }
+    functionDef
+    {
+        name                        "FUNC_142"
+        value                       (localvarstring("ui_specialistStreak3") != "none") && (localvarstring("ui_specialistStreak2") != "none") && (localvarstring("ui_specialistStreak1") != "none");
+    }
+    functionDef
+    {
+        name                        "FUNC_143"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_m4", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_m16", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_scar", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_cm901", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_type95", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_g36c", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_acr", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mk14", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_ak47", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_144"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mp5", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_ump45", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_pp90m1", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_p90", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_m9", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mp7", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_145"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_sa80", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mg36", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_pecheneg", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mk46", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_m60", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_146"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_barrett", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_l96a1", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_dragunov", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_as50", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_147"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_usas12", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_ksg", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_spas12", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_aa12", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_striker", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_1887", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_148"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_fmg9", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mp9", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_skorpion", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_g18", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_149"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_usp45", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_p99", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_mp412", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_44magnum", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_fnfiveseven", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_deserteagle", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_150"
+        value                       getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "iw5_smaw", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "javelin", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "stinger", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "xm25", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "m320", 0))) || getplayerdata("challengeTierNew", int(tablelookup("mp/challengeTable.csv", 6, "rpg", 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_151"
+        value                       FUNC_143() || FUNC_144() || FUNC_147() || FUNC_145() || FUNC_146();
+    }
+    functionDef
+    {
+        name                        "FUNC_152"
+        value                       FUNC_148() || FUNC_149() || FUNC_150();
+    }
+    functionDef
+    {
+        name                        "FUNC_153"
+        value                       localvarstring("ui_selected_attach_ref") != "" && !(areAllItemsUnlocked() || (getplayerdata("weaponRank", tablelookup("mp/challengeTable.csv", 4, localvarstring("ui_challengeTierTable"), 6)) >= tablelookup("mp/weaponRankTable.csv", (tablelookup("mp/weaponRankTable.csv", 0, tablelookup("mp/statsTable.csv", 4, tablelookup("mp/challengeTable.csv", 4, localvarstring("ui_challengeTierTable"), 6), 2), 2)), localvarstring("ui_selected_attach_ref"), 4)) || dvarbool(xblive_privatematch));
+    }
+    functionDef
+    {
+        name                        "FUNC_154"
+        value                       localvarstring("ui_selected_perk_ref") != "" && !isitemunlocked(localvarstring("ui_selected_perk_ref"));
+    }
+    functionDef
+    {
+        name                        "FUNC_155"
+        value                       localvarstring("ui_selected_ks_ref") != "" && !(isitemunlocked(localvarstring("ui_selected_ks_ref")) && ((localvarstring("ui_info_filter") == "killstreaks_specialist") || (getplayerdata("killstreakUnlocked", localvarstring("ui_selected_ks_ref")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_156"
+        value                       localvarstring("ui_selected_subtier_ref") != "" && !isitemunlocked(localvarstring("ui_selected_subtier_ref"));
+    }
+    functionDef
+    {
+        name                        "FUNC_157"
+        value                       getplayerdata("challengeProgress", localvarstring("ui_selected_ref")) == 0 && !dvarbool(unlockAllItems) && (FUNC_153() || FUNC_154() || FUNC_155() || FUNC_156());
+    }
+    functionDef
+    {
+        name                        "FUNC_158"
+        value                       select(FUNC_153(), locstring("@MPUI_UNLOCKED_AT_WEAPON_LEVEL_N", int((tablelookup("mp/weaponRankTable.csv", (tablelookup("mp/weaponRankTable.csv", 0, tablelookup("mp/statsTable.csv", 4, tablelookup("mp/challengeTable.csv", 4, localvarstring("ui_challengeTierTable"), 6), 2), 2)), localvarstring("ui_selected_attach_ref"), 5)))), select(FUNC_154(), select(tablelookup("mp/unlockTable.csv", 0, localvarstring("ui_selected_perk_ref"), 3) != "", "@PERKS_UNLOCKED_BY_CHALLENGE", "@" + tablelookup("mp/rankTable.csv", 0, tablelookup("mp/unlockTable.csv", 0, localvarstring("ui_selected_perk_ref"), 2), 17)), select(FUNC_155(), select(isitemunlocked(localvarstring("ui_selected_ks_ref")), "@MPUI_KILLSTREAK_UNPURCHASED_DESC", "@" + tablelookup("mp/rankTable.csv", 0, tablelookup("mp/unlockTable.csv", 0, localvarstring("ui_selected_ks_ref"), 2), 17)), select(FUNC_156(), "@" + tablelookup("mp/rankTable.csv", 0, tablelookup("mp/unlockTable.csv", 0, localvarstring("ui_selected_subtier_ref"), 2), 17), ""))));
+    }
+    functionDef
+    {
+        name                        "FUNC_159"
+        value                       localvarstring("ui_selected_ref") == "ch_longersprint_pro" || localvarstring("ui_selected_periodic_ref") == "ch_longersprint_pro_weekly" || localvarstring("ui_selected_periodic_ref") == "ch_longersprint_pro_daily";
+    }
+    functionDef
+    {
+        name                        "FUNC_160"
+        value                       inprivateparty() && !privatepartyhost() && privatepartyhostinlobby();
+    }
+    functionDef
+    {
+        name                        "FUNC_161"
+        value                       inprivateparty() && privatepartyhost();
+    }
+    functionDef
+    {
+        name                        "FUNC_162"
+        value                       !gamehost() || ispartyhostwaitingonmembers() || !partyclientsuptodate();
+    }
+    functionDef
+    {
+        name                        "FUNC_163"
+        value                       localvarstring("ui_modes_gametype");
+    }
+    functionDef
+    {
+        name                        "FUNC_164"
+        value                       select(FUNC_163() == "jugg", "playlist_generic", select(FUNC_163() == "gun", "playlist_dogtags", select(FUNC_163() == "infect", "playlist_generic", select(FUNC_163() == "oic", "playlist_dogtags", "playlist_standard"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_165"
+        value                       select(FUNC_163() == "ctf", "playlist_objectives", select(FUNC_163() == "dd", "playlist_objectives", select(FUNC_163() == "tdef", "playlist_objectives", select(FUNC_163() == "conf", "playlist_dogtags", select(FUNC_163() == "grnd", "playlist_objectives", select(FUNC_163() == "tjugg", "playlist_generic", FUNC_164()))))));
+    }
+    functionDef
+    {
+        name                        "FUNC_166"
+        value                       select(FUNC_163() == "dm", "playlist_dogtags", select(FUNC_163() == "war", "playlist_dogtags", select(FUNC_163() == "sd", "playlist_objectives", select(FUNC_163() == "sab", "playlist_objectives", select(FUNC_163() == "dom", "playlist_objectives", select(FUNC_163() == "koth", "playlist_objectives", FUNC_165()))))));
+    }
+    functionDef
+    {
+        name                        "FUNC_167"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_168"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_169"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_170"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 1000), "@MPUI_RULES_1000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 1500), "@MPUI_RULES_1500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 3000), "@MPUI_RULES_3000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), "@MPUI_RULES_5000POINTS", "@MPUI_RULES_7000POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_171"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 1000, select((getmatchrulesdata("commonOption", "scoreLimit") == 1000), 1500, select((getmatchrulesdata("commonOption", "scoreLimit") == 1500), 3000, select((getmatchrulesdata("commonOption", "scoreLimit") == 3000), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 7000, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_172"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 7000, select((getmatchrulesdata("commonOption", "scoreLimit") == 1000), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 1500), 1000, select((getmatchrulesdata("commonOption", "scoreLimit") == 3000), 1500, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 3000, 5000)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_173"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_174"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_175"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_176"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), "@MPUI_RULES_2500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), "@MPUI_RULES_5000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), "@MPUI_RULES_7500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), "@MPUI_RULES_10000POINTS", "@MPUI_RULES_15000POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_177"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 10000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 15000, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_178"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 15000, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 7500, 10000)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_179"
+        value                       select((getmatchrulesdata("sdData", "roundLength") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("sdData", "roundLength") == 2.5), "@MPUI_RULES_2_5MINUTES", select((getmatchrulesdata("sdData", "roundLength") == 3), "@MPUI_RULES_3MINUTES", select((getmatchrulesdata("sdData", "roundLength") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("sdData", "roundLength") == 8), "@MPUI_RULES_8MINUTES", "@MPUI_RULES_10MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_180"
+        value                       select((getmatchrulesdata("sdData", "roundLength") == 0), 2.5, select((getmatchrulesdata("sdData", "roundLength") == 2.5), 3, select((getmatchrulesdata("sdData", "roundLength") == 3), 5, select((getmatchrulesdata("sdData", "roundLength") == 5), 8, select((getmatchrulesdata("sdData", "roundLength") == 8), 10, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_181"
+        value                       select((getmatchrulesdata("sdData", "roundLength") == 0), 10, select((getmatchrulesdata("sdData", "roundLength") == 2.5), 0, select((getmatchrulesdata("sdData", "roundLength") == 3), 2.5, select((getmatchrulesdata("sdData", "roundLength") == 5), 3, select((getmatchrulesdata("sdData", "roundLength") == 8), 5, 8)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_182"
+        value                       select((getmatchrulesdata("sdData", "bombTimer") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("sdData", "bombTimer") == 15), "@MPUI_RULES_15SECONDS", select((getmatchrulesdata("sdData", "bombTimer") == 30), "@MPUI_RULES_30SECONDS", select((getmatchrulesdata("sdData", "bombTimer") == 45), "@MPUI_RULES_45SECONDS", "@MPUI_RULES_1MINUTE"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_183"
+        value                       select((getmatchrulesdata("sdData", "bombTimer") == 5), 15, select((getmatchrulesdata("sdData", "bombTimer") == 15), 30, select((getmatchrulesdata("sdData", "bombTimer") == 30), 45, select((getmatchrulesdata("sdData", "bombTimer") == 45), 60, 5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_184"
+        value                       select((getmatchrulesdata("sdData", "bombTimer") == 5), 60, select((getmatchrulesdata("sdData", "bombTimer") == 15), 5, select((getmatchrulesdata("sdData", "bombTimer") == 30), 15, select((getmatchrulesdata("sdData", "bombTimer") == 45), 30, 45))));
+    }
+    functionDef
+    {
+        name                        "FUNC_185"
+        value                       select((getmatchrulesdata("sdData", "plantTime") == 1), "@MPUI_RULES_1SECOND", select((getmatchrulesdata("sdData", "plantTime") == 2.5), "@MPUI_RULES_2_5SECONDS", select((getmatchrulesdata("sdData", "plantTime") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("sdData", "plantTime") == 7.5), "@MPUI_RULES_7_5SECONDS", "@MPUI_RULES_10SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_186"
+        value                       select((getmatchrulesdata("sdData", "plantTime") == 1), 2.5, select((getmatchrulesdata("sdData", "plantTime") == 2.5), 5, select((getmatchrulesdata("sdData", "plantTime") == 5), 7.5, select((getmatchrulesdata("sdData", "plantTime") == 7.5), 10, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_187"
+        value                       select((getmatchrulesdata("sdData", "plantTime") == 1), 10, select((getmatchrulesdata("sdData", "plantTime") == 2.5), 1, select((getmatchrulesdata("sdData", "plantTime") == 5), 2.5, select((getmatchrulesdata("sdData", "plantTime") == 7.5), 5, 7.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_188"
+        value                       select((getmatchrulesdata("sdData", "defuseTime") == 1), "@MPUI_RULES_1SECOND", select((getmatchrulesdata("sdData", "defuseTime") == 2.5), "@MPUI_RULES_2_5SECONDS", select((getmatchrulesdata("sdData", "defuseTime") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("sdData", "defuseTime") == 7.5), "@MPUI_RULES_7_5SECONDS", "@MPUI_RULES_10SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_189"
+        value                       select((getmatchrulesdata("sdData", "defuseTime") == 1), 2.5, select((getmatchrulesdata("sdData", "defuseTime") == 2.5), 5, select((getmatchrulesdata("sdData", "defuseTime") == 5), 7.5, select((getmatchrulesdata("sdData", "defuseTime") == 7.5), 10, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_190"
+        value                       select((getmatchrulesdata("sdData", "defuseTime") == 1), 10, select((getmatchrulesdata("sdData", "defuseTime") == 2.5), 1, select((getmatchrulesdata("sdData", "defuseTime") == 5), 2.5, select((getmatchrulesdata("sdData", "defuseTime") == 7.5), 5, 7.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_191"
+        value                       select((getmatchrulesdata("sdData", "multiBomb") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_192"
+        value                       select((getmatchrulesdata("sdData", "multiBomb") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_193"
+        value                       select((getmatchrulesdata("sdData", "multiBomb") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_194"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 1), "@MPUI_RULES_1POINT", select((getmatchrulesdata("commonOption", "scoreLimit") == 4), "@MPUI_RULES_4POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 8), "@MPUI_RULES_8POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 12), "@MPUI_RULES_12POINTS", "@MPUI_RULES_24POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_195"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 1, select((getmatchrulesdata("commonOption", "scoreLimit") == 1), 4, select((getmatchrulesdata("commonOption", "scoreLimit") == 4), 8, select((getmatchrulesdata("commonOption", "scoreLimit") == 8), 12, select((getmatchrulesdata("commonOption", "scoreLimit") == 12), 24, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_196"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 24, select((getmatchrulesdata("commonOption", "scoreLimit") == 1), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 4), 1, select((getmatchrulesdata("commonOption", "scoreLimit") == 8), 4, select((getmatchrulesdata("commonOption", "scoreLimit") == 12), 8, 12)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_197"
+        value                       select((getmatchrulesdata("sdData", "roundSwitch") == 0), "@MPUI_RULES_NEVER", select((getmatchrulesdata("sdData", "roundSwitch") == 1), "@MPUI_RULES_EVERY_ROUND", select((getmatchrulesdata("sdData", "roundSwitch") == 2), "@MPUI_RULES_EVERY_2ROUNDS", select((getmatchrulesdata("sdData", "roundSwitch") == 3), "@MPUI_RULES_EVERY_3ROUNDS", "@MPUI_RULES_EVERY_4ROUNDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_198"
+        value                       select((getmatchrulesdata("sdData", "roundSwitch") == 0), 1, select((getmatchrulesdata("sdData", "roundSwitch") == 1), 2, select((getmatchrulesdata("sdData", "roundSwitch") == 2), 3, select((getmatchrulesdata("sdData", "roundSwitch") == 3), 4, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_199"
+        value                       select((getmatchrulesdata("sdData", "roundSwitch") == 0), 4, select((getmatchrulesdata("sdData", "roundSwitch") == 1), 0, select((getmatchrulesdata("sdData", "roundSwitch") == 2), 1, select((getmatchrulesdata("sdData", "roundSwitch") == 3), 2, 3))));
+    }
+    functionDef
+    {
+        name                        "FUNC_200"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 2.5), "@MPUI_RULES_2_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_201"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 2.5, select((getmatchrulesdata("commonOption", "timeLimit") == 2.5), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_202"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 2.5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 2.5, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_203"
+        value                       select((getmatchrulesdata("sabData", "bombTimer") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("sabData", "bombTimer") == 30), "@MPUI_RULES_30SECONDS", select((getmatchrulesdata("sabData", "bombTimer") == 45), "@MPUI_RULES_45SECONDS", select((getmatchrulesdata("sabData", "bombTimer") == 60), "@MPUI_RULES_1MINUTE", select((getmatchrulesdata("sabData", "bombTimer") == 90), "@MPUI_RULES_1_5MINUTES", "@MPUI_RULES_2MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_204"
+        value                       select((getmatchrulesdata("sabData", "bombTimer") == 5), 30, select((getmatchrulesdata("sabData", "bombTimer") == 30), 45, select((getmatchrulesdata("sabData", "bombTimer") == 45), 60, select((getmatchrulesdata("sabData", "bombTimer") == 60), 90, select((getmatchrulesdata("sabData", "bombTimer") == 90), 120, 5)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_205"
+        value                       select((getmatchrulesdata("sabData", "bombTimer") == 5), 120, select((getmatchrulesdata("sabData", "bombTimer") == 30), 5, select((getmatchrulesdata("sabData", "bombTimer") == 45), 30, select((getmatchrulesdata("sabData", "bombTimer") == 60), 45, select((getmatchrulesdata("sabData", "bombTimer") == 90), 60, 90)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_206"
+        value                       select((getmatchrulesdata("sabData", "plantTime") == 1), "@MPUI_RULES_1SECOND", select((getmatchrulesdata("sabData", "plantTime") == 2.5), "@MPUI_RULES_2_5SECONDS", select((getmatchrulesdata("sabData", "plantTime") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("sabData", "plantTime") == 7.5), "@MPUI_RULES_7_5SECONDS", "@MPUI_RULES_10SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_207"
+        value                       select((getmatchrulesdata("sabData", "plantTime") == 1), 2.5, select((getmatchrulesdata("sabData", "plantTime") == 2.5), 5, select((getmatchrulesdata("sabData", "plantTime") == 5), 7.5, select((getmatchrulesdata("sabData", "plantTime") == 7.5), 10, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_208"
+        value                       select((getmatchrulesdata("sabData", "plantTime") == 1), 10, select((getmatchrulesdata("sabData", "plantTime") == 2.5), 1, select((getmatchrulesdata("sabData", "plantTime") == 5), 2.5, select((getmatchrulesdata("sabData", "plantTime") == 7.5), 5, 7.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_209"
+        value                       select((getmatchrulesdata("sabData", "defuseTime") == 1), "@MPUI_RULES_1SECOND", select((getmatchrulesdata("sabData", "defuseTime") == 2.5), "@MPUI_RULES_2_5SECONDS", select((getmatchrulesdata("sabData", "defuseTime") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("sabData", "defuseTime") == 7.5), "@MPUI_RULES_7_5SECONDS", "@MPUI_RULES_10SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_210"
+        value                       select((getmatchrulesdata("sabData", "defuseTime") == 1), 2.5, select((getmatchrulesdata("sabData", "defuseTime") == 2.5), 5, select((getmatchrulesdata("sabData", "defuseTime") == 5), 7.5, select((getmatchrulesdata("sabData", "defuseTime") == 7.5), 10, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_211"
+        value                       select((getmatchrulesdata("sabData", "defuseTime") == 1), 10, select((getmatchrulesdata("sabData", "defuseTime") == 2.5), 1, select((getmatchrulesdata("sabData", "defuseTime") == 5), 2.5, select((getmatchrulesdata("sabData", "defuseTime") == 7.5), 5, 7.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_212"
+        value                       select((getmatchrulesdata("sabData", "sharedBombTimer") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_213"
+        value                       select((getmatchrulesdata("sabData", "sharedBombTimer") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_214"
+        value                       select((getmatchrulesdata("sabData", "sharedBombTimer") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_215"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_216"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_217"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_218"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 50), "@MPUI_RULES_50POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 100), "@MPUI_RULES_100POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 200), "@MPUI_RULES_200POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 500), "@MPUI_RULES_500POINTS", "@MPUI_RULES_750POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_219"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 50, select((getmatchrulesdata("commonOption", "scoreLimit") == 50), 100, select((getmatchrulesdata("commonOption", "scoreLimit") == 100), 200, select((getmatchrulesdata("commonOption", "scoreLimit") == 200), 500, select((getmatchrulesdata("commonOption", "scoreLimit") == 500), 750, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_220"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 750, select((getmatchrulesdata("commonOption", "scoreLimit") == 50), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 100), 50, select((getmatchrulesdata("commonOption", "scoreLimit") == 200), 100, select((getmatchrulesdata("commonOption", "scoreLimit") == 500), 200, 500)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_221"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 15), "@MPUI_RULES_15MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_222"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 15, select((getmatchrulesdata("commonOption", "timeLimit") == 15), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_223"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 15), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 15, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_224"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 100), "@MPUI_RULES_100POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 250), "@MPUI_RULES_250POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 500), "@MPUI_RULES_500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 1000), "@MPUI_RULES_1000POINTS", "@MPUI_RULES_1500POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_225"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 100, select((getmatchrulesdata("commonOption", "scoreLimit") == 100), 250, select((getmatchrulesdata("commonOption", "scoreLimit") == 250), 500, select((getmatchrulesdata("commonOption", "scoreLimit") == 500), 1000, select((getmatchrulesdata("commonOption", "scoreLimit") == 1000), 1500, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_226"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 1500, select((getmatchrulesdata("commonOption", "scoreLimit") == 100), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 250), 100, select((getmatchrulesdata("commonOption", "scoreLimit") == 500), 250, select((getmatchrulesdata("commonOption", "scoreLimit") == 1000), 500, 1000)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_227"
+        value                       select((getmatchrulesdata("hqData", "HQLifetime") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("hqData", "HQLifetime") == 30), "@MPUI_RULES_30SECONDS", select((getmatchrulesdata("hqData", "HQLifetime") == 45), "@MPUI_RULES_45SECONDS", select((getmatchrulesdata("hqData", "HQLifetime") == 60), "@MPUI_RULES_1MINUTE", select((getmatchrulesdata("hqData", "HQLifetime") == 90), "@MPUI_RULES_1_5MINUTES", "@MPUI_RULES_2MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_228"
+        value                       select((getmatchrulesdata("hqData", "HQLifetime") == 0), 30, select((getmatchrulesdata("hqData", "HQLifetime") == 30), 45, select((getmatchrulesdata("hqData", "HQLifetime") == 45), 60, select((getmatchrulesdata("hqData", "HQLifetime") == 60), 90, select((getmatchrulesdata("hqData", "HQLifetime") == 90), 120, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_229"
+        value                       select((getmatchrulesdata("hqData", "HQLifetime") == 0), 120, select((getmatchrulesdata("hqData", "HQLifetime") == 30), 0, select((getmatchrulesdata("hqData", "HQLifetime") == 45), 30, select((getmatchrulesdata("hqData", "HQLifetime") == 60), 45, select((getmatchrulesdata("hqData", "HQLifetime") == 90), 60, 90)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_230"
+        value                       select((getmatchrulesdata("hqData", "HQActivateDelay") == 0), "@MPUI_RULES_INSTANT", select((getmatchrulesdata("hqData", "HQActivateDelay") == 15), "@MPUI_RULES_15SECONDS", select((getmatchrulesdata("hqData", "HQActivateDelay") == 30), "@MPUI_RULES_30SECONDS", "@MPUI_RULES_1MINUTE")));
+    }
+    functionDef
+    {
+        name                        "FUNC_231"
+        value                       select((getmatchrulesdata("hqData", "HQActivateDelay") == 0), 15, select((getmatchrulesdata("hqData", "HQActivateDelay") == 15), 30, select((getmatchrulesdata("hqData", "HQActivateDelay") == 30), 60, 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_232"
+        value                       select((getmatchrulesdata("hqData", "HQActivateDelay") == 0), 60, select((getmatchrulesdata("hqData", "HQActivateDelay") == 15), 0, select((getmatchrulesdata("hqData", "HQActivateDelay") == 30), 15, 30)));
+    }
+    functionDef
+    {
+        name                        "FUNC_233"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_234"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_235"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_236"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 3), "@MPUI_RULES_3POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 5), "@MPUI_RULES_5POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 10), "@MPUI_RULES_10POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 20), "@MPUI_RULES_20POINTS", "@MPUI_RULES_30POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_237"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 3, select((getmatchrulesdata("commonOption", "scoreLimit") == 3), 5, select((getmatchrulesdata("commonOption", "scoreLimit") == 5), 10, select((getmatchrulesdata("commonOption", "scoreLimit") == 10), 20, select((getmatchrulesdata("commonOption", "scoreLimit") == 20), 30, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_238"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 30, select((getmatchrulesdata("commonOption", "scoreLimit") == 3), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 5), 3, select((getmatchrulesdata("commonOption", "scoreLimit") == 10), 5, select((getmatchrulesdata("commonOption", "scoreLimit") == 20), 10, 20)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_239"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 2.5), "@MPUI_RULES_2_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 3), "@MPUI_RULES_3MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 8), "@MPUI_RULES_8MINUTES", "@MPUI_RULES_10MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_240"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 2.5), 3, select((getmatchrulesdata("commonOption", "timeLimit") == 3), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 8, select((getmatchrulesdata("commonOption", "timeLimit") == 8), 10, 2.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_241"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 2.5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 3), 2.5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 3, select((getmatchrulesdata("commonOption", "timeLimit") == 8), 5, 8))));
+    }
+    functionDef
+    {
+        name                        "FUNC_242"
+        value                       select((getmatchrulesdata("demData", "roundSwitch") == 0), "@MPUI_RULES_NEVER", select((getmatchrulesdata("demData", "roundSwitch") == 1), "@MPUI_RULES_EVERY_ROUND", select((getmatchrulesdata("demData", "roundSwitch") == "dd_gamerules_2_VAL3"), "dd_gamerules_2_STR3", select((getmatchrulesdata("demData", "roundSwitch") == "dd_gamerules_2_VAL4"), "dd_gamerules_2_STR4", "dd_gamerules_2_STR5"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_243"
+        value                       select((getmatchrulesdata("demData", "roundSwitch") == 0), 1, select((getmatchrulesdata("demData", "roundSwitch") == 1), "dd_gamerules_2_VAL3", select((getmatchrulesdata("demData", "roundSwitch") == "dd_gamerules_2_VAL3"), "dd_gamerules_2_VAL4", select((getmatchrulesdata("demData", "roundSwitch") == "dd_gamerules_2_VAL4"), "dd_gamerules_2_VAL5", 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_244"
+        value                       select((getmatchrulesdata("demData", "roundSwitch") == 0), "dd_gamerules_2_VAL5", select((getmatchrulesdata("demData", "roundSwitch") == 1), 0, select((getmatchrulesdata("demData", "roundSwitch") == "dd_gamerules_2_VAL3"), 1, select((getmatchrulesdata("demData", "roundSwitch") == "dd_gamerules_2_VAL4"), "dd_gamerules_2_VAL3", "dd_gamerules_2_VAL4"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_245"
+        value                       select((getmatchrulesdata("demData", "bombTimer") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("demData", "bombTimer") == 30), "@MPUI_RULES_30SECONDS", select((getmatchrulesdata("demData", "bombTimer") == 45), "@MPUI_RULES_45SECONDS", select((getmatchrulesdata("demData", "bombTimer") == 60), "@MPUI_RULES_1MINUTE", select((getmatchrulesdata("demData", "bombTimer") == 90), "@MPUI_RULES_1_5MINUTES", "@MPUI_RULES_2MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_246"
+        value                       select((getmatchrulesdata("demData", "bombTimer") == 5), 30, select((getmatchrulesdata("demData", "bombTimer") == 30), 45, select((getmatchrulesdata("demData", "bombTimer") == 45), 60, select((getmatchrulesdata("demData", "bombTimer") == 60), 90, select((getmatchrulesdata("demData", "bombTimer") == 90), 120, 5)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_247"
+        value                       select((getmatchrulesdata("demData", "bombTimer") == 5), 120, select((getmatchrulesdata("demData", "bombTimer") == 30), 5, select((getmatchrulesdata("demData", "bombTimer") == 45), 30, select((getmatchrulesdata("demData", "bombTimer") == 60), 45, select((getmatchrulesdata("demData", "bombTimer") == 90), 60, 90)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_248"
+        value                       select((getmatchrulesdata("demData", "plantTime") == 1), "@MPUI_RULES_1SECOND", select((getmatchrulesdata("demData", "plantTime") == 2.5), "@MPUI_RULES_2_5SECONDS", select((getmatchrulesdata("demData", "plantTime") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("demData", "plantTime") == 7.5), "@MPUI_RULES_7_5SECONDS", "@MPUI_RULES_10SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_249"
+        value                       select((getmatchrulesdata("demData", "plantTime") == 1), 2.5, select((getmatchrulesdata("demData", "plantTime") == 2.5), 5, select((getmatchrulesdata("demData", "plantTime") == 5), 7.5, select((getmatchrulesdata("demData", "plantTime") == 7.5), 10, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_250"
+        value                       select((getmatchrulesdata("demData", "plantTime") == 1), 10, select((getmatchrulesdata("demData", "plantTime") == 2.5), 1, select((getmatchrulesdata("demData", "plantTime") == 5), 2.5, select((getmatchrulesdata("demData", "plantTime") == 7.5), 5, 7.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_251"
+        value                       select((getmatchrulesdata("demData", "defuseTime") == 1), "@MPUI_RULES_1SECOND", select((getmatchrulesdata("demData", "defuseTime") == 2.5), "@MPUI_RULES_2_5SECONDS", select((getmatchrulesdata("demData", "defuseTime") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("demData", "defuseTime") == 7.5), "@MPUI_RULES_7_5SECONDS", "@MPUI_RULES_10SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_252"
+        value                       select((getmatchrulesdata("demData", "defuseTime") == 1), 2.5, select((getmatchrulesdata("demData", "defuseTime") == 2.5), 5, select((getmatchrulesdata("demData", "defuseTime") == 5), 7.5, select((getmatchrulesdata("demData", "defuseTime") == 7.5), 10, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_253"
+        value                       select((getmatchrulesdata("demData", "defuseTime") == 1), 10, select((getmatchrulesdata("demData", "defuseTime") == 2.5), 1, select((getmatchrulesdata("demData", "defuseTime") == 5), 2.5, select((getmatchrulesdata("demData", "defuseTime") == 7.5), 5, 7.5))));
+    }
+    functionDef
+    {
+        name                        "FUNC_254"
+        value                       select((getmatchrulesdata("demData", "extraTime") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("demData", "extraTime") == 1.5), "@MPUI_RULES_1_5MINUTES", select((getmatchrulesdata("demData", "extraTime") == 2), "@MPUI_RULES_2MINUTES", select((getmatchrulesdata("demData", "extraTime") == 2.5), "@MPUI_RULES_2_5MINUTES", select((getmatchrulesdata("demData", "extraTime") == 3), "@MPUI_RULES_3MINUTES", "@MPUI_RULES_5MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_255"
+        value                       select((getmatchrulesdata("demData", "extraTime") == 0), 1.5, select((getmatchrulesdata("demData", "extraTime") == 1.5), 2, select((getmatchrulesdata("demData", "extraTime") == 2), 2.5, select((getmatchrulesdata("demData", "extraTime") == 2.5), 3, select((getmatchrulesdata("demData", "extraTime") == 3), 5, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_256"
+        value                       select((getmatchrulesdata("demData", "extraTime") == 0), 5, select((getmatchrulesdata("demData", "extraTime") == 1.5), 0, select((getmatchrulesdata("demData", "extraTime") == 2), 1.5, select((getmatchrulesdata("demData", "extraTime") == 2.5), 2, select((getmatchrulesdata("demData", "extraTime") == 3), 2.5, 3)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_257"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_258"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_259"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_260"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), "@MPUI_RULES_2500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), "@MPUI_RULES_5000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), "@MPUI_RULES_7500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), "@MPUI_RULES_10000POINTS", "@MPUI_RULES_15000POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_261"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 10000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 15000, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_262"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 15000, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 7500, 10000)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_263"
+        value                       select((getmatchrulesdata("tdefData", "enemyFlagRadar") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_264"
+        value                       select((getmatchrulesdata("tdefData", "enemyFlagRadar") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_265"
+        value                       select((getmatchrulesdata("tdefData", "enemyFlagRadar") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_266"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_267"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_268"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_269"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 10), "@MPUI_RULES_10POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 30), "@MPUI_RULES_30POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 65), "@MPUI_RULES_65POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 80), "@MPUI_RULES_80POINTS", "@MPUI_RULES_100POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_270"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 10, select((getmatchrulesdata("commonOption", "scoreLimit") == 10), 30, select((getmatchrulesdata("commonOption", "scoreLimit") == 30), 65, select((getmatchrulesdata("commonOption", "scoreLimit") == 65), 80, select((getmatchrulesdata("commonOption", "scoreLimit") == 80), 100, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_271"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 100, select((getmatchrulesdata("commonOption", "scoreLimit") == 10), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 30), 10, select((getmatchrulesdata("commonOption", "scoreLimit") == 65), 30, select((getmatchrulesdata("commonOption", "scoreLimit") == 80), 65, 80)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_272"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_273"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_274"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_275"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), "@MPUI_RULES_2500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), "@MPUI_RULES_7500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 15000), "@MPUI_RULES_15000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 20000), "@MPUI_RULES_20000POINTS", "@MPUI_RULES_30000POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_276"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 15000, select((getmatchrulesdata("commonOption", "scoreLimit") == 15000), 20000, select((getmatchrulesdata("commonOption", "scoreLimit") == 20000), 30000, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_277"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 30000, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 15000), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 20000), 15000, 20000)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_278"
+        value                       select((getmatchrulesdata("grndData", "dropTime") == 0), "@MPUI_RULES_NEVER", select((getmatchrulesdata("grndData", "dropTime") == 15), "@MPUI_RULES_15SECONDS", select((getmatchrulesdata("grndData", "dropTime") == 30), "@MPUI_RULES_30SECONDS", select((getmatchrulesdata("grndData", "dropTime") == 60), "@MPUI_RULES_1MINUTE", select((getmatchrulesdata("grndData", "dropTime") == 90), "@MPUI_RULES_1_5MINUTES", "@MPUI_RULES_2MINUTES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_279"
+        value                       select((getmatchrulesdata("grndData", "dropTime") == 0), 15, select((getmatchrulesdata("grndData", "dropTime") == 15), 30, select((getmatchrulesdata("grndData", "dropTime") == 30), 60, select((getmatchrulesdata("grndData", "dropTime") == 60), 90, select((getmatchrulesdata("grndData", "dropTime") == 90), 120, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_280"
+        value                       select((getmatchrulesdata("grndData", "dropTime") == 0), 120, select((getmatchrulesdata("grndData", "dropTime") == 15), 0, select((getmatchrulesdata("grndData", "dropTime") == 30), 15, select((getmatchrulesdata("grndData", "dropTime") == 60), 30, select((getmatchrulesdata("grndData", "dropTime") == 90), 60, 90)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_281"
+        value                       select((getmatchrulesdata("grndData", "zoneSwitchTime") == 1), "@MPUI_RULES_1MINUTE", select((getmatchrulesdata("grndData", "zoneSwitchTime") == 1.5), "@MPUI_RULES_1_5MINUTES", select((getmatchrulesdata("grndData", "zoneSwitchTime") == 2), "@MPUI_RULES_2MINUTES", select((getmatchrulesdata("grndData", "zoneSwitchTime") == 3), "@MPUI_RULES_3MINUTES", "@MPUI_RULES_5MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_282"
+        value                       select((getmatchrulesdata("grndData", "zoneSwitchTime") == 1), 1.5, select((getmatchrulesdata("grndData", "zoneSwitchTime") == 1.5), 2, select((getmatchrulesdata("grndData", "zoneSwitchTime") == 2), 3, select((getmatchrulesdata("grndData", "zoneSwitchTime") == 3), 5, 1))));
+    }
+    functionDef
+    {
+        name                        "FUNC_283"
+        value                       select((getmatchrulesdata("grndData", "zoneSwitchTime") == 1), 5, select((getmatchrulesdata("grndData", "zoneSwitchTime") == 1.5), 1, select((getmatchrulesdata("grndData", "zoneSwitchTime") == 2), 1.5, select((getmatchrulesdata("grndData", "zoneSwitchTime") == 3), 2, 3))));
+    }
+    functionDef
+    {
+        name                        "FUNC_284"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_285"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_286"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_287"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), "@MPUI_RULES_5000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), "@MPUI_RULES_7500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), "@MPUI_RULES_10000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 15000), "@MPUI_RULES_15000POINTS", "@MPUI_RULES_20000POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_288"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 10000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 15000, select((getmatchrulesdata("commonOption", "scoreLimit") == 15000), 20000, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_289"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 20000, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 15000), 10000, 15000)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_290"
+        value                       select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 30), "@MPUI_RULES_30SECONDS", select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 60), "@MPUI_RULES_1MINUTE", select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 90), "@MPUI_RULES_1_5MINUTES", "@MPUI_RULES_2MINUTES")));
+    }
+    functionDef
+    {
+        name                        "FUNC_291"
+        value                       select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 30), 60, select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 60), 90, select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 90), 120, 30)));
+    }
+    functionDef
+    {
+        name                        "FUNC_292"
+        value                       select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 30), 120, select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 60), 30, select((getmatchrulesdata("tjuggData", "juggSwitchTime") == 90), 60, 90)));
+    }
+    functionDef
+    {
+        name                        "FUNC_293"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_294"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_295"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_296"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 3), "@MPUI_RULES_3POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 5), "@MPUI_RULES_5POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 10), "@MPUI_RULES_10POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 15), "@MPUI_RULES_15POINTS", "@MPUI_RULES_20POINTS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_297"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 3, select((getmatchrulesdata("commonOption", "scoreLimit") == 3), 5, select((getmatchrulesdata("commonOption", "scoreLimit") == 5), 10, select((getmatchrulesdata("commonOption", "scoreLimit") == 10), 15, select((getmatchrulesdata("commonOption", "scoreLimit") == 15), 20, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_298"
+        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 20, select((getmatchrulesdata("commonOption", "scoreLimit") == 3), 0, select((getmatchrulesdata("commonOption", "scoreLimit") == 5), 3, select((getmatchrulesdata("commonOption", "scoreLimit") == 10), 5, select((getmatchrulesdata("commonOption", "scoreLimit") == 15), 10, 15)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_299"
+        value                       select((getmatchrulesdata("juggData", "respawnNewJugg") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_300"
+        value                       select((getmatchrulesdata("juggData", "respawnNewJugg") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_301"
+        value                       select((getmatchrulesdata("juggData", "respawnNewJugg") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_302"
+        value                       select((getmatchrulesdata("juggData", "showJuggRadarIcon") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_303"
+        value                       select((getmatchrulesdata("juggData", "showJuggRadarIcon") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_304"
+        value                       select((getmatchrulesdata("juggData", "showJuggRadarIcon") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_305"
+        value                       select((getmatchrulesdata("juggData", "showJuggWorldIcon") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_306"
+        value                       select((getmatchrulesdata("juggData", "showJuggWorldIcon") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_307"
+        value                       select((getmatchrulesdata("juggData", "showJuggWorldIcon") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_308"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_309"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_310"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_311"
+        value                       select((getmatchrulesdata("gunData", "randomize") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_312"
+        value                       select((getmatchrulesdata("gunData", "randomize") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_313"
+        value                       select((getmatchrulesdata("gunData", "randomize") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_314"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_315"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_316"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_317"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_318"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_319"
+        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 30, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 0, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 10, 20))));
+    }
+    functionDef
+    {
+        name                        "FUNC_320"
+        value                       select((getmatchrulesdata("oicData", "initialAmmoCount") == 1), "1", select((getmatchrulesdata("oicData", "initialAmmoCount") == 2), "2", select((getmatchrulesdata("oicData", "initialAmmoCount") == 3), "3", select((getmatchrulesdata("oicData", "initialAmmoCount") == 5), "5", select((getmatchrulesdata("oicData", "initialAmmoCount") == 10), "10", "15")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_321"
+        value                       select((getmatchrulesdata("oicData", "initialAmmoCount") == 1), 2, select((getmatchrulesdata("oicData", "initialAmmoCount") == 2), 3, select((getmatchrulesdata("oicData", "initialAmmoCount") == 3), 5, select((getmatchrulesdata("oicData", "initialAmmoCount") == 5), 10, select((getmatchrulesdata("oicData", "initialAmmoCount") == 10), 15, 1)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_322"
+        value                       select((getmatchrulesdata("oicData", "initialAmmoCount") == 1), 15, select((getmatchrulesdata("oicData", "initialAmmoCount") == 2), 1, select((getmatchrulesdata("oicData", "initialAmmoCount") == 3), 2, select((getmatchrulesdata("oicData", "initialAmmoCount") == 5), 3, select((getmatchrulesdata("oicData", "initialAmmoCount") == 10), 5, 10)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_323"
+        value                       select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 1), "1", select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 2), "2", select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 3), "3", select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 5), "5", select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 10), "10", "15")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_324"
+        value                       select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 1), 2, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 2), 3, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 3), 5, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 5), 10, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 10), 15, 1)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_325"
+        value                       select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 1), 15, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 2), 1, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 3), 2, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 5), 3, select((getmatchrulesdata("oicData", "killRewardAmmoCount") == 10), 5, 10)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_326"
+        value                       select((getmatchrulesdata("oicData", "oneShotKill") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_327"
+        value                       select((getmatchrulesdata("oicData", "oneShotKill") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_328"
+        value                       select((getmatchrulesdata("oicData", "oneShotKill") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_329"
+        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), "@MENU_DISABLED", select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), select(dvarbool(ui_recipeIsTeamBased), "@MPUI_RULES_PLAYERS_ONLY", "@MPUI_RULES_TEAM_ONLY"), "@MPUI_RULES_FREE"));
+    }
+    functionDef
+    {
+        name                        "FUNC_330"
+        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), 1, select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), 2, 0));
+    }
+    functionDef
+    {
+        name                        "FUNC_331"
+        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), 2, select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), 0, 1));
+    }
+    functionDef
+    {
+        name                        "FUNC_332"
+        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_333"
+        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_334"
+        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_335"
+        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), "@MENU_NO", "@MENU_YES");
+    }
+    functionDef
+    {
+        name                        "FUNC_336"
+        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_337"
+        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_338"
+        value                       select((getmatchrulesdata("commonOption", "respawnDelay") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("commonOption", "respawnDelay") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("commonOption", "respawnDelay") == 7.5), "@MPUI_RULES_7_5SECONDS", select((getmatchrulesdata("commonOption", "respawnDelay") == 10), "@MPUI_RULES_10SECONDS", select((getmatchrulesdata("commonOption", "respawnDelay") == 15), "@MPUI_RULES_15SECONDS", "@MPUI_RULES_30SECONDS")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_339"
+        value                       select((getmatchrulesdata("commonOption", "respawnDelay") == 0), 5, select((getmatchrulesdata("commonOption", "respawnDelay") == 5), 7.5, select((getmatchrulesdata("commonOption", "respawnDelay") == 7.5), 10, select((getmatchrulesdata("commonOption", "respawnDelay") == 10), 15, select((getmatchrulesdata("commonOption", "respawnDelay") == 15), 30, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_340"
+        value                       select((getmatchrulesdata("commonOption", "respawnDelay") == 0), 30, select((getmatchrulesdata("commonOption", "respawnDelay") == 5), 0, select((getmatchrulesdata("commonOption", "respawnDelay") == 7.5), 5, select((getmatchrulesdata("commonOption", "respawnDelay") == 10), 7.5, select((getmatchrulesdata("commonOption", "respawnDelay") == 15), 10, 15)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_341"
+        value                       select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 10), "@MPUI_RULES_10SECONDS", select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 15), "@MPUI_RULES_15SECONDS", "@MPUI_RULES_30SECONDS"))));
+    }
+    functionDef
+    {
+        name                        "FUNC_342"
+        value                       select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 0), 5, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 5), 10, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 10), 15, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 15), 30, 0))));
+    }
+    functionDef
+    {
+        name                        "FUNC_343"
+        value                       select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 0), 30, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 5), 0, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 10), 5, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 15), 10, 15))));
+    }
+    functionDef
+    {
+        name                        "FUNC_344"
+        value                       select((getmatchrulesdata("commonOption", "forceRespawn") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_345"
+        value                       select((getmatchrulesdata("commonOption", "forceRespawn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_346"
+        value                       select((getmatchrulesdata("commonOption", "forceRespawn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_347"
+        value                       select((getmatchrulesdata("commonOption", "friendlyFire") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_348"
+        value                       select((getmatchrulesdata("commonOption", "friendlyFire") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_349"
+        value                       select((getmatchrulesdata("commonOption", "friendlyFire") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_350"
+        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), "@MENU_DISABLED", select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), select(dvarbool(ui_recipeIsTeamBased), "@MPUI_RULES_PLAYERS_ONLY", "@MPUI_RULES_TEAM_ONLY"), "@MPUI_RULES_FREE"));
+    }
+    functionDef
+    {
+        name                        "FUNC_351"
+        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), 1, select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), 2, 0));
+    }
+    functionDef
+    {
+        name                        "FUNC_352"
+        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), 2, select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), 0, 1));
+    }
+    functionDef
+    {
+        name                        "FUNC_353"
+        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_354"
+        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_355"
+        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_356"
+        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), "@MENU_NO", "@MENU_YES");
+    }
+    functionDef
+    {
+        name                        "FUNC_357"
+        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_358"
+        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_359"
+        value                       select((getmatchrulesdata("commonOption", "allowPerks") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_360"
+        value                       select((getmatchrulesdata("commonOption", "allowPerks") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_361"
+        value                       select((getmatchrulesdata("commonOption", "allowPerks") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_362"
+        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_363"
+        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_364"
+        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_365"
+        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_366"
+        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_367"
+        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_368"
+        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_369"
+        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_370"
+        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_371"
+        value                       select((getmatchrulesdata("commonOption", "allowKillstreaks") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_372"
+        value                       select((getmatchrulesdata("commonOption", "allowKillstreaks") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_373"
+        value                       select((getmatchrulesdata("commonOption", "allowKillstreaks") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_374"
+        value                       select((getmatchrulesdata("commonOption", "allowCustomClasses") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_375"
+        value                       select((getmatchrulesdata("commonOption", "allowCustomClasses") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_376"
+        value                       select((getmatchrulesdata("commonOption", "allowCustomClasses") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_377"
+        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_378"
+        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_379"
+        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_380"
+        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_381"
+        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_382"
+        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_383"
+        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+    }
+    functionDef
+    {
+        name                        "FUNC_384"
+        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_385"
+        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), 1, 0);
+    }
+    functionDef
+    {
+        name                        "FUNC_386"
+        value                       select((getmatchrulesdata("commonOption", "numLives") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "numLives") == 1), "@MPUI_RULES_ITEM_LIFE", select((getmatchrulesdata("commonOption", "numLives") == 2), "@MPUI_RULES_ITEM_2LIVES", select((getmatchrulesdata("commonOption", "numLives") == 3), "@MPUI_RULES_ITEM_3LIVES", select((getmatchrulesdata("commonOption", "numLives") == 5), "@MPUI_RULES_ITEM_5LIVES", "@MPUI_RULES_ITEM_9LIVES")))));
+    }
+    functionDef
+    {
+        name                        "FUNC_387"
+        value                       select((getmatchrulesdata("commonOption", "numLives") == 0), 1, select((getmatchrulesdata("commonOption", "numLives") == 1), 2, select((getmatchrulesdata("commonOption", "numLives") == 2), 3, select((getmatchrulesdata("commonOption", "numLives") == 3), 5, select((getmatchrulesdata("commonOption", "numLives") == 5), 9, 0)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_388"
+        value                       select((getmatchrulesdata("commonOption", "numLives") == 0), 9, select((getmatchrulesdata("commonOption", "numLives") == 1), 0, select((getmatchrulesdata("commonOption", "numLives") == 2), 1, select((getmatchrulesdata("commonOption", "numLives") == 3), 2, select((getmatchrulesdata("commonOption", "numLives") == 5), 3, 5)))));
+    }
+    functionDef
+    {
+        name                        "FUNC_389"
+        value                       select((getmatchrulesdata("commonOption", "maxHealth") == 30), "@MPUI_RULES_MINISCULE", select((getmatchrulesdata("commonOption", "maxHealth") == 50), "@MPUI_RULES_HALF", select((getmatchrulesdata("commonOption", "maxHealth") == 100), "@MPUI_RULES_NORMAL", "@MPUI_RULES_DOUBLE")));
+    }
+    functionDef
+    {
+        name                        "FUNC_390"
+        value                       select((getmatchrulesdata("commonOption", "maxHealth") == 30), 50, select((getmatchrulesdata("commonOption", "maxHealth") == 50), 100, select((getmatchrulesdata("commonOption", "maxHealth") == 100), 200, 30)));
+    }
+    functionDef
+    {
+        name                        "FUNC_391"
+        value                       select((getmatchrulesdata("commonOption", "maxHealth") == 30), 200, select((getmatchrulesdata("commonOption", "maxHealth") == 50), 30, select((getmatchrulesdata("commonOption", "maxHealth") == 100), 50, 100)));
+    }
+    functionDef
+    {
+        name                        "FUNC_392"
+        value                       select((getmatchrulesdata("commonOption", "healthRegen") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("commonOption", "healthRegen") == 2), "@MPUI_RULES_FAST", select((getmatchrulesdata("commonOption", "healthRegen") == 5), "@MPUI_RULES_NORMAL", "@MPUI_RULES_SLOW")));
+    }
+    functionDef
+    {
+        name                        "FUNC_393"
+        value                       select((getmatchrulesdata("commonOption", "healthRegen") == 0), 2, select((getmatchrulesdata("commonOption", "healthRegen") == 2), 5, select((getmatchrulesdata("commonOption", "healthRegen") == 5), 10, 0)));
+    }
+    functionDef
+    {
+        name                        "FUNC_394"
+        value                       select((getmatchrulesdata("commonOption", "healthRegen") == 0), 10, select((getmatchrulesdata("commonOption", "healthRegen") == 2), 0, select((getmatchrulesdata("commonOption", "healthRegen") == 5), 2, 5)));
+    }
+    functionDef
+    {
+        name                        "FUNC_395"
+        value                       select(dvarint(pm_gamesetup_options_createdefaultclass), 3, 2);
+    }
+    functionDef
+    {
+        name                        "FUNC_396"
+        value                       select((dvarstring(ui_gametype) == "gun"), (3), ((0 - (!dvarint(pm_gamesetup_options_createdefaultclass))) + select((dvarstring(ui_gametype) == "oic"), 1, 3 + 1)));
+    }
+    functionDef
+    {
+        name                        "FUNC_397"
+        value                       select((dvarstring(ui_gametype) == "jugg"), FUNC_395(), FUNC_396());
+    }
+    functionDef
+    {
+        name                        "FUNC_398"
+        value                       tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdata("experience")), 2);
+    }
+    functionDef
+    {
+        name                        "FUNC_399"
+        value                       tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdata("experience")), 7);
+    }
+    functionDef
+    {
+        name                        "FUNC_400"
+        value                       min((getplayerdata("experience") - FUNC_398()) / (FUNC_399() - FUNC_398()), 0.9999);
+    }
+    functionDef
+    {
+        name                        "FUNC_401"
+        value                       min((getplayerdata("restXPGoal") - FUNC_398()) / (FUNC_399() - FUNC_398()), 0.9999);
+    }
+    functionDef
+    {
+        name                        "FUNC_402"
+        value                       (sin(milliseconds() / 100) * 0.5 + 0.5) * 0.25 + 0.75;
+    }
+    loadMenu { "ui_mp/cac_strike_package_assault_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_strike_package_support_gamesettings.menu" }
+    loadMenu { "ui_mp/popup_cas_specialist_gamesettings.menu" }
+    loadMenu { "ui_mp/popup_cac_streaktype_gamesettings.menu" }
+    loadMenu { "ui_mp/popup_cac_deathstreak_gamesettings.menu" }
+    loadMenu { "ui_mp/menu_cac_gamerules.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_defaultclasswarning_privmatch.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_oic.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_2teams.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_sd.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_2teams_special_infect.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_2teams_alt_special.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_2teams_alt_special_only.menu" }
+    loadMenu { "ui_mp/menu_defaultclass_config_teammembers_2teams_special_special.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_oic.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_sd.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_2teams_special_infect.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_2teams_alt_special.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_2teams_alt_special_only.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_2teams_special_special.menu" }
+    loadMenu { "ui_mp/popup_cac_gs_copy_class_2teams.menu" }
+    loadMenu { "ui_mp/pc_gs_rename_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_assault_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_assault_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_handgun_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_lmg_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_lmg_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_machinepistol_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_riot_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_riot_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_rocket_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_shotgun_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_shotgun_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_smg_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_smg_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_sniper_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_sniper_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_attachments_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_attachments_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_camo_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_camo_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_assault_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_lmg_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_riot_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_shotgun_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_smg_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_sniper_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_assault_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_handgun_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_launcher_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_lmg_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_machine_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_riot_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_shotgun_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_smg_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_sniper_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_reticle_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_reticle_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_second_primary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_weapon_secondary_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_equipment_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_special_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_perk1_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_perk2_gamesettings.menu" }
+    loadMenu { "ui_mp/cac_perk3_gamesettings.menu" }
+    loadMenu { "ui_mp/main.menu" }
+    loadMenu { "ui_mp/single_popmenu.menu" }
+    loadMenu { "ui_mp/menu_xboxlive.menu" }
+    loadMenu { "ui_mp/popup_findgame.menu" }
+    loadMenu { "ui_mp/kickwarning.menu" }
+    loadMenu { "ui_mp/playerunmutable.menu" }
+    loadMenu { "ui_mp/leaveprivatepartywarning.menu" }
+    loadMenu { "ui_mp/downloadingezpatch.menu" }
+    loadMenu { "ui_mp/downloadingplaylist.menu" }
+    loadMenu { "ui_mp/player_popup_party.menu" }
+    loadMenu { "ui_mp/hostchangewarning.menu" }
+    loadMenu { "ui_mp/player_popup_publiclobby.menu" }
+    loadMenu { "ui_mp/player_popup_privatematch.menu" }
+    loadMenu { "ui_mp/player_popup_report.menu" }
+    loadMenu { "ui_mp/youarehost.menu" }
+    loadMenu { "ui_mp/makehostfailed.menu" }
+    loadMenu { "ui_mp/partyinviteconfirm.menu" }
+    loadMenu { "ui_mp/patchnotes_popup.menu" }
+    loadMenu { "ui_mp/gameinfos_popup.menu" }
+    loadMenu { "ui_mp/popup_vault.menu" }
+    loadMenu { "ui_mp/popup_vault_fetching.menu" }
+    loadMenu { "ui_mp/popup_vault_success.menu" }
+    loadMenu { "ui_mp/vault_loadfromslot.menu" }
+    loadMenu { "ui_mp/vault_savetoslot.menu" }
+    loadMenu { "ui_mp/vault_copytoslot.menu" }
+    loadMenu { "ui_mp/vault_copytoslotnotice.menu" }
+    loadMenu { "ui_mp/vault_confirmoverwrite.menu" }
+    loadMenu { "ui_mp/vault_task_in_progress.menu" }
+    loadMenu { "ui_mp/vault_browser.menu" }
+    loadMenu { "ui_mp/vault_confirmdelete.menu" }
+    loadMenu { "ui_mp/popup_vault_actions_cgm.menu" }
+    loadMenu { "ui_mp/popup_vault_actions_screenshot.menu" }
+    loadMenu { "ui_mp/popup_vault_actions_film.menu" }
+    loadMenu { "ui_mp/popup_vault_actions_clip.menu" }
+    loadMenu { "ui_mp/vault_editmeta.menu" }
+    loadMenu { "ui_mp/vault_friend_browser.menu" }
+    loadMenu { "ui_mp/popup_vault_friend_actions_cgm.menu" }
+    loadMenu { "ui_mp/popup_vault_friend_actions_screenshot.menu" }
+    loadMenu { "ui_mp/popup_vault_friend_actions_film.menu" }
+    loadMenu { "ui_mp/popup_vault_notify.menu" }
+    loadMenu { "ui_mp/serverbrowser.menu" }
+    loadMenu { "ui_mp/serverfilters.menu" }
+    loadMenu { "ui_mp/combopinglist.menu" }
+    loadMenu { "ui_mp/combogametypelist.menu" }
+    loadMenu { "ui_mp/combomaplist.menu" }
+    loadMenu { "ui_mp/add_fav_message_popmenu.menu" }
+    loadMenu { "ui_mp/del_fav_message_popmenu.menu" }
+    loadMenu { "ui_mp/popup_server_browser_password.menu" }
+    loadMenu { "ui_mp/pc_options_dedicateserver.menu" }
+    loadMenu { "ui_mp/load_recipe.menu" }
+    loadMenu { "ui_mp/load_recipe_succeeded.menu" }
+    loadMenu { "ui_mp/load_recipe_failed.menu" }
+    loadMenu { "ui_mp/ds_connecting.menu" }
+    loadMenu { "ui_mp/popup_demo_enum.menu" }
+    loadMenu { "ui_mp/popup_recentgames_action.menu" }
+    loadMenu { "ui_mp/popup_recentgames_action_novault.menu" }
+    loadMenu { "ui_mp/popup_demo_norecentgames.menu" }
+    loadMenu { "ui_mp/pc_options_video.menu" }
+    loadMenu { "ui_mp/pc_options_audio.menu" }
+    loadMenu { "ui_mp/pc_options_controls.menu" }
+    loadMenu { "ui_mp/pc_options_voice.menu" }
+    loadMenu { "ui_mp/pc_options_advanced_video.menu" }
+    loadMenu { "ui_mp/apply_picmip_popmenu.menu" }
+    loadMenu { "ui_mp/pc_options_movement.menu" }
+    loadMenu { "ui_mp/pc_options_actions.menu" }
+    loadMenu { "ui_mp/pc_options_look.menu" }
+    loadMenu { "ui_mp/controls_multi.menu" }
+    loadMenu { "ui_mp/all_restart_popmenu.menu" }
+    loadMenu { "ui_mp/vid_restart_popmenu.menu" }
+    loadMenu { "ui_mp/sp_vid_restart_popmenu_listen.menu" }
+    loadMenu { "ui_mp/mp_vid_restart_popmenu_listen.menu" }
+    loadMenu { "ui_mp/vid_restart_popmenu_dead.menu" }
+    loadMenu { "ui_mp/snd_restart_popmenu.menu" }
+    loadMenu { "ui_mp/options_graphics.menu" }
+    loadMenu { "ui_mp/options_graphics_texture.menu" }
+    loadMenu { "ui_mp/options_control_defaults.menu" }
+    loadMenu { "ui_mp/options_graphics_defaults.menu" }
+    loadMenu { "ui_mp/cac_popup.menu" }
+    loadMenu { "ui_mp/killstreak_unlockconfirm.menu" }
+    loadMenu { "ui_mp/cac_strike_package_assault.menu" }
+    loadMenu { "ui_mp/cac_strike_package_support.menu" }
+    loadMenu { "ui_mp/popup_cas_specialist.menu" }
+    loadMenu { "ui_mp/menu_cac_assault.menu" }
+    loadMenu { "ui_mp/popup_cac_template.menu" }
+    loadMenu { "ui_mp/popup_cac_defaultclasswarning_assault.menu" }
+    loadMenu { "ui_mp/popup_cac_defaultclasswarning_spec_ops.menu" }
+    loadMenu { "ui_mp/popup_cac_defaultclasswarning_heavy_gunner.menu" }
+    loadMenu { "ui_mp/popup_cac_defaultclasswarning_demolitions.menu" }
+    loadMenu { "ui_mp/popup_cac_defaultclasswarning_sniper.menu" }
+    loadMenu { "ui_mp/pc_rename.menu" }
+    loadMenu { "ui_mp/popup_cac_copy_class.menu" }
+    loadMenu { "ui_mp/cac_weapon_primary.menu" }
+    loadMenu { "ui_mp/cac_weapon_secondary.menu" }
+    loadMenu { "ui_mp/cac_weapon_second_primary.menu" }
+    loadMenu { "ui_mp/cac_assault_primary.menu" }
+    loadMenu { "ui_mp/cac_smg_primary.menu" }
+    loadMenu { "ui_mp/cac_lmg_primary.menu" }
+    loadMenu { "ui_mp/cac_sniper_primary.menu" }
+    loadMenu { "ui_mp/cac_shotgun_primary.menu" }
+    loadMenu { "ui_mp/cac_riot_primary.menu" }
+    loadMenu { "ui_mp/cac_assault_second_primary.menu" }
+    loadMenu { "ui_mp/cac_smg_second_primary.menu" }
+    loadMenu { "ui_mp/cac_lmg_second_primary.menu" }
+    loadMenu { "ui_mp/cac_sniper_second_primary.menu" }
+    loadMenu { "ui_mp/cac_shotgun_second_primary.menu" }
+    loadMenu { "ui_mp/cac_riot_second_primary.menu" }
+    loadMenu { "ui_mp/cac_machinepistol_secondary.menu" }
+    loadMenu { "ui_mp/cac_handgun_secondary.menu" }
+    loadMenu { "ui_mp/cac_rocket_secondary.menu" }
+    loadMenu { "ui_mp/cac_weapon_customize_primary.menu" }
+    loadMenu { "ui_mp/cac_weapon_customize_secondary.menu" }
+    loadMenu { "ui_mp/cac_weapon_attachments_primary.menu" }
+    loadMenu { "ui_mp/cac_weapon_attachments_secondary.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_assault.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_smg.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_lmg.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_sniper.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_shotgun.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_primary_riot.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_assault.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_smg.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_lmg.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_sniper.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_shotgun.menu" }
+    loadMenu { "ui_mp/cac_weapon_proficiency_secondary_riot.menu" }
+    loadMenu { "ui_mp/cac_weapon_reticle_primary.menu" }
+    loadMenu { "ui_mp/cac_weapon_reticle_secondary.menu" }
+    loadMenu { "ui_mp/cac_weapon_camo_primary.menu" }
+    loadMenu { "ui_mp/cac_weapon_camo_secondary.menu" }
+    loadMenu { "ui_mp/popup_cac_streaktype.menu" }
+    loadMenu { "ui_mp/popup_cac_deathstreak.menu" }
+    loadMenu { "ui_mp/cac_perk1.menu" }
+    loadMenu { "ui_mp/cac_perk2.menu" }
+    loadMenu { "ui_mp/cac_perk3.menu" }
+    loadMenu { "ui_mp/cac_equipment.menu" }
+    loadMenu { "ui_mp/cac_special.menu" }
+    loadMenu { "ui_mp/menu_playercard_title_popup.menu" }
+    loadMenu { "ui_mp/menu_playercard_icon_popup.menu" }
+    loadMenu { "ui_mp/popup_statswarning.menu" }
+    loadMenu { "ui_mp/popup_callsign.menu" }
+    loadMenu { "ui_mp/popup_use_elite_title.menu" }
+    loadMenu { "ui_mp/popup_use_elite_tag.menu" }
+    loadMenu { "ui_mp/popup_playername.menu" }
+    loadMenu { "ui_mp/popup_serverpassword.menu" }
+    loadMenu { "ui_mp/popup_joinpassword.menu" }
+    loadMenu { "ui_mp/serverinfo_popmenu.menu" }
+    loadMenu { "ui_mp/serverinfo_loading.menu" }
+    loadMenu { "ui_mp/server_info_fail.menu" }
+    loadMenu { "ui_mp/auconfirm.menu" }
+    loadMenu { "ui_mp/iwnet_account.menu" }
+    loadMenu { "ui_mp/iwnet_login_popmenu.menu" }
+    loadMenu { "ui_mp/iwnet_create_popmenu.menu" }
+    loadMenu { "ui_mp/reset_password_popup.menu" }
+    loadMenu { "ui_mp/reset_password_confirm_popup.menu" }
+    loadMenu { "ui_mp/iwnet_create_fail_popmenu.menu" }
+    loadMenu { "ui_mp/iwnet_creating_popmenu.menu" }
+    loadMenu { "ui_mp/iwnet_mustlogin_popmenu.menu" }
+    loadMenu { "ui_mp/iwnet_status_popmenu.menu" }
+    loadMenu { "ui_mp/iwnet_connecting_popmenu.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_custom_classes.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_reset_stats.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_double_xp.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_double_weapon_xp.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_title_emblem_1.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_title_emblem_2.menu" }
+    loadMenu { "ui_mp/menu_prestige_confirmation_title_emblem_3.menu" }
+    loadMenu { "ui_mp/reset_stats1.menu" }
+    loadMenu { "ui_mp/reset_stats2.menu" }
+    loadMenu { "ui_mp/reset_stats3.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_primary.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_secondary.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_assaultrifles.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_smgs.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_lmgs.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_sniper.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_shotguns.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_machine.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_handguns.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_rockets.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_equipment.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_special.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_perk1.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_perk2.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_perk3.menu" }
+    loadMenu { "ui_mp/menu_prestige_shop_unlocks_deathstreak.menu" }
+    loadMenu { "ui_mp/menu_prestige_thing_unlock.menu" }
+    loadMenu { "ui_mp/player_profile.menu" }
+    loadMenu { "ui_mp/profile_create_popmenu.menu" }
+    loadMenu { "ui_mp/profile_must_create_popmenu.menu" }
+    loadMenu { "ui_mp/profile_del_sure_popmenu.menu" }
+    loadMenu { "ui_mp/profile_exists_popmenu.menu" }
+    loadMenu { "ui_mp/profile_create_fail_popmenu.menu" }
+    loadMenu { "ui_mp/profile_create_too_many_popmenu.menu" }
+    loadMenu { "ui_mp/profile_delete_fail_popmenu.menu" }
+    loadMenu { "ui_mp/language_restart_popmenu.menu" }
+    loadMenu { "ui_mp/quit_popmenu.menu" }
+    loadMenu { "ui_mp/playerdataread.menu" }
+    loadMenu { "ui_mp/menu_online_barracks.menu" }
+    loadMenu { "ui_mp/prestige_reset1.menu" }
+    loadMenu { "ui_mp/prestige_reset2.menu" }
+    loadMenu { "ui_mp/prestige_reset3.menu" }
+    loadMenu { "ui_mp/menu_records.menu" }
+    loadMenu { "ui_mp/challenges_popup.menu" }
+    loadMenu { "ui_mp/challenges_online.menu" }
+    loadMenu { "ui_mp/challenges_offline.menu" }
+    loadMenu { "ui_mp/challenges_detail.menu" }
+    loadMenu { "ui_mp/challenges_detail_periodic.menu" }
+    loadMenu { "ui_mp/challenges_weapon_primary.menu" }
+    loadMenu { "ui_mp/challenges_weapon_primary_assault.menu" }
+    loadMenu { "ui_mp/challenges_weapon_primary_smg.menu" }
+    loadMenu { "ui_mp/challenges_weapon_primary_lmg.menu" }
+    loadMenu { "ui_mp/challenges_weapon_primary_sniper.menu" }
+    loadMenu { "ui_mp/challenges_weapon_primary_shotgun.menu" }
+    loadMenu { "ui_mp/challenges_weapon_secondary.menu" }
+    loadMenu { "ui_mp/challenges_weapon_secondary_machinepistol.menu" }
+    loadMenu { "ui_mp/challenges_weapon_secondary_handgun.menu" }
+    loadMenu { "ui_mp/challenges_weapon_secondary_launcher.menu" }
+    loadMenu { "ui_mp/challenges_perks.menu" }
+    loadMenu { "ui_mp/challenges_killstreaks.menu" }
+    loadMenu { "ui_mp/menu_xboxlive_lobby.menu" }
+    loadMenu { "ui_mp/popup_ready.menu" }
+    loadMenu { "ui_mp/skipmapconfirmation.menu" }
+    loadMenu { "ui_mp/leavelobbywarning.menu" }
+    loadMenu { "ui_mp/leavelobbyandpartywarning.menu" }
+    loadMenu { "ui_mp/menu_xboxlive_lobbyended.menu" }
+    loadMenu { "ui_mp/menu_xboxlive_partyended.menu" }
+    loadMenu { "ui_mp/menu_xboxlive_privatelobby.menu" }
+    loadMenu { "ui_mp/popup_recipesetup.menu" }
+    loadMenu { "ui_mp/popup_recipesetup_modes.menu" }
+    loadMenu { "ui_mp/popup_pc_save_recipe.menu" }
+    loadMenu { "ui_mp/pc_save_recipe_succeeded.menu" }
+    loadMenu { "ui_mp/pc_save_recipe_failed.menu" }
+    loadMenu { "ui_mp/pc_save_recipe_invalid_name.menu" }
+    loadMenu { "ui_mp/pc_save_recipe_overwrite_confirm.menu" }
+    loadMenu { "ui_mp/recipe_guest_notallowed.menu" }
+    loadMenu { "ui_mp/recipe_needsavedevice.menu" }
+    loadMenu { "ui_mp/settings_my_history.menu" }
+    loadMenu { "ui_mp/settings_my_modes.menu" }
+    loadMenu { "ui_mp/popup_confirm_mymode_overwrite.menu" }
+    loadMenu { "ui_mp/save_to_my_modes.menu" }
+    loadMenu { "ui_mp/settings_recipe_choosetype_standard.menu" }
+    loadMenu { "ui_mp/settings_recipe_choosetype_alternate.menu" }
+    loadMenu { "ui_mp/settings_recipe_rules_base.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_primary.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_secondary.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_assaultrifles.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_smgs.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_lmgs.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_sniper.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_shotguns.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_machine.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_handguns.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_rockets.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_equipment.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_special.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_perk1.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_perk2.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_perk3.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_streak_type.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_assault.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_support.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_specialist.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_deathstreak.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_prof.menu" }
+    loadMenu { "ui_mp/menu_custom_class_restrictions_attachments.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_assault.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_smg.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_lmg.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_sniper.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_shotgun.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_machine.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_handgun.menu" }
+    loadMenu { "ui_mp/menu_gg_sequence_launcher.menu" }
+    loadMenu { "ui_mp/popup_gs_opt_3.menu" }
+    loadMenu { "ui_mp/popup_gs_opt_4.menu" }
+    loadMenu { "ui_mp/popup_gs_opt_5.menu" }
+    loadMenu { "ui_mp/popup_gs_opt_6.menu" }
+    loadMenu { "ui_mp/menu_gamesetup_systemlink.menu" }
+    loadMenu { "ui_mp/menu_gamesetup_splitscreen.menu" }
+    loadMenu { "ui_mp/noprofilewarning_splitscreen.menu" }
+    loadMenu { "ui_mp/settings_map.menu" }
+    loadMenu { "ui_mp/settings_map_rotation.menu" }
+    loadMenu { "ui_mp/settings_bonus_map.menu" }
+    loadMenu { "ui_mp/settings_bonus_map_rotation.menu" }
+    loadMenu { "ui_mp/settings_gametype.menu" }
+    loadMenu { "ui_mp/popup_summary.menu" }
+    loadMenu { "ui_mp/popup_summary_splitscreen.menu" }
+    loadMenu { "ui_mp/page_unlocks_titles.menu" }
+    loadMenu { "ui_mp/page_unlocks_emblems.menu" }
+    loadMenu { "ui_mp/page_summary.menu" }
+    loadMenu { "ui_mp/page_progress.menu" }
+    loadMenu { "ui_mp/page_accolades.menu" }
+    loadMenu { "ui_mp/page_highlights.menu" }
+    loadMenu { "ui_mp/page_weapon_xp.menu" }
+    loadMenu { "ui_mp/page_challenges.menu" }
+    loadMenu { "ui_mp/page_scoreboard.menu" }
+    loadMenu { "ui_mp/page_summary_splitscreen.menu" }
+    loadMenu { "ui_mp/page_highlights_splitscreen.menu" }
+    loadMenu { "ui_mp/page_scoreboard_splitscreen.menu" }
+    loadMenu { "ui_mp/page_unlocks_features.menu" }
+    loadMenu { "ui_mp/page_unlocks_perks.menu" }
+    loadMenu { "ui_mp/page_unlocks_weapons.menu" }
+    loadMenu { "ui_mp/gear_selection.menu" }
+    loadMenu { "ui_mp/gear_head.menu" }
+    loadMenu { "ui_mp/gear_chest.menu" }
+    loadMenu { "ui_mp/gear_legs.menu" }
+    loadMenu { "ui_mp/streak_set1.menu" }
+    loadMenu { "ui_mp/streak_set2.menu" }
+    loadMenu { "ui_mp/streak_set3.menu" }
+    loadMenu { "ui_mp/streak_set4.menu" }
+    loadMenu { "ui_mp/playerdataread.menu" }
+    loadMenu { "ui_mp/readingsavedevice.menu" }
+    loadMenu { "ui_mp/onlineupdate.menu" }
+    loadMenu { "ui_mp/popup_friend_report.menu" }
+    loadMenu { "ui_mp/popup_recent_report.menu" }
+    loadMenu { "ui_mp/popup_facebook_report.menu" }
+    loadMenu { "ui_mp/popup_clan_report.menu" }
+    loadMenu { "ui_mp/popup_friend_list_actions.menu" }
+    loadMenu { "ui_mp/popup_recent_list_actions.menu" }
+    loadMenu { "ui_mp/popup_facebook_list_actions.menu" }
+    loadMenu { "ui_mp/popup_clan_list_actions.menu" }
+    loadMenu { "ui_mp/page_friends.menu" }
+    loadMenu { "ui_mp/user_group_popup.menu" }
+    loadMenu { "ui_mp/page_recent.menu" }
+    loadMenu { "ui_mp/page_elite_clan.menu" }
+    loadMenu { "ui_mp/page_facebook.menu" }
+    loadMenu { "ui_mp/popup_friends.menu" }
+    loadMenu { "ui_mp/popup_update_clan_motd_success.menu" }
+    loadMenu { "ui_mp/popup_elite_clan_updating_motd.menu" }
+    loadMenu { "ui_mp/popup_friend_invite_sent.menu" }
+    loadMenu { "ui_mp/demo_error.menu" }
+    loadMenu { "ui_mp/theater_avi_upload.menu" }
+    loadMenu { "ui_mp/menu_screenshot.menu" }
+    loadMenu { "ui_mp/popup_gettinglb.menu" }
+    loadMenu { "ui_mp/menu_leaderboards.menu" }
+    loadMenu { "ui_mp/popup_lb_group.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_accolades.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_accolades.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_experience.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_experience.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_wins.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_wins.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_kills.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_kills.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_accuracy.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_accuracy.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_dm.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_dm.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_war.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_war.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_sd.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_sd.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_sab.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_sab.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_dom.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_dom.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_koth.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_koth.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_ctf.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_ctf.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_dd.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_dd.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_conf.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_conf.menu" }
+    loadMenu { "ui_mp/popup_lb_duration_tdef.menu" }
+    loadMenu { "ui_mp/menu_lb_filter_tdef.menu" }
+    loadMenu { "ui_mp/menu_accolades_leaderboard.menu" }
+    loadMenu { "ui_mp/menu_leaderboard.menu" }
+    loadMenu { "ui_mp/popup_facebook_legal.menu" }
+    loadMenu { "ui_mp/popup_facebook_legal2.menu" }
+    loadMenu { "ui_mp/popup_facebook.menu" }
+    loadMenu { "ui_mp/popup_facebook_authenticating.menu" }
+    loadMenu { "ui_mp/popup_facebook_authentication_popup.menu" }
+    loadMenu { "ui_mp/popup_facebook_unregister.menu" }
+    loadMenu { "ui_mp/popup_facebook_unregistering.menu" }
+    loadMenu { "ui_mp/popup_facebook_pc_username.menu" }
+    loadMenu { "ui_mp/popup_facebook_pc_password.menu" }
+    loadMenu { "ui_mp/popup_getting_socialconfig.menu" }
+    loadMenu { "ui_mp/menu_accolades_leaderboard_hd.menu" }
+    loadMenu { "ui_mp/menu_accolades_leaderboard_sd.menu" }
+    loadMenu { "ui_mp/menu_leaderboard_sd.menu" }
+    loadMenu { "ui_mp/menu_leaderboard_hd.menu" }
+    loadMenu { "ui_mp/popmenu_dl_content_notice.menu" }
+    loadMenu { "ui_mp/popmenu_dl_content_avail.menu" }
+    loadMenu { "ui_mp/popmenu_dl_req_content_avail.menu" }
+    loadMenu { "ui_mp/mw3_content_available_error.menu" }
+    loadMenu { "ui_mp/mw3_content_required_error.menu" }
+    loadMenu { "ui_mp/mp_dlc_switch_searchtype.menu" }
+    loadMenu { "ui_mp/prematchtimerpopup.menu" }
+    loadMenu { "ui_mp/popmenu_dl_get_missing_content.menu" }
+    loadMenu { "ui_mp/pc_options_actions_ingame.menu" }
+}

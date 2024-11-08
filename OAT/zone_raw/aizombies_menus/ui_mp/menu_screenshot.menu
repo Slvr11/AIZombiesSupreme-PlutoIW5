@@ -1,0 +1,136 @@
+{
+    menuDef
+    {
+        name                        "menu_screenshot"
+        rect                        -300 -180 600 380 2 2
+        outOfBoundsClick            
+        popup                       
+        visible                     1
+        onESC
+        {
+            execNow abortScreenshotDownload;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            name                        "frame"
+            rect                        0 0 600 360 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect h                  360 + 20;
+        }
+        itemDef
+        {
+            name                        "frame"
+            rect                        10 10 580 340 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        260 140 80 80 2 2
+            decoration                  
+            visible                     when(isContentServerTaskInProgress("readfile"));
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            exp text                    locstring("@MENU_ONLINEVAULT_DOWNLOADING_PERCENT", getContentServerTaskProgress("download"));
+        }
+        itemDef
+        {
+            name                        "screenshot"
+            rect                        10 10 580 340 2 2
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   379
+            textscale                   0.55
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "menu_screenshot";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (((0 - 600 / 2) + 600 + (0 - (0 - 600 / 2)))) - (1 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((377 + (0 - (0 - 360 / 2))));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "menu_screenshot"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (((0 - 600 / 2) + 600 + (0 - (0 - 600 / 2)))) - (1 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((377 + (0 - (0 - 360 / 2)))) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "menu_screenshot"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (((0 - 600 / 2) + 600 + (0 - (0 - 600 / 2)))) - (1 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((377 + (0 - (0 - 360 / 2))));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (((0 - 600 / 2) + 600 + (0 - (0 - 600 / 2)))) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((377 + (0 - (0 - 360 / 2))));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "menu_screenshot"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "menu_screenshot"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "menu_screenshot"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+    }
+}

@@ -1,0 +1,138 @@
+{
+    menuDef
+    {
+        name                        "muteplayer"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        blurWorld                   4.8
+        onESC
+        {
+            close self;
+            open class;
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_30() && (dvarstring(gameMode) == "mp" || (dvarstring(gameMode) == "so" && !dvarbool(solo_play))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            text                        "@MPUI_MUTEPLAYERS"
+            rect                        0 0 272 28 1 1
+            decoration                  
+            visible                     1
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.5
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "playermutelist"
+            rect                        -160 80 320 288 2 1
+            style                       1
+            type                        6
+            border                      1
+            borderSize                  1
+            visible                     1
+            textalignx                  6
+            textscale                   0.4
+            textstyle                   3
+            bordercolor                 1 1 1 0.15
+            outlinecolor                1 1 1 0.2
+            mouseEnter
+            {
+                setitemcolor maplist bordercolor 1 1 1 "0.55";
+            }
+            mouseExit
+            {
+                setitemcolor maplist bordercolor 1 1 1 "0.15";
+            }
+            exp rect h                  24 * min(12, getFeederData("playermutelist", "count")) + 2;
+            elementwidth                120
+            elementheight               24
+            feeder                      19
+            columns                     2
+                                        2 0 62 0 10 0
+                                        64 0 172 0 25 0
+            doubleclick
+            {
+                play mouse_click;
+                uiScript mutePlayer;
+            }
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "muteplayers";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "muteplayers"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "muteplayers"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "muteplayers"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "muteplayers"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "muteplayers"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+    }
+}

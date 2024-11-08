@@ -1,0 +1,29 @@
+{
+    menuDef
+    {
+        name                        "blood_effect_left"
+        decoration                  
+        rect                        0 0 640 480 8 8
+        onOpen
+        {
+            lerp alpha from 1 to 1 over "0.0";
+            lerp scale from "1.0" to "1.0" over "0.0";
+            lerp x from 325 to 325 over "0.0";
+            setLocalVarInt blood_update_time (milliseconds() + 6000);
+        }
+        onRequestClose
+        {
+            lerp alpha from 1 to 0 over "1.0";
+        }
+        itemDef
+        {
+            rect                        -512 -282 1024 564 1 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "screen_blood_directional_left"
+            exp forecolor a             min(((localvarint("blood_update_time") - milliseconds()) / 6000) * 2, 1);
+        }
+    }
+}

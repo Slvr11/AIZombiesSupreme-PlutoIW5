@@ -1,0 +1,12 @@
+{
+    menuDef
+    {
+        name                        "initteam_marines"
+        rect                        0 0 0 0 0 0
+        onOpen
+        {
+            setLocalVarString ui_team "marines";
+            close self;
+        }
+    }
+}

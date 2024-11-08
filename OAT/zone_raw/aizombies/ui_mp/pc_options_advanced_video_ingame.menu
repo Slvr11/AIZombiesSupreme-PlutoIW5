@@ -1,0 +1,1164 @@
+{
+    menuDef
+    {
+        name                        "pc_options_advanced_video_ingame"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        blurWorld                   4.8
+        onOpen
+        {
+            ExecNow "profile_menuDvarsSetup; resetViewport";
+            setLocalVarBool ui_hideBack 1;
+            focusfirst;
+            close pc_options_video_ingame;
+        }
+        onClose
+        {
+            ExecNow "profile_menuDvarsFinish; resetViewport";
+            setLocalVarBool ui_hideBack 0;
+            execondvarintvalue r_lodScaleRigid 2 "set r_lodScaleSkinned 4; set r_lodBiasSkinned -200; set r_lodBiasRigid -100";
+            execondvarintvalue r_lodScaleRigid 1 "set r_lodScaleSkinned 1; set r_lodBiasSkinned 0; set r_lodBiasRigid 0";
+            open pc_options_video_ingame;
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -264 -236 501.5 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_ADVANCED_VIDEO";
+        }
+        itemDef
+        {
+            rect                        -45.833 111 283.333 4 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -45.833 191 283.333 4 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -45.833 231 283.333 4 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            name                        "aspect_ratio"
+            rect                        237.5 34.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor aspect_ratio_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor aspect_ratio_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_aspectratio"
+            dvarStrList                 { "@MENU_AUTO" "auto" "@MENU_STANDARD_4_3" "standard" "@MENU_WIDE_16_10" "wide 16:10" "@MENU_WIDE_16_9" "wide 16:9" }
+        }
+        itemDef
+        {
+            name                        "aspect_ratio"
+            rect                        237.5 34.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "aspect_ratio");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 0 * 20;
+        }
+        itemDef
+        {
+            name                        "aspect_ratio_label"
+            text                        "@MENU_ASPECT_RATIO"
+            rect                        237.5 34.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_ASPECT_RATIO"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_ASPECT_RATIO"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "antialiasing"
+            rect                        237.5 54.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor antialiasing_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor antialiasing_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_aasamples"
+            dvarFloatList               { "@MENU_OFF" 1 "@MENU_2X" 2 "@MENU_4X" 4 }
+        }
+        itemDef
+        {
+            name                        "antialiasing"
+            rect                        237.5 54.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "antialiasing");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 1 * 20;
+        }
+        itemDef
+        {
+            name                        "antialiasing_label"
+            text                        "@MENU_ANTIALIASING"
+            rect                        237.5 54.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_ANTIALIASING"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_ANTIALIASING"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "refresh_rate"
+            rect                        237.5 74.667 344 20 1 1
+            style                       1
+            type                        13
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor refresh_rate_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor refresh_rate_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_displayRefresh"
+            dvarEnumList                "r_displayRefresh"
+        }
+        itemDef
+        {
+            name                        "refresh_rate"
+            rect                        237.5 74.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "refresh_rate");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 2 * 20;
+        }
+        itemDef
+        {
+            name                        "refresh_rate_label"
+            text                        "@MENU_SCREEN_REFRESH_RATE"
+            rect                        237.5 74.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_SCREEN_REFRESH_RATE"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_SCREEN_REFRESH_RATE"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "sync_every_frame"
+            rect                        237.5 94.667 344 20 1 1
+            style                       1
+            type                        11
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor sync_every_frame_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor sync_every_frame_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_vsync"
+        }
+        itemDef
+        {
+            name                        "sync_every_frame"
+            rect                        237.5 94.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "sync_every_frame");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 3 * 20;
+        }
+        itemDef
+        {
+            name                        "sync_every_frame_label"
+            text                        "@MENU_SYNC_EVERY_FRAME"
+            rect                        237.5 94.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_SYNC_EVERY_FRAME"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_SYNC_EVERY_FRAME"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "shadows"
+            rect                        237.5 114.667 344 20 1 1
+            style                       1
+            type                        11
+            visible                     when(1);
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "sm_enable"
+        }
+        itemDef
+        {
+            name                        "shadows"
+            rect                        237.5 114.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "shadows");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 4 * 20;
+        }
+        itemDef
+        {
+            text                        "@MENU_SHADOWS"
+            rect                        237.5 114.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_SHADOWS"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_SHADOWS"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "specular_map"
+            rect                        237.5 134.667 344 20 1 1
+            style                       1
+            type                        11
+            visible                     when(1);
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "r_specular"
+        }
+        itemDef
+        {
+            name                        "specular_map"
+            rect                        237.5 134.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "specular_map");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 5 * 20;
+        }
+        itemDef
+        {
+            text                        "@MENU_SPECULAR_MAP"
+            rect                        237.5 134.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_SPECULAR_MAP"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_SPECULAR_MAP"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "dof"
+            rect                        237.5 154.667 344 20 1 1
+            style                       1
+            type                        11
+            visible                     when(1);
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "r_dof_enable"
+        }
+        itemDef
+        {
+            name                        "dof"
+            rect                        237.5 154.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "dof");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 6 * 20;
+        }
+        itemDef
+        {
+            text                        "@MENU_DOF"
+            rect                        237.5 154.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_DOF"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_DOF"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "ssao"
+            rect                        237.5 174.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(dvarint(r_supportsSSAO));
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor ssao_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor ssao_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_ssao"
+            dvarFloatList               { "@MENU_OFF" 0 "@PLATFORM_LOW_QUALITY" 1 "@PLATFORM_HIGH_QUALITY" 2 }
+        }
+        itemDef
+        {
+            name                        "ssao"
+            rect                        237.5 174.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "ssao");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 7 * 20;
+        }
+        itemDef
+        {
+            name                        "ssao_label"
+            text                        "@PLATFORM_SSAO"
+            rect                        237.5 174.667 344 20 1 1
+            decoration                  
+            visible                     when(dvarint(r_supportsSSAO));
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@PLATFORM_SSAO"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@PLATFORM_SSAO"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "feather_smoke"
+            rect                        237.5 194.667 344 20 1 1
+            style                       1
+            type                        11
+            visible                     when(1);
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "r_zfeather"
+        }
+        itemDef
+        {
+            name                        "feather_smoke"
+            rect                        237.5 194.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "feather_smoke");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 8 * 20;
+        }
+        itemDef
+        {
+            text                        "@MENU_ZFEATHER_SMOKE"
+            rect                        237.5 194.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_ZFEATHER_SMOKE"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_ZFEATHER_SMOKE"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "bullet_impacts"
+            rect                        237.5 214.667 344 20 1 1
+            style                       1
+            type                        11
+            visible                     when(1);
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "fx_marks"
+        }
+        itemDef
+        {
+            name                        "bullet_impacts"
+            rect                        237.5 214.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "bullet_impacts");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 9 * 20;
+        }
+        itemDef
+        {
+            text                        "@MENU_BULLET_IMPACTS"
+            rect                        237.5 214.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_BULLET_IMPACTS"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_BULLET_IMPACTS"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "image_quality"
+            rect                        237.5 234.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor image_quality_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor image_quality_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_imageQuality"
+            dvarFloatList               { "@PLATFORM_UI_NATIVE" 0 "@MENU_LOW" 1 "@MENU_NORMAL" 2 "@MENU_HIGH" 3 "@MENU_EXTRA" 4 }
+        }
+        itemDef
+        {
+            name                        "image_quality"
+            rect                        237.5 234.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "image_quality");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 10 * 20;
+        }
+        itemDef
+        {
+            name                        "image_quality_label"
+            text                        "@PLATFORM_UI_IMAGE_QUALITY"
+            rect                        237.5 234.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@PLATFORM_UI_IMAGE_QUALITY"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@PLATFORM_UI_IMAGE_QUALITY"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "texture_quality"
+            rect                        237.5 254.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor texture_quality_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor texture_quality_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showPicApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_picmip_manual"
+            dvarFloatList               { "@MENU_AUTOMATIC" 0 "@MENU_MANUAL" 1 }
+        }
+        itemDef
+        {
+            name                        "texture_quality"
+            rect                        237.5 254.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "texture_quality");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 11 * 20;
+        }
+        itemDef
+        {
+            name                        "texture_quality_label"
+            text                        "@MENU_TEXTURE_QUALITY"
+            rect                        237.5 254.667 344 20 1 1
+            decoration                  
+            visible                     when(1);
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_TEXTURE_QUALITY"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_TEXTURE_QUALITY"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "texture_resolution"
+            rect                        237.5 274.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(dvarint(ui_r_picmip_manual));
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor texture_resolution_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor texture_resolution_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showPicApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_picmip"
+            dvarFloatList               { "@MENU_LOW" 3 "@MENU_NORMAL" 2 "@MENU_HIGH" 1 "@MENU_EXTRA" 0 }
+        }
+        itemDef
+        {
+            name                        "texture_resolution"
+            rect                        237.5 274.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "texture_resolution");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 12 * 20;
+        }
+        itemDef
+        {
+            name                        "texture_resolution_label"
+            text                        "@MENU_TEXTURE_RESOLUTION"
+            rect                        237.5 274.667 344 20 1 1
+            decoration                  
+            visible                     when(dvarint(ui_r_picmip_manual));
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_TEXTURE_RESOLUTION"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_TEXTURE_RESOLUTION"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "normal_map_resolution"
+            rect                        237.5 294.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(dvarint(ui_r_picmip_manual));
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor normal_map_resolution_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor normal_map_resolution_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showPicApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_picmip_bump"
+            dvarFloatList               { "@MENU_LOW" 3 "@MENU_NORMAL" 2 "@MENU_HIGH" 1 "@MENU_EXTRA" 0 }
+        }
+        itemDef
+        {
+            name                        "normal_map_resolution"
+            rect                        237.5 294.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "normal_map_resolution");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 13 * 20;
+        }
+        itemDef
+        {
+            name                        "normal_map_resolution_label"
+            text                        "@MENU_NORMAL_MAP_RESOLUTION"
+            rect                        237.5 294.667 344 20 1 1
+            decoration                  
+            visible                     when(dvarint(ui_r_picmip_manual));
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_NORMAL_MAP_RESOLUTION"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_NORMAL_MAP_RESOLUTION"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            name                        "specular_map_resolution"
+            rect                        237.5 314.667 344 20 1 1
+            style                       1
+            type                        12
+            visible                     when(dvarint(ui_r_picmip_manual));
+            disabled                    when(FUNC_32());
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            backcolor                   1 1 1 0
+            disablecolor                0.6 0.55 0.55 1
+            background                  "navbar_selection_bar_centered"
+            onFocus
+            {
+                setItemColor self backcolor 1 1 1 1 setItemColor self disablecolor 0 0 0 1 setItemColor specular_map_resolution_label disablecolor 0 0 0 1 play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0 setItemColor self disablecolor "0.6" "0.55" "0.55" 1 setItemColor specular_map_resolution_label disablecolor "0.6" "0.55" "0.55" 1;
+            }
+            action
+            {
+                setLocalVarBool ui_showPicApply 1;
+                play mouse_click;
+            }
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            dvar                        "ui_r_picmip_spec"
+            dvarFloatList               { "@MENU_LOW" 3 "@MENU_NORMAL" 2 "@MENU_HIGH" 1 "@MENU_EXTRA" 0 }
+        }
+        itemDef
+        {
+            name                        "specular_map_resolution"
+            rect                        237.5 314.667 344 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(("VIS_ARG") && getfocuseditemname() == "specular_map_resolution");
+            textalign                   4
+            textalignx                  333.5
+            textscale                   0.375
+            textfont                    3
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  0 - 64;
+            exp rect w                  301.5 + 200;
+            exp rect h                  8.666;
+            exp rect y                  18 + 34.667 + 14 * 20;
+        }
+        itemDef
+        {
+            name                        "specular_map_resolution_label"
+            text                        "@MENU_SPECULAR_MAP_RESOLUTION"
+            rect                        237.5 314.667 344 20 1 1
+            decoration                  
+            visible                     when(dvarint(ui_r_picmip_manual));
+            disabled                    when(FUNC_32());
+            textalign                   6
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp rect x                  301.5 - 64 - 25 - getTextWidthModCase(locstring("@MENU_SPECULAR_MAP_RESOLUTION"), 3, 0.375, 9);
+            exp rect w                  getTextWidthModCase(locstring("@MENU_SPECULAR_MAP_RESOLUTION"), 3, 0.375, 9);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "pc_options_advanced_video_ingame";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                escape self;
+                if (!(menuisopen("pc_options_advanced_video_ingame") || menuisopen("pc_options_video_ingame") || menuisopen("pc_options_audio_ingame") || menuisopen("pc_options_controls_ingame") || menuisopen("pc_options_voice_ingame")))
+                {
+                    if (localvarbool("ui_showPicApply") && !localvarbool("ui_showApply"))
+                    {
+                        execnow "setfromdvar r_picmip ui_r_picmip";
+                        execnow "setfromdvar r_picmip_bump ui_r_picmip_bump";
+                        execnow "setfromdvar r_picmip_spec ui_r_picmip_spec";
+                        execnow "setfromdvar r_picmip_manual ui_r_picmip_manual";
+                        exec "wait; wait; r_applyPicmip";
+                        setLocalVarBool ui_showPicApply 0;
+                    }
+                    if (localvarbool("ui_showApply") || localvarbool("ui_showAudioApply"))
+                    {
+                        open all_restart_popmenu;
+                    }
+                }
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pc_options_advanced_video_ingame"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pc_options_advanced_video_ingame"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pc_options_advanced_video_ingame"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pc_options_advanced_video_ingame"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pc_options_advanced_video_ingame"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+    }
+}

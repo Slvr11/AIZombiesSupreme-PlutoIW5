@@ -1,0 +1,54 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 2,
+    "constantTable": [
+        {
+            "literal": [
+                20,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "eyeOffsetPar",
+            "nameHash": 135446697
+        },
+        {
+            "literal": [
+                0.0666666701436043,
+                15,
+                0.0,
+                0.0
+            ],
+            "name": "featherParms‰ˆˆ=",
+            "nameHash": 1300144692
+        }
+    ],
+    "gameFlags": 4,
+    "maps": [
+        {
+            "firstCharacter": 99,
+            "image": "flare_a",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 2,
+            "typeHash": 2695565377
+        }
+    ],
+    "name": "mc/gfx_spotlight_lenseflare_flare_a_eyeoffset",
+    "sortKey": 47,
+    "stateFlags": 19,
+    "stateMap": [
+        [
+            421628202,
+            12
+        ],
+        [
+            2282915858,
+            3835578668
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "mc_effect_add_eyeoffset",
+    "unknown": 0
+}

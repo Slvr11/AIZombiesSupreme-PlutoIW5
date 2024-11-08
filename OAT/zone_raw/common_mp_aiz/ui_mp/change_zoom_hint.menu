@@ -1,0 +1,19 @@
+{
+    menuDef
+    {
+        name                        "change_zoom_hint"
+        rect                        0 -160 0 0 2 2
+        visible                     when(!adsjavelin() && FUNC_80() && FUNC_86() && FUNC_94() && FUNC_106());
+        itemDef
+        {
+            name                        "chRect"
+            rect                        0 0 0 0 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   70
+            textscale                   0.375
+            textstyle                   3
+        }
+    }
+}

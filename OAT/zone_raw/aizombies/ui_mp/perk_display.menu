@@ -1,0 +1,12 @@
+{
+    menuDef
+    {
+        name                        "perk_display"
+        rect                        0 0 640 1 1 0
+        onOpen
+        {
+            setLocalVarInt ui_show_perks (milliseconds());
+            close self;
+        }
+    }
+}

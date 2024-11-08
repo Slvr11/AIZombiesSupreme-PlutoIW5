@@ -1,0 +1,155 @@
+{
+    menuDef
+    {
+        name                        "combomaplist"
+        rect                        0 0 164.267 199 0 0
+        style                       1
+        backcolor                   0.2 0.2 0.2 1
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        soundLoop                   "music_mainmenu_mp"
+        popup                       
+        exp rect X                  ((((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4) + ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * (1 - 0.8)) + (((96 + 4) * 0) + 6));
+        exp rect Y                  (((((70 + 24 + 3 + 6) + 16 + 2) + FUNC_131()) + 9) + (4 + ((20 + 4) * 0)) - (((20 - 1) * 10) + 6) - 2);
+        onESC
+        {
+            if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+            {
+                setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                uiScript RefreshFilter;
+            }
+            close self;
+        }
+        itemDef
+        {
+            rect                        -2560 -1600 5120 3200 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("comboMapList"));
+            textscale                   0.55
+            forecolor                   0.1 0.1 0.1 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 100 1 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+            exp rect w                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.8);
+        }
+        itemDef
+        {
+            rect                        0 0 100 2 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+            exp rect y                  (((20 - 1) * 10) + 6) + 1;
+            exp rect w                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.8);
+        }
+        itemDef
+        {
+            rect                        0 0 144.267 19 0 0
+            style                       3
+            decoration                  
+            visible                     when(((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  (((int(getFeederData("listboxMapFilter", "selection")) - int(getFeederData("listboxMapFilter", "start"))) * (20 - 1)) + 3) + ((20 - 1)) - 3;
+            exp rect w                  select((int(getFeederData(39, "count")) > 10), (((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.8) - 20), ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.8));
+        }
+        itemDef
+        {
+            rect                        0 0 144.267 19 0 0
+            style                       3
+            decoration                  
+            visible                     when(((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  (((int(getFeederData("listboxMapFilter", "selection")) - int(getFeederData("listboxMapFilter", "start"))) * (20 - 1)) + 3);
+            exp rect w                  select((int(getFeederData(39, "count")) > 10), (((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.8) - 20), ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0.8));
+        }
+        itemDef
+        {
+            name                        "listboxMapFilter"
+            rect                        0 1 164.267 196 0 0
+            style                       1
+            type                        6
+            visible                     1
+            textalignx                  4
+            textscale                   0.375
+            textstyle                   9
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                play mouse_over;
+            }
+            mouseEnter
+            {
+                play mouse_over;
+            }
+            elementwidth                164.267
+            elementheight               19
+            feeder                      39
+            columns                     1
+                                        3 0 0 0 64 0
+            doubleclick
+            {
+                play mouse_click;
+                setLocalVarString ui_tempMapFilterKey dvarstring(ui_filterMapKey);
+                setLocalVarString ui_tempMapFilterName dvarstring(ui_filterMapName);
+                close self;
+            }
+        }
+        itemDef
+        {
+            name                        "mapFilterPreviewBack"
+            rect                        -289.261 0 289.261 199 0 0
+            style                       1
+            decoration                  
+            visible                     when((((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")));
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            name                        "mapFilterPreviewBorder"
+            rect                        -289.261 1 289.261 196 0 0
+            style                       1
+            decoration                  
+            visible                     when((((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")));
+            textscale                   0.55
+            backcolor                   0.2039 0.2235 0.2118 1
+        }
+        itemDef
+        {
+            name                        "mapFilterPreviewImageBox"
+            rect                        -287.261 3 285.261 162 0 0
+            style                       3
+            decoration                  
+            visible                     when((((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")));
+            textscale                   0.55
+            exp material                (getFeederData("listboxMapFilter", "currentMapImageName"));
+        }
+        itemDef
+        {
+            name                        "mapFilterPreviewDesc"
+            rect                        -287.261 165 285.261 30 0 0
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when((((1) && (int(getFeederData("listboxMapFilter", "selection")) >= int(getFeederData("listboxMapFilter", "start"))) && (int(getFeederData("listboxMapFilter", "selection")) < (int(getFeederData("listboxMapFilter", "start")) + 10))) && (dvarstring(ui_filterMapKey) != "All")));
+            textalign                   4
+            textscale                   0.25
+            textfont                    3
+            backcolor                   0.2039 0.2235 0.2118 1
+            exp text                    "@" + getFeederData("listboxMapFilter", "currentMapLongDesc");
+        }
+    }
+}

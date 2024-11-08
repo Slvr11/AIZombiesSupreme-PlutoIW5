@@ -1,0 +1,316 @@
+{
+    menuDef
+    {
+        name                        "endgameupdate"
+        rect                        0 0 640 4 4 0
+        popup                       
+        onOpen
+        {
+            setLocalVarString ui_challenges_table "mp/allChallengesTable.csv";
+        }
+        onRequestClose
+        {
+            lerp alpha from 1 to 0 over "0.5";
+        }
+        itemDef
+        {
+            rect                        -250 0 500 480 2 4
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "line_horizontal_scorebar"
+        }
+        itemDef
+        {
+            text                        "@RANK_PROMOTED"
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+        }
+        itemDef
+        {
+            rect                        0 20 0 0 2 1
+            decoration                  
+            visible                     when(dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    "@" + tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdata("experience")), 5);
+        }
+        itemDef
+        {
+            rect                        -24 50 48 48 2 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(ui_promotion));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdata("experience")), getplayerdata("prestige") + 1);
+        }
+        itemDef
+        {
+            text                        "@MP_CHALLENGE_COMPLETED"
+            rect                        0 130 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_1_ref) != "" && dvarstring(ui_challenge_2_ref) == "");
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            exp rect y                  dvarbool(ui_promotion) * 120;
+        }
+        itemDef
+        {
+            text                        "@MP_CHALLENGES_COMPLETED"
+            rect                        0 130 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_1_ref) != "" && dvarstring(ui_challenge_2_ref) != "");
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            exp rect y                  dvarbool(ui_promotion) * 120;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_1_ref) != "" && 1);
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_1_ref)), 1)) - 1))));
+            exp rect y                  (50) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_1_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3))) != "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_1_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_1_ref)), 1)) - 1)))))));
+            exp rect y                  (50) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_1_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 3))) == "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 0) == dvarstring(ui_challenge_1_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_1_ref), 2)));
+            exp rect y                  (50) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_2_ref) != "" && 1);
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_2_ref)), 1)) - 1))));
+            exp rect y                  (100) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_2_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3))) != "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_2_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_2_ref)), 1)) - 1)))))));
+            exp rect y                  (100) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_2_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 3))) == "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 0) == dvarstring(ui_challenge_2_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_2_ref), 2)));
+            exp rect y                  (100) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_3_ref) != "" && 1);
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_3_ref)), 1)) - 1))));
+            exp rect y                  (150) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_3_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3))) != "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_3_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_3_ref)), 1)) - 1)))))));
+            exp rect y                  (150) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_3_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 3))) == "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 0) == dvarstring(ui_challenge_3_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_3_ref), 2)));
+            exp rect y                  (150) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_4_ref) != "" && 1);
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_4_ref)), 1)) - 1))));
+            exp rect y                  (200) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_4_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3))) != "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_4_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_4_ref)), 1)) - 1)))))));
+            exp rect y                  (200) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_4_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 3))) == "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 0) == dvarstring(ui_challenge_4_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_4_ref), 2)));
+            exp rect y                  (200) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_5_ref) != "" && 1);
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_5_ref)), 1)) - 1))));
+            exp rect y                  (250) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_5_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3))) != "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_5_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_5_ref)), 1)) - 1)))))));
+            exp rect y                  (250) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_5_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 3))) == "@CHALLENGE_BLANK" && 1);
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 0) == dvarstring(ui_challenge_5_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_5_ref), 2)));
+            exp rect y                  (250) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_6_ref) != "" && !dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_6_ref)), 1)) - 1))));
+            exp rect y                  (300) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_6_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3))) != "@CHALLENGE_BLANK" && !dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_6_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_6_ref)), 1)) - 1)))))));
+            exp rect y                  (300) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_6_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 3))) == "@CHALLENGE_BLANK" && !dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 0) == dvarstring(ui_challenge_6_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_6_ref), 2)));
+            exp rect y                  (300) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_7_ref) != "" && !dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.48611
+            textfont                    6
+            glowcolor                   0.25 0.75 0.25 1
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@CHALLENGE_DAILY_CHALLENGE", select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@CHALLENGE_WEEKLY_CHALLENGE", locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 1)) + locstring("@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3) + "_" + (int(max(getplayerdata("challengeState", dvarstring(ui_challenge_7_ref)), 1)) - 1))));
+            exp rect y                  (350) + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_7_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3))) != "@CHALLENGE_BLANK" && !dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring(select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 2))), select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), int(tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 6)), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), int(tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 6)), (int(getchallengedata(dvarstring(ui_challenge_7_ref), "target", select(((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)) || (tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref))), 0, int(max(getplayerdata("challengeState", dvarstring(ui_challenge_7_ref)), 1)) - 1)))))));
+            exp rect y                  (350) + 20 + dvarbool(ui_promotion) * 100;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            decoration                  
+            visible                     when(dvarstring(ui_challenge_7_ref) != "" && select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 3))) == "@CHALLENGE_BLANK" && !dvarbool(ui_promotion));
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/dailyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 2), select((tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 0) == dvarstring(ui_challenge_7_ref)), "@" + tablelookup("mp/weeklyChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 2), "@" + tablelookup("mp/allChallengesTable.csv", 0, dvarstring(ui_challenge_7_ref), 2)));
+            exp rect y                  (350) + 20 + dvarbool(ui_promotion) * 100;
+        }
+    }
+}

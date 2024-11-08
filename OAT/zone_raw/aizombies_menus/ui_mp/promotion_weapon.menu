@@ -1,0 +1,57 @@
+{
+    menuDef
+    {
+        name                        "promotion_weapon"
+        decoration                  
+        rect                        0 0 640 480 1 1
+        exp rect Y                  (FUNC_184() || FUNC_88()) * (0 - 40) * FUNC_163();
+        onOpen
+        {
+            lerp alpha from 0 to 1 over "0.15";
+            lerp x from 640 to 370 over "0.15";
+            forceClose splash;
+            forceClose challenge;
+            forceClose defcon;
+            forceClose killstreak_pickup;
+            forceClose killstreak;
+            forceClose perk_challenge;
+            forceClose promotion;
+            forceClose killstreak_minisplash;
+            forceClose daily_challenge;
+            forceClose weekly_challenge;
+        }
+        onRequestClose
+        {
+            lerp alpha from 1 to 0 over "0.15";
+            lerp x from 370 to 640 over "0.15";
+        }
+        itemDef
+        {
+            name                        "promotion_text"
+            text                        "@RANK_PROMOTED_WEAPON"
+            rect                        -580 60 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_163());
+            textalign                   2
+            textscale                   0.2916
+            textstyle                   3
+            textfont                    4
+            glowcolor                   0.25 0.75 0.25 1
+            decodeEffect                100 4000 500
+        }
+        itemDef
+        {
+            name                        "promotion_text"
+            text                        "@RANK_PROMOTED_WEAPON"
+            rect                        -580 60 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   2
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    4
+            glowcolor                   0.25 0.75 0.25 1
+            decodeEffect                100 4000 500
+        }
+    }
+}

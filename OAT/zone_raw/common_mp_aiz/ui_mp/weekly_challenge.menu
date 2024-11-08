@@ -1,0 +1,99 @@
+{
+    menuDef
+    {
+        name                        "weekly_challenge"
+        decoration                  
+        rect                        0 0 640 480 1 1
+        exp rect Y                  FUNC_185() * (0 - 40) * FUNC_162();
+        onOpen
+        {
+            lerp alpha from 0 to 1 over "0.15";
+            lerp x from 640 to 370 over "0.15";
+            forceClose splash;
+            forceClose challenge;
+            forceClose daily_challenge;
+            forceClose defcon;
+            forceClose killstreak_pickup;
+            forceClose killstreak;
+            forceClose perk_challenge;
+            forceClose promotion;
+            forceClose promotion_weapon;
+            setLocalVarString splashRef (tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 0));
+            setLocalVarString challengeRef (("ch_weekly_" + ((tablelookupbyrow("mp/weeklyChallengesTable.csv", getplayerdata("weeklyChallengeId", 0), 0) == localvarstring("splashRef")) + (2 * (tablelookupbyrow("mp/weeklyChallengesTable.csv", getplayerdata("weeklyChallengeId", 1), 0) == localvarstring("splashRef"))) + (3 * (tablelookupbyrow("mp/weeklyChallengesTable.csv", getplayerdata("weeklyChallengeId", 2), 0) == localvarstring("splashRef"))) - 1)));
+            setLocalVarString uiChallengesTable ("mp/weeklyChallengesTable.csv");
+            if (tablelookup("mp/weeklyChallengesTable.csv", 0, localvarstring("splashRef"), 1) == "" || ((tablelookupbyrow("mp/weeklyChallengesTable.csv", getplayerdata("weeklyChallengeId", 0), 0) == localvarstring("splashRef")) + (2 * (tablelookupbyrow("mp/weeklyChallengesTable.csv", getplayerdata("weeklyChallengeId", 1), 0) == localvarstring("splashRef"))) + (3 * (tablelookupbyrow("mp/weeklyChallengesTable.csv", getplayerdata("weeklyChallengeId", 2), 0) == localvarstring("splashRef"))) - 1) < 0)
+            {
+                setLocalVarString temp (debugprint("Splash", "INVALID WEEKLY CHALLENGE"));
+                setLocalVarString splashRef ("");
+                setLocalVarString challengeRef ("");
+                close self;
+            }
+        }
+        onRequestClose
+        {
+            if (localvarstring("splashRef") != "")
+            {
+                lerp alpha from 1 to 0 over "0.15";
+                lerp x from 370 to 640 over "0.15";
+            }
+        }
+        itemDef
+        {
+            name                        "challenge_title_tiered"
+            rect                        -580 60 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_162() && (int(max(getplayerdata("challengeState", localvarstring("challengeRef")), 1)) - 1) > 0);
+            textalign                   2
+            textscale                   0.375
+            textstyle                   3
+            textfont                    4
+            exp text                    locstring("@CHALLENGE_PATCH_WEEKLY_CHALLENGE");
+            exp glowcolor r             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 8);
+            decodeEffect                100 3000 500
+        }
+        itemDef
+        {
+            name                        "challenge_description"
+            rect                        -580 80 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_162() && (int(max(getplayerdata("challengeState", localvarstring("challengeRef")), 1)) - 1) > 0);
+            textalign                   2
+            textscale                   0.2916
+            textstyle                   3
+            exp text                    getsplashdescription(0);
+            decodeEffect                50 3000 500
+        }
+        itemDef
+        {
+            name                        "challenge_title_tiered"
+            rect                        -580 60 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_161() && (int(max(getplayerdata("challengeState", localvarstring("challengeRef")), 1)) - 1) > 0);
+            textalign                   2
+            textscale                   0.729165
+            textstyle                   3
+            textfont                    4
+            exp text                    locstring("@CHALLENGE_PATCH_WEEKLY_CHALLENGE");
+            exp glowcolor r             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 8);
+            decodeEffect                100 3000 500
+        }
+        itemDef
+        {
+            name                        "challenge_description"
+            rect                        -580 80 200 20 10 8
+            decoration                  
+            visible                     when(FUNC_161() && (int(max(getplayerdata("challengeState", localvarstring("challengeRef")), 1)) - 1) > 0);
+            textalign                   2
+            textscale                   0.4583
+            textstyle                   3
+            exp text                    getsplashdescription(0);
+            decodeEffect                50 3000 500
+        }
+    }
+}

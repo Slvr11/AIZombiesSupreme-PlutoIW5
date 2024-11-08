@@ -1,0 +1,96 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 1,
+    "constantTable": [
+        {
+            "literal": [
+                0.4000000059604645,
+                0.33000001311302185,
+                1.399999976158142,
+                2.0
+            ],
+            "name": "envMapParms",
+            "nameHash": 1033475292
+        },
+        {
+            "literal": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "heatMapDetai",
+            "nameHash": 2264331605
+        },
+        {
+            "literal": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "name": "colorTint",
+            "nameHash": 3054254906
+        }
+    ],
+    "gameFlags": 16,
+    "maps": [
+        {
+            "firstCharacter": 115,
+            "image": "~mi24p_hind_window_chernobyl_~56d8bc22",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 8,
+            "typeHash": 887934131
+        },
+        {
+            "firstCharacter": 110,
+            "image": "mi24p_hind_window_chernobyl_nml",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 5,
+            "typeHash": 1507003663
+        },
+        {
+            "firstCharacter": 104,
+            "image": "chemwar_blk_metal_swatch_flir",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 2,
+            "typeHash": 1938402404
+        },
+        {
+            "firstCharacter": 99,
+            "image": "mi24p_hind_window_chernobyl_col",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 2,
+            "typeHash": 2695565377
+        }
+    ],
+    "name": "mc/mtl_mi24p_hind_chernobyl_window",
+    "sortKey": 29,
+    "stateFlags": 49,
+    "stateMap": [
+        [
+            1495830885,
+            12
+        ],
+        [
+            1477611874,
+            13
+        ],
+        [
+            1477611813,
+            3758358604
+        ],
+        [
+            2282915858,
+            3835578668
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "mc_l_sm_heat_b0c0n0s0_sat",
+    "unknown": 256
+}

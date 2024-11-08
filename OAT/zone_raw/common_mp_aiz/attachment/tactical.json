@@ -1,0 +1,31 @@
+{
+    "_type": "attachment",
+    "_version": 1,
+    "adsSettingsScale": 0.0,
+    "adsSettingsScaleMain": 0.0,
+    "aimAssist": {
+        "aimAssistRange": 3200.0,
+        "aimAssistRangeAds": 3200.0,
+        "autoAimRange": 2800.0
+    },
+    "ammunitionScale": 0.0,
+    "damageScale": 0.0,
+    "damageScaleMin": 0.0,
+    "displayName": "WEAPON_TACTICAL_ATTACHMENT",
+    "fireTimersScale": 1.0,
+    "gunKickScale": 0.0,
+    "hideIronSightsWithThisAttachment": false,
+    "hipSpreadScale": 0.0,
+    "idleSettingsScale": 0.0,
+    "loadIndex": 0,
+    "reticleViewModels": [],
+    "shareAmmoWithAlt": false,
+    "stateTimersScale": 1.0,
+    "type": "other",
+    "viewCenterScale": 0.0,
+    "viewKickScale": 0.0,
+    "viewModels": [],
+    "weapClass": "pistol",
+    "weaponType": "none",
+    "worldModels": []
+}

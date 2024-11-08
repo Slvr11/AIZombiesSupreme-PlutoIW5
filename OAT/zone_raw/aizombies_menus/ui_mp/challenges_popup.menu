@@ -1,0 +1,1075 @@
+{
+    menuDef
+    {
+        name                        "challenges_popup"
+        rect                        -213 57 426 290 2 1
+        style                       1
+        focuscolor                  1 1 1 1
+        background                  "white"
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        allowedBinding              "+talk"
+        visible                     1
+        onOpen
+        {
+            setLocalVarString ui_info_filter_backup localvarstring("ui_info_filter");
+            setLocalVarString ui_hint_text_backup localvarstring("ui_hint_text");
+            execnow "incnosplitscreencontrol challenges_popup";
+            setLocalVarInt ui_centerPopup 1;
+            uiScript SortChallengesTop;
+            setLocalVarInt total_width (getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 60 + getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) + 20);
+            setLocalVarInt ui_navbar_x (0 - (0.5 * localvarint("total_width")));
+            if (getsortedchallengecount(localvarstring("ui_info_filter")) == 0)
+            {
+                close self;
+                if (localvarbool("ui_challenges_online"))
+                {
+                    open challenges_online;
+                }
+                else
+                {
+                    open challenges_offline;
+                }
+            }
+        }
+        onClose
+        {
+            execnow "decnosplitscreencontrol challenges_popup";
+            setLocalVarInt ui_centerPopup 0;
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("challenges_popup"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 426 290 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.2118 0.2314 0.22 1
+        }
+        itemDef
+        {
+            rect                        0 0 426 48 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.1569 0.1725 0.1608 1
+        }
+        itemDef
+        {
+            rect                        0 0 410 24 0 0
+            decoration                  
+            visible                     when(!((localvarstring("ui_info_name") == ("@CLASS_SLOT" + 1)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 2)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 3)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 4)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 5)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 6)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 7)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 8)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 9)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 10)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 11)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 12)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 13)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 14)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 15))));
+            textalign                   9
+            textaligny                  2
+            textscale                   0.4583
+            textfont                    9
+            exp text                    locstring(localvarstring("ui_info_name"));
+        }
+        itemDef
+        {
+            rect                        0 0 410 24 0 0
+            decoration                  
+            visible                     when(((localvarstring("ui_info_name") == ("@CLASS_SLOT" + 1)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 2)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 3)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 4)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 5)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 6)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 7)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 8)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 9)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 10)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 11)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 12)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 13)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 14)) || (localvarstring("ui_info_name") == ("@CLASS_SLOT" + 15))));
+            textalign                   9
+            textaligny                  2
+            textscale                   0.4583
+            textfont                    9
+            exp text                    localvarstring("loadoutClassName");
+        }
+        itemDef
+        {
+            text                        "@MENU_CHALLENGES_CAP"
+            rect                        0 24 410 24 0 0
+            decoration                  
+            visible                     1
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.2916
+            textstyle                   9
+            textfont                    9
+        }
+        itemDef
+        {
+            rect                        0 0 426 72 0 0
+            style                       1
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) % 2 == 0)));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  0 * 72 + 48;
+        }
+        itemDef
+        {
+            rect                        0 0 426 72 0 0
+            style                       1
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) % 2 == 0)));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  2 * 72 + 48;
+        }
+        itemDef
+        {
+            rect                        0 0 426 72 0 0
+            style                       1
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) % 2 == 1)));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  1 * 72 + 48;
+        }
+        itemDef
+        {
+            rect                        0 48 426 10 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 256 426 -10 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 266 426 24 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3098 0.349 0.2745 1
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 2;
+                setLocalVarString ui_ralign_group "challenges_popup";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                play mouse_click;
+                close self;
+                if (localvarbool("ui_challenges_online"))
+                {
+                    open challenges_online;
+                }
+                else
+                {
+                    open challenges_offline;
+                }
+            }
+            exp rect x                  (426) - (1 * 5) - 20 - getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 5), 0);
+            exp rect y                  (((290 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "challenges_popup"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (426) - (1 * 5) - (20) - getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 5), 0);
+            exp rect y                  (((290 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "challenges_popup"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (426) - (1 * 5) - (20) - getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 5), 0);
+            exp rect y                  (((290 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@CHALLENGE_ALL_CHALLENGES";
+            exp rect x                  (426) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 5), 0);
+            exp rect y                  (((290 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@CHALLENGE_ALL_CHALLENGES"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "challenges_popup"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "challenges_popup"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "challenges_popup"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "challenges_popup";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                close self;
+            }
+            exp rect x                  (426) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375);
+            exp rect y                  (((290 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "challenges_popup"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (426) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375);
+            exp rect y                  (((290 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "challenges_popup"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (426) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375);
+            exp rect y                  (((290 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 2 1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CLOSE";
+            exp rect x                  (426) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375);
+            exp rect y                  (((290 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CLOSE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "challenges_popup"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "challenges_popup"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "challenges_popup"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            name                        "challengeFeeder"
+            rect                        -2 46 430 220 2 1
+            type                        6
+            visible                     when(1);
+            textscale                   0.375
+            elementwidth                200
+            elementheight               214
+            feeder                      38
+            columns                     1
+                                        0 0 200 0 40 0
+            doubleclick
+            {
+                play mouse_click;
+                close self;
+                if (localvarbool("ui_challenges_online"))
+                {
+                    open challenges_online;
+                }
+                else
+                {
+                    open challenges_offline;
+                }
+            }
+            selectBorder                0.8 0.95 1 0
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)));
+            exp rect y                  (48) + (44) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))));
+            exp rect y                  (48) + (44) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 0) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")));
+            exp rect y                  (48) + (44) + (0) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 0), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)));
+            exp rect y                  (48) + (44) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))));
+            exp rect y                  (48) + (44) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 1) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")));
+            exp rect y                  (48) + (44) + (1) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 1), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)));
+            exp rect y                  (48) + (44) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280)))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ((getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro" && "@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") != "@CHALLENGE_BLANK"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))));
+            exp rect y                  (48) + (44) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc"), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.32
+            textfont                    9
+            exp text                    getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "name") + locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label_nonperiodic") + "_" + int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)));
+            exp rect y                  (48) + (6) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 7.833 0 0
+            style                       3
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textscale                   0.55
+            forecolor                   0.7843 0.7843 0.7843 1
+            background                  "white"
+            exp rect y                  (48) + (18) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+            exp rect w                  (426 - 16 - 30) * ((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")))) / (int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))));
+        }
+        itemDef
+        {
+            rect                        15 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")));
+            textalign                   4
+            textscale                   0.32
+            textfont                    9
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    locstring("@MPUI_N_XP", int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "reward", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) == "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", int((getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")))) / 5280), int((int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1))))) / 5280));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        205 0 190 0 0 0
+            decoration                  
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && (("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK")) && (getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")) != "ch_longersprint_pro"));
+            textalign                   6
+            textscale                   0.32
+            textfont                    9
+            exp text                    locstring("@CHALLENGE_PROGRESS_X_OF_Y", getplayerdata("challengeProgress", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), int(getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "target", int(max(getplayerdata("challengeState", getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter"))), 1)))));
+            exp rect y                  (48) + (18 + 7.833) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+        itemDef
+        {
+            rect                        15 0 380 0 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(((int(getFeederData("challengeFeeder", "start")) + 2) < (int(getFeederData("challengeFeeder", "count")) + 2)) && ("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "label") == "@CHALLENGE_BLANK"));
+            textalign                   4
+            textaligny                  -4
+            textscale                   0.3
+            textfont                    3
+            exp text                    (locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")));
+            exp rect y                  (48) + (44) + (2) * 72 + (select((getTextWidth(((locstring("@" + getchallengedata(getsortedchallengename((int(getFeederData("challengeFeeder", "start")) + 2), localvarstring("ui_info_filter")), "desc")))), 3, 0.3) > (426 - 16 - 30)), 0, 8));
+        }
+    }
+}

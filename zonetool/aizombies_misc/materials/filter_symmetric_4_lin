@@ -1,0 +1,31 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 4,
+    "constantTable": [
+        {
+            "literal": [
+                1.0,
+                1.0,
+                0.0,
+                0.0
+            ],
+            "name": "uvScale",
+            "nameHash": 3809220315
+        }
+    ],
+    "gameFlags": 0,
+    "maps": null,
+    "name": "filter_symmetric_4_lin",
+    "sortKey": 34,
+    "stateFlags": 3,
+    "stateMap": [
+        [
+            1477609490,
+            3759013890
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "filter_symmetric_4",
+    "unknown": 0
+}

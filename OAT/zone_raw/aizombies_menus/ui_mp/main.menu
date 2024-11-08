@@ -1,0 +1,1151 @@
+{
+    menuDef
+    {
+        name                        "main"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_mainmenu_mp"
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarString ui_buttonNavGroupName "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            focusfirst;
+            setdvar ui_version_show 0;
+            setLocalVarBool ui_centerPopup 0;
+            setLocalVarInt ui_open_time milliseconds();
+            setLocalVarString sharedBackgroundMusic "music_mainmenu_mp";
+            setLocalVarString temp (debugprint("DEBUG", " MP Root Open"));
+            if (menuisopen("menu_xboxlive_partyended"))
+            {
+                setLocalVarInt ui_buttonNavGroupOffset 0;
+                setLocalVarInt ui_buttonNavGroupCurrent 0;
+                setLocalVarString ui_buttonNavGroupName "invalid";
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+                close menu_xboxlive_partyended;
+                open menu_xboxlive_partyended;
+            }
+        }
+        onESC
+        {
+            open quit_popmenu;
+        }
+        onFocusDueToClose
+        {
+            setLocalVarString ui_hint_text "";
+            focusfirst;
+            focusfirst;
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        237.5 -36 640 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "background_image_blur_less_dest_alpha_masked"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_AIZ_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.5) <= 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_AIZ_CAPS");
+            exp forecolor a             select(((getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.4) <= 200)), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 1 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_AIZ_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.4) > 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -88 34.667 325.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + (0.667);
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_0"
+            rect                        -68 34.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_0";
+                setLocalVarInt ui_buttonNavGroupCurrent 0;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@PLATFORM_PLAY_ONLINE_DESC";
+                exec xcheckezpatchversion;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    execnow "forcenosplitscreencontrol main_XBOXLIVE_1";
+                    if (!usercanplayonline())
+                    {
+                        execWithResolve xrequirelivesignin;
+                        exec "forcesplitscreencontrol main_XBOXLIVE_2";
+                    }
+                    else
+                    {
+                        setdvar ui_opensummary 0;
+                        execnow resetSplitscreenSignIn;
+                        execnow "forcenosplitscreencontrol main_XBOXLIVE_3";
+                        setdvar systemlink 0;
+                        setdvar splitscreen 0;
+                        setdvar onlinegame 1;
+                        execnow "exec default_xboxlive.cfg";
+                        setdvar party_maxplayers 9;
+                        setdvar xblive_privatematch 0;
+                        execnow xstartprivateparty;
+                        setdvar ui_mptype 0;
+                        exec startentitlements;
+                        execnow upload_playercard;
+                        open menu_xboxlive;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 33.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_PLAY_ONLINE_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -46.5 53.334 283.333 3.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (1) && (((1) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "navbar_tick"
+            exp rect x                  (0) + ((0 - 64)) + 0.667 + 17.5;
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 2.3333));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_1"
+            rect                        -68 54.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_1";
+                setLocalVarInt ui_buttonNavGroupCurrent 1;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_VAULT_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    execnow "forcenosplitscreencontrol main_VAULT";
+                    if (!canuseraccessonlinevault())
+                    {
+                        execWithResolve xrequirelivesigninforvault;
+                        exec "forcesplitscreencontrol main_VAULT_CANCEL";
+                    }
+                    else
+                    {
+                        open popup_vault;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 53.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_VAULT_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_2"
+            rect                        -68 74.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_2";
+                setLocalVarInt ui_buttonNavGroupCurrent 2;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@PLATFORM_STORE_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    execnow "forcenosplitscreencontrol main_STORE";
+                    uiScript commerceShowStore;
+                    execnow "forcesplitscreencontrol main_STORE";
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 73.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_STORE_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_3"
+            rect                        -68 94.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_3";
+                setLocalVarInt ui_buttonNavGroupCurrent 3;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_SERVERS_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    if (!usercanplayonline())
+                    {
+                        execWithResolve xrequirelivesignin;
+                    }
+                    else
+                    {
+                        open serverbrowser;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 93.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_SERVERS_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_4"
+            rect                        -68 114.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_4";
+                setLocalVarInt ui_buttonNavGroupCurrent 4;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_OPTIONS_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open pc_options_video;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 113.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_OPTIONS_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_5"
+            rect                        -68 134.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_5";
+                setLocalVarInt ui_buttonNavGroupCurrent 5;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_MAIN_MENU_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open single_popmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 133.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_MAIN_MENU_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_6"
+            rect                        -68 154.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_6";
+                setLocalVarInt ui_buttonNavGroupCurrent 6;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_QUIT_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open quit_popmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 153.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_QUIT_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -46.5 173.334 283.333 3.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (7) && (((7) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "navbar_tick"
+            exp rect x                  (0) + ((0 - 64)) + 0.667 + 17.5;
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 7))) + ((0 - 2.3333));
+        }
+        itemDef
+        {
+            rect                        -64 173.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)) && !localvarbool("ui_centerPopup") && !localvarbool("ui_leftPopup")) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (7) && (((7) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && (0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 7))) + ((0 - 1.333));
+            exp rect x                  (((301.5 / 2) - 77)) + ((0 - 64));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0.882 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.882));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0.655 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.655));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0.173 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.173));
+        }
+        itemDef
+        {
+            rect                        -64 173.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)) && !localvarbool("ui_centerPopup") && !localvarbool("ui_leftPopup")) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (7) && (((7) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && !(0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 7))) + ((0 - 1.333));
+            exp rect x                  (((301.5 / 2) - 77)) + ((0 - 64));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_7" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_3"
+            rect                        -68 94.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_3";
+                setLocalVarInt ui_buttonNavGroupCurrent 3;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_OPTIONS_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open pc_options_video;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 93.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_OPTIONS_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_4"
+            rect                        -68 114.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_4";
+                setLocalVarInt ui_buttonNavGroupCurrent 4;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_MAIN_MENU_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open single_popmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 113.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_MAIN_MENU_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_5"
+            rect                        -68 134.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_5";
+                setLocalVarInt ui_buttonNavGroupCurrent 5;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_QUIT_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open quit_popmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 133.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_QUIT_CAPS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            name                        "MAIN_BUTTON_LIST_6"
+            rect                        -68 134.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MAIN_BUTTON_LIST_5";
+                setLocalVarInt ui_buttonNavGroupCurrent 5;
+                setLocalVarString ui_buttonNavGroupName "MAIN_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_QUIT_DESC";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open quit_popmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 153.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "UNLOAD AIZOMBIES";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -46.5 153.334 283.333 3.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser))) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (6) && (((6) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "navbar_tick"
+            exp rect x                  (0) + ((0 - 64)) + 0.667 + 17.5;
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 2.3333));
+        }
+        itemDef
+        {
+            rect                        -64 153.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)) && !localvarbool("ui_centerPopup") && !localvarbool("ui_leftPopup")) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (6) && (((6) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && (0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+            exp rect x                  (((301.5 / 2) - 77)) + ((0 - 64));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0.882 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.882));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0.655 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.655));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0.173 * select(isdemoplaying(), FUNC_36(), FUNC_35()), 0.173));
+        }
+        itemDef
+        {
+            rect                        -64 153.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((!((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)) && !localvarbool("ui_centerPopup") && !localvarbool("ui_leftPopup")) && (((localvarint("ui_buttonNavGroupOffset") + (select(((!dvarbool(kill_dedicatedserver)) && dvarbool(cl_enableDedicatedServerBrowser)), 8, 7) - 1)) >= (6) && (((6) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && !(0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+            exp rect x                  (((301.5 / 2) - 77)) + ((0 - 64));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MAIN_BUTTON_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "MAIN_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            name                        "iotd"
+            rect                        40 242.667 183 183 1 1
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   387
+            textalign                   9
+            textscale                   0.340278
+            textfont                    3
+            exp rect x                  dvarfloat(ui_iotd_x);
+            exp rect y                  dvarfloat(ui_iotd_y);
+            exp rect w                  dvarfloat(ui_iotd_w);
+            exp rect h                  dvarfloat(ui_iotd_h);
+        }
+    }
+}

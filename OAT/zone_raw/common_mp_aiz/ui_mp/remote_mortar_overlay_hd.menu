@@ -1,0 +1,408 @@
+{
+    menuDef
+    {
+        name                        "remote_mortar_overlay_hd"
+        rect                        0 0 640 480 0 0
+        visible                     when(FUNC_66() && !inkillcamnpc() && FUNC_82() && FUNC_107());
+        itemDef
+        {
+            rect                        -275 170 550 20 2 2
+            decoration                  
+            type                        8
+            visible                     when(FUNC_64());
+            ownerdraw                   145
+            textscale                   0.55
+            textstyle                   3
+            background                  "viper_heading_mp"
+        }
+        itemDef
+        {
+            rect                        70 -170 30 30 2 2
+            decoration                  
+            type                        8
+            visible                     when(FUNC_64());
+            ownerdraw                   161
+            textalign                   8
+            textscale                   0.625
+            textstyle                   3
+        }
+        itemDef
+        {
+            rect                        -200 -70 30 30 2 2
+            decoration                  
+            type                        8
+            visible                     when(FUNC_64());
+            ownerdraw                   160
+            textalign                   8
+            textscale                   0.625
+            textstyle                   3
+        }
+        itemDef
+        {
+            rect                        -426 -239 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_64());
+            textscale                   0.55
+            forecolor                   0 0 0 0.7
+            background                  "reaper_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_64());
+            textscale                   0.55
+            background                  "reaper_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        -426 -239 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_65());
+            textscale                   0.55
+            forecolor                   0 0 0 0.7
+            background                  "reaper_overlay_zoomed_mp"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_65());
+            textscale                   0.55
+            background                  "reaper_overlay_zoomed_mp"
+        }
+        itemDef
+        {
+            rect                        -29 -109 60 35 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "viper_locking_box"
+        }
+        itemDef
+        {
+            rect                        -30 -110 60 35 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "viper_locking_box"
+        }
+        itemDef
+        {
+            rect                        -40 -107 60 30 2 2
+            decoration                  
+            visible                     when(dvarint(ui_reaper_targetDistance) >= 0);
+            textalign                   14
+            textscale                   0.5833
+            textstyle                   132
+            exp text                    dvarint(ui_reaper_targetDistance);
+        }
+        itemDef
+        {
+            rect                        201 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        200 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (14 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        211 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        210 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (13 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        221 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        220 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (12 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        231 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        230 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (11 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        241 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        240 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (10 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        251 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        250 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (9 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        261 135 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        260 134 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (8 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        201 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        200 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (7 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        211 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        210 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (6 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        221 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        220 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (5 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        231 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        230 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (4 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        241 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        240 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (3 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        251 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        250 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (2 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        261 151 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        260 150 5 10 2 2
+            style                       3
+            decoration                  
+            visible                     when(dvarint(ui_reaper_ammoCount) > (1 - 1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.7
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 1 0 0.8
+            background                  "javelin_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.4
+            background                  "nightvision_overlay_goggles"
+        }
+    }
+}

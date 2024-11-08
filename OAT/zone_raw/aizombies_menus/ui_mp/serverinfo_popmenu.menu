@@ -1,0 +1,315 @@
+{
+    menuDef
+    {
+        name                        "serverinfo_popmenu"
+        rect                        -190 -167 380 334 2 2
+        style                       1
+        backcolor                   0 0 0 1
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        visible                     1
+        onOpen
+        {
+            uiScript ServerStatus;
+            setLocalVarBool si_btnRefreshFocused 0;
+            setLocalVarBool si_btnCloseFocused 0;
+            setLocalVarBool ui_centerPopup 1;
+            setLocalVarString uiSi_mapname "";
+            open serverinfo_loading;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            close serverinfo_loading;
+        }
+        onESC
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play mouse_click;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("serverinfo_popmenu"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            name                        "titleBar"
+            rect                        0 0 380 24 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.1569 0.1765 0.1608 1
+        }
+        itemDef
+        {
+            name                        "siServerName"
+            rect                        0 0 380 24 0 0
+            decoration                  
+            type                        8
+            border                      1
+            visible                     1
+            ownerdraw                   384
+            textaligny                  23
+            textscale                   0.5
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "block1"
+            rect                        0 26 380 110 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.2431 0.2431 0.2431 1
+        }
+        itemDef
+        {
+            name                        "siList1"
+            rect                        0 27 187.13 110 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     1
+            textscale                   0.35
+            textfont                    1
+            notselectable               
+            elementwidth                120
+            elementheight               24
+            feeder                      43
+            columns                     4
+                                        4 0 140 0 50 0
+                                        144 0 2 0 2 0
+                                        146 0 2 0 2 0
+                                        148 0 50 0 50 0
+        }
+        itemDef
+        {
+            name                        "mapImageBox"
+            rect                        192.87 29 183.13 104 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarstring("uiSi_mapname") != "");
+            textscale                   0.55
+            exp material                localvarstring("uiSi_mapname");
+        }
+        itemDef
+        {
+            name                        "siMapNameShadow"
+            rect                        192.87 103 183.13 18 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   385
+            textalignx                  175.87
+            textaligny                  16
+            textscale                   0.4
+            textfont                    9
+            forecolor                   0 0 0 1
+        }
+        itemDef
+        {
+            name                        "siMapName"
+            rect                        192.87 103 183.13 18 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   385
+            textalignx                  174.87
+            textaligny                  15
+            textscale                   0.4
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "siGameTypeShadow"
+            rect                        192.87 115 183.13 18 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   386
+            textalignx                  175.87
+            textaligny                  16
+            textscale                   0.27
+            textfont                    9
+            forecolor                   0 0 0 1
+        }
+        itemDef
+        {
+            name                        "siGameType"
+            rect                        192.87 115 183.13 18 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   386
+            textalignx                  174.87
+            textaligny                  15
+            textscale                   0.27
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "centerLine"
+            rect                        0 138 380 2 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            name                        "block2"
+            rect                        0 142 380 143 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.2431 0.2431 0.2431 1
+        }
+        itemDef
+        {
+            name                        "siList2"
+            rect                        0 143 380 143 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     1
+            textscale                   0.25
+            textfont                    1
+            notselectable               
+            elementwidth                120
+            elementheight               16
+            feeder                      44
+            columns                     4
+                                        4 0 140 0 50 0
+                                        144 0 2 0 2 0
+                                        146 0 2 0 2 0
+                                        148 0 50 0 50 0
+        }
+        itemDef
+        {
+            name                        "refreshBtn"
+            text                        "@MENU_REFRESH"
+            rect                        0 287 380 20 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalignx                  4
+            textaligny                  16
+            textscale                   0.3
+            textfont                    3
+            backcolor                   0.2431 0.2431 0.2431 1
+            onFocus
+            {
+                setLocalVarBool si_btnRefreshFocused 1;
+                setItemColor self backcolor ".5098" ".5373" ".5098" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool si_btnRefreshFocused 0;
+                setItemColor self backcolor ".2431" ".2431" ".2431" 1;
+            }
+            action
+            {
+                open serverinfo_loading;
+                uiScript ServerStatus;
+            }
+        }
+        itemDef
+        {
+            name                        "btnGap"
+            rect                        0 307 380 0 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.2431 0.2431 0.2431 1
+        }
+        itemDef
+        {
+            name                        "closeBtn"
+            text                        "@MENU_CLOSE"
+            rect                        0 307 380 20 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalignx                  4
+            textaligny                  16
+            textscale                   0.3
+            textfont                    3
+            backcolor                   0.2431 0.2431 0.2431 1
+            onFocus
+            {
+                setLocalVarBool si_btnCloseFocused 1;
+                setItemColor self backcolor ".5098" ".5373" ".5098" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool si_btnCloseFocused 0;
+                setItemColor self backcolor ".2431" ".2431" ".2431" 1;
+            }
+            action
+            {
+                close self;
+            }
+        }
+        itemDef
+        {
+            name                        "bottomBorder"
+            rect                        0 327 380 7 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.3686 0.4431 0.3333 1
+        }
+        itemDef
+        {
+            rect                        0 24 380 10 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 285 380 10 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 307 380 10 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("si_btnRefreshFocused"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 327 380 10 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("si_btnCloseFocused"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+    }
+}

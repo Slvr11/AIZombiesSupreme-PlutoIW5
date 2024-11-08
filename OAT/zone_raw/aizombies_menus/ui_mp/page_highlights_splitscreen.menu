@@ -1,0 +1,2629 @@
+{
+    menuDef
+    {
+        name                        "page_highlights_splitscreen"
+        rect                        0 26 533.333 357 2 1
+        style                       1
+        focuscolor                  1 1 1 1
+        exp rect X                  - (533.333 / 2);
+        onOpen
+        {
+            setLocalVarString ui_currentPage "page_highlights_splitscreen";
+            if ("page_highlights_splitscreen" == "page_summary_splitscreen")
+            {
+                setLocalVarInt ui_leftArrow 0;
+                if ((getclientmatchdatadef() != ""))
+                {
+                    setLocalVarInt ui_rightArrow 1;
+                }
+                else
+                {
+                    setLocalVarInt ui_rightArrow 0;
+                }
+            }
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                setLocalVarInt ui_leftArrow 1;
+                if ((getclientmatchdatadef() != ""))
+                {
+                    setLocalVarInt ui_rightArrow 1;
+                }
+                else
+                {
+                    setLocalVarInt ui_rightArrow 0;
+                }
+            }
+            if ("page_highlights_splitscreen" == "page_scoreboard_splitscreen")
+            {
+                setLocalVarInt ui_leftArrow 1;
+                setLocalVarInt ui_rightArrow 0;
+            }
+        }
+        onESC
+        {
+            close self;
+            close popup_summary_splitscreen;
+        }
+        execKeyInt 157
+        {
+            if ("page_highlights_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 186
+        {
+            if ("page_highlights_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 23
+        {
+            if ("page_highlights_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 31
+        {
+            if ("page_highlights_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 156
+        {
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                close self;
+                open page_summary_splitscreen;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir - 1;
+            }
+            if ("page_highlights_splitscreen" == "page_scoreboard_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir - 1;
+                }
+            }
+        }
+        execKeyInt 185
+        {
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                close self;
+                open page_summary_splitscreen;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir - 1;
+            }
+            if ("page_highlights_splitscreen" == "page_scoreboard_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir - 1;
+                }
+            }
+        }
+        execKeyInt 22
+        {
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                close self;
+                open page_summary_splitscreen;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir - 1;
+            }
+            if ("page_highlights_splitscreen" == "page_scoreboard_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir - 1;
+                }
+            }
+        }
+        execKeyInt 30
+        {
+            if ("page_highlights_splitscreen" == "page_highlights_splitscreen")
+            {
+                close self;
+                open page_summary_splitscreen;
+                play tabs_slide;
+                setLocalVarInt ui_switchTime (milliseconds());
+                setLocalVarInt ui_switchDir - 1;
+            }
+            if ("page_highlights_splitscreen" == "page_scoreboard_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir - 1;
+                }
+            }
+        }
+        execKeyInt 1
+        {
+            close self;
+            close popup_summary_splitscreen;
+        }
+        itemDef
+        {
+            text                        "@MPUI_ACCOLADES"
+            rect                        0 0 533.333 48 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textalign                   9
+            textscale                   0.55
+            textstyle                   9
+            textfont                    9
+            backcolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 48 533.333 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 24 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  357 - 24;
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  357 - 24 - 21.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "page_highlights_splitscreen";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 1;
+            }
+            exp rect x                  ((533.333)) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 0 0
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_highlights_splitscreen"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_highlights_splitscreen"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CONTINUE";
+            exp rect x                  ((533.333)) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_highlights_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_highlights_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_highlights_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            group                       "left_arrow"
+            rect                        0 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_leftArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_left"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor left_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor left_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_leftArrow"))
+                {
+                    play mouse_click;
+                    setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+                    if ("" == "page_scoreboard")
+                    {
+                        if (!dvarbool(xblive_privatematch))
+                        {
+                            close self;
+                            open page_challenges;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                    }
+                    if ("" == "page_challenges")
+                    {
+                        close self;
+                        open page_weapon_xp;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_weapon_xp")
+                    {
+                        close self;
+                        open page_highlights;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_highlights")
+                    {
+                        close self;
+                        open page_accolades;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_accolades")
+                    {
+                        close self;
+                        open page_progress;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_progress")
+                    {
+                        close self;
+                        open page_summary;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            group                       "right_arrow"
+            rect                        485.333 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_rightArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_right"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor right_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor right_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_rightArrow"))
+                {
+                    play mouse_click;
+                    setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+                    if ((getclientmatchdatadef() != ""))
+                    {
+                        if ("" == "page_summary")
+                        {
+                            close self;
+                            open page_progress;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_progress")
+                        {
+                            close self;
+                            open page_accolades;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_accolades")
+                        {
+                            close self;
+                            open page_highlights;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_highlights")
+                        {
+                            close self;
+                            open page_weapon_xp;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_weapon_xp")
+                        {
+                            close self;
+                            open page_challenges;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_challenges")
+                        {
+                            close self;
+                            open page_scoreboard;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                    }
+                    focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            rect                        0 63 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 93 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 123 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 153 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 183 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 213 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 243 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 273 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 303 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            text                        "@MENU_PLAYER"
+            rect                        3 48 450 15 0 0
+            decoration                  
+            visible                     1
+            textalign                   8
+            textaligny                  -1
+            textscale                   0.34
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 0.8 0.4 1
+        }
+        itemDef
+        {
+            text                        "@MPUI_ACCOLADE"
+            rect                        189 48 450 15 0 0
+            decoration                  
+            visible                     1
+            textalign                   8
+            textaligny                  -1
+            textscale                   0.34
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 0.8 0.4 1
+        }
+        itemDef
+        {
+            rect                        0 63 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 0, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 63 450 15 0 0
+            decoration                  
+            visible                     when((0 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 0, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 64 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 0, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 63 450 15 0 0
+            decoration                  
+            visible                     when((0 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 0, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 0, "value");
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 0, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 0, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 0, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 0, "value") & 65535) - int((getclientmatchdata("highlights", 0, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 0, "value") & 65535) / (getclientmatchdata("highlights", 0, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 0, "value") & 65535) / (getclientmatchdata("highlights", 0, "value") >> 16) - int((getclientmatchdata("highlights", 0, "value") & 65535) / (getclientmatchdata("highlights", 0, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 0, "value") & 65535) + "/" + (getclientmatchdata("highlights", 0, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 63 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 0, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 0, "value") / 100) - int((getclientmatchdata("highlights", 0, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 78 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 1, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 78 450 15 0 0
+            decoration                  
+            visible                     when((1 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 1, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 79 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 1, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 78 450 15 0 0
+            decoration                  
+            visible                     when((1 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 1, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 1, "value");
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 1, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 1, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 1, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 1, "value") & 65535) - int((getclientmatchdata("highlights", 1, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 1, "value") & 65535) / (getclientmatchdata("highlights", 1, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 1, "value") & 65535) / (getclientmatchdata("highlights", 1, "value") >> 16) - int((getclientmatchdata("highlights", 1, "value") & 65535) / (getclientmatchdata("highlights", 1, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 1, "value") & 65535) + "/" + (getclientmatchdata("highlights", 1, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 78 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 1, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 1, "value") / 100) - int((getclientmatchdata("highlights", 1, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 93 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 2, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 93 450 15 0 0
+            decoration                  
+            visible                     when((2 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 2, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 94 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 2, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 93 450 15 0 0
+            decoration                  
+            visible                     when((2 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 2, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 2, "value");
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 2, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 2, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 2, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 2, "value") & 65535) - int((getclientmatchdata("highlights", 2, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 2, "value") & 65535) / (getclientmatchdata("highlights", 2, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 2, "value") & 65535) / (getclientmatchdata("highlights", 2, "value") >> 16) - int((getclientmatchdata("highlights", 2, "value") & 65535) / (getclientmatchdata("highlights", 2, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 2, "value") & 65535) + "/" + (getclientmatchdata("highlights", 2, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 93 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 2, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 2, "value") / 100) - int((getclientmatchdata("highlights", 2, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 108 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 3, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 108 450 15 0 0
+            decoration                  
+            visible                     when((3 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 3, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 109 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 3, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 108 450 15 0 0
+            decoration                  
+            visible                     when((3 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 3, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 3, "value");
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 3, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 3, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 3, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 3, "value") & 65535) - int((getclientmatchdata("highlights", 3, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 3, "value") & 65535) / (getclientmatchdata("highlights", 3, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 3, "value") & 65535) / (getclientmatchdata("highlights", 3, "value") >> 16) - int((getclientmatchdata("highlights", 3, "value") & 65535) / (getclientmatchdata("highlights", 3, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 3, "value") & 65535) + "/" + (getclientmatchdata("highlights", 3, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 108 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 3, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 3, "value") / 100) - int((getclientmatchdata("highlights", 3, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 123 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((4 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 4, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 123 450 15 0 0
+            decoration                  
+            visible                     when((4 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 4, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 124 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((4 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 4, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 123 450 15 0 0
+            decoration                  
+            visible                     when((4 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 4, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 4, "value");
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 4, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 4, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 4, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 4, "value") & 65535) - int((getclientmatchdata("highlights", 4, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 4, "value") & 65535) / (getclientmatchdata("highlights", 4, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 4, "value") & 65535) / (getclientmatchdata("highlights", 4, "value") >> 16) - int((getclientmatchdata("highlights", 4, "value") & 65535) / (getclientmatchdata("highlights", 4, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 4, "value") & 65535) + "/" + (getclientmatchdata("highlights", 4, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 123 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 4, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 4, "value") / 100) - int((getclientmatchdata("highlights", 4, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 138 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((5 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 5, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 138 450 15 0 0
+            decoration                  
+            visible                     when((5 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 5, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 139 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((5 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 5, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 138 450 15 0 0
+            decoration                  
+            visible                     when((5 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 5, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 5, "value");
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 5, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 5, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 5, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 5, "value") & 65535) - int((getclientmatchdata("highlights", 5, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 5, "value") & 65535) / (getclientmatchdata("highlights", 5, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 5, "value") & 65535) / (getclientmatchdata("highlights", 5, "value") >> 16) - int((getclientmatchdata("highlights", 5, "value") & 65535) / (getclientmatchdata("highlights", 5, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 5, "value") & 65535) + "/" + (getclientmatchdata("highlights", 5, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 138 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 5, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 5, "value") / 100) - int((getclientmatchdata("highlights", 5, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 153 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((6 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 6, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 153 450 15 0 0
+            decoration                  
+            visible                     when((6 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 6, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 154 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((6 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 6, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 153 450 15 0 0
+            decoration                  
+            visible                     when((6 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 6, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 6, "value");
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 6, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 6, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 6, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 6, "value") & 65535) - int((getclientmatchdata("highlights", 6, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 6, "value") & 65535) / (getclientmatchdata("highlights", 6, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 6, "value") & 65535) / (getclientmatchdata("highlights", 6, "value") >> 16) - int((getclientmatchdata("highlights", 6, "value") & 65535) / (getclientmatchdata("highlights", 6, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 6, "value") & 65535) + "/" + (getclientmatchdata("highlights", 6, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 153 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 6, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 6, "value") / 100) - int((getclientmatchdata("highlights", 6, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 168 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((7 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 7, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 168 450 15 0 0
+            decoration                  
+            visible                     when((7 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 7, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 169 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((7 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 7, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 168 450 15 0 0
+            decoration                  
+            visible                     when((7 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 7, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 7, "value");
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 7, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 7, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 7, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 7, "value") & 65535) - int((getclientmatchdata("highlights", 7, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 7, "value") & 65535) / (getclientmatchdata("highlights", 7, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 7, "value") & 65535) / (getclientmatchdata("highlights", 7, "value") >> 16) - int((getclientmatchdata("highlights", 7, "value") & 65535) / (getclientmatchdata("highlights", 7, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 7, "value") & 65535) + "/" + (getclientmatchdata("highlights", 7, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 168 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 7, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 7, "value") / 100) - int((getclientmatchdata("highlights", 7, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 183 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((8 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 8, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 183 450 15 0 0
+            decoration                  
+            visible                     when((8 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 8, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 184 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((8 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 8, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 183 450 15 0 0
+            decoration                  
+            visible                     when((8 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 8, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 8, "value");
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 8, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 8, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 8, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 8, "value") & 65535) - int((getclientmatchdata("highlights", 8, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 8, "value") & 65535) / (getclientmatchdata("highlights", 8, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 8, "value") & 65535) / (getclientmatchdata("highlights", 8, "value") >> 16) - int((getclientmatchdata("highlights", 8, "value") & 65535) / (getclientmatchdata("highlights", 8, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 8, "value") & 65535) + "/" + (getclientmatchdata("highlights", 8, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 183 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 8, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 8, "value") / 100) - int((getclientmatchdata("highlights", 8, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 198 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((9 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 9, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 198 450 15 0 0
+            decoration                  
+            visible                     when((9 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 9, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 199 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((9 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 9, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 198 450 15 0 0
+            decoration                  
+            visible                     when((9 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 9, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 9, "value");
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 9, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 9, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 9, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 9, "value") & 65535) - int((getclientmatchdata("highlights", 9, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 9, "value") & 65535) / (getclientmatchdata("highlights", 9, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 9, "value") & 65535) / (getclientmatchdata("highlights", 9, "value") >> 16) - int((getclientmatchdata("highlights", 9, "value") & 65535) / (getclientmatchdata("highlights", 9, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 9, "value") & 65535) + "/" + (getclientmatchdata("highlights", 9, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 198 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 9, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 9, "value") / 100) - int((getclientmatchdata("highlights", 9, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 213 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((10 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 10, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 213 450 15 0 0
+            decoration                  
+            visible                     when((10 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 10, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 214 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((10 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 10, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 213 450 15 0 0
+            decoration                  
+            visible                     when((10 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 10, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 10, "value");
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 10, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 10, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 10, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 10, "value") & 65535) - int((getclientmatchdata("highlights", 10, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 10, "value") & 65535) / (getclientmatchdata("highlights", 10, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 10, "value") & 65535) / (getclientmatchdata("highlights", 10, "value") >> 16) - int((getclientmatchdata("highlights", 10, "value") & 65535) / (getclientmatchdata("highlights", 10, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 10, "value") & 65535) + "/" + (getclientmatchdata("highlights", 10, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 213 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 10, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 10, "value") / 100) - int((getclientmatchdata("highlights", 10, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 228 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((11 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 11, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 228 450 15 0 0
+            decoration                  
+            visible                     when((11 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 11, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 229 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((11 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 11, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 228 450 15 0 0
+            decoration                  
+            visible                     when((11 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 11, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 11, "value");
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 11, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 11, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 11, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 11, "value") & 65535) - int((getclientmatchdata("highlights", 11, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 11, "value") & 65535) / (getclientmatchdata("highlights", 11, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 11, "value") & 65535) / (getclientmatchdata("highlights", 11, "value") >> 16) - int((getclientmatchdata("highlights", 11, "value") & 65535) / (getclientmatchdata("highlights", 11, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 11, "value") & 65535) + "/" + (getclientmatchdata("highlights", 11, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 228 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 11, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 11, "value") / 100) - int((getclientmatchdata("highlights", 11, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 243 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((12 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 12, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 243 450 15 0 0
+            decoration                  
+            visible                     when((12 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 12, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 244 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((12 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 12, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 243 450 15 0 0
+            decoration                  
+            visible                     when((12 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 12, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 12, "value");
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 12, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 12, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 12, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 12, "value") & 65535) - int((getclientmatchdata("highlights", 12, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 12, "value") & 65535) / (getclientmatchdata("highlights", 12, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 12, "value") & 65535) / (getclientmatchdata("highlights", 12, "value") >> 16) - int((getclientmatchdata("highlights", 12, "value") & 65535) / (getclientmatchdata("highlights", 12, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 12, "value") & 65535) + "/" + (getclientmatchdata("highlights", 12, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 243 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 12, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 12, "value") / 100) - int((getclientmatchdata("highlights", 12, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 258 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((13 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 13, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 258 450 15 0 0
+            decoration                  
+            visible                     when((13 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 13, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 259 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((13 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 13, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 258 450 15 0 0
+            decoration                  
+            visible                     when((13 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 13, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 13, "value");
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 13, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 13, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 13, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 13, "value") & 65535) - int((getclientmatchdata("highlights", 13, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 13, "value") & 65535) / (getclientmatchdata("highlights", 13, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 13, "value") & 65535) / (getclientmatchdata("highlights", 13, "value") >> 16) - int((getclientmatchdata("highlights", 13, "value") & 65535) / (getclientmatchdata("highlights", 13, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 13, "value") & 65535) + "/" + (getclientmatchdata("highlights", 13, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 258 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 13, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 13, "value") / 100) - int((getclientmatchdata("highlights", 13, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 273 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((14 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 14, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 273 450 15 0 0
+            decoration                  
+            visible                     when((14 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 14, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 274 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((14 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 14, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 273 450 15 0 0
+            decoration                  
+            visible                     when((14 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 14, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 14, "value");
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 14, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 14, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 14, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 14, "value") & 65535) - int((getclientmatchdata("highlights", 14, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 14, "value") & 65535) / (getclientmatchdata("highlights", 14, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 14, "value") & 65535) / (getclientmatchdata("highlights", 14, "value") >> 16) - int((getclientmatchdata("highlights", 14, "value") & 65535) / (getclientmatchdata("highlights", 14, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 14, "value") & 65535) + "/" + (getclientmatchdata("highlights", 14, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 273 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 14, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 14, "value") / 100) - int((getclientmatchdata("highlights", 14, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 288 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((15 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 15, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 288 450 15 0 0
+            decoration                  
+            visible                     when((15 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 15, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 289 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((15 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 15, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 288 450 15 0 0
+            decoration                  
+            visible                     when((15 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 15, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 15, "value");
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 15, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 15, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 15, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 15, "value") & 65535) - int((getclientmatchdata("highlights", 15, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 15, "value") & 65535) / (getclientmatchdata("highlights", 15, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 15, "value") & 65535) / (getclientmatchdata("highlights", 15, "value") >> 16) - int((getclientmatchdata("highlights", 15, "value") & 65535) / (getclientmatchdata("highlights", 15, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 15, "value") & 65535) + "/" + (getclientmatchdata("highlights", 15, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 288 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 15, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 15, "value") / 100) - int((getclientmatchdata("highlights", 15, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 303 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((16 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 16, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 303 450 15 0 0
+            decoration                  
+            visible                     when((16 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 16, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 304 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((16 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 16, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 303 450 15 0 0
+            decoration                  
+            visible                     when((16 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 16, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 16, "value");
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 16, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 16, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 16, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 16, "value") & 65535) - int((getclientmatchdata("highlights", 16, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 16, "value") & 65535) / (getclientmatchdata("highlights", 16, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 16, "value") & 65535) / (getclientmatchdata("highlights", 16, "value") >> 16) - int((getclientmatchdata("highlights", 16, "value") & 65535) / (getclientmatchdata("highlights", 16, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 16, "value") & 65535) + "/" + (getclientmatchdata("highlights", 16, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 303 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 16, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 16, "value") / 100) - int((getclientmatchdata("highlights", 16, "value") / 100))) * 100);
+        }
+        itemDef
+        {
+            rect                        0 318 533.333 15 0 0
+            style                       3
+            decoration                  
+            visible                     when((17 < getclientmatchdata("highlightCount")) && (getclientmatchdata("players", getclientmatchdata("highlights", 17, "clientId"), "xuid") == stripColorsFromString(getplayercardinfo(13, 1, 0))));
+            textscale                   0.55
+            forecolor                   1 1 1 0.3
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        3 318 450 15 0 0
+            decoration                  
+            visible                     when((17 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("players", getclientmatchdata("highlights", 17, "clientId"), "xuid");
+        }
+        itemDef
+        {
+            rect                        175 319 13 13 0 0
+            style                       3
+            decoration                  
+            visible                     when((17 < getclientmatchdata("highlightCount")));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 17, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        189 318 450 15 0 0
+            decoration                  
+            visible                     when((17 < getclientmatchdata("highlightCount")));
+            textalign                   8
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getclientmatchdata("highlights", 17, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    getclientmatchdata("highlights", 17, "value");
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int(getclientmatchdata("highlights", 17, "value") / 36) + " yds";
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    secondsascountdown(getclientmatchdata("highlights", 17, "value") / 1000) + " min";
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 17, "value") & 65535)) + "." + int(((getclientmatchdata("highlights", 17, "value") & 65535) - int((getclientmatchdata("highlights", 17, "value") & 65535))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 17, "value") & 65535) / (getclientmatchdata("highlights", 17, "value") >> 16)) + "." + int(((getclientmatchdata("highlights", 17, "value") & 65535) / (getclientmatchdata("highlights", 17, "value") >> 16) - int((getclientmatchdata("highlights", 17, "value") & 65535) / (getclientmatchdata("highlights", 17, "value") >> 16))) * 100);
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    (getclientmatchdata("highlights", 17, "value") & 65535) + "/" + (getclientmatchdata("highlights", 17, "value") >> 16);
+        }
+        itemDef
+        {
+            rect                        -3 318 450 15 0 0
+            decoration                  
+            textalign                   10
+            textaligny                  -2
+            textscale                   0.34
+            textfont                    3
+            exp text                    int((getclientmatchdata("highlights", 17, "value") / 100)) + "." + int(((getclientmatchdata("highlights", 17, "value") / 100) - int((getclientmatchdata("highlights", 17, "value") / 100))) * 100);
+        }
+    }
+}

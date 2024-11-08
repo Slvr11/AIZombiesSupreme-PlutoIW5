@@ -1,0 +1,884 @@
+{
+    menuDef
+    {
+        name                        "serverfilters"
+        rect                        6 415 624 0 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        soundLoop                   "music_mainmenu_mp"
+        popup                       
+        exp rect Y                  (((70 + 24 + 3 + 6) + 16 + 2) + FUNC_131()) + 9;
+        exp rect H                  FUNC_133();
+        onOpen
+        {
+            setLocalVarInt ui_sbFilterPanel 1;
+        }
+        onClose
+        {
+            setLocalVarInt ui_sbFilterPanel 0;
+        }
+        onESC
+        {
+            if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+            {
+                setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                uiScript RefreshFilter;
+            }
+            if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+            {
+                setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                uiScript RefreshFilter;
+            }
+            if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+            {
+                setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                uiScript RefreshFilter;
+            }
+            close self;
+        }
+        itemDef
+        {
+            rect                        -2560 -1600 5120 3200 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("serverFilters"));
+            textscale                   0.55
+            forecolor                   0.1 0.1 0.1 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            name                        "filterPanel"
+            rect                        0 0 624 0 0 0
+            style                       1
+            decoration                  
+            type                        8
+            border                      1
+            borderSize                  1
+            visible                     1
+            textscale                   0.55
+            backcolor                   0.25 0.25 0.25 1
+            forecolor                   0.9 0.9 0.95 1
+            bordercolor                 0.5 0.5 0.5 0.5
+            exp rect h                  FUNC_133();
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 0) && (localvarint("uisb_filter_focused_col") == 0));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        11
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 0;
+                setLocalVarInt uisb_filter_focused_col 0;
+                setLocalVarString ui_sb_toolTip select((dvarbool(ui_browserShowFull)), "@MENU_SB_TOOLTIP_FILTER_FULL_YES", "@MENU_SB_TOOLTIP_FILTER_FULL_NO");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip select((dvarbool(ui_browserShowFull)), "@MENU_SB_TOOLTIP_FILTER_FULL_YES", "@MENU_SB_TOOLTIP_FILTER_FULL_NO");
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+            dvar                        "ui_browserShowFull"
+        }
+        itemDef
+        {
+            text                        "@MENU_VIEW_FULL"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 1) && (localvarint("uisb_filter_focused_col") == 0));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        11
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 1;
+                setLocalVarInt uisb_filter_focused_col 0;
+                setLocalVarString ui_sb_toolTip select((dvarbool(ui_browserShowEmpty)), "@MENU_SB_TOOLTIP_FILTER_EMPTY_YES", "@MENU_SB_TOOLTIP_FILTER_EMPTY_NO");
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip select((dvarbool(ui_browserShowEmpty)), "@MENU_SB_TOOLTIP_FILTER_EMPTY_YES", "@MENU_SB_TOOLTIP_FILTER_EMPTY_NO");
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+            dvar                        "ui_browserShowEmpty"
+        }
+        itemDef
+        {
+            text                        "@MENU_VIEW_EMPTY"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 2) && (localvarint("uisb_filter_focused_col") == 0));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 2);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        12
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 2;
+                setLocalVarInt uisb_filter_focused_col 0;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserHardcore) < 0), "@MENU_SB_TOOLTIP_FILTER_HARDCORE_ALL", (select(dvarint(ui_browserHardcore), "@MENU_SB_TOOLTIP_FILTER_HARDCORE_YES", "@MENU_SB_TOOLTIP_FILTER_HARDCORE_NO"))));
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserHardcore) < 0), "@MENU_SB_TOOLTIP_FILTER_HARDCORE_ALL", (select(dvarint(ui_browserHardcore), "@MENU_SB_TOOLTIP_FILTER_HARDCORE_YES", "@MENU_SB_TOOLTIP_FILTER_HARDCORE_NO"))));
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 2);
+            dvar                        "ui_browserHardcore"
+            dvarFloatList               { "@MENU_ALL" -1 "@MENU_NO" 0 "@MENU_YES" 1 }
+        }
+        itemDef
+        {
+            text                        "@MENU_HARDCORE"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 2);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 3) && (localvarint("uisb_filter_focused_col") == 0));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 3);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        12
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 3;
+                setLocalVarInt uisb_filter_focused_col 0;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserShowPassword) < 0), "@MENU_SB_TOOLTIP_FILTER_PASSWORD_ALL", (select(dvarint(ui_browserShowPassword), "@MENU_SB_TOOLTIP_FILTER_PASSWORD_YES", "@MENU_SB_TOOLTIP_FILTER_PASSWORD_NO"))));
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserShowPassword) < 0), "@MENU_SB_TOOLTIP_FILTER_PASSWORD_ALL", (select(dvarint(ui_browserShowPassword), "@MENU_SB_TOOLTIP_FILTER_PASSWORD_YES", "@MENU_SB_TOOLTIP_FILTER_PASSWORD_NO"))));
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 3);
+            dvar                        "ui_browserShowPassword"
+            dvarFloatList               { "@MENU_ALL" -1 "@MENU_NO" 0 "@MENU_YES" 1 }
+        }
+        itemDef
+        {
+            text                        "@MENU_PASSWORD3"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 0) + 4;
+            exp rect y                  4 + ((20 + 4) * 3);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 0) && (localvarint("uisb_filter_focused_col") == 1));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        12
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 0;
+                setLocalVarInt uisb_filter_focused_col 1;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserKillcam) < 0), "@MENU_SB_TOOLTIP_FILTER_KILLCAM_ALL", (select(dvarint(ui_browserKillcam), "@MENU_SB_TOOLTIP_FILTER_KILLCAM_YES", "@MENU_SB_TOOLTIP_FILTER_KILLCAM_NO"))));
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserKillcam) < 0), "@MENU_SB_TOOLTIP_FILTER_KILLCAM_ALL", (select(dvarint(ui_browserKillcam), "@MENU_SB_TOOLTIP_FILTER_KILLCAM_YES", "@MENU_SB_TOOLTIP_FILTER_KILLCAM_NO"))));
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+            dvar                        "ui_browserKillcam"
+            dvarFloatList               { "@MENU_ALL" -1 "@MENU_NO" 0 "@MENU_YES" 1 }
+        }
+        itemDef
+        {
+            text                        "@MENU_VIEW_KILLCAM"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 1) && (localvarint("uisb_filter_focused_col") == 1));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        12
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 1;
+                setLocalVarInt uisb_filter_focused_col 1;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserFriendlyfire) < 0), "@MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_ALL", (select(dvarint(ui_browserFriendlyfire), "@MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_YES", "@MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_NO"))));
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_browserFriendlyfire) < 0), "@MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_ALL", (select(dvarint(ui_browserFriendlyfire), "@MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_YES", "@MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_NO"))));
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+            dvar                        "ui_browserFriendlyfire"
+            dvarFloatList               { "@MENU_ALL" -1 "@MENU_NO" 0 "@MENU_YES" 1 }
+        }
+        itemDef
+        {
+            text                        "@MENU_FRIENDLY_FIRE2"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 2) && (localvarint("uisb_filter_focused_col") == 1));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 2);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        12
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 2;
+                setLocalVarInt uisb_filter_focused_col 1;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_voiceType) < 0), "@MENU_SB_TOOLTIP_FILTER_VOICE_NO_FILTER", (select((dvarint(ui_voiceType) == 0), "@MENU_SB_TOOLTIP_FILTER_VOICE_NO_VOICE", (select((dvarint(ui_voiceType) == 1), "@MENU_SB_TOOLTIP_FILTER_VOICE_CHAT_ALL", "@MENU_SB_TOOLTIP_FILTER_VOICE_CHAT_TEAM"))))));
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarstring("ui_tempMapFilterKey") != dvarstring(ui_filterMapKey))
+                {
+                    setdvar ui_filterMapKey localVarString ( ui_tempMapFilterKey );
+                    setdvar ui_filterMapName localVarString ( ui_tempMapFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarstring("ui_tempGameTypeFilterKey") != dvarstring(ui_joinGameTypeKey))
+                {
+                    setdvar ui_joinGameTypeKey localVarString ( ui_tempGameTypeFilterKey );
+                    setdvar ui_joinGameTypeName localVarString ( ui_tempGameTypeFilterName );
+                    uiScript RefreshFilter;
+                }
+                if (localvarint("ui_tempMaxPingName") != dvarstring(ui_maxPingName))
+                {
+                    setdvar ui_maxPingName localVarString ( ui_tempMaxPingName );
+                    uiScript RefreshFilter;
+                }
+                setLocalVarBool ui_showApply 1;
+                uiScript RefreshFilter;
+                setLocalVarString ui_sb_toolTip (select((dvarint(ui_voiceType) < 0), "@MENU_SB_TOOLTIP_FILTER_VOICE_NO_FILTER", (select((dvarint(ui_voiceType) == 0), "@MENU_SB_TOOLTIP_FILTER_VOICE_NO_VOICE", (select((dvarint(ui_voiceType) == 1), "@MENU_SB_TOOLTIP_FILTER_VOICE_CHAT_ALL", "@MENU_SB_TOOLTIP_FILTER_VOICE_CHAT_TEAM"))))));
+            }
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 2);
+            dvar                        "ui_voiceType"
+            dvarFloatList               { "@MENU_ALL" -1 "@MENU_NO_VOICE" 0 "@MENU_EVERYONE" 1 "@MENU_TEAM_CHAT" 2 }
+        }
+        itemDef
+        {
+            text                        "@MENU_VOICE_CHAT_ENABLE"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 2);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 3) && (localvarint("uisb_filter_focused_col") == 1));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 3);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  107.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 3;
+                setLocalVarInt uisb_filter_focused_col 1;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_FILTER_PING";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                open comboPingList;
+            }
+            exp text                    dvarstring(ui_maxPingName);
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 3);
+        }
+        itemDef
+        {
+            text                        "@MENU_MAX_PING"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -102.667
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 1) + 4;
+            exp rect y                  4 + ((20 + 4) * 3);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 0) && (localvarint("uisb_filter_focused_col") == 2));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  87.1333
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 0;
+                setLocalVarInt uisb_filter_focused_col 2;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_FILTER_MAP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                open comboMapList;
+            }
+            exp text                    dvarstring(ui_filterMapName);
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            text                        "@MENU_MAP_PRE2"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -123.2
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4;
+            exp rect y                  4 + ((20 + 4) * 0);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 && (localvarint("uisb_filter_focused_row") == 1) && (localvarint("uisb_filter_focused_col") == 2));
+            disabled                    when(0);
+            textscale                   0.55
+            background                  "navbar_selection_bar_centered"
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            rect                        0 0 205.333 20 0 0
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   4
+            textalignx                  87.1333
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarInt uisb_filter_focused_row 1;
+                setLocalVarInt uisb_filter_focused_col 2;
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_FILTER_GAME_MODE";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt uisb_filter_focused_row - 1;
+                setLocalVarInt uisb_filter_focused_col - 1;
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                open comboGametypeList;
+            }
+            exp text                    dvarstring(ui_joinGameTypeName);
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            text                        "@MENU_GAME_TYPE2"
+            rect                        0 0 205.333 20 0 0
+            decoration                  
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   6
+            textalignx                  -123.2
+            textscale                   0.375
+            textfont                    3
+            disablecolor                0.6 0.55 0.55 1
+            exp disabled                0;
+            exp rect x                  ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4;
+            exp rect y                  4 + ((20 + 4) * 1);
+        }
+        itemDef
+        {
+            name                        "resetFilter"
+            text                        "@MENU_RESET"
+            rect                        0 0 100 20 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textaligny                  -2
+            textscale                   0.35
+            backcolor                   0.3686 0.4431 0.3333 1
+            forecolor                   0.9 0.9 0.95 1
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_sb_toolTip "@MENU_SB_TOOLTIP_BTN_RESET_FILTER";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarString ui_sb_toolTip "";
+            }
+            action
+            {
+                play mouse_click;
+                setdvar ui_browserShowFull 1;
+                setdvar ui_browserShowEmpty 1;
+                setdvar ui_voiceType "-1";
+                setdvar ui_browserHardcore "-1";
+                setdvar ui_browserShowPassword "-1";
+                setdvar ui_browserKillcam "-1";
+                setdvar ui_browserFriendlyfire "-1";
+                setdvar ui_maxPingName 1200;
+                setLocalVarString ui_tempMaxPingName "1200";
+                setdvar ui_filterMapKey All;
+                setdvar ui_filterMapName "@MENU_ALL";
+                setLocalVarString ui_tempMapFilterKey "All";
+                setLocalVarString ui_tempMapFilterName "@MENU_ALL";
+                setdvar ui_joinGameTypeKey All;
+                setdvar ui_joinGameTypeName "@MENU_ALL";
+                setLocalVarString ui_tempGameTypeFilterKey "All";
+                setLocalVarString ui_tempGameTypeFilterName "@MENU_ALL";
+                uiScript RefreshFilter;
+            }
+            exp rect x                  (((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) * 2) + 4) + ((((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) / 2) - 4;
+            exp rect y                  (4 + ((20 + 4) * 3)) - 2;
+            exp rect w                  (((((((((6 + 22) + 249) + 90) + 48) + 151) + 24) + 40 - 6) - (2 * 4)) / 3) / 2;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+{
+    menuDef
+    {
+        name                        "playercard_splash"
+        decoration                  
+        rect                        0 0 640 480 10 10
+        legacySplitScreenScale      
+        onOpen
+        {
+            if (!dvarbool(ui_hide_playercards))
+            {
+                setLocalVarInt ui_show_perks 0;
+                play mp_card_slide;
+                setLocalVarInt callout_update_time (milliseconds() + 1000);
+            }
+        }
+        itemDef
+        {
+            rect                        0 0 160 18 10 8
+            decoration                  
+            visible                     when(FUNC_25() && FUNC_163());
+            textalign                   6
+            textalignx                  8
+            textscale                   0.3333
+            textstyle                   8
+            textfont                    10
+            forecolor                   0.6 0.8 0.6 1
+            exp text                    getplayercardinfo(11, 0, 5);
+            exp rect x                  - 172;
+            exp rect y                  (110) - 5;
+        }
+        itemDef
+        {
+            rect                        0 0 160 18 10 8
+            decoration                  
+            visible                     when(FUNC_28() && FUNC_163());
+            textalign                   6
+            textalignx                  8
+            textscale                   0.3333
+            textstyle                   8
+            textfont                    10
+            forecolor                   0.8 0.35 0.4 1
+            exp text                    getplayercardinfo(11, 0, 5);
+            exp rect x                  - 172;
+            exp rect y                  (110) - 5;
+        }
+        itemDef
+        {
+            rect                        0 0 208 20 10 8
+            style                       1
+            decoration                  
+            visible                     when((getplayercardinfo(0, 0, 5) != 0) && FUNC_163());
+            textalign                   6
+            textalignx                  8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    6
+            glowcolor                   1 0.8 0.6 1
+            exp text                    getsplashdescription(1);
+            exp rect x                  - 172 - 48;
+            exp rect y                  (110) + 10;
+        }
+        itemDef
+        {
+            rect                        0 0 160 18 10 8
+            decoration                  
+            visible                     when(FUNC_25() && FUNC_162());
+            textalign                   6
+            textalignx                  8
+            textscale                   0.3333
+            textstyle                   8
+            textfont                    10
+            forecolor                   0.6 0.8 0.6 1
+            exp text                    getplayercardinfo(11, 0, 5);
+            exp rect x                  - 172;
+            exp rect y                  (60) - 5;
+        }
+        itemDef
+        {
+            rect                        0 0 160 18 10 8
+            decoration                  
+            visible                     when(FUNC_28() && FUNC_162());
+            textalign                   6
+            textalignx                  8
+            textscale                   0.3333
+            textstyle                   8
+            textfont                    10
+            forecolor                   0.8 0.35 0.4 1
+            exp text                    getplayercardinfo(11, 0, 5);
+            exp rect x                  - 172;
+            exp rect y                  (60) - 5;
+        }
+        itemDef
+        {
+            rect                        0 0 208 20 10 8
+            style                       1
+            decoration                  
+            visible                     when((getplayercardinfo(0, 0, 5) != 0) && FUNC_162());
+            textalign                   6
+            textalignx                  8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    6
+            glowcolor                   1 0.8 0.6 1
+            exp text                    getsplashdescription(1);
+            exp rect x                  - 172 - 48;
+            exp rect y                  (60) + 10;
+        }
+    }
+}

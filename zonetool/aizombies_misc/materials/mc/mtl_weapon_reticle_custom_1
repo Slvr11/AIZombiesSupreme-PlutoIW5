@@ -1,0 +1,52 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 2,
+    "constantTable": [
+        {
+            "literal": [
+                14.0,
+                14.0,
+                0.0,
+                0.0
+            ],
+            "name": "detailScale",
+            "nameHash": 148072969
+        }
+    ],
+    "gameFlags": 4,
+    "maps": [
+        {
+            "firstCharacter": 99,
+            "image": "weapon_reticle_custom_1_col",
+            "lastCharacter": 112,
+            "sampleState": -12,
+            "semantic": 2,
+            "typeHash": 2695565377
+        },
+        {
+            "firstCharacter": 100,
+            "image": "weapon_red_cross_background_iw5",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 2,
+            "typeHash": 3948059469
+        }
+    ],
+    "name": "mc/mtl_weapon_reticle_custom_1",
+    "sortKey": 53,
+    "stateFlags": 19,
+    "stateMap": [
+        [
+            422087010,
+            12
+        ],
+        [
+            2282915858,
+            3835578668
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "mc_reflexsight",
+    "unknown": 0
+}

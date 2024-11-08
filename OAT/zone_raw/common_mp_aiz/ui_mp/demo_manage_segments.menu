@@ -1,0 +1,3362 @@
+{
+    menuDef
+    {
+        name                        "demo_manage_segments"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        blurWorld                   4.8
+        onOpen
+        {
+            setLocalVarInt total_width (getTextWidth(locstring("@MENU_DEMO_SELECT_SEGMENT"), 1, 0.375) + 40 + getTextWidth(locstring("@MENU_DEMO_PREVIEW_CLIP"), 1, 0.375) + 40 + getTextWidth(locstring("@MENU_DEMO_CLEAR_ALL_SEGMENTS"), 1, 0.375) + 40 + getTextWidth(locstring("@MENU_BACK"), 1, 0.375));
+            setLocalVarInt ui_navbar_x (0 - (0.5 * localvarint("total_width")));
+            setLocalVarInt ui_navbutton_a_x (localvarint("ui_navbar_x"));
+            setLocalVarInt ui_navbutton_y_x (localvarint("ui_navbutton_a_x") + getTextWidth(locstring("@MENU_DEMO_SELECT_SEGMENT"), 1, 0.375) + 40);
+            setLocalVarInt ui_navbutton_x_x (localvarint("ui_navbutton_y_x") + getTextWidth(locstring("@MENU_DEMO_CLEAR_ALL_SEGMENTS"), 1, 0.375) + 40);
+            setLocalVarInt ui_navbutton_b_x (localvarint("ui_navbutton_x_x") + getTextWidth(locstring("@MENU_DEMO_PREVIEW_CLIP"), 1, 0.375) + 40);
+            if (dvarint(cl_demo_ui_selected_segment) < 0)
+            {
+                focusFirst;
+            }
+            else
+            {
+                uiScript SetFocusOnSegmentButton;
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+            }
+        }
+        onESC
+        {
+            if ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)))
+            {
+                uiScript SetFocusOnSegmentButton;
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+            }
+            else
+            {
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+                close self;
+                open demo_ingame;
+            }
+        }
+        onFocusDueToClose
+        {
+            if (dvarint(cl_demo_ui_selected_segment) >= getdemosegmentcount())
+            {
+                uiScript SetFocusOnSegmentButton;
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+            }
+        }
+        execKeyInt 167
+        {
+            if (getdemosegmentcount() > 0)
+            {
+                if ((dvarint(cl_demo_ui_selected_segment) == (0 - 1)))
+                {
+                    open delete_all_segments_confirmation;
+                }
+                else
+                {
+                    open delete_segment_confirmation;
+                }
+            }
+        }
+        execKeyInt 168
+        {
+            if (getdemosegmentcount() > 0)
+            {
+                if ((dvarint(cl_demo_ui_selected_segment) == (0 - 1)))
+                {
+                    exec cl_demo_previewclip;
+                    close self;
+                }
+                else
+                {
+                    uiScript PreviewSegment;
+                    close self;
+                }
+            }
+        }
+        execKeyInt 14
+        {
+            if ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)))
+            {
+                uiScript SetFocusOnSegmentButton;
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+            }
+            else
+            {
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+                close self;
+                open demo_ingame;
+            }
+        }
+        itemDef
+        {
+            text                        "@MENU_DEMO_MANAGE_SEGMENTS"
+            rect                        -320 0 640 28 2 1
+            decoration                  
+            visible                     1
+            textalign                   5
+            textscale                   0.5
+            textstyle                   3
+            textfont                    9
+        }
+        itemDef
+        {
+            rect                        -265 -48.75 400 30 2 2
+            decoration                  
+            visible                     when(getdemosegmentcount() > 0);
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation(("segmentPositionIndex" - 1), "totalClipDurationLocString");
+        }
+        itemDef
+        {
+            rect                        -265 -38 25 2 2 2
+            style                       3
+            decoration                  
+            visible                     when((getdemosegmentcount() > 0));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 1
+            background                  "white"
+            exp rect w                  (45 * getdemosegmentcount()) + (8 * (getdemosegmentcount() - 1));
+        }
+        itemDef
+        {
+            rect                        -270 -42 9 9 2 2
+            style                       3
+            decoration                  
+            visible                     when((getdemosegmentcount() > 0));
+            textscale                   0.55
+            forecolor                   1 1 1 0.8
+            background                  "ui_arrow_left"
+        }
+        itemDef
+        {
+            rect                        25 -42 9 9 2 2
+            style                       3
+            decoration                  
+            visible                     when((getdemosegmentcount() > 0));
+            textscale                   0.55
+            forecolor                   1 1 1 0.8
+            background                  "ui_arrow_right"
+            exp rect x                  (- 530 / 2) + (45 * getdemosegmentcount()) + (8 * (getdemosegmentcount() - 1)) - 6;
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 1 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 1));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -269 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 1));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 1 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    1;
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    1;
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 1) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 1) + getdemosegmentinformation((1 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((1 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((1 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_1"
+            rect                        -265 -30 45 37.5 2 2
+            type                        1
+            visible                     when((1 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 1;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 0;
+                setdvar cl_demo_ui_segment_position 1;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((1 > getdemosegmentcount()) && (localvarint("ui_highlight") != 1 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    1;
+        }
+        itemDef
+        {
+            rect                        -265 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((1 > getdemosegmentcount()) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    1;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((1 > getdemosegmentcount()) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 1) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_1"
+            rect                        -265 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((1 > getdemosegmentcount()) && (localvarint("ui_highlight") != 1 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 1;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+            execKeyInt 20
+            {
+            }
+            execKeyInt 28
+            {
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_1"
+            rect                        -265 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((1 > getdemosegmentcount()) && (localvarint("ui_highlight") == 1 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 1;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+            execKeyInt 20
+            {
+            }
+            execKeyInt 28
+            {
+            }
+        }
+        itemDef
+        {
+            rect                        -220 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 2 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -220 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 2 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -220 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 2 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -220 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 2 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -220 -30 8 37.5 2 2
+            type                        1
+            visible                     when((1 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 2;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 0 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 2 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(0, "transition");
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 3 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 2));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -216 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 2));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 3 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    2;
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    2;
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 2) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 2) + getdemosegmentinformation((2 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((2 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((2 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_2"
+            rect                        -212 -30 45 37.5 2 2
+            type                        1
+            visible                     when((2 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 3;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 1;
+                setdvar cl_demo_ui_segment_position 2;
+            }
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((2 > getdemosegmentcount()) && (localvarint("ui_highlight") != 3 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    2;
+        }
+        itemDef
+        {
+            rect                        -212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((2 > getdemosegmentcount()) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    2;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((2 > getdemosegmentcount()) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 2) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_2"
+            rect                        -212 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((2 > getdemosegmentcount()) && (localvarint("ui_highlight") != 3 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 3;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_2"
+            rect                        -212 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((2 > getdemosegmentcount()) && (localvarint("ui_highlight") == 3 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 3;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        -167 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 4 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -167 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 4 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -167 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 4 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -167 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((2 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 4 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -167 -30 8 37.5 2 2
+            type                        1
+            visible                     when((2 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 4;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 1 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 4 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(1, "transition");
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 5 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 3));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -163 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 3));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 5 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    3;
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    3;
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 3) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 3) + getdemosegmentinformation((3 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((3 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((3 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_3"
+            rect                        -159 -30 45 37.5 2 2
+            type                        1
+            visible                     when((3 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 5;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 2;
+                setdvar cl_demo_ui_segment_position 3;
+            }
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((3 > getdemosegmentcount()) && (localvarint("ui_highlight") != 5 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    3;
+        }
+        itemDef
+        {
+            rect                        -159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((3 > getdemosegmentcount()) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    3;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((3 > getdemosegmentcount()) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 3) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_3"
+            rect                        -159 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((3 > getdemosegmentcount()) && (localvarint("ui_highlight") != 5 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 5;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_3"
+            rect                        -159 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((3 > getdemosegmentcount()) && (localvarint("ui_highlight") == 5 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 5;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        -114 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 6 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -114 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 6 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -114 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 6 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -114 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((3 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 6 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -114 -30 8 37.5 2 2
+            type                        1
+            visible                     when((3 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 6;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 2 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 6 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(2, "transition");
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 7 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 4));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -110 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 4));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 7 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    4;
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    4;
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 4) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 4) + getdemosegmentinformation((4 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((4 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((4 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_4"
+            rect                        -106 -30 45 37.5 2 2
+            type                        1
+            visible                     when((4 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 7;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 3;
+                setdvar cl_demo_ui_segment_position 4;
+            }
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((4 > getdemosegmentcount()) && (localvarint("ui_highlight") != 7 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    4;
+        }
+        itemDef
+        {
+            rect                        -106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((4 > getdemosegmentcount()) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    4;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((4 > getdemosegmentcount()) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 4) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_4"
+            rect                        -106 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((4 > getdemosegmentcount()) && (localvarint("ui_highlight") != 7 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 7;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_4"
+            rect                        -106 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((4 > getdemosegmentcount()) && (localvarint("ui_highlight") == 7 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 7;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        -61 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 8 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -61 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 8 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -61 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 8 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -61 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((4 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 8 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -61 -30 8 37.5 2 2
+            type                        1
+            visible                     when((4 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 8;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 3 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 8 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(3, "transition");
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 9 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 5));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -57 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 5));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 9 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    5;
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    5;
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 5) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 5) + getdemosegmentinformation((5 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((5 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((5 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_5"
+            rect                        -53 -30 45 37.5 2 2
+            type                        1
+            visible                     when((5 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 9;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 4;
+                setdvar cl_demo_ui_segment_position 5;
+            }
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((5 > getdemosegmentcount()) && (localvarint("ui_highlight") != 9 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    5;
+        }
+        itemDef
+        {
+            rect                        -53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((5 > getdemosegmentcount()) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    5;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((5 > getdemosegmentcount()) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 5) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_5"
+            rect                        -53 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((5 > getdemosegmentcount()) && (localvarint("ui_highlight") != 9 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 9;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_5"
+            rect                        -53 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((5 > getdemosegmentcount()) && (localvarint("ui_highlight") == 9 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 9;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        -8 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 10 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -8 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 10 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -8 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 10 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -8 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((5 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 10 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        -8 -30 8 37.5 2 2
+            type                        1
+            visible                     when((5 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 10;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 4 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 10 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(4, "transition");
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 11 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 6));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -4 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 6));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 11 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    6;
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    6;
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 6) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 6) + getdemosegmentinformation((6 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((6 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((6 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_6"
+            rect                        0 -30 45 37.5 2 2
+            type                        1
+            visible                     when((6 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 11;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 5;
+                setdvar cl_demo_ui_segment_position 6;
+            }
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((6 > getdemosegmentcount()) && (localvarint("ui_highlight") != 11 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    6;
+        }
+        itemDef
+        {
+            rect                        0 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((6 > getdemosegmentcount()) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    6;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((6 > getdemosegmentcount()) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 6) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_6"
+            rect                        0 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((6 > getdemosegmentcount()) && (localvarint("ui_highlight") != 11 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 11;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_6"
+            rect                        0 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((6 > getdemosegmentcount()) && (localvarint("ui_highlight") == 11 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 11;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        45 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 12 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        45 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 12 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        45 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 12 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        45 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((6 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 12 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        45 -30 8 37.5 2 2
+            type                        1
+            visible                     when((6 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 12;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 5 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 12 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(5, "transition");
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 13 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 7));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        49 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 7));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 13 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    7;
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    7;
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 7) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 7) + getdemosegmentinformation((7 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((7 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((7 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_7"
+            rect                        53 -30 45 37.5 2 2
+            type                        1
+            visible                     when((7 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 13;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 6;
+                setdvar cl_demo_ui_segment_position 7;
+            }
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((7 > getdemosegmentcount()) && (localvarint("ui_highlight") != 13 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    7;
+        }
+        itemDef
+        {
+            rect                        53 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((7 > getdemosegmentcount()) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    7;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((7 > getdemosegmentcount()) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 7) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_7"
+            rect                        53 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((7 > getdemosegmentcount()) && (localvarint("ui_highlight") != 13 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 13;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_7"
+            rect                        53 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((7 > getdemosegmentcount()) && (localvarint("ui_highlight") == 13 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 13;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        98 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 14 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        98 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 14 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        98 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 14 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        98 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((7 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 14 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        98 -30 8 37.5 2 2
+            type                        1
+            visible                     when((7 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 14;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 6 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 14 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(6, "transition");
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 15 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 8));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        102 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 8));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 15 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    8;
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    8;
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 8) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 8) + getdemosegmentinformation((8 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((8 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((8 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_8"
+            rect                        106 -30 45 37.5 2 2
+            type                        1
+            visible                     when((8 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 15;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 7;
+                setdvar cl_demo_ui_segment_position 8;
+            }
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((8 > getdemosegmentcount()) && (localvarint("ui_highlight") != 15 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    8;
+        }
+        itemDef
+        {
+            rect                        106 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((8 > getdemosegmentcount()) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    8;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((8 > getdemosegmentcount()) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 8) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_8"
+            rect                        106 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((8 > getdemosegmentcount()) && (localvarint("ui_highlight") != 15 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 15;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_8"
+            rect                        106 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((8 > getdemosegmentcount()) && (localvarint("ui_highlight") == 15 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 15;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        151 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 16 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        151 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 16 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        151 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 16 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        151 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((8 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 16 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        151 -30 8 37.5 2 2
+            type                        1
+            visible                     when((8 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 16;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 7 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 16 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(7, "transition");
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 17 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 9));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        155 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 9));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 17 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    9;
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    9;
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 9) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 9) + getdemosegmentinformation((9 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((9 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((9 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_9"
+            rect                        159 -30 45 37.5 2 2
+            type                        1
+            visible                     when((9 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 17;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 8;
+                setdvar cl_demo_ui_segment_position 9;
+            }
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((9 > getdemosegmentcount()) && (localvarint("ui_highlight") != 17 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    9;
+        }
+        itemDef
+        {
+            rect                        159 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((9 > getdemosegmentcount()) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    9;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((9 > getdemosegmentcount()) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 9) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_9"
+            rect                        159 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((9 > getdemosegmentcount()) && (localvarint("ui_highlight") != 17 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 17;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_9"
+            rect                        159 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((9 > getdemosegmentcount()) && (localvarint("ui_highlight") == 17 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 17;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+        }
+        itemDef
+        {
+            rect                        204 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 18 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        204 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") != 18 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 1
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        204 -30 8 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 18 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        204 -18.75 8 15 2 2
+            style                       3
+            decoration                  
+            visible                     when((9 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))) && (localvarint("ui_highlight") == 18 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "ui_arrow_right"
+        }
+        itemDef
+        {
+            rect                        204 -30 8 37.5 2 2
+            type                        1
+            visible                     when((9 < getdemosegmentcount() && (dvarint(cl_demo_ui_selected_segment) == (0 - 1))));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 18;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                uiScript SwitchSegmentTransition 8 0;
+            }
+        }
+        itemDef
+        {
+            rect                        -265 45 400 30 2 2
+            decoration                  
+            visible                     when("visArg" && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 18 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_DEMO_TRANSITION") + getdemosegmentinformation(8, "transition");
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 19 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) != 10));
+            textscale                   0.55
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        208 -34 53 45.5 2 2
+            style                       3
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)) && (dvarint(cl_demo_ui_segment_position) == 10));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") != 19 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0 0 0 0.7
+            exp text                    10;
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    10;
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_segment_position) == 10) && (dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            exp text                    (dvarint(cl_demo_ui_selected_segment) + 1);
+        }
+        itemDef
+        {
+            rect                        -265 45 300 30 2 2
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 10) + getdemosegmentinformation((10 - 1), "name");
+        }
+        itemDef
+        {
+            rect                        -265 65 300 30 2 2
+            decoration                  
+            visible                     when((10 <= getdemosegmentcount()) && (dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    getdemosegmentinformation((10 - 1), "durationLocString");
+        }
+        itemDef
+        {
+            name                        "segment_pc_10"
+            rect                        212 -30 45 37.5 2 2
+            type                        1
+            visible                     when((10 <= getdemosegmentcount()));
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 19;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+                setdvar cl_demo_ui_selected_segment 9;
+                setdvar cl_demo_ui_segment_position 10;
+            }
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((10 > getdemosegmentcount()) && (localvarint("ui_highlight") != 19 || !menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.3 0.3 0.3 1
+            exp text                    10;
+        }
+        itemDef
+        {
+            rect                        212 -30 45 37.5 2 2
+            decoration                  
+            visible                     when((10 > getdemosegmentcount()) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    1
+            forecolor                   0.8 0.8 0.8 1
+            exp text                    10;
+        }
+        itemDef
+        {
+            rect                        -265 45 400 60 2 2
+            decoration                  
+            visible                     when((10 > getdemosegmentcount()) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SEGMENT_NUMBER", 10) + locstring("@MENU_EMPTY");
+        }
+        itemDef
+        {
+            name                        "segment_pc_10"
+            rect                        212 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((10 > getdemosegmentcount()) && (localvarint("ui_highlight") != 19 || !menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.3 0.3 0.3 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 19;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+            execKeyInt 21
+            {
+            }
+            execKeyInt 29
+            {
+            }
+        }
+        itemDef
+        {
+            name                        "segment_pc_10"
+            rect                        212 -30 45 37.5 2 2
+            type                        1
+            border                      1
+            borderSize                  0.8
+            visible                     when((10 > getdemosegmentcount()) && (localvarint("ui_highlight") == 19 && menuhasfocus("demo_manage_segments")));
+            textscale                   0.55
+            bordercolor                 0.8 0.8 0.8 1
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarInt ui_highlight 19;
+                setLocalVarString ui_choicegroup "demo_manage_segments";
+            }
+            leaveFocus
+            {
+            }
+            action
+            {
+                play mouse_click;
+            }
+            execKeyInt 21
+            {
+            }
+            execKeyInt 29
+            {
+            }
+        }
+        itemDef
+        {
+            rect                        -88 34.667 325.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + (0.667);
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_12"
+            rect                        -68 274.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_12";
+                setLocalVarInt ui_buttonNavGroupCurrent 12;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis ((((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0)) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    exec cl_demo_previewclip;
+                    close self;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 12))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 273.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0)));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_PREVIEW_CLIP";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 12))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_13"
+            rect                        -68 294.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_13";
+                setLocalVarInt ui_buttonNavGroupCurrent 13;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis ((((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0)) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open delete_all_segments_confirmation;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 13))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 293.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((((dvarint(cl_demo_ui_selected_segment) == (0 - 1)) && getdemosegmentcount() > 0)));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_CLEAR_ALL_SEGMENTS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 13))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_10"
+            rect                        -68 234.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_10";
+                setLocalVarInt ui_buttonNavGroupCurrent 10;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarint(cl_demo_ui_selected_segment) != (0 - 1))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    uiScript SetFocusOnSegmentButton;
+                    execNow "set cl_demo_ui_selected_segment -1";
+                    execNow "set cl_demo_ui_segment_position -1";
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 10))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 233.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) != (0 - 1))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_PLACE_SEGMENT";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 10))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_10" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_10" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_10" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_10" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_10" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_10" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_11"
+            rect                        -68 254.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_11";
+                setLocalVarInt ui_buttonNavGroupCurrent 11;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarint(cl_demo_ui_selected_segment) != (0 - 1))) && !((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == 1)));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+                setLocalVarBool ui_swfSelectionDisabled ((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == 1));
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == 1)))
+                {
+                    play mouse_click;
+                    uiScript MoveSegment 0;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 11))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 253.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) != (0 - 1))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_MOVE_SEGMENT_LEFT";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 11))) + ((0 - 1.333));
+            exp forecolor r             select((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == 1), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_11" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_11" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == 1), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_11" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_11" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == 1), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_11" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_11" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_12"
+            rect                        -68 274.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_12";
+                setLocalVarInt ui_buttonNavGroupCurrent 12;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarint(cl_demo_ui_selected_segment) != (0 - 1))) && !((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == getdemosegmentcount())));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+                setLocalVarBool ui_swfSelectionDisabled ((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == getdemosegmentcount()));
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == getdemosegmentcount())))
+                {
+                    play mouse_click;
+                    uiScript MoveSegment 1;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 12))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 273.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) != (0 - 1))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_MOVE_SEGMENT_RIGHT";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 12))) + ((0 - 1.333));
+            exp forecolor r             select((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == getdemosegmentcount()), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == getdemosegmentcount()), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select((getdemosegmentcount() > 1 && dvarint(cl_demo_ui_segment_position) == getdemosegmentcount()), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_12" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_13"
+            rect                        -68 294.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_13";
+                setLocalVarInt ui_buttonNavGroupCurrent 13;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarint(cl_demo_ui_selected_segment) != (0 - 1))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    uiScript PreviewSegment;
+                    close self;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 13))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 293.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) != (0 - 1))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_PREVIEW_SEGMENT";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 13))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_13" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "MANAGE_SEGMENTS_14"
+            rect                        -68 314.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "MANAGE_SEGMENTS_14";
+                setLocalVarInt ui_buttonNavGroupCurrent 14;
+                setLocalVarString ui_buttonNavGroupName "MANAGE_SEGMENTS";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarint(cl_demo_ui_selected_segment) != (0 - 1))) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarint(cl_demo_ui_selected_segment) != (0 - 1)));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((20 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (20 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open delete_segment_confirmation;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 14))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 313.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarint(cl_demo_ui_selected_segment) != (0 - 1))));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@PLATFORM_DEMO_DELETE_SEGMENT";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 14))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_14" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_14" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_14" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_14" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_14" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", 0, 0.360784), select(localvarstring("ui_swf_selection") == "MANAGE_SEGMENTS_14" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "MANAGE_SEGMENTS"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "demo_manage_segments";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_manage_segments"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_manage_segments"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_manage_segments"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_manage_segments"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_manage_segments"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            name                        "segment_keycatcher"
+            rect                        0 0 0 0 0 0
+            type                        1
+            textscale                   0.55
+            execKeyInt 23
+            {
+                uiScript MoveSegment 1;
+            }
+            execKeyInt 31
+            {
+                uiScript MoveSegment 1;
+            }
+            execKeyInt 22
+            {
+                uiScript MoveSegment 0;
+            }
+            execKeyInt 30
+            {
+                uiScript MoveSegment 0;
+            }
+            execKeyInt 21
+            {
+            }
+            execKeyInt 20
+            {
+            }
+            execKeyInt 29
+            {
+            }
+            execKeyInt 28
+            {
+            }
+            execKeyInt 1
+            {
+                uiScript SetFocusOnSegmentButton;
+                execNow "set cl_demo_ui_selected_segment -1";
+                execNow "set cl_demo_ui_segment_position -1";
+            }
+        }
+    }
+}

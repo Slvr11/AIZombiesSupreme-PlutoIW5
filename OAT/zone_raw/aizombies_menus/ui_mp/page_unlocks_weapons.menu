@@ -1,0 +1,896 @@
+{
+    menuDef
+    {
+        name                        "page_unlocks_weapons"
+        rect                        -246 0 492 0 2 2
+        style                       1
+        backcolor                   1 1 1 1
+        focuscolor                  1 1 1 1
+        background                  "white"
+        outOfBoundsClick            
+        popup                       
+        allowedBinding              "+talk"
+        visible                     1
+        exp rect Y                  0 - localvarint("ui_WeaponUnlocksHeight") / 2;
+        exp rect H                  localvarint("ui_WeaponUnlocksHeight");
+        onOpen
+        {
+            setLocalVarInt ui_centerPopup 1;
+            setLocalVarInt ui_leftArrow 0;
+            setLocalVarInt ui_rightArrow 0;
+            setLocalVarInt ui_CamoHeight (((unlockeditemcount("weaponCamo")) > 0) * ((6 + 48) + 2 + 8));
+            setLocalVarInt ui_BuffHeight (((unlockeditemcount("weaponBuff")) > 0) * ((6 + 48) + 2));
+            setLocalVarInt ui_ReticleHeight (((unlockeditemcount("weaponReticle")) > 0) * ((6 + 48) + 2));
+            setLocalVarInt ui_AttachmentHeight (((unlockeditemcount("weaponAttachment")) > 0) * ((6 + 48) + 2));
+            setLocalVarInt ui_WeaponHeight (((unlockeditemcount("weapon")) > 0) * ((6 + 125) + 2));
+            setLocalVarInt ui_WeaponUnlocksHeight (24 + localvarint("ui_CamoHeight") + localvarint("ui_BuffHeight") + localvarint("ui_ReticleHeight") + localvarint("ui_AttachmentHeight") + localvarint("ui_WeaponHeight") + 24 - 2);
+            setLocalVarInt ui_CamoY (24);
+            setLocalVarInt ui_BuffY (localvarint("ui_CamoY") + localvarint("ui_CamoHeight"));
+            setLocalVarInt ui_ReticleY (localvarint("ui_BuffY") + localvarint("ui_BuffHeight"));
+            setLocalVarInt ui_AttachmentY (localvarint("ui_ReticleY") + localvarint("ui_ReticleHeight"));
+            setLocalVarInt ui_WeaponY (localvarint("ui_AttachmentY") + localvarint("ui_AttachmentHeight"));
+            if (localvarint("ui_autoopened"))
+            {
+                play mp_ingame_summary;
+            }
+        }
+        onClose
+        {
+            setLocalVarInt ui_centerPopup 0;
+            if ("page_unlocks_weapons" == "page_unlocks_titles")
+            {
+                if ((unlockeditemcount("icon")))
+                {
+                    open page_unlocks_emblems;
+                }
+                else
+                {
+                    if ((unlockeditemcount("perk")))
+                    {
+                        open page_unlocks_perks;
+                    }
+                    else
+                    {
+                        if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                        {
+                            open page_unlocks_weapons;
+                        }
+                        else
+                        {
+                            if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                            {
+                                open page_unlocks_features;
+                            }
+                            else
+                            {
+                                open page_summary;
+                            }
+                        }
+                    }
+                }
+            }
+            if ("page_unlocks_weapons" == "page_unlocks_emblems")
+            {
+                if ((unlockeditemcount("perk")))
+                {
+                    open page_unlocks_perks;
+                }
+                else
+                {
+                    if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                    {
+                        open page_unlocks_weapons;
+                    }
+                    else
+                    {
+                        if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                        {
+                            open page_unlocks_features;
+                        }
+                        else
+                        {
+                            open page_summary;
+                        }
+                    }
+                }
+            }
+            if ("page_unlocks_weapons" == "page_unlocks_perks")
+            {
+                if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                {
+                    open page_unlocks_weapons;
+                }
+                else
+                {
+                    if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                    {
+                        open page_unlocks_features;
+                    }
+                    else
+                    {
+                        open page_summary;
+                    }
+                }
+            }
+            if ("page_unlocks_weapons" == "page_unlocks_weapons")
+            {
+                if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                {
+                    open page_unlocks_features;
+                }
+                else
+                {
+                    open page_summary;
+                }
+            }
+            if ("page_unlocks_weapons" == "page_unlocks_features")
+            {
+                open page_summary;
+            }
+            play mouse_over;
+        }
+        onESC
+        {
+            close self;
+            close self;
+        }
+        execKeyInt 13
+        {
+            close self;
+        }
+        execKeyInt 1
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("page_unlocks_weapons"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -854 -480 3416 1920 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            background                  "xpbar_stencilbase"
+        }
+        itemDef
+        {
+            rect                        0 0 492 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect h                  localvarint("ui_WeaponUnlocksHeight");
+        }
+        itemDef
+        {
+            text                        "@MPUI_WEAPON_UNLOCKS"
+            rect                        0 0 492 24 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textalign                   9
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            backcolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 24 492 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 0 492 24 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  localvarint("ui_WeaponUnlocksHeight") - 24;
+        }
+        itemDef
+        {
+            rect                        0 0 492 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  localvarint("ui_WeaponUnlocksHeight") - 24 - 21.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "page_unlocks_weapons";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 1;
+            }
+            exp rect x                  ((492)) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((localvarint("ui_WeaponUnlocksHeight") - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 0 0
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_weapons"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((492)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((localvarint("ui_WeaponUnlocksHeight") - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_weapons"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  ((492)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((localvarint("ui_WeaponUnlocksHeight") - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CONTINUE";
+            exp rect x                  ((492)) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((localvarint("ui_WeaponUnlocksHeight") - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_weapons"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_weapons"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_weapons"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            rect                        115 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponCamo")));
+            textscale                   0.55
+            exp material                select(unlockeditem("weaponCamo", 0, 1) == "none", tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 0, 1), 4), tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 0, 1), 4) + "_sm");
+            exp rect y                  (localvarint("ui_CamoY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponCamo")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponCamo", 0, 0), 3);
+            exp rect y                  (localvarint("ui_CamoY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(0 < (unlockeditemcount("weaponCamo")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 0, 1), 2);
+            exp rect y                  (localvarint("ui_CamoY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        278 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponCamo")));
+            textscale                   0.55
+            exp material                select(unlockeditem("weaponCamo", 1, 1) == "none", tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 1, 1), 4), tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 1, 1), 4) + "_sm");
+            exp rect y                  (localvarint("ui_CamoY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponCamo")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponCamo", 1, 0), 3);
+            exp rect y                  (localvarint("ui_CamoY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(1 < (unlockeditemcount("weaponCamo")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 1, 1), 2);
+            exp rect y                  (localvarint("ui_CamoY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        441 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponCamo")));
+            textscale                   0.55
+            exp material                select(unlockeditem("weaponCamo", 2, 1) == "none", tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 2, 1), 4), tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 2, 1), 4) + "_sm");
+            exp rect y                  (localvarint("ui_CamoY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponCamo")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponCamo", 2, 0), 3);
+            exp rect y                  (localvarint("ui_CamoY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(2 < (unlockeditemcount("weaponCamo")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/camoTable.csv", 1, unlockeditem("weaponCamo", 2, 1), 2);
+            exp rect y                  (localvarint("ui_CamoY")) + 6 + 18;
+        }
+        itemDef
+        {
+            text                        "..."
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when((unlockeditemcount("weaponCamo")) > 3);
+            textalign                   2
+            textalignx                  -2
+            textaligny                  17
+            textscale                   0.4
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp rect y                  (localvarint("ui_CamoY")) + (6 + 48) - 18;
+        }
+        itemDef
+        {
+            rect                        115 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponBuff")));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("weaponBuff", 0, 1), 3);
+            exp rect y                  (localvarint("ui_BuffY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponBuff")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponBuff", 0, 0), 3);
+            exp rect y                  (localvarint("ui_BuffY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(0 < (unlockeditemcount("weaponBuff")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("weaponBuff", 0, 1), 2);
+            exp rect y                  (localvarint("ui_BuffY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        278 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponBuff")));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("weaponBuff", 1, 1), 3);
+            exp rect y                  (localvarint("ui_BuffY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponBuff")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponBuff", 1, 0), 3);
+            exp rect y                  (localvarint("ui_BuffY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(1 < (unlockeditemcount("weaponBuff")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("weaponBuff", 1, 1), 2);
+            exp rect y                  (localvarint("ui_BuffY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        441 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponBuff")));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("weaponBuff", 2, 1), 3);
+            exp rect y                  (localvarint("ui_BuffY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponBuff")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponBuff", 2, 0), 3);
+            exp rect y                  (localvarint("ui_BuffY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(2 < (unlockeditemcount("weaponBuff")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("weaponBuff", 2, 1), 2);
+            exp rect y                  (localvarint("ui_BuffY")) + 6 + 18;
+        }
+        itemDef
+        {
+            text                        "..."
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when((unlockeditemcount("weaponBuff")) > 3);
+            textalign                   2
+            textalignx                  -2
+            textaligny                  17
+            textscale                   0.4
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp rect y                  (localvarint("ui_BuffY")) + (6 + 48) - 18;
+        }
+        itemDef
+        {
+            rect                        115 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponReticle")));
+            textscale                   0.55
+            exp material                tablelookup("mp/reticleTable.csv", 1, unlockeditem("weaponReticle", 0, 1), 4);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponReticle")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponReticle", 0, 0), 3);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(0 < (unlockeditemcount("weaponReticle")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/reticleTable.csv", 1, unlockeditem("weaponReticle", 0, 1), 2);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        278 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponReticle")));
+            textscale                   0.55
+            exp material                tablelookup("mp/reticleTable.csv", 1, unlockeditem("weaponReticle", 1, 1), 4);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponReticle")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponReticle", 1, 0), 3);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(1 < (unlockeditemcount("weaponReticle")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/reticleTable.csv", 1, unlockeditem("weaponReticle", 1, 1), 2);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        441 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponReticle")));
+            textscale                   0.55
+            exp material                tablelookup("mp/reticleTable.csv", 1, unlockeditem("weaponReticle", 2, 1), 4);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponReticle")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponReticle", 2, 0), 3);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(2 < (unlockeditemcount("weaponReticle")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/reticleTable.csv", 1, unlockeditem("weaponReticle", 2, 1), 2);
+            exp rect y                  (localvarint("ui_ReticleY")) + 6 + 18;
+        }
+        itemDef
+        {
+            text                        "..."
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when((unlockeditemcount("weaponReticle")) > 3);
+            textalign                   2
+            textalignx                  -2
+            textaligny                  17
+            textscale                   0.4
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp rect y                  (localvarint("ui_ReticleY")) + (6 + 48) - 18;
+        }
+        itemDef
+        {
+            rect                        115 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponAttachment")));
+            textscale                   0.55
+            exp material                tablelookup("mp/attachmentTable.csv", 4, unlockeditem("weaponAttachment", 0, 1), 6);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weaponAttachment")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponAttachment", 0, 0), 3);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(0 < (unlockeditemcount("weaponAttachment")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/attachmentTable.csv", 4, unlockeditem("weaponAttachment", 0, 1), 3);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        278 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponAttachment")));
+            textscale                   0.55
+            exp material                tablelookup("mp/attachmentTable.csv", 4, unlockeditem("weaponAttachment", 1, 1), 6);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weaponAttachment")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponAttachment", 1, 0), 3);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6;
+        }
+        itemDef
+        {
+            rect                        166 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(1 < (unlockeditemcount("weaponAttachment")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/attachmentTable.csv", 4, unlockeditem("weaponAttachment", 1, 1), 3);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6 + 18;
+        }
+        itemDef
+        {
+            rect                        441 0 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponAttachment")));
+            textscale                   0.55
+            exp material                tablelookup("mp/attachmentTable.csv", 4, unlockeditem("weaponAttachment", 2, 1), 6);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when(2 < (unlockeditemcount("weaponAttachment")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weaponAttachment", 2, 0), 3);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6;
+        }
+        itemDef
+        {
+            rect                        329 0 160 18 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(2 < (unlockeditemcount("weaponAttachment")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/attachmentTable.csv", 4, unlockeditem("weaponAttachment", 2, 1), 3);
+            exp rect y                  (localvarint("ui_AttachmentY")) + 6 + 18;
+        }
+        itemDef
+        {
+            text                        "..."
+            rect                        329 0 160 18 0 0
+            decoration                  
+            visible                     when((unlockeditemcount("weaponAttachment")) > 3);
+            textalign                   2
+            textalignx                  -2
+            textaligny                  17
+            textscale                   0.4
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp rect y                  (localvarint("ui_AttachmentY")) + (6 + 48) - 18;
+        }
+        itemDef
+        {
+            rect                        44.5 0 200 100 0 0
+            style                       3
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weapon")));
+            textscale                   0.55
+            exp material                tablelookup("mp/statsTable.csv", 4, unlockeditem("weapon", 0), 6);
+            exp rect y                  (localvarint("ui_WeaponY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 241.5 18 0 0
+            decoration                  
+            visible                     when(0 < (unlockeditemcount("weapon")));
+            textalign                   8
+            textalignx                  3
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statsTable.csv", 4, unlockeditem("weapon", 0), 3);
+            exp rect y                  (localvarint("ui_WeaponY")) + 6;
+        }
+        itemDef
+        {
+            rect                        3 0 241.5 36 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(0 < (unlockeditemcount("weapon")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weapon", 0), 7);
+            exp rect y                  (localvarint("ui_WeaponY")) + (6 + 125) - 36;
+        }
+        itemDef
+        {
+            rect                        289 0 200 100 0 0
+            style                       3
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weapon")));
+            textscale                   0.55
+            exp material                tablelookup("mp/statsTable.csv", 4, unlockeditem("weapon", 1), 6);
+            exp rect y                  (localvarint("ui_WeaponY")) + 6;
+        }
+        itemDef
+        {
+            rect                        247.5 0 241.5 18 0 0
+            decoration                  
+            visible                     when(1 < (unlockeditemcount("weapon")));
+            textalign                   8
+            textalignx                  3
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/statsTable.csv", 4, unlockeditem("weapon", 1), 3);
+            exp rect y                  (localvarint("ui_WeaponY")) + 6;
+        }
+        itemDef
+        {
+            rect                        247.5 0 241.5 36 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when(1 < (unlockeditemcount("weapon")));
+            textalignx                  3
+            textaligny                  16
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.784314 0.784314 0.784314 1
+            exp text                    "@" + tablelookup("mp/statstable.csv", 4, unlockeditem("weapon", 1), 7);
+            exp rect y                  (localvarint("ui_WeaponY")) + (6 + 125) - 36;
+        }
+        itemDef
+        {
+            text                        "..."
+            rect                        247.5 0 241.5 18 0 0
+            decoration                  
+            visible                     when((unlockeditemcount("weapon")) > 2);
+            textalign                   2
+            textalignx                  -2
+            textaligny                  17
+            textscale                   0.4
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.8 0.4 1
+            exp rect y                  (localvarint("ui_WeaponY")) + (6 + 125) - 18;
+        }
+    }
+}

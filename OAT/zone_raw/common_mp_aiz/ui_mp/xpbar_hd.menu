@@ -1,0 +1,8 @@
+{
+    menuDef
+    {
+        name                        "xpbar_hd"
+        rect                        0 0 640 480 8 8
+        visible                     when(0 > 1);
+    }
+}

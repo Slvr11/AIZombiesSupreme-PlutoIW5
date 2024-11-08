@@ -1,0 +1,270 @@
+{
+    menuDef
+    {
+        name                        "ingame_migration"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        blurWorld                   4.8
+        onOpen
+        {
+            setdvar ui_SaveLoadVisible 0;
+            setLocalVarInt migration_time_start milliseconds();
+            setLocalVarBool ishost 0;
+            focusFirst;
+        }
+        onClose
+        {
+        }
+        onESC
+        {
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0
+            background                  "mockup_bg_glow"
+            exp forecolor a             ((sin(milliseconds() / 1500) + 1) * 0.25) + 0.25;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0
+            background                  "mockup_bg_glow"
+            exp forecolor a             ((sin(milliseconds() / 480) + 1) * 0.25) + 0.25;
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 7 1
+            style                       1
+            decoration                  
+            visible                     when(!dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5
+            textstyle                   3
+            textfont                    9
+            exp text                    locstring("@MENU_HOST_MIGRATION");
+        }
+        itemDef
+        {
+            rect                        -320 -168.5 640 0 7 2
+            style                       1
+            decoration                  
+            visible                     when(dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.75
+            textstyle                   3
+            textfont                    9
+            exp text                    locstring("@MENU_HOST_MIGRATION");
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.25 && !localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + "   ";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.25 && !localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + "   ";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.25 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.5 && !localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + ".  ";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.25 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.5 && !localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + ".  ";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.5 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.75 && !localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + ".. ";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.5 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.75 && !localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + ".. ";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.75 && !localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + "...";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.75 && !localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    getmigrationstatus() + "...";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.25 && localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.25 && localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.25 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.5 && localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.25 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.5 && localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.5 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.75 && localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.5 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.75 && localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 1
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.75 && localvarbool("ishost")) && !dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  getTextHeight(9, 0.5);
+        }
+        itemDef
+        {
+            rect                        -320 0 640 0 2 2
+            decoration                  
+            visible                     when(((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.75 && localvarbool("ishost")) && dvarbool(splitscreen));
+            textalign                   5
+            textscale                   0.5625
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_UPLOADING_STATS") + "...";
+            exp rect y                  (0 - (337 / 2)) + getTextHeight(9, (0.5 * 1.5));
+        }
+    }
+}

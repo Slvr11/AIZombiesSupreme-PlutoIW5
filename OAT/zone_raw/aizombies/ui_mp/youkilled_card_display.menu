@@ -1,0 +1,13 @@
+{
+    menuDef
+    {
+        name                        "youkilled_card_display"
+        decoration                  
+        rect                        0 0 640 1 1 0
+        onOpen
+        {
+            setLocalVarInt ui_show_youKilled (milliseconds());
+            close self;
+        }
+    }
+}

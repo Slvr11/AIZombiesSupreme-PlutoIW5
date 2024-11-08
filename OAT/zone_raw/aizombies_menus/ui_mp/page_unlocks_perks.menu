@@ -1,0 +1,2320 @@
+{
+    menuDef
+    {
+        name                        "page_unlocks_perks"
+        rect                        -246 0 492 0 2 2
+        style                       1
+        backcolor                   1 1 1 1
+        focuscolor                  1 1 1 1
+        background                  "white"
+        outOfBoundsClick            
+        popup                       
+        allowedBinding              "+talk"
+        visible                     1
+        exp rect Y                  0 - 350 / 2;
+        exp rect H                  350;
+        onOpen
+        {
+            setLocalVarInt ui_centerPopup 1;
+            setLocalVarInt ui_leftArrow 0;
+            setLocalVarInt ui_rightArrow 0;
+            if (localvarint("ui_autoopened"))
+            {
+                play new_perk_unlocks;
+            }
+        }
+        onClose
+        {
+            setLocalVarInt ui_centerPopup 0;
+            if ("page_unlocks_perks" == "page_unlocks_titles")
+            {
+                if ((unlockeditemcount("icon")))
+                {
+                    open page_unlocks_emblems;
+                }
+                else
+                {
+                    if ((unlockeditemcount("perk")))
+                    {
+                        open page_unlocks_perks;
+                    }
+                    else
+                    {
+                        if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                        {
+                            open page_unlocks_weapons;
+                        }
+                        else
+                        {
+                            if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                            {
+                                open page_unlocks_features;
+                            }
+                            else
+                            {
+                                open page_summary;
+                            }
+                        }
+                    }
+                }
+            }
+            if ("page_unlocks_perks" == "page_unlocks_emblems")
+            {
+                if ((unlockeditemcount("perk")))
+                {
+                    open page_unlocks_perks;
+                }
+                else
+                {
+                    if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                    {
+                        open page_unlocks_weapons;
+                    }
+                    else
+                    {
+                        if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                        {
+                            open page_unlocks_features;
+                        }
+                        else
+                        {
+                            open page_summary;
+                        }
+                    }
+                }
+            }
+            if ("page_unlocks_perks" == "page_unlocks_perks")
+            {
+                if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                {
+                    open page_unlocks_weapons;
+                }
+                else
+                {
+                    if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                    {
+                        open page_unlocks_features;
+                    }
+                    else
+                    {
+                        open page_summary;
+                    }
+                }
+            }
+            if ("page_unlocks_perks" == "page_unlocks_weapons")
+            {
+                if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                {
+                    open page_unlocks_features;
+                }
+                else
+                {
+                    open page_summary;
+                }
+            }
+            if ("page_unlocks_perks" == "page_unlocks_features")
+            {
+                open page_summary;
+            }
+            play mouse_over;
+        }
+        onESC
+        {
+            close self;
+            close self;
+        }
+        execKeyInt 13
+        {
+            close self;
+        }
+        execKeyInt 1
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("page_unlocks_perks"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -854 -480 3416 1920 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            background                  "xpbar_stencilbase"
+        }
+        itemDef
+        {
+            rect                        0 0 492 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect h                  350;
+        }
+        itemDef
+        {
+            text                        "@MPUI_PERK_UNLOCKS"
+            rect                        0 0 492 24 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textalign                   9
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            backcolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 24 492 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 0 492 24 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  350 - 24;
+        }
+        itemDef
+        {
+            rect                        0 0 492 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  350 - 24 - 21.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "page_unlocks_perks";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 1;
+            }
+            exp rect x                  ((492)) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((350 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 0 0
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_perks"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((492)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((350 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_perks"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  ((492)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((350 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CONTINUE";
+            exp rect x                  ((492)) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((350 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_perks"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_perks"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_unlocks_perks"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            rect                        0 100.667 492 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 122 492 8 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 130 492 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        10 26 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk3"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 3);
+        }
+        itemDef
+        {
+            rect                        10 26 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk4"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 3);
+        }
+        itemDef
+        {
+            rect                        10 26 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "equipment"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 3);
+        }
+        itemDef
+        {
+            rect                        10 26 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade3"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, tablelookup("mp/perkTable.csv", 8, unlockeditem("perk", 0), 1), 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        58 26 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk3"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 2);
+        }
+        itemDef
+        {
+            rect                        58 26 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk4"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 2);
+        }
+        itemDef
+        {
+            rect                        58 26 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "equipment"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 2);
+        }
+        itemDef
+        {
+            rect                        58 26 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade3"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, tablelookup("mp/perkTable.csv", 8, unlockeditem("perk", 0), 1), int(2 + (isitemunlocked(tablelookup("mp/perkTable.csv", 1, tablelookup("mp/perkTable.csv", 8, unlockeditem("perk", 0), 1), 8)) * (9 - 2))));
+        }
+        itemDef
+        {
+            rect                        58 50 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk3"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 4);
+        }
+        itemDef
+        {
+            rect                        58 50 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "perk4"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 4);
+        }
+        itemDef
+        {
+            rect                        58 50 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "equipment"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 4);
+        }
+        itemDef
+        {
+            rect                        58 50 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 5) == "upgrade3"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 0), 4);
+        }
+        itemDef
+        {
+            rect                        10 74 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk3"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 3);
+        }
+        itemDef
+        {
+            rect                        10 74 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk4"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 3);
+        }
+        itemDef
+        {
+            rect                        10 74 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "equipment"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 3);
+        }
+        itemDef
+        {
+            rect                        10 74 48 48 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade3"));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, tablelookup("mp/perkTable.csv", 8, unlockeditem("perk", 1), 1), 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        58 74 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk3"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 2);
+        }
+        itemDef
+        {
+            rect                        58 74 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk4"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 2);
+        }
+        itemDef
+        {
+            rect                        58 74 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "equipment"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 2);
+        }
+        itemDef
+        {
+            rect                        58 74 392 24 0 0
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade3"));
+            textalignx                  5
+            textaligny                  16
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, tablelookup("mp/perkTable.csv", 8, unlockeditem("perk", 1), 1), int(2 + (isitemunlocked(tablelookup("mp/perkTable.csv", 1, tablelookup("mp/perkTable.csv", 8, unlockeditem("perk", 1), 1), 8)) * (9 - 2))));
+        }
+        itemDef
+        {
+            rect                        58 98 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk3"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 4);
+        }
+        itemDef
+        {
+            rect                        58 98 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "perk4"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 4);
+        }
+        itemDef
+        {
+            rect                        58 98 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "equipment"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 4);
+        }
+        itemDef
+        {
+            rect                        58 98 420 24 0 0
+            decoration                  
+            autowrapped                 
+            visible                     when((tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade1" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade2" || tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 5) == "upgrade3"));
+            textalignx                  5
+            textaligny                  4
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 1 0.8
+            exp text                    "@" + tablelookup("mp/perkTable.csv", 1, unlockeditem("perk", 1), 4);
+        }
+        itemDef
+        {
+            rect                        0 74 492 48 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 164 492 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 228 492 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 292 492 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            text                        "@MENU_PERK1_CAPS"
+            rect                        10 132 440 32 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.3333
+            textfont                    3
+            backcolor                   1 1 1 0
+            forecolor                   1 1 1 0.65
+            background                  "line_horizontal"
+        }
+        itemDef
+        {
+            text                        "@MENU_PERK2_CAPS"
+            rect                        10 164 440 32 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.3333
+            textfont                    3
+            backcolor                   1 1 1 0
+            forecolor                   1 1 1 0.65
+            background                  "line_horizontal"
+        }
+        itemDef
+        {
+            text                        "@MENU_PERK3_CAPS"
+            rect                        10 196 440 32 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.3333
+            textfont                    3
+            backcolor                   1 1 1 0
+            forecolor                   1 1 1 0.65
+            background                  "line_horizontal"
+        }
+        itemDef
+        {
+            text                        "@MENU_DEATHSTREAK_CAPS"
+            rect                        10 228 440 32 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.3333
+            textfont                    3
+            backcolor                   1 1 1 0
+            forecolor                   1 1 1 0.65
+            background                  "line_horizontal"
+        }
+        itemDef
+        {
+            text                        "@MENU_EQUIPMENT_CAPS"
+            rect                        10 260 440 32 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.3333
+            textfont                    3
+            backcolor                   1 1 1 0
+            forecolor                   1 1 1 0.65
+            background                  "line_horizontal"
+        }
+        itemDef
+        {
+            text                        "@MENU_SPECIAL_EQUIPMENT_CAPS"
+            rect                        10 292 440 32 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.3333
+            textfont                    3
+            backcolor                   1 1 1 0
+            forecolor                   1 1 1 0.65
+            background                  "line_horizontal"
+        }
+        itemDef
+        {
+            rect                        140 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_paint"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_paint", 3);
+        }
+        itemDef
+        {
+            rect                        140 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_paint") && !(tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_paint", 3);
+        }
+        itemDef
+        {
+            rect                        140 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_paint", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        156 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_paint") || (unlockeditem("perk", 1) == "specialty_paint") || (unlockeditem("perk", 2) == "specialty_paint") || (unlockeditem("perk", 3) == "specialty_paint") || (unlockeditem("perk", 4) == "specialty_paint") || (unlockeditem("perk", 5) == "specialty_paint") || (unlockeditem("perk", 6) == "specialty_paint") || (unlockeditem("perk", 7) == "specialty_paint") || (unlockeditem("perk", 8) == "specialty_paint") || (unlockeditem("perk", 9) == "specialty_paint")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        156 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_paint", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        184 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_fastreload"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 3);
+        }
+        itemDef
+        {
+            rect                        184 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_fastreload") && !(tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 3);
+        }
+        itemDef
+        {
+            rect                        184 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        200 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_fastreload") || (unlockeditem("perk", 1) == "specialty_fastreload") || (unlockeditem("perk", 2) == "specialty_fastreload") || (unlockeditem("perk", 3) == "specialty_fastreload") || (unlockeditem("perk", 4) == "specialty_fastreload") || (unlockeditem("perk", 5) == "specialty_fastreload") || (unlockeditem("perk", 6) == "specialty_fastreload") || (unlockeditem("perk", 7) == "specialty_fastreload") || (unlockeditem("perk", 8) == "specialty_fastreload") || (unlockeditem("perk", 9) == "specialty_fastreload")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        200 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_fastreload", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        228 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_blindeye"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 3);
+        }
+        itemDef
+        {
+            rect                        228 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_blindeye") && !(tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 3);
+        }
+        itemDef
+        {
+            rect                        228 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        244 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_blindeye") || (unlockeditem("perk", 1) == "specialty_blindeye") || (unlockeditem("perk", 2) == "specialty_blindeye") || (unlockeditem("perk", 3) == "specialty_blindeye") || (unlockeditem("perk", 4) == "specialty_blindeye") || (unlockeditem("perk", 5) == "specialty_blindeye") || (unlockeditem("perk", 6) == "specialty_blindeye") || (unlockeditem("perk", 7) == "specialty_blindeye") || (unlockeditem("perk", 8) == "specialty_blindeye") || (unlockeditem("perk", 9) == "specialty_blindeye")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        244 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_blindeye", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        272 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_longersprint"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 3);
+        }
+        itemDef
+        {
+            rect                        272 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_longersprint") && !(tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 3);
+        }
+        itemDef
+        {
+            rect                        272 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        288 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_longersprint") || (unlockeditem("perk", 1) == "specialty_longersprint") || (unlockeditem("perk", 2) == "specialty_longersprint") || (unlockeditem("perk", 3) == "specialty_longersprint") || (unlockeditem("perk", 4) == "specialty_longersprint") || (unlockeditem("perk", 5) == "specialty_longersprint") || (unlockeditem("perk", 6) == "specialty_longersprint") || (unlockeditem("perk", 7) == "specialty_longersprint") || (unlockeditem("perk", 8) == "specialty_longersprint") || (unlockeditem("perk", 9) == "specialty_longersprint")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        288 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_longersprint", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        316 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_scavenger"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 3);
+        }
+        itemDef
+        {
+            rect                        316 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_scavenger") && !(tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 3);
+        }
+        itemDef
+        {
+            rect                        316 132 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        332 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_scavenger") || (unlockeditem("perk", 1) == "specialty_scavenger") || (unlockeditem("perk", 2) == "specialty_scavenger") || (unlockeditem("perk", 3) == "specialty_scavenger") || (unlockeditem("perk", 4) == "specialty_scavenger") || (unlockeditem("perk", 5) == "specialty_scavenger") || (unlockeditem("perk", 6) == "specialty_scavenger") || (unlockeditem("perk", 7) == "specialty_scavenger") || (unlockeditem("perk", 8) == "specialty_scavenger") || (unlockeditem("perk", 9) == "specialty_scavenger")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        332 148 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_scavenger", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        140 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_quickdraw"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 3);
+        }
+        itemDef
+        {
+            rect                        140 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_quickdraw") && !(tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 3);
+        }
+        itemDef
+        {
+            rect                        140 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        156 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_quickdraw") || (unlockeditem("perk", 1) == "specialty_quickdraw") || (unlockeditem("perk", 2) == "specialty_quickdraw") || (unlockeditem("perk", 3) == "specialty_quickdraw") || (unlockeditem("perk", 4) == "specialty_quickdraw") || (unlockeditem("perk", 5) == "specialty_quickdraw") || (unlockeditem("perk", 6) == "specialty_quickdraw") || (unlockeditem("perk", 7) == "specialty_quickdraw") || (unlockeditem("perk", 8) == "specialty_quickdraw") || (unlockeditem("perk", 9) == "specialty_quickdraw")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        156 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_quickdraw", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        184 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("_specialty_blastshield"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 3);
+        }
+        itemDef
+        {
+            rect                        184 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("_specialty_blastshield") && !(tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 3);
+        }
+        itemDef
+        {
+            rect                        184 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        200 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "_specialty_blastshield") || (unlockeditem("perk", 1) == "_specialty_blastshield") || (unlockeditem("perk", 2) == "_specialty_blastshield") || (unlockeditem("perk", 3) == "_specialty_blastshield") || (unlockeditem("perk", 4) == "_specialty_blastshield") || (unlockeditem("perk", 5) == "_specialty_blastshield") || (unlockeditem("perk", 6) == "_specialty_blastshield") || (unlockeditem("perk", 7) == "_specialty_blastshield") || (unlockeditem("perk", 8) == "_specialty_blastshield") || (unlockeditem("perk", 9) == "_specialty_blastshield")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        200 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "_specialty_blastshield", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        228 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_hardline"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 3);
+        }
+        itemDef
+        {
+            rect                        228 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_hardline") && !(tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 3);
+        }
+        itemDef
+        {
+            rect                        228 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        244 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_hardline") || (unlockeditem("perk", 1) == "specialty_hardline") || (unlockeditem("perk", 2) == "specialty_hardline") || (unlockeditem("perk", 3) == "specialty_hardline") || (unlockeditem("perk", 4) == "specialty_hardline") || (unlockeditem("perk", 5) == "specialty_hardline") || (unlockeditem("perk", 6) == "specialty_hardline") || (unlockeditem("perk", 7) == "specialty_hardline") || (unlockeditem("perk", 8) == "specialty_hardline") || (unlockeditem("perk", 9) == "specialty_hardline")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        244 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_hardline", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        272 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_coldblooded"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 3);
+        }
+        itemDef
+        {
+            rect                        272 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_coldblooded") && !(tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 3);
+        }
+        itemDef
+        {
+            rect                        272 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        288 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_coldblooded") || (unlockeditem("perk", 1) == "specialty_coldblooded") || (unlockeditem("perk", 2) == "specialty_coldblooded") || (unlockeditem("perk", 3) == "specialty_coldblooded") || (unlockeditem("perk", 4) == "specialty_coldblooded") || (unlockeditem("perk", 5) == "specialty_coldblooded") || (unlockeditem("perk", 6) == "specialty_coldblooded") || (unlockeditem("perk", 7) == "specialty_coldblooded") || (unlockeditem("perk", 8) == "specialty_coldblooded") || (unlockeditem("perk", 9) == "specialty_coldblooded")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        288 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_coldblooded", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        316 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_twoprimaries"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 3);
+        }
+        itemDef
+        {
+            rect                        316 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_twoprimaries") && !(tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 3);
+        }
+        itemDef
+        {
+            rect                        316 164 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        332 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_twoprimaries") || (unlockeditem("perk", 1) == "specialty_twoprimaries") || (unlockeditem("perk", 2) == "specialty_twoprimaries") || (unlockeditem("perk", 3) == "specialty_twoprimaries") || (unlockeditem("perk", 4) == "specialty_twoprimaries") || (unlockeditem("perk", 5) == "specialty_twoprimaries") || (unlockeditem("perk", 6) == "specialty_twoprimaries") || (unlockeditem("perk", 7) == "specialty_twoprimaries") || (unlockeditem("perk", 8) == "specialty_twoprimaries") || (unlockeditem("perk", 9) == "specialty_twoprimaries")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        332 180 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_twoprimaries", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        140 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_autospot"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 3);
+        }
+        itemDef
+        {
+            rect                        140 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_autospot") && !(tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 3);
+        }
+        itemDef
+        {
+            rect                        140 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        156 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_autospot") || (unlockeditem("perk", 1) == "specialty_autospot") || (unlockeditem("perk", 2) == "specialty_autospot") || (unlockeditem("perk", 3) == "specialty_autospot") || (unlockeditem("perk", 4) == "specialty_autospot") || (unlockeditem("perk", 5) == "specialty_autospot") || (unlockeditem("perk", 6) == "specialty_autospot") || (unlockeditem("perk", 7) == "specialty_autospot") || (unlockeditem("perk", 8) == "specialty_autospot") || (unlockeditem("perk", 9) == "specialty_autospot")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        156 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_autospot", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        184 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_stalker"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 3);
+        }
+        itemDef
+        {
+            rect                        184 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_stalker") && !(tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 3);
+        }
+        itemDef
+        {
+            rect                        184 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        200 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_stalker") || (unlockeditem("perk", 1) == "specialty_stalker") || (unlockeditem("perk", 2) == "specialty_stalker") || (unlockeditem("perk", 3) == "specialty_stalker") || (unlockeditem("perk", 4) == "specialty_stalker") || (unlockeditem("perk", 5) == "specialty_stalker") || (unlockeditem("perk", 6) == "specialty_stalker") || (unlockeditem("perk", 7) == "specialty_stalker") || (unlockeditem("perk", 8) == "specialty_stalker") || (unlockeditem("perk", 9) == "specialty_stalker")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        200 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_stalker", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        228 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_detectexplosive"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 3);
+        }
+        itemDef
+        {
+            rect                        228 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_detectexplosive") && !(tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 3);
+        }
+        itemDef
+        {
+            rect                        228 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        244 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_detectexplosive") || (unlockeditem("perk", 1) == "specialty_detectexplosive") || (unlockeditem("perk", 2) == "specialty_detectexplosive") || (unlockeditem("perk", 3) == "specialty_detectexplosive") || (unlockeditem("perk", 4) == "specialty_detectexplosive") || (unlockeditem("perk", 5) == "specialty_detectexplosive") || (unlockeditem("perk", 6) == "specialty_detectexplosive") || (unlockeditem("perk", 7) == "specialty_detectexplosive") || (unlockeditem("perk", 8) == "specialty_detectexplosive") || (unlockeditem("perk", 9) == "specialty_detectexplosive")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        244 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_detectexplosive", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        272 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_bulletaccuracy"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 3);
+        }
+        itemDef
+        {
+            rect                        272 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_bulletaccuracy") && !(tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 3);
+        }
+        itemDef
+        {
+            rect                        272 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        288 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_bulletaccuracy") || (unlockeditem("perk", 1) == "specialty_bulletaccuracy") || (unlockeditem("perk", 2) == "specialty_bulletaccuracy") || (unlockeditem("perk", 3) == "specialty_bulletaccuracy") || (unlockeditem("perk", 4) == "specialty_bulletaccuracy") || (unlockeditem("perk", 5) == "specialty_bulletaccuracy") || (unlockeditem("perk", 6) == "specialty_bulletaccuracy") || (unlockeditem("perk", 7) == "specialty_bulletaccuracy") || (unlockeditem("perk", 8) == "specialty_bulletaccuracy") || (unlockeditem("perk", 9) == "specialty_bulletaccuracy")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        288 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_bulletaccuracy", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        316 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_quieter"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 3);
+        }
+        itemDef
+        {
+            rect                        316 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_quieter") && !(tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 3);
+        }
+        itemDef
+        {
+            rect                        316 196 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        332 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_quieter") || (unlockeditem("perk", 1) == "specialty_quieter") || (unlockeditem("perk", 2) == "specialty_quieter") || (unlockeditem("perk", 3) == "specialty_quieter") || (unlockeditem("perk", 4) == "specialty_quieter") || (unlockeditem("perk", 5) == "specialty_quieter") || (unlockeditem("perk", 6) == "specialty_quieter") || (unlockeditem("perk", 7) == "specialty_quieter") || (unlockeditem("perk", 8) == "specialty_quieter") || (unlockeditem("perk", 9) == "specialty_quieter")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        332 212 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_quieter", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        140 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_juiced"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 3);
+        }
+        itemDef
+        {
+            rect                        140 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_juiced") && !(tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 3);
+        }
+        itemDef
+        {
+            rect                        140 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        156 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_juiced") || (unlockeditem("perk", 1) == "specialty_juiced") || (unlockeditem("perk", 2) == "specialty_juiced") || (unlockeditem("perk", 3) == "specialty_juiced") || (unlockeditem("perk", 4) == "specialty_juiced") || (unlockeditem("perk", 5) == "specialty_juiced") || (unlockeditem("perk", 6) == "specialty_juiced") || (unlockeditem("perk", 7) == "specialty_juiced") || (unlockeditem("perk", 8) == "specialty_juiced") || (unlockeditem("perk", 9) == "specialty_juiced")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        156 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_juiced", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        184 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_revenge"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 3);
+        }
+        itemDef
+        {
+            rect                        184 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_revenge") && !(tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 3);
+        }
+        itemDef
+        {
+            rect                        184 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        200 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_revenge") || (unlockeditem("perk", 1) == "specialty_revenge") || (unlockeditem("perk", 2) == "specialty_revenge") || (unlockeditem("perk", 3) == "specialty_revenge") || (unlockeditem("perk", 4) == "specialty_revenge") || (unlockeditem("perk", 5) == "specialty_revenge") || (unlockeditem("perk", 6) == "specialty_revenge") || (unlockeditem("perk", 7) == "specialty_revenge") || (unlockeditem("perk", 8) == "specialty_revenge") || (unlockeditem("perk", 9) == "specialty_revenge")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        200 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_revenge", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        228 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_finalstand"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 3);
+        }
+        itemDef
+        {
+            rect                        228 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_finalstand") && !(tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 3);
+        }
+        itemDef
+        {
+            rect                        228 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        244 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_finalstand") || (unlockeditem("perk", 1) == "specialty_finalstand") || (unlockeditem("perk", 2) == "specialty_finalstand") || (unlockeditem("perk", 3) == "specialty_finalstand") || (unlockeditem("perk", 4) == "specialty_finalstand") || (unlockeditem("perk", 5) == "specialty_finalstand") || (unlockeditem("perk", 6) == "specialty_finalstand") || (unlockeditem("perk", 7) == "specialty_finalstand") || (unlockeditem("perk", 8) == "specialty_finalstand") || (unlockeditem("perk", 9) == "specialty_finalstand")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        244 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_finalstand", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        272 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_grenadepulldeath"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 3);
+        }
+        itemDef
+        {
+            rect                        272 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_grenadepulldeath") && !(tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 3);
+        }
+        itemDef
+        {
+            rect                        272 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        288 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_grenadepulldeath") || (unlockeditem("perk", 1) == "specialty_grenadepulldeath") || (unlockeditem("perk", 2) == "specialty_grenadepulldeath") || (unlockeditem("perk", 3) == "specialty_grenadepulldeath") || (unlockeditem("perk", 4) == "specialty_grenadepulldeath") || (unlockeditem("perk", 5) == "specialty_grenadepulldeath") || (unlockeditem("perk", 6) == "specialty_grenadepulldeath") || (unlockeditem("perk", 7) == "specialty_grenadepulldeath") || (unlockeditem("perk", 8) == "specialty_grenadepulldeath") || (unlockeditem("perk", 9) == "specialty_grenadepulldeath")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        288 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_grenadepulldeath", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        316 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_c4death"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 3);
+        }
+        itemDef
+        {
+            rect                        316 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_c4death") && !(tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 3);
+        }
+        itemDef
+        {
+            rect                        316 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        332 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_c4death") || (unlockeditem("perk", 1) == "specialty_c4death") || (unlockeditem("perk", 2) == "specialty_c4death") || (unlockeditem("perk", 3) == "specialty_c4death") || (unlockeditem("perk", 4) == "specialty_c4death") || (unlockeditem("perk", 5) == "specialty_c4death") || (unlockeditem("perk", 6) == "specialty_c4death") || (unlockeditem("perk", 7) == "specialty_c4death") || (unlockeditem("perk", 8) == "specialty_c4death") || (unlockeditem("perk", 9) == "specialty_c4death")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        332 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_c4death", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        360 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_stopping_power"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 3);
+        }
+        itemDef
+        {
+            rect                        360 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_stopping_power") && !(tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 3);
+        }
+        itemDef
+        {
+            rect                        360 228 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        376 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_stopping_power") || (unlockeditem("perk", 1) == "specialty_stopping_power") || (unlockeditem("perk", 2) == "specialty_stopping_power") || (unlockeditem("perk", 3) == "specialty_stopping_power") || (unlockeditem("perk", 4) == "specialty_stopping_power") || (unlockeditem("perk", 5) == "specialty_stopping_power") || (unlockeditem("perk", 6) == "specialty_stopping_power") || (unlockeditem("perk", 7) == "specialty_stopping_power") || (unlockeditem("perk", 8) == "specialty_stopping_power") || (unlockeditem("perk", 9) == "specialty_stopping_power")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        376 244 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_stopping_power", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        140 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("frag_grenade_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        140 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("frag_grenade_mp") && !(tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        140 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        156 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "frag_grenade_mp") || (unlockeditem("perk", 1) == "frag_grenade_mp") || (unlockeditem("perk", 2) == "frag_grenade_mp") || (unlockeditem("perk", 3) == "frag_grenade_mp") || (unlockeditem("perk", 4) == "frag_grenade_mp") || (unlockeditem("perk", 5) == "frag_grenade_mp") || (unlockeditem("perk", 6) == "frag_grenade_mp") || (unlockeditem("perk", 7) == "frag_grenade_mp") || (unlockeditem("perk", 8) == "frag_grenade_mp") || (unlockeditem("perk", 9) == "frag_grenade_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        156 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "frag_grenade_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        184 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("semtex_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "semtex_mp", 3);
+        }
+        itemDef
+        {
+            rect                        184 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("semtex_mp") && !(tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "semtex_mp", 3);
+        }
+        itemDef
+        {
+            rect                        184 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "semtex_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        200 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "semtex_mp") || (unlockeditem("perk", 1) == "semtex_mp") || (unlockeditem("perk", 2) == "semtex_mp") || (unlockeditem("perk", 3) == "semtex_mp") || (unlockeditem("perk", 4) == "semtex_mp") || (unlockeditem("perk", 5) == "semtex_mp") || (unlockeditem("perk", 6) == "semtex_mp") || (unlockeditem("perk", 7) == "semtex_mp") || (unlockeditem("perk", 8) == "semtex_mp") || (unlockeditem("perk", 9) == "semtex_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        200 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "semtex_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        228 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("throwingknife_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 3);
+        }
+        itemDef
+        {
+            rect                        228 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("throwingknife_mp") && !(tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 3);
+        }
+        itemDef
+        {
+            rect                        228 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        244 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "throwingknife_mp") || (unlockeditem("perk", 1) == "throwingknife_mp") || (unlockeditem("perk", 2) == "throwingknife_mp") || (unlockeditem("perk", 3) == "throwingknife_mp") || (unlockeditem("perk", 4) == "throwingknife_mp") || (unlockeditem("perk", 5) == "throwingknife_mp") || (unlockeditem("perk", 6) == "throwingknife_mp") || (unlockeditem("perk", 7) == "throwingknife_mp") || (unlockeditem("perk", 8) == "throwingknife_mp") || (unlockeditem("perk", 9) == "throwingknife_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        244 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "throwingknife_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        272 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("bouncingbetty_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 3);
+        }
+        itemDef
+        {
+            rect                        272 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("bouncingbetty_mp") && !(tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 3);
+        }
+        itemDef
+        {
+            rect                        272 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        288 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "bouncingbetty_mp") || (unlockeditem("perk", 1) == "bouncingbetty_mp") || (unlockeditem("perk", 2) == "bouncingbetty_mp") || (unlockeditem("perk", 3) == "bouncingbetty_mp") || (unlockeditem("perk", 4) == "bouncingbetty_mp") || (unlockeditem("perk", 5) == "bouncingbetty_mp") || (unlockeditem("perk", 6) == "bouncingbetty_mp") || (unlockeditem("perk", 7) == "bouncingbetty_mp") || (unlockeditem("perk", 8) == "bouncingbetty_mp") || (unlockeditem("perk", 9) == "bouncingbetty_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        288 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "bouncingbetty_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        316 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("claymore_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "claymore_mp", 3);
+        }
+        itemDef
+        {
+            rect                        316 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("claymore_mp") && !(tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "claymore_mp", 3);
+        }
+        itemDef
+        {
+            rect                        316 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "claymore_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        332 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "claymore_mp") || (unlockeditem("perk", 1) == "claymore_mp") || (unlockeditem("perk", 2) == "claymore_mp") || (unlockeditem("perk", 3) == "claymore_mp") || (unlockeditem("perk", 4) == "claymore_mp") || (unlockeditem("perk", 5) == "claymore_mp") || (unlockeditem("perk", 6) == "claymore_mp") || (unlockeditem("perk", 7) == "claymore_mp") || (unlockeditem("perk", 8) == "claymore_mp") || (unlockeditem("perk", 9) == "claymore_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        332 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "claymore_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        360 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("c4_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "c4_mp", 3);
+        }
+        itemDef
+        {
+            rect                        360 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("c4_mp") && !(tablelookup("mp/perkTable.csv", 1, "c4_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "c4_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "c4_mp", 3);
+        }
+        itemDef
+        {
+            rect                        360 260 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "c4_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "c4_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "c4_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        376 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "c4_mp") || (unlockeditem("perk", 1) == "c4_mp") || (unlockeditem("perk", 2) == "c4_mp") || (unlockeditem("perk", 3) == "c4_mp") || (unlockeditem("perk", 4) == "c4_mp") || (unlockeditem("perk", 5) == "c4_mp") || (unlockeditem("perk", 6) == "c4_mp") || (unlockeditem("perk", 7) == "c4_mp") || (unlockeditem("perk", 8) == "c4_mp") || (unlockeditem("perk", 9) == "c4_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        376 276 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "c4_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        140 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("flash_grenade_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        140 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("flash_grenade_mp") && !(tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        140 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        156 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "flash_grenade_mp") || (unlockeditem("perk", 1) == "flash_grenade_mp") || (unlockeditem("perk", 2) == "flash_grenade_mp") || (unlockeditem("perk", 3) == "flash_grenade_mp") || (unlockeditem("perk", 4) == "flash_grenade_mp") || (unlockeditem("perk", 5) == "flash_grenade_mp") || (unlockeditem("perk", 6) == "flash_grenade_mp") || (unlockeditem("perk", 7) == "flash_grenade_mp") || (unlockeditem("perk", 8) == "flash_grenade_mp") || (unlockeditem("perk", 9) == "flash_grenade_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        156 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "flash_grenade_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        184 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("concussion_grenade_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        184 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("concussion_grenade_mp") && !(tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        184 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        200 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "concussion_grenade_mp") || (unlockeditem("perk", 1) == "concussion_grenade_mp") || (unlockeditem("perk", 2) == "concussion_grenade_mp") || (unlockeditem("perk", 3) == "concussion_grenade_mp") || (unlockeditem("perk", 4) == "concussion_grenade_mp") || (unlockeditem("perk", 5) == "concussion_grenade_mp") || (unlockeditem("perk", 6) == "concussion_grenade_mp") || (unlockeditem("perk", 7) == "concussion_grenade_mp") || (unlockeditem("perk", 8) == "concussion_grenade_mp") || (unlockeditem("perk", 9) == "concussion_grenade_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        200 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "concussion_grenade_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        228 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_scrambler"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 3);
+        }
+        itemDef
+        {
+            rect                        228 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_scrambler") && !(tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 3);
+        }
+        itemDef
+        {
+            rect                        228 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        244 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_scrambler") || (unlockeditem("perk", 1) == "specialty_scrambler") || (unlockeditem("perk", 2) == "specialty_scrambler") || (unlockeditem("perk", 3) == "specialty_scrambler") || (unlockeditem("perk", 4) == "specialty_scrambler") || (unlockeditem("perk", 5) == "specialty_scrambler") || (unlockeditem("perk", 6) == "specialty_scrambler") || (unlockeditem("perk", 7) == "specialty_scrambler") || (unlockeditem("perk", 8) == "specialty_scrambler") || (unlockeditem("perk", 9) == "specialty_scrambler")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        244 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_scrambler", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        272 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("emp_grenade_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        272 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("emp_grenade_mp") && !(tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        272 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        288 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "emp_grenade_mp") || (unlockeditem("perk", 1) == "emp_grenade_mp") || (unlockeditem("perk", 2) == "emp_grenade_mp") || (unlockeditem("perk", 3) == "emp_grenade_mp") || (unlockeditem("perk", 4) == "emp_grenade_mp") || (unlockeditem("perk", 5) == "emp_grenade_mp") || (unlockeditem("perk", 6) == "emp_grenade_mp") || (unlockeditem("perk", 7) == "emp_grenade_mp") || (unlockeditem("perk", 8) == "emp_grenade_mp") || (unlockeditem("perk", 9) == "emp_grenade_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        288 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "emp_grenade_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        316 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("smoke_grenade_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        316 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("smoke_grenade_mp") && !(tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 3);
+        }
+        itemDef
+        {
+            rect                        316 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        332 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "smoke_grenade_mp") || (unlockeditem("perk", 1) == "smoke_grenade_mp") || (unlockeditem("perk", 2) == "smoke_grenade_mp") || (unlockeditem("perk", 3) == "smoke_grenade_mp") || (unlockeditem("perk", 4) == "smoke_grenade_mp") || (unlockeditem("perk", 5) == "smoke_grenade_mp") || (unlockeditem("perk", 6) == "smoke_grenade_mp") || (unlockeditem("perk", 7) == "smoke_grenade_mp") || (unlockeditem("perk", 8) == "smoke_grenade_mp") || (unlockeditem("perk", 9) == "smoke_grenade_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        332 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "smoke_grenade_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        360 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("trophy_mp"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "trophy_mp", 3);
+        }
+        itemDef
+        {
+            rect                        360 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("trophy_mp") && !(tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "trophy_mp", 3);
+        }
+        itemDef
+        {
+            rect                        360 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "trophy_mp", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        376 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "trophy_mp") || (unlockeditem("perk", 1) == "trophy_mp") || (unlockeditem("perk", 2) == "trophy_mp") || (unlockeditem("perk", 3) == "trophy_mp") || (unlockeditem("perk", 4) == "trophy_mp") || (unlockeditem("perk", 5) == "trophy_mp") || (unlockeditem("perk", 6) == "trophy_mp") || (unlockeditem("perk", 7) == "trophy_mp") || (unlockeditem("perk", 8) == "trophy_mp") || (unlockeditem("perk", 9) == "trophy_mp")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        376 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "trophy_mp", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        404 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_tacticalinsertion"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 3);
+        }
+        itemDef
+        {
+            rect                        404 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_tacticalinsertion") && !(tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 3);
+        }
+        itemDef
+        {
+            rect                        404 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        420 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_tacticalinsertion") || (unlockeditem("perk", 1) == "specialty_tacticalinsertion") || (unlockeditem("perk", 2) == "specialty_tacticalinsertion") || (unlockeditem("perk", 3) == "specialty_tacticalinsertion") || (unlockeditem("perk", 4) == "specialty_tacticalinsertion") || (unlockeditem("perk", 5) == "specialty_tacticalinsertion") || (unlockeditem("perk", 6) == "specialty_tacticalinsertion") || (unlockeditem("perk", 7) == "specialty_tacticalinsertion") || (unlockeditem("perk", 8) == "specialty_tacticalinsertion") || (unlockeditem("perk", 9) == "specialty_tacticalinsertion")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        420 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_tacticalinsertion", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        448 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(!isitemunlocked("specialty_portable_radar"));
+            textscale                   0.55
+            forecolor                   0.25 0.25 0.25 0.5
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 3);
+        }
+        itemDef
+        {
+            rect                        448 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when(isitemunlocked("specialty_portable_radar") && !(tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 3);
+        }
+        itemDef
+        {
+            rect                        448 292 32 32 0 0
+            style                       3
+            decoration                  
+            visible                     when((tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8) != "specialty_null" && isitemunlocked(tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8))));
+            textscale                   0.55
+            exp material                tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 3) + "_upgrade";
+        }
+        itemDef
+        {
+            rect                        464 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == "specialty_portable_radar") || (unlockeditem("perk", 1) == "specialty_portable_radar") || (unlockeditem("perk", 2) == "specialty_portable_radar") || (unlockeditem("perk", 3) == "specialty_portable_radar") || (unlockeditem("perk", 4) == "specialty_portable_radar") || (unlockeditem("perk", 5) == "specialty_portable_radar") || (unlockeditem("perk", 6) == "specialty_portable_radar") || (unlockeditem("perk", 7) == "specialty_portable_radar") || (unlockeditem("perk", 8) == "specialty_portable_radar") || (unlockeditem("perk", 9) == "specialty_portable_radar")));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+        itemDef
+        {
+            rect                        464 308 32 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(((unlockeditem("perk", 0) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 1) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 2) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 3) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 4) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 5) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 6) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 7) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 8) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8)) || (unlockeditem("perk", 9) == tablelookup("mp/perkTable.csv", 1, "specialty_portable_radar", 8))));
+            textscale                   0.55
+            background                  "specialty_new"
+        }
+    }
+}

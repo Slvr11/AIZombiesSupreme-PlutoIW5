@@ -1,0 +1,184 @@
+{
+    menuDef
+    {
+        name                        "hud_fullscreen"
+        rect                        0 0 640 480 4 4
+        visible                     1
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            type                        8
+            visible                     when(!FUNC_73() && (FUNC_100() || inkillcam()) && FUNC_107());
+            ownerdraw                   112
+            textscale                   0.55
+            background                  "splatter_alt"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(scopedthermal() && FUNC_100() && FUNC_107());
+            textscale                   0.55
+            forecolor                   0.9 1 1 0.3
+            background                  "ac130_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(FUNC_72() && !FUNC_73() && FUNC_107());
+            textscale                   0.55
+            background                  "ballistic_overlay"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(isempjammed() && FUNC_107());
+            textscale                   0.55
+            forecolor                   0.9 1 1 0.3
+            background                  "ac130_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        0 -75 40 40 2 10
+            type                        8
+            visible                     when(FUNC_111() && !(FUNC_187() || FUNC_188()));
+            ownerdraw                   80
+            textscale                   0.375
+            textstyle                   3
+            forecolor                   1 1 1 0.65
+        }
+        itemDef
+        {
+            rect                        0 -125 40 40 2 10
+            type                        8
+            visible                     when(FUNC_111());
+            ownerdraw                   72
+            textscale                   0.375
+            textstyle                   3
+            forecolor                   1 1 1 0.65
+        }
+        itemDef
+        {
+            rect                        0 -125 0 0 2 2
+            decoration                  
+            type                        8
+            visible                     when(FUNC_82() && FUNC_90() && FUNC_107());
+            ownerdraw                   113
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+        }
+        itemDef
+        {
+            name                        "talking"
+            rect                        108 48 24 24 8 8
+            decoration                  
+            type                        8
+            visible                     when(FUNC_110() && FUNC_106());
+            ownerdraw                   366
+            textscale                   0.55
+            forecolor                   1 1 1 0.85
+            exp rect y                  6 + (FUNC_189() * 16) + (FUNC_146() * 26);
+        }
+        itemDef
+        {
+            name                        "talker1"
+            rect                        0 136 18 18 8 8
+            decoration                  
+            type                        8
+            visible                     when(FUNC_110() && FUNC_106());
+            ownerdraw                   203
+            textalignx                  18
+            textaligny                  17
+            textscale                   0.375
+            textstyle                   3
+        }
+        itemDef
+        {
+            name                        "talker2"
+            rect                        0 154 18 18 8 8
+            decoration                  
+            type                        8
+            visible                     when(FUNC_110() && FUNC_106());
+            ownerdraw                   204
+            textalignx                  18
+            textaligny                  17
+            textscale                   0.375
+            textstyle                   3
+        }
+        itemDef
+        {
+            name                        "talker3"
+            rect                        0 172 18 18 8 8
+            decoration                  
+            type                        8
+            visible                     when(FUNC_110() && FUNC_106());
+            ownerdraw                   205
+            textalignx                  18
+            textaligny                  17
+            textscale                   0.375
+            textstyle                   3
+        }
+        itemDef
+        {
+            name                        "talker4"
+            rect                        0 190 18 18 8 8
+            decoration                  
+            type                        8
+            visible                     when(FUNC_110() && FUNC_106());
+            ownerdraw                   206
+            textalignx                  18
+            textaligny                  17
+            textscale                   0.375
+            textstyle                   3
+        }
+        itemDef
+        {
+            text                        "@CGAME_FOLLOWING"
+            rect                        -100 20 200 0 2 1
+            visible                     when(FUNC_86() && FUNC_93() && FUNC_82() && FUNC_70() && (FUNC_106() || !isdemofreecamera()));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   3
+            forecolor                   1 1 1 0.65
+        }
+        itemDef
+        {
+            rect                        0 0 200 5 8 8
+            type                        8
+            visible                     when(FUNC_86() && FUNC_93() && FUNC_82() && FUNC_70() && FUNC_106());
+            ownerdraw                   61
+            textalign                   4
+            textscale                   0.375
+            textstyle                   3
+            forecolor                   1 1 1 0.65
+        }
+        itemDef
+        {
+            rect                        6 -60 10 10 8 10
+            type                        19
+            visible                     when(FUNC_86() && FUNC_82() && !isdemofreecamera());
+            textscale                   0.375
+            textstyle                   3
+            forecolor                   1 1 1 0.45
+            gamemsgwindowmode           1
+        }
+        itemDef
+        {
+            rect                        0 -60 10 10 9 9
+            type                        19
+            visible                     when(FUNC_86() && FUNC_82() && FUNC_107());
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            gamemsgwindowindex          1
+            gamemsgwindowmode           1
+        }
+    }
+}

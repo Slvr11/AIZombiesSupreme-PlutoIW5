@@ -1,0 +1,1733 @@
+{
+    menuDef
+    {
+        name                        "popup_cac_copy_class"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((((23 * 1) + (16.367 * 0)) + (int(5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))) * (20 + 2)) + 5) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (((23 * 1) + (16.367 * 0)) + (int(5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))) * (20 + 2)) + 5);
+        onOpen
+        {
+            if (!(tablelookup("mp/attachmentTable.csv", 4, getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "attachment", 0), 12) != "" || tablelookup("mp/attachmentTable.csv", 4, getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "attachment", 0), 12) != "") && (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 0) == "specialty_null_gl" || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 0) == "specialty_null_grip" || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 0) == "specialty_null_shotgun") || getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 0) == "specialty_null_heartbeat")
+            {
+                setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , perks , 0 , specialty_null );
+            }
+            setLocalVarString loadoutPrimary (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "weapon"));
+            setLocalVarString loadoutPrimaryAttachment (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "attachment", 0));
+            setLocalVarString loadoutPrimaryAttachment2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "attachment", 1));
+            if (localvarstring("loadoutPrimaryAttachment2") == "")
+            {
+                setLocalVarString loadoutPrimaryAttachment2 ("none");
+            }
+            setLocalVarString loadoutPrimaryBuff (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "buff"));
+            setLocalVarString loadoutPrimaryCamo (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "camo"));
+            setLocalVarString loadoutPrimaryReticle (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 0, "reticle"));
+            setLocalVarString loadoutSecondary (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "weapon"));
+            setLocalVarString loadoutSecondaryAttachment (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "attachment", 0));
+            setLocalVarString loadoutSecondaryAttachment2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "attachment", 1));
+            if (localvarstring("loadoutSecondaryAttachment2") == "")
+            {
+                setLocalVarString loadoutSecondaryAttachment2 ("none");
+            }
+            setLocalVarString loadoutSecondaryBuff (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "buff"));
+            setLocalVarString loadoutSecondaryCamo (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "camo"));
+            setLocalVarString loadoutSecondaryReticle (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "weaponSetups", 1, "reticle"));
+            setLocalVarString loadoutEquipment (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 0));
+            setLocalVarString loadoutPerk1 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 1));
+            setLocalVarString loadoutPerk2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 2));
+            setLocalVarString loadoutPerk3 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 3));
+            setLocalVarString loadoutStreakType (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 5));
+            setLocalVarString loadoutAssaultKillStreak1 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "assaultStreaks", 0));
+            setLocalVarString loadoutAssaultKillStreak2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "assaultStreaks", 1));
+            setLocalVarString loadoutAssaultKillStreak3 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "assaultStreaks", 2));
+            setLocalVarString loadoutDefenseKillStreak1 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "defenseStreaks", 0));
+            setLocalVarString loadoutDefenseKillStreak2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "defenseStreaks", 1));
+            setLocalVarString loadoutDefenseKillStreak3 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "defenseStreaks", 2));
+            setLocalVarString loadoutSpecialistKillStreak1 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "specialistStreaks", 0));
+            setLocalVarString loadoutSpecialistKillStreak2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "specialistStreaks", 1));
+            setLocalVarString loadoutSpecialistKillStreak3 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "specialistStreaks", 2));
+            setLocalVarString loadoutSpecialistKills1 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "specialistStreakKills", 0));
+            setLocalVarString loadoutSpecialistKills2 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "specialistStreakKills", 1));
+            setLocalVarString loadoutSpecialistKills3 (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "specialistStreakKills", 2));
+            setLocalVarString loadoutDeathStreak (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "deathstreak"));
+            setLocalVarString loadoutOffhandSecondary (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "perks", 6));
+            setLocalVarString loadoutClassName (getplayerdata(localvarstring("ui_customClassLoc"), localvarint("classIndex"), "name"));
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus COPYCLASS_POPUP_0;
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_cac_copy_class"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (((23 * 1) + (16.367 * 0)) + (int(5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))) * (20 + 2)) + 5) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * int(5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses")))) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_DESTINATION";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_0"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((0 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 0));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((0 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 0))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((0 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 0));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 0;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 0 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 0);
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((0 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 0, "name");
+            exp rect y                  (((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 0), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 0), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 0), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_1"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((1 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 1));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((1 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 1))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((1 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 1));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 1;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 1 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 1);
+            exp rect y                  ((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((1 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 1, "name");
+            exp rect y                  (((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 1), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 1), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 1), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_2"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((2 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 2));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 2;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((2 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 2))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((2 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 2));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 2;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 2 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 2);
+            exp rect y                  ((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((2 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 2, "name");
+            exp rect y                  (((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 2), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 2), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 2), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_3"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((3 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 3));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 3;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((3 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 3))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((3 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 3));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 3;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 3 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 3);
+            exp rect y                  ((3 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((3 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 3, "name");
+            exp rect y                  (((3 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 3), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 3), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 3), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_4"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((4 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 4));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 4;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((4 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 4))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((4 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 4));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 4;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 4 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 4);
+            exp rect y                  ((4 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((4 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 4, "name");
+            exp rect y                  (((4 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 4), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 4), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 4), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_5"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((5 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 5));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 5;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((5 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 5))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((5 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 5));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 5;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 5 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 5);
+            exp rect y                  ((5 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((5 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 5, "name");
+            exp rect y                  (((5 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 5), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 5), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 5), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,5)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_6"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((6 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 6));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 6;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((6 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 6))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((6 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 6));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 6;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 6 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 6);
+            exp rect y                  ((6 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((6 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 6, "name");
+            exp rect y                  (((6 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 6), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 6), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 6), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,6)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_7"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((7 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 7));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 7;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((7 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 7))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((7 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 7));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 7;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 7 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 7);
+            exp rect y                  ((7 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((7 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 7, "name");
+            exp rect y                  (((7 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 7), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 7), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 7), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,7)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_8"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((8 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 8));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 8;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((8 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 8))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((8 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 8));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 8;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 8 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 8);
+            exp rect y                  ((8 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((8 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 8, "name");
+            exp rect y                  (((8 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 8), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 8), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 8), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_9"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((9 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 9));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 9;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((9 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 9))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((9 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 9));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 9;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 9 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 9);
+            exp rect y                  ((9 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((9 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 9, "name");
+            exp rect y                  (((9 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 9), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 9), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 9), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,9)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_10"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((10 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 10));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 10;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((10 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 10))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((10 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 10));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 10;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 10 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 10);
+            exp rect y                  ((10 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((10 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 10, "name");
+            exp rect y                  (((10 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 10), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 10), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 10), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,10)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_11"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((11 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 11));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 11;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((11 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 11))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((11 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 11));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 11;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 11 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 11);
+            exp rect y                  ((11 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((11 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 11, "name");
+            exp rect y                  (((11 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 11), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 11), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 11), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,11)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_12"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((12 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 12));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 12;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((12 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 12))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((12 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 12));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 12;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 12 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 12);
+            exp rect y                  ((12 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((12 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 12, "name");
+            exp rect y                  (((12 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 12), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 12), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 12), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,12)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_13"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((13 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 13));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 13;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((13 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 13))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((13 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 13));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 13;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 13 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 13);
+            exp rect y                  ((13 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((13 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 13, "name");
+            exp rect y                  (((13 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 13), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 13), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 13), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,13)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_14"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((14 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 14));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 14;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((14 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 14))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((14 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 14));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 14;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 14 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 14);
+            exp rect y                  ((14 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((14 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 14, "name");
+            exp rect y                  (((14 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 14), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 14), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 14), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,14)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_15"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(((15 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+            disabled                    when((localvarint("classIndex") == 15));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 15;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((((15 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && !((localvarint("classIndex") == 15))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (((15 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))));
+                setLocalVarBool ui_swfPopupSelectionDisabled ((localvarint("classIndex") == 15));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , inUse , true );
+                setLocalVarInt oldClassIndex (localvarint("classIndex"));
+                setLocalVarInt classIndex 15;
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , perks , 0 , localVarString ( loadoutEquipment ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , perks , 5 , localVarString ( loadoutStreakType ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , deathstreak , localVarString ( loadoutDeathStreak ) );
+                if (locstring("@CLASS_SLOT" + (localvarint("oldClassIndex") + 1)) != localvarstring("loadoutClassName"))
+                {
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , 15 , name , localvarstring ( loadoutClassName ) );
+                }
+                close menu_cac_assault;
+                open menu_cac_assault;
+                close popup_cac_copy_class;
+            }
+            exp disabled                (localvarint("classIndex") == 15);
+            exp rect y                  ((15 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((((15 < (5 + ((getplayerdata("extraCustomClassesPrestige") + getplayerdata("extraCustomClassesEntitlement")) * (localvarstring("ui_customClassLoc") != "privateMatchCustomClasses"))))) && (1)));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    getplayerdata(localvarstring("ui_customClassLoc"), 15, "name");
+            exp rect y                  (((15 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select((localvarint("classIndex") == 15), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select((localvarint("classIndex") == 15), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select((localvarint("classIndex") == 15), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,15)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+    }
+}

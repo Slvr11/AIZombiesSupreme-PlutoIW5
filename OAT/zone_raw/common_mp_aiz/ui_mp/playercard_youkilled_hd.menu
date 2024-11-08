@@ -1,0 +1,434 @@
+{
+    menuDef
+    {
+        name                        "playercard_youkilled_hd"
+        rect                        0 0 640 480 4 4
+        visible                     when(FUNC_98());
+        exp rect Y                  (max(min((1 - (milliseconds() - localvarint("ui_show_youKilled")) / 150), 1), 0) * (180)) + (min(max((milliseconds() - localvarint("ui_show_youKilled") + 2350) / 150, 0), 1) * (180));
+        itemDef
+        {
+            rect                        0 0 240 20 9 10
+            style                       1
+            decoration                  
+            visible                     when(0 && (getplayercardinfo(0, 0, 8) != 0) && FUNC_70());
+            textalign                   5
+            textscale                   0.375
+            textstyle                   8
+            textfont                    6
+            glowcolor                   1 0.8 0.6 1
+            exp text                    "@MP_KILLED_BY";
+            exp rect x                  (0 - 104);
+            exp rect y                  - 60 - 20;
+        }
+        itemDef
+        {
+            rect                        0 0 240 20 9 10
+            style                       1
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   5
+            textscale                   0.375
+            textstyle                   8
+            textfont                    6
+            glowcolor                   1 0.8 0.6 1
+            exp text                    "@MP_YOU_KILLED";
+            exp rect x                  (0 - 104);
+            exp rect y                  - 60 - 20;
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 9 10
+            style                       3
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  (0 - 104);
+            exp rect y                  (- 60);
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 9 10
+            style                       3
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  (0 - 104) + 1.333;
+            exp rect y                  (- 60) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 9 10
+            style                       3
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 0, 8), 1);
+            exp rect x                  (0 - 104) + 2.533;
+            exp rect y                  (- 60) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 9 10
+            style                       1
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            backcolor                   1 1 1 1
+            exp text                    getplayercardinfo(14, 0, 8);
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 0, 8), 2);
+            exp rect x                  (0 - 104) + 33.9;
+            exp rect y                  (- 60) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 0, 8), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 0, 8), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 0, 8), 5);
+            exp backcolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && !0 && !1) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && !0 && !1) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && !0 && !1) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 1 && FUNC_24()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.6;
+            exp forecolor g             0.8;
+            exp forecolor b             0.6;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 1 && FUNC_24()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.6;
+            exp forecolor g             0.8;
+            exp forecolor b             0.6;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 1 && FUNC_24()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 22;
+            exp forecolor r             0.6;
+            exp forecolor g             0.8;
+            exp forecolor b             0.6;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 1 && FUNC_27()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.8;
+            exp forecolor g             0.35;
+            exp forecolor b             0.4;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 1 && FUNC_27()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.8;
+            exp forecolor g             0.35;
+            exp forecolor b             0.4;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 1 && FUNC_27()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 22;
+            exp forecolor r             0.8;
+            exp forecolor g             0.35;
+            exp forecolor b             0.4;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 0 && FUNC_23()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.6;
+            exp forecolor g             0.8;
+            exp forecolor b             0.6;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 0 && FUNC_23()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.6;
+            exp forecolor g             0.8;
+            exp forecolor b             0.6;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 0 && FUNC_23()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 22;
+            exp forecolor r             0.6;
+            exp forecolor g             0.8;
+            exp forecolor b             0.6;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 0 && FUNC_26()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.8;
+            exp forecolor g             0.35;
+            exp forecolor b             0.4;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 0 && FUNC_26()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 21.5;
+            exp forecolor r             0.8;
+            exp forecolor g             0.35;
+            exp forecolor b             0.4;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 9 10
+            style                       1
+            decoration                  
+            visible                     when((1 && 0 && FUNC_26()) && (getplayercardinfo(0, 0, 8) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 0, 8);
+            exp rect x                  (0 - 104) + 40;
+            exp rect y                  (- 60) + 22;
+            exp forecolor r             0.8;
+            exp forecolor g             0.35;
+            exp forecolor b             0.4;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 0, 8), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 9 10
+            style                       1
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0) && getplayercardinfo(12, 0, 8) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 0, 8) + "]";
+            exp rect x                  (0 - 104) + 188;
+            exp rect y                  (- 60) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 9 10
+            style                       3
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(4, 0, 8) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 0, 8), (getplayercardinfo(5, 0, 8) + 1));
+            exp rect x                  (0 - 104) + 192;
+            exp rect y                  (- 60) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 9 10
+            style                       1
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(4, 0, 8) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 0, 8), 14);
+            exp rect x                  (0 - 104) + 212;
+            exp rect y                  (- 60) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 9 10
+            style                       3
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(6, 0, 8) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 0, 8), 6);
+            exp rect x                  (0 - 104) + 192;
+            exp rect y                  (- 60) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 9 10
+            style                       1
+            decoration                  
+            visible                     when(1 && (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(6, 0, 8) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 0, 8), 14);
+            exp rect x                  (0 - 104) + 212;
+            exp rect y                  (- 60) + 19.167;
+            exp forecolor a             1;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    menuDef
+    {
+        name                        "dpad_hd"
+        rect                        0 -16 640 480 4 4
+        visible                     when(FUNC_109() && !FUNC_103() && FUNC_94());
+        itemDef
+        {
+            rect                        -61 -29 32 32 10 10
+            type                        8
+            visible                     1
+            ownerdraw                   173
+            textalign                   2
+            textalignx                  -21
+            textaligny                  -9
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+        }
+        itemDef
+        {
+            rect                        -61 -29 32 32 10 10
+            decoration                  
+            visible                     when(actionslotusable(3));
+            textalign                   1
+            textaligny                  35
+            textscale                   0.25
+            textstyle                   6
+            textfont                    6
+            forecolor                   1 1 0 1
+            exp text                    "^3" + keybinding("+actionslot 3");
+        }
+    }
+}

@@ -1,0 +1,396 @@
+{
+    menuDef
+    {
+        name                        "remote_uav_overlay_720_splitquarter"
+        rect                        0 0 640 480 0 0
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        legacySplitScreenScale      
+        visible                     when(FUNC_69() && !inkillcamnpc() && FUNC_84() && FUNC_108());
+        itemDef
+        {
+            rect                        -30 -120 60 26 2 2
+            decoration                  
+            visible                     when(getplayerdata("reconDroneState", "incomingMissile"));
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   1
+            textfont                    9
+            forecolor                   1 0 0 1
+            exp text                    "@MP_INCOMING_MISSILE";
+        }
+        itemDef
+        {
+            rect                        -30 -84 60 26 2 2
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textalign                   9
+            textscale                   0.3333
+            textstyle                   7
+            textfont                    10
+            forecolor                   0 1 0 1
+            exp text                    "@MP_REMOTE_UAV_NO_LOCK";
+        }
+        itemDef
+        {
+            rect                        -30 -84 60 26 2 2
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textalign                   9
+            textscale                   0.3333
+            textstyle                   7
+            textfont                    10
+            forecolor                   1 0 0 1
+            exp text                    "@MP_REMOTE_UAV_LOCK";
+        }
+        itemDef
+        {
+            rect                        -97 -65 50 4 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        47 -65 50 4 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -97 61 50 4 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        47 61 50 4 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -97 -61 4 30 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -97 31 4 30 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        93 -61 4 30 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        93 31 4 30 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 -64 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        48 -64 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 62 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        48 62 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 -62 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 32 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        94 -62 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        94 32 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   0.2 0.8 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 -64 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        48 -64 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 62 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        48 62 48 2 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 -62 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -96 32 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        94 -62 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        94 32 2 30 2 2
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            forecolor                   0.8 0.2 0.2 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.5 1 0.5 0.2
+            background                  "javelin_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.5 1 0.5 0.2
+            background                  "nightvision_overlay_goggles"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "ac130_overlay_grain"
+            exp forecolor a             getplayerdata("reconDroneState", "staticAlpha");
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "ac130_overlay_grain"
+            exp forecolor a             getplayerdata("reconDroneState", "staticAlpha");
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "ac130_overlay_grain"
+            exp forecolor a             getplayerdata("reconDroneState", "staticAlpha");
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "ac130_overlay_grain"
+            exp forecolor a             getplayerdata("reconDroneState", "staticAlpha");
+        }
+        itemDef
+        {
+            rect                        -25 -100 60 26 2 2
+            decoration                  
+            visible                     when(getplayerdata("reconDroneState", "staticAlpha") > 0);
+            textalign                   9
+            textscale                   0.5833
+            textstyle                   6
+            textfont                    9
+            forecolor                   1 0.2 0.2 1
+            exp text                    "@MP_REMOTE_UAV_OUT_OF_RANGE";
+        }
+        itemDef
+        {
+            rect                        -70 -65 60 26 2 3
+            decoration                  
+            visible                     when(FUNC_107());
+            textalign                   14
+            textscale                   0.3333
+            textstyle                   6
+            textfont                    10
+            forecolor                   1 1 1 0.75
+            exp text                    "@PLATFORM_REMOTE_UAV_DESCEND";
+        }
+        itemDef
+        {
+            rect                        10 -65 60 26 2 3
+            decoration                  
+            visible                     when(FUNC_107());
+            textalign                   12
+            textscale                   0.3333
+            textstyle                   6
+            textfont                    10
+            forecolor                   1 1 1 0.75
+            exp text                    "@PLATFORM_REMOTE_UAV_ASCEND";
+        }
+        itemDef
+        {
+            rect                        -30 -30 60 26 2 3
+            decoration                  
+            visible                     when(FUNC_107() && FUNC_92());
+            textalign                   13
+            textscale                   0.3333
+            textstyle                   6
+            textfont                    10
+            forecolor                   1 1 1 0.4
+            exp text                    "@MP_EARLY_EXIT";
+        }
+    }
+}

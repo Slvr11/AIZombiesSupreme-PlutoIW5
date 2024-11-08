@@ -1,0 +1,146 @@
+{
+    menuDef
+    {
+        name                        "auconfirm"
+        rect                        204 160 235 135 0 0
+        style                       1
+        border                      1
+        focuscolor                  1 1 1 1
+        popup                       
+        onESC
+        {
+            close auconfirm;
+        }
+        itemDef
+        {
+            name                        "acwindow"
+            group                       "grpControlbutton"
+            rect                        0 2 235 135 0 0
+            style                       1
+            decoration                  
+            border                      1
+            visible                     1
+            textscale                   0.55
+            backcolor                   0 0 0 0.85
+            bordercolor                 0.5 0.5 0.5 0.5
+        }
+        itemDef
+        {
+            name                        "acwindow2"
+            group                       "grpControlbutton"
+            rect                        2 4 231 20 0 0
+            style                       1
+            decoration                  
+            border                      1
+            visible                     1
+            textscale                   0.55
+            backcolor                   1 1 0.3 0.3
+            bordercolor                 0.1 0.1 0.1 0.2
+        }
+        itemDef
+        {
+            name                        "acconfirm"
+            text                        "@MENU_DOWNLOAD_AUTOUPDATE_PATCH"
+            rect                        116 20 110 20 0 0
+            decoration                  
+            visible                     1
+            textalign                   1
+            textalignx                  -55
+            textscale                   0.25
+            textstyle                   3
+            textfont                    1
+        }
+        itemDef
+        {
+            name                        "oldtitle"
+            text                        "@MENU_VERSION_INSTALLED"
+            rect                        30 40 110 20 0 0
+            decoration                  
+            visible                     1
+            textscale                   0.25
+            textstyle                   3
+            textfont                    1
+        }
+        itemDef
+        {
+            name                        "oldver"
+            rect                        30 55 110 20 0 0
+            decoration                  
+            visible                     1
+            textscale                   0.25
+            textstyle                   3
+            textfont                    1
+            dvar                        "cl_updateoldversion"
+        }
+        itemDef
+        {
+            name                        "newtitle"
+            text                        "@MENU_VERSION_AVAILABLE"
+            rect                        30 70 110 20 0 0
+            decoration                  
+            visible                     1
+            textscale                   0.25
+            textstyle                   3
+            textfont                    1
+        }
+        itemDef
+        {
+            name                        "newver"
+            rect                        30 85 110 20 0 0
+            decoration                  
+            visible                     1
+            textscale                   0.25
+            textstyle                   3
+            textfont                    1
+            dvar                        "cl_updateversion"
+        }
+        itemDef
+        {
+            name                        "yes"
+            text                        "@MENU_YES"
+            rect                        45 95 50 20 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   1
+            textaligny                  15
+            textscale                   0.3
+            textstyle                   3
+            textfont                    1
+            forecolor                   0.9 0.9 0.95 1
+            mouseEnter
+            {
+                play MENU_AUDIO_ON_FOCUS;
+            }
+            action
+            {
+                play MENU_AUDIO_ON_POSITIVE_ACTION;
+                getautoupdate;
+            }
+        }
+        itemDef
+        {
+            name                        "no"
+            text                        "@MENU_NO"
+            rect                        142 95 50 20 0 0
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   1
+            textaligny                  15
+            textscale                   0.3
+            textstyle                   3
+            textfont                    1
+            forecolor                   0.9 0.9 0.95 1
+            mouseEnter
+            {
+                play MENU_AUDIO_ON_FOCUS;
+            }
+            action
+            {
+                play MENU_AUDIO_ON_POSITIVE_ACTION;
+                close auconfirm;
+            }
+        }
+    }
+}

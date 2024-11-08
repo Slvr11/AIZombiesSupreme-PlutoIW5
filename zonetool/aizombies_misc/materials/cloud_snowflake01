@@ -1,0 +1,29 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 2,
+    "constantTable": null,
+    "gameFlags": 0,
+    "maps": [
+        {
+            "firstCharacter": 99,
+            "image": "snowflake#0",
+            "lastCharacter": 112,
+            "sampleState": -12,
+            "semantic": 2,
+            "typeHash": 2695565377
+        }
+    ],
+    "name": "cloud_snowflake01",
+    "sortKey": 47,
+    "stateFlags": 19,
+    "stateMap": [
+        [
+            422089061,
+            12
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "particle_cloud",
+    "unknown": 0
+}

@@ -1,0 +1,296 @@
+{
+    menuDef
+    {
+        name                        "popup_summary"
+        rect                        -266.667 0 533.333 0 2 2
+        style                       1
+        backcolor                   1 1 1 1
+        focuscolor                  1 1 1 1
+        background                  "white"
+        outOfBoundsClick            
+        popup                       
+        allowedBinding              "+talk"
+        visible                     when(!(menuisopen("page_unlocks_titles") || menuisopen("page_unlocks_emblems") || menuisopen("page_unlocks_perks") || menuisopen("page_unlocks_weapons") || menuisopen("page_unlocks_features")));
+        exp rect Y                  0 - 357 / 2;
+        exp rect H                  357;
+        onOpen
+        {
+            setLocalVarInt ui_centerPopup 1;
+            if (!(getclientmatchdatadef() != ""))
+            {
+                if (dvarbool(splitscreen))
+                {
+                    if (splitscreenplayercount() >= 1)
+                    {
+                        setPlayerDataSplitscreen ( 0 , round , awardCount , 0 );
+                    }
+                    if (splitscreenplayercount() >= 2)
+                    {
+                        setPlayerDataSplitscreen ( 1 , round , awardCount , 0 );
+                    }
+                    if (splitscreenplayercount() >= 3)
+                    {
+                        setPlayerDataSplitscreen ( 2 , round , awardCount , 0 );
+                    }
+                    if (splitscreenplayercount() >= 4)
+                    {
+                        setPlayerDataSplitscreen ( 3 , round , awardCount , 0 );
+                    }
+                }
+                else
+                {
+                    setPlayerData ( round , awardCount , 0 );
+                }
+                uiScript clearClientMatchData;
+            }
+            if (dvarbool(splitscreen))
+            {
+                if (splitscreenplayercount() >= 1)
+                {
+                    if (isitemunlockedbyclient(0, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+                if (splitscreenplayercount() >= 2)
+                {
+                    if (isitemunlockedbyclient(1, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+                if (splitscreenplayercount() >= 3)
+                {
+                    if (isitemunlockedbyclient(2, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+                if (splitscreenplayercount() >= 4)
+                {
+                    if (isitemunlockedbyclient(3, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (isitemunlocked("cac"))
+                {
+                    if (!getplayerdata("killstreakUnlocked", "uav"))
+                    {
+                        setPlayerData ( killstreakUnlocked , uav , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "predator_missile"))
+                    {
+                        setPlayerData ( killstreakUnlocked , predator_missile , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "helicopter"))
+                    {
+                        setPlayerData ( killstreakUnlocked , helicopter , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "uav_support"))
+                    {
+                        setPlayerData ( killstreakUnlocked , uav_support , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "sam_turret"))
+                    {
+                        setPlayerData ( killstreakUnlocked , sam_turret , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "triple_uav"))
+                    {
+                        setPlayerData ( killstreakUnlocked , triple_uav , true );
+                    }
+                }
+            }
+            if (dvarbool(xblive_privatematch))
+            {
+                open page_scoreboard;
+            }
+            else
+            {
+                if ((unlockeditemcount("title")))
+                {
+                    open page_unlocks_titles;
+                }
+                else
+                {
+                    if ((unlockeditemcount("icon")))
+                    {
+                        open page_unlocks_emblems;
+                    }
+                    else
+                    {
+                        if ((unlockeditemcount("perk")))
+                        {
+                            open page_unlocks_perks;
+                        }
+                        else
+                        {
+                            if ((unlockeditemcount("weapon") || unlockeditemcount("weaponAttachment") || unlockeditemcount("weaponBuff") || unlockeditemcount("weaponCamo") || unlockeditemcount("weaponReticle")))
+                            {
+                                open page_unlocks_weapons;
+                            }
+                            else
+                            {
+                                if ((unlockeditemcount("feature") || unlockeditemcount("challenge")))
+                                {
+                                    open page_unlocks_features;
+                                }
+                                else
+                                {
+                                    open page_summary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            setLocalVarString ui_scoreboardType getplayerdata("round", "scoreboardType");
+        }
+        onClose
+        {
+            setLocalVarInt ui_centerPopup 0;
+            close page_unlocks_titles;
+            close page_unlocks_emblems;
+            close page_unlocks_perks;
+            close page_unlocks_weapons;
+            close page_unlocks_features;
+            close page_summary;
+            close page_progress;
+            close page_accolades;
+            close page_highlights;
+            close page_weapon_xp;
+            close page_challenges close page_scoreboard;
+        }
+        onESC
+        {
+            close self;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when((menuistopmost("page_summary") || menuistopmost("page_progress") || menuistopmost("page_accolades") || menuistopmost("page_highlights") || menuistopmost("page_weapon_xp") || menuistopmost("page_challenges") || menuistopmost("page_scoreboard")));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -854 -480 3416 1920 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            background                  "xpbar_stencilbase"
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect h                  357;
+        }
+    }
+}

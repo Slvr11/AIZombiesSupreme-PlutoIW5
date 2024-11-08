@@ -1,0 +1,959 @@
+REFERENCE		AIZ_1000_KILLSTREAK
+LANG_ENGLISH		"1000 Kill Streak!"
+
+REFERENCE		AIZ_A10_SUPPORT
+LANG_ENGLISH		"A-10 Support"
+
+REFERENCE		AIZ_ABANDONED_ROAD_OF_HELL
+LANG_ENGLISH		"Abandoned Road Of Hell"
+
+REFERENCE		AIZ_ABANDONED_SUBWAY
+LANG_ENGLISH		"Abandoned Subway"
+
+REFERENCE		AIZ_ACID_RAIN
+LANG_ENGLISH		"Acid Rain"
+
+REFERENCE		AIZ_ACID_RAIN_INCOMING
+LANG_ENGLISH		"Acid Rain Incoming!"
+
+REFERENCE		AIZ_AGROUND_DESC
+LANG_ENGLISH		"Shipwreck caused by a virus at sea"
+
+REFERENCE		AIZ_AIRSPACE_CROWDED
+LANG_ENGLISH		"Airspace too crowded."
+
+REFERENCE		AIZ_ALL_PERKS_AWARDED
+LANG_ENGLISH		"All Perks Awarded!"
+
+REFERENCE		AIZ_ALREADY_BEING_REVIVED
+LANG_ENGLISH		"&&1 is already being revived!"
+
+REFERENCE		AIZ_AMMO
+LANG_ENGLISH		"Ammo!"
+
+REFERENCE		AIZ_ARKADEN_DESC
+LANG_ENGLISH		"German mall robbed by the undead"
+
+REFERENCE		AIZ_AUTO_REVIVE_DESC
+LANG_ENGLISH		"Automatically be revived shortly after going down\n+ Revive your team faster"
+
+REFERENCE		AIZ_BAKAARA_DESC
+LANG_ENGLISH		"An african city hit by the undead"
+
+REFERENCE		AIZ_BANK_DEPOSIT
+LANG_ENGLISH		"Bank Deposit"
+
+REFERENCE		AIZ_BANK_WITHDRAW
+LANG_ENGLISH		"Bank Withdraw"
+
+REFERENCE		AIZ_BIG_BLACK_DEATH
+LANG_ENGLISH		"Big Black Death"
+
+REFERENCE		AIZ_BLACK_BOX_DESC
+LANG_ENGLISH		"Crash site of an airborne\nvirus attack"
+
+REFERENCE		AIZ_BLIZZARD_INCOMING
+LANG_ENGLISH		"Blizzard Inbound!"
+
+REFERENCE		AIZ_BONE_APPETITE
+LANG_ENGLISH		"Bone Appetite"
+
+REFERENCE		AIZ_BONUS_POINTS
+LANG_ENGLISH		"Bonus Points: "
+
+REFERENCE		AIZ_BOOTLEG_DESC
+LANG_ENGLISH		"Stormy town taken over by the undead"
+
+REFERENCE		AIZ_BOSS_WAVE_COMPLETED
+LANG_ENGLISH		"Completed Boss Wave!"
+
+REFERENCE		AIZ_BOSS_WAVE_SURVIVED
+LANG_ENGLISH		"Boss Wave Survived!"
+
+REFERENCE		AIZ_CARBON_DESC
+LANG_ENGLISH		"A once lively oil refinery"
+
+REFERENCE		AIZ_CAR_LOT_OF_PAIN
+LANG_ENGLISH		"Car Lot Of Pain"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_BOSS_HEALTH
+LANG_ENGLISH		"Boss Health was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_BOT_DAMAGE
+LANG_ENGLISH		"Bot Damage was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_BOT_HEALTH
+LANG_ENGLISH		"Bot Health was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_BOT_HEALTH_FACTOR
+LANG_ENGLISH		"Bot Health Factor was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_CRAWLER_HEALTH
+LANG_ENGLISH		"Crawler Health was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_JUGGERNOG_HEALTH
+LANG_ENGLISH		"Max Juggernog Health was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_MAX_HEALTH
+LANG_ENGLISH		"Max Health was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_INCORRECT_PERK_LIMIT
+LANG_ENGLISH		"Perk Limit was set to an incorrect value in the cfg!, Set to default (&&1)"
+
+REFERENCE		AIZ_CONFIG_NOT_FOUND
+LANG_ENGLISH		"Configuration file for AIZombies was not found! Creating one..."
+
+REFERENCE		AIZ_CONSTRUCTION_SITE_OF_HELL
+LANG_ENGLISH		"Construction Site Of Hell"
+
+REFERENCE		AIZ_CRATE_DEATH_MACHINE
+LANG_ENGLISH		"Death Machine"
+
+REFERENCE		AIZ_CRATE_DOUBLE_POINTS
+LANG_ENGLISH		"Double Points"
+
+REFERENCE		AIZ_CRATE_INSTAKILL
+LANG_ENGLISH		"Insta-Kill"
+
+REFERENCE		AIZ_CRATE_NUKE
+LANG_ENGLISH		"Nuke"
+
+REFERENCE		AIZ_CRAWLER_WAVE_COMPLETED
+LANG_ENGLISH		"Max Ammo Awarded!"
+
+REFERENCE		AIZ_CRAWLER_WAVE_SURVIVED
+LANG_ENGLISH		"Crawler Wave Survived!"
+
+REFERENCE		AIZ_CREDITS
+LANG_ENGLISH		"^1AIZombies Supreme Made by ^2Slvr99"
+
+REFERENCE		AIZ_CURRENT_BALANCE
+LANG_ENGLISH		"Current Balance: $&&1"
+
+REFERENCE		AIZ_CUSTOM_GAMETYPE_NAME_ERROR
+LANG_ENGLISH		"Unable to set custom gametype name in server browser!"
+
+REFERENCE		AIZ_DEAD_AQUEDUCT
+LANG_ENGLISH		"Dead Aqueduct"
+
+REFERENCE		AIZ_DEATH_ALLEY
+LANG_ENGLISH		"Death Alley"
+
+REFERENCE		AIZ_DEATH_AVENUE
+LANG_ENGLISH		"Death Avenue"
+
+REFERENCE		AIZ_DEATH_CHANCE
+LANG_ENGLISH		"^1God decides if you live or die in 5 seconds"
+
+REFERENCE		AIZ_DEATH_CHANCE_WON
+LANG_ENGLISH		"^2You live."
+
+REFERENCE		AIZ_DEATH_IN_PROGRESS
+LANG_ENGLISH		"Death In Progress"
+
+REFERENCE		AIZ_DEATH_MACHINE
+LANG_ENGLISH		"Death Machine!"
+
+REFERENCE		AIZ_DEATH_ROW
+LANG_ENGLISH		"Death Row"
+
+REFERENCE		AIZ_DEATH_WAIT_TO_SPAWN
+LANG_ENGLISH		"^1Wait until the end of the round to spawn!"
+
+REFERENCE		AIZ_DECOMMISSION_DESC
+LANG_ENGLISH		"A shipwreck near a town\nthat has been infected"
+
+REFERENCE		AIZ_DEFCON_IS_AT_LEVEL_N
+LANG_ENGLISH		"Defcon is at level &&1"
+
+REFERENCE		AIZ_DEFCON_TRIGGER_SYSTEM
+LANG_ENGLISH		"Defcon Trigger System"
+
+REFERENCE		AIZ_DEFEAT
+LANG_ENGLISH		"Defeat!"
+
+REFERENCE		AIZ_DEMOLISHED_UNDERPASS
+LANG_ENGLISH		"Demolished Underpass"
+
+REFERENCE		AIZ_DESERT_OUTPOST
+LANG_ENGLISH		"Desert Outpost"
+
+REFERENCE		AIZ_DEVELOPER_IMPERSONATOR
+LANG_ENGLISH		" Please do not impersonate the developer."
+
+REFERENCE		AIZ_DOCKED_DEATH
+LANG_ENGLISH		"Docked Death"
+
+REFERENCE		AIZ_DOME_DESC
+LANG_ENGLISH		"An abandoned outpost in the desert"
+
+REFERENCE		AIZ_DOUBLETAP
+LANG_ENGLISH		"Double Tap"
+
+REFERENCE		AIZ_DOUBLE_HEALTH
+LANG_ENGLISH		"^2Double Health for 30 seconds!"
+
+REFERENCE		AIZ_DOUBLE_HEALTH_OVER
+LANG_ENGLISH		"Double Health over!"
+
+REFERENCE		AIZ_DOUBLE_POINTS
+LANG_ENGLISH		"Double Points!"
+
+REFERENCE		AIZ_DOUBLE_TAP_DESC
+LANG_ENGLISH		"Faster rate of fire"
+
+REFERENCE		AIZ_DOWNTURN_DESC
+LANG_ENGLISH		"The aftermath of a dangerous mistake"
+
+REFERENCE		AIZ_DRIVABLE_HUMVEE
+LANG_ENGLISH		"Drivable Humvee"
+
+REFERENCE		AIZ_ELEVATOR
+LANG_ENGLISH		"Elevator!"
+
+REFERENCE		AIZ_EL_BROTE
+LANG_ENGLISH		"El Brote"
+
+REFERENCE		AIZ_END_WAVE_INTERMISSION
+LANG_ENGLISH		"^320 Second Intermission"
+
+REFERENCE		AIZ_EROSION_DESC
+LANG_ENGLISH		"Aqueduct contaminated by the undead"
+
+REFERENCE		AIZ_ERROR_LOADING_MAPEDIT
+LANG_ENGLISH		"Error loading mapedit for map &&1: &&2"
+
+REFERENCE		AIZ_ERROR_UPDATING
+LANG_ENGLISH		"There was an error contacting the update check server!: &&1"
+
+REFERENCE		AIZ_ERROR_UPDATING_NO_RESPONSE
+LANG_ENGLISH		"There was an error contacting the update check server!: No response from the server."
+
+REFERENCE		AIZ_EXTRA_BONUS_POINTS
+LANG_ENGLISH		"Extra Bonus Points!"
+
+REFERENCE		AIZ_EXTRA_CASH
+LANG_ENGLISH		"Extra Cash!"
+
+REFERENCE		AIZ_FAILED_TO_REVIVE
+LANG_ENGLISH		"^1Failed to revive &&1"
+
+REFERENCE		AIZ_FALLEN_DESC
+LANG_ENGLISH		"An abandoned russian ghost town"
+
+REFERENCE		AIZ_FIRE_SALE
+LANG_ENGLISH		"Fire Sale!"
+
+REFERENCE		AIZ_FLAMETHROWER
+LANG_ENGLISH		"Flamethrower"
+
+REFERENCE		AIZ_FOUNDATION_DESC
+LANG_ENGLISH		"Cement factory overtaken by the undead"
+
+REFERENCE		AIZ_FREEZER
+LANG_ENGLISH		"Freezer!"
+
+REFERENCE		AIZ_GAMBLER
+LANG_ENGLISH		"Gambler!"
+
+REFERENCE		AIZ_GAMBLER_IN_USE
+LANG_ENGLISH		"^1Gambler is already in use!"
+
+REFERENCE		AIZ_GAMBLER_ONCE_PER_ROUND
+LANG_ENGLISH		"^1You may only use the gambler once per round!"
+
+REFERENCE		AIZ_GAMBLER_RESULTS_WILL_DISPLAY
+LANG_ENGLISH		"^2Your results will display in 10 seconds."
+
+REFERENCE		AIZ_GAMETYPE_NAME_ERROR
+LANG_ENGLISH		"There was an error setting the gametype name!: "
+
+REFERENCE		AIZ_GAMETYPE_NAME_NO_ADDRESSES
+LANG_ENGLISH		"There was an error setting the gametype name: No addresses found!"
+
+REFERENCE		AIZ_GAMETYPE_NAME_SEARCH_CANCELLED
+LANG_ENGLISH		"Gametype name search was cancelled for an unknown reason."
+
+REFERENCE		AIZ_GETAWAY_DESC
+LANG_ENGLISH		"Vacation spot that turned\ninto a nightmare"
+
+REFERENCE		AIZ_GET_READY
+LANG_ENGLISH		"Get ready for the attack in:"
+
+REFERENCE		AIZ_GIFTED_CASH_TO
+LANG_ENGLISH		" Gifted $500 to &&1!"
+
+REFERENCE		AIZ_GULCH_DESC
+LANG_ENGLISH		"Desert gulch thriving with undead"
+
+REFERENCE		AIZ_HARDHAT_DESC
+LANG_ENGLISH		"A small construction site unfinished"
+
+REFERENCE		AIZ_HAS_BEEN_KILLED
+LANG_ENGLISH		"^1&&1 ^1has been killed."
+
+REFERENCE		AIZ_HELI_SNIPER_FAIL_LOCATION
+LANG_ENGLISH		"Cannot call in Heli Sniper here"
+
+REFERENCE		AIZ_HELI_SNIPER_FAIL_TELEPORT
+LANG_ENGLISH		"Cannot call in Heli Sniper while teleporting"
+
+REFERENCE		AIZ_HIDEOUT_OF_HELL
+LANG_ENGLISH		"Hideout of Hell"
+
+REFERENCE		AIZ_HOLD_FOR
+LANG_ENGLISH		"Hold ^3[{+activate}] ^7for "
+
+REFERENCE		AIZ_HOLD_FOR_EXPLOSIVE_AMMO
+LANG_ENGLISH		"Hold ^3[{+activate}] ^7for Explosive Ammo"
+
+REFERENCE		AIZ_HOLD_TO_BOARD_HELI
+LANG_ENGLISH		"Hold ^3[{+activate}] ^7to board the Heli"
+
+REFERENCE		AIZ_HOLD_TO_REVIVE
+LANG_ENGLISH		"Hold ^3[{+activate}] ^7to revive &&1"
+
+REFERENCE		AIZ_HUMANS
+LANG_ENGLISH		"^2Humans"
+
+REFERENCE		AIZ_HUMANS_SURVIVED_FOR
+LANG_ENGLISH		"Humans survived for"
+
+REFERENCE		AIZ_HUMANS_WON
+LANG_ENGLISH		"We Won This Fight!"
+
+REFERENCE		AIZ_INFINITE_HEALTH
+LANG_ENGLISH		"^2Infinite Health for 30 seconds!"
+
+REFERENCE		AIZ_INFINITE_HEALTH_OVER
+LANG_ENGLISH		"Infinite Health over!"
+
+REFERENCE		AIZ_INSTAKILL
+LANG_ENGLISH		"Insta-Kill!"
+
+REFERENCE		AIZ_INTERCHANGE_DESC
+LANG_ENGLISH		"A destroyed freeway\nresulting from an outbreak"
+
+REFERENCE		AIZ_INTERSECTION_DESC
+LANG_ENGLISH		"A freeway in the centre on the attacks"
+
+REFERENCE		AIZ_INTRO_1
+LANG_ENGLISH		"^2Welcome &&1!"
+
+REFERENCE		AIZ_INTRO_2
+LANG_ENGLISH		"^1AIZombies Supreme v0.99 Beta"
+
+REFERENCE		AIZ_INTRO_3
+LANG_ENGLISH		"^3Map: &&1"
+
+REFERENCE		AIZ_INTRO_4
+LANG_ENGLISH		"^2Made By Slvr99"
+
+REFERENCE		AIZ_INTRO_5
+LANG_ENGLISH		"^5Survive &&1 Waves."
+
+REFERENCE		AIZ_JUGGERNOG
+LANG_ENGLISH		"Juggernog"
+
+REFERENCE		AIZ_JUGG_DESC
+LANG_ENGLISH		"More health"
+
+REFERENCE		AIZ_KILLSTREAK_AIRSTRIKE
+LANG_ENGLISH		"Airstrike"
+
+REFERENCE		AIZ_KILLSTREAK_AMMO
+LANG_ENGLISH		"Ammo"
+
+REFERENCE		AIZ_KILLSTREAK_ARTILLERY
+LANG_ENGLISH		"Artillery"
+
+REFERENCE		AIZ_KILLSTREAK_ASSAULT_BOATS
+LANG_ENGLISH		"Assault Boats"
+
+REFERENCE		AIZ_KILLSTREAK_BARBED_WIRE
+LANG_ENGLISH		"Barbed Wire"
+
+REFERENCE		AIZ_KILLSTREAK_BLIZZARD
+LANG_ENGLISH		"Blizzard"
+
+REFERENCE		AIZ_KILLSTREAK_EXPLOSIVE_AMMO
+LANG_ENGLISH		"Deployable Explosive Ammo"
+
+REFERENCE		AIZ_KILLSTREAK_GL_TURRET
+LANG_ENGLISH		"Grenade Launcher Turret"
+
+REFERENCE		AIZ_KILLSTREAK_HELI_SNIPER
+LANG_ENGLISH		"Heli Sniper"
+
+REFERENCE		AIZ_KILLSTREAK_LITTLEBIRD_DRONE
+LANG_ENGLISH		"Littlebird Drone"
+
+REFERENCE		AIZ_KILLSTREAK_MISSILE
+LANG_ENGLISH		"Missile"
+
+REFERENCE		AIZ_KILLSTREAK_MOAB
+LANG_ENGLISH		"M.O.A.B."
+
+REFERENCE		AIZ_KILLSTREAK_OIL_SPILL
+LANG_ENGLISH		"Oil Spill"
+
+REFERENCE		AIZ_KILLSTREAK_POISON_GAS
+LANG_ENGLISH		"Poison Gas Attack"
+
+REFERENCE		AIZ_KILLSTREAK_POWER_SURGE
+LANG_ENGLISH		"Power Surge"
+
+REFERENCE		AIZ_KILLSTREAK_READY_FOR_USE
+LANG_ENGLISH		"^3&&1 ^7ready for usage!"
+
+REFERENCE		AIZ_KILLSTREAK_SENTRY
+LANG_ENGLISH		"Sentry Gun"
+
+REFERENCE		AIZ_KILLSTREAK_VISION_RESTORER
+LANG_ENGLISH		"Vision Restorer"
+
+REFERENCE		AIZ_KILLSTREAK_VOLCANIC_ERUPTION
+LANG_ENGLISH		"Volcanic Eruption"
+
+REFERENCE		AIZ_LIBERATION_DESC
+LANG_ENGLISH		"A military base built in a park\nfor protection against the undead"
+
+REFERENCE		AIZ_LMG_TEAM
+LANG_ENGLISH		"LMG Team"
+
+REFERENCE		AIZ_LOCKDOWN_DESC
+LANG_ENGLISH		"Once peaceful streets overrun by undead"
+
+REFERENCE		AIZ_LOOKOUT_DESC
+LANG_ENGLISH		"A rest repo that's useful for\nanything other than rest"
+
+REFERENCE		AIZ_LOSE
+LANG_ENGLISH		"Lose"
+
+REFERENCE		AIZ_LOSS_REASON
+LANG_ENGLISH		"Zombies ate the humans"
+
+REFERENCE		AIZ_MAP_KILLSTREAK
+LANG_ENGLISH		"Map Killstreak"
+
+REFERENCE		AIZ_MAX_AMMO
+LANG_ENGLISH		"Max Ammo!"
+
+REFERENCE		AIZ_MAX_AMMO_CHANCE
+LANG_ENGLISH		"^2You have 1/2 chance for Max Ammo!"
+
+REFERENCE		AIZ_MAX_AMMO_LOST
+LANG_ENGLISH		"^1No Max Ammo."
+
+REFERENCE		AIZ_MAX_AMMO_WON
+LANG_ENGLISH		"^2You've won the Max Ammo!"
+
+REFERENCE		AIZ_MAX_BANK_BALANCE
+LANG_ENGLISH		"Your bank balance is already at max!"
+
+REFERENCE		AIZ_MAX_PERK_LIMIT
+LANG_ENGLISH		"You may only carry &&1 perks!"
+
+REFERENCE		AIZ_MINUTES
+LANG_ENGLISH		"&&1 Minutes"
+
+REFERENCE		AIZ_MISSION_DESC
+LANG_ENGLISH		"A rundown village taken over\nby the undead"
+
+REFERENCE		AIZ_MOAB
+LANG_ENGLISH		"M.O.A.B."
+
+REFERENCE		AIZ_MONEY
+LANG_ENGLISH		"Money: $"
+
+REFERENCE		AIZ_MULEKICK
+LANG_ENGLISH		"Mule Kick"
+
+REFERENCE		AIZ_MULE_DESC
+LANG_ENGLISH		"An extra weapon slot"
+
+REFERENCE		AIZ_NEEDS_TO_BE_REVIVED
+LANG_ENGLISH		"^1&&1 ^1needs to be revived!"
+
+REFERENCE		AIZ_NEXT_ROUND_IN
+LANG_ENGLISH		"Next Round In: &&1"
+
+REFERENCE		AIZ_NOT_AVAILABLE
+LANG_ENGLISH		"&&1 not available."
+
+REFERENCE		AIZ_NOT_ENOUGH_CASH_FOR_AMMO
+LANG_ENGLISH		"^1Not enough money for Ammo. Need ^2$&&1"
+
+REFERENCE		AIZ_NOT_ENOUGH_CASH_FOR_RANDOM_WEAPON
+LANG_ENGLISH		"^1Not enough money for a Random Weapon. Need ^2$950"
+
+REFERENCE		AIZ_NOT_ENOUGH_CASH_FOR_RANDOM_WEAPON_SALE
+LANG_ENGLISH		"^1Not enough money for a Random Weapon. Need ^2$10"
+
+REFERENCE		AIZ_NO_BOT_SPAWNS
+LANG_ENGLISH		"^1No bot spawns available! Check console for details"
+
+REFERENCE		AIZ_NO_BOT_SPAWNS_CONSOLE
+LANG_ENGLISH		"No bot spawns available! Please have at least one \zombiespawn\ in your map file."
+
+REFERENCE		AIZ_NUKE
+LANG_ENGLISH		"Nuke!"
+
+REFERENCE		AIZ_NUKE_ALREADY_INBOUND
+LANG_ENGLISH		"Nuke already inbound!"
+
+REFERENCE		AIZ_NUKE_INBOUND_IN
+LANG_ENGLISH		"Nuke Incoming In: &&1"
+
+REFERENCE		AIZ_OASIS_DESC
+LANG_ENGLISH		"An oasis that got overrun by undead"
+
+REFERENCE		AIZ_OCEANSIDE_ATTACK
+LANG_ENGLISH		"Oceanside Attack"
+
+REFERENCE		AIZ_OFFSHORE_DESC
+LANG_ENGLISH		"An oil rig overrun by\nmore than juggernauts"
+
+REFERENCE		AIZ_OIL_REFINERY
+LANG_ENGLISH		"Oil Refinery"
+
+REFERENCE		AIZ_OIL_RIG
+LANG_ENGLISH		"Oil Rig"
+
+REFERENCE		AIZ_OPENED_DOOR
+LANG_ENGLISH		"Opened Door!"
+
+REFERENCE		AIZ_OUTPOST_DESC
+LANG_ENGLISH		"Siberian outpost evacuated\ndue to the outbreak"
+
+REFERENCE		AIZ_OVERWATCH_DESC
+LANG_ENGLISH		"A skyscraper abandoned due\nto the outbreak"
+
+REFERENCE		AIZ_PANDEMIC_BRIDGE
+LANG_ENGLISH		"Pandemic Bridge"
+
+REFERENCE		AIZ_PARADISE
+LANG_ENGLISH		"Paradise"
+
+REFERENCE		AIZ_PARISH_DESC
+LANG_ENGLISH		"A fun town that was\novertaken by undead"
+
+REFERENCE		AIZ_PERMANENT_BOT_ACHIEVED
+LANG_ENGLISH		"Permanent Bot Achieved!"
+
+REFERENCE		AIZ_PES_ACTIVE
+LANG_ENGLISH		"^5P.E.S. Active."
+
+REFERENCE		AIZ_PIAZZA_DESC
+LANG_ENGLISH		"A spanish town infected by muertos"
+
+REFERENCE		AIZ_PLEASE_ACTIVATE_PES
+LANG_ENGLISH		"^5Please activate P.E.S."
+
+REFERENCE		AIZ_POISON_GAS_INCOMING
+LANG_ENGLISH		"Poison Gas Inbound!"
+
+REFERENCE		AIZ_POWER
+LANG_ENGLISH		"Power!"
+
+REFERENCE		AIZ_POWER_ACTIVATED_BY
+LANG_ENGLISH		"Power Activated By"
+
+REFERENCE		AIZ_POWER_HAS_BEEN_ACTIVATED
+LANG_ENGLISH		"Power has been activated"
+
+REFERENCE		AIZ_POWER_MUST_BE_ACTIVATED
+LANG_ENGLISH		"^1Power must be activated!"
+
+REFERENCE		AIZ_POWER_NOT_ACTIVATED
+LANG_ENGLISH		"Power is not activated"
+
+REFERENCE		AIZ_POWER_TEMP_ACTIVATED
+LANG_ENGLISH		"Power has been temporarily activated for &&1 seconds"
+
+REFERENCE		AIZ_PRESS_FOR
+LANG_ENGLISH		"Press ^3[{+activate}] ^7for &&1"
+
+REFERENCE		AIZ_PRESS_FOR_AMMO
+LANG_ENGLISH		"Press ^3[{+activate}] ^7for Ammo [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_FOR_EASTER_EGG
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to wash away your sins."
+
+REFERENCE		AIZ_PRESS_FOR_PES
+LANG_ENGLISH		"Press ^3[{+actionslot 3}] ^7to equip P.E.S."
+
+REFERENCE		AIZ_PRESS_FOR_RANDOM_KILLSTREAK
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy a random killstreak [Cost: 200 ^5Bonus Points^7]"
+
+REFERENCE		AIZ_PRESS_FOR_RANDOM_WEAPON
+LANG_ENGLISH		"Press ^3[{+activate}] ^7for a Random Weapon [Cost: 950]"
+
+REFERENCE		AIZ_PRESS_FOR_RANDOM_WEAPON_SALE
+LANG_ENGLISH		"Press ^3[{+activate}] ^7for a Random Weapon [Cost: 10]"
+
+REFERENCE		AIZ_PRESS_N_FOR_COST
+LANG_ENGLISH		"Press ^3[{+activate}] ^7for &&1 ^7[Cost: &&2]"
+
+REFERENCE		AIZ_PRESS_TO_ACTIVATE_POWER
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to activate Power [Cost: 10000]"
+
+REFERENCE		AIZ_PRESS_TO_BUY
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy &&1 [Cost: &&2]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_AUTOREVIVE
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Quick Revive Pro [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_DOUBLETAP
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Double Tap [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_JUGG
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Juggernog [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_MULE
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Mule Kick [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_SPEED
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Speed Cola [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_STALKER
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Stalker Soda [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_STAMINUP
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Stamin-Up [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_GIFT
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to gift $^2500 ^7to &&1"
+
+REFERENCE		AIZ_PRESS_TO_LINK_TELEPORTER
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to link the teleporter"
+
+REFERENCE		AIZ_PRESS_TO_OPEN_DOOR
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to open the door [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_TAKE_UPGRADE
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to take ^2your new upgraded weapon"
+
+REFERENCE		AIZ_PRESS_TO_TELEPORT
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to teleport"
+
+REFERENCE		AIZ_PRESS_TO_TRADE_WEAPONS
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to trade Weapons: "
+
+REFERENCE		AIZ_PRESS_TO_UPGRADE
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to upgrade your ^1Current Weapon ^7[Cost: 5000]"
+
+REFERENCE		AIZ_PRESS_TO_USE_ELEVATOR
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to use the elevator [Cost: 500]"
+
+REFERENCE		AIZ_PRESS_TO_USE_GAMBLER
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to use the Gambler [Cost: 1000]"
+
+REFERENCE		AIZ_PRESS_TO_WITHDRAW
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to withdraw from the ATM [Amount: 1000] [Cost: 100]\n\n                  Press ^3[{vote yes}] ^7to deposit to the ATM [Cost: 1000]"
+
+REFERENCE		AIZ_QUICKREVIVE
+LANG_ENGLISH		"Quick Revive Pro"
+
+REFERENCE		AIZ_RANDOM
+LANG_ENGLISH		"^5Random"
+
+REFERENCE		AIZ_RANDOM_KILLSTREAK
+LANG_ENGLISH		"Random Killstreak!"
+
+REFERENCE		AIZ_RANDOM_PERK
+LANG_ENGLISH		"Random Perk!"
+
+REFERENCE		AIZ_RANDOM_WEAPON
+LANG_ENGLISH		"Random Weapon!"
+
+REFERENCE		AIZ_RECIEVED_CASH_FROM
+LANG_ENGLISH		" Recieved $500 from &&1!"
+
+REFERENCE		AIZ_REROUTE_DRONE
+LANG_ENGLISH		"Press ^3[{vote no}] ^7to re-route the drone"
+
+REFERENCE		AIZ_RESISTANCE_DESC
+LANG_ENGLISH		"Parisian district not safe anymore"
+
+REFERENCE		AIZ_REST_SITE_OF_HELL
+LANG_ENGLISH		"Rest Site Of Hell"
+
+REFERENCE		AIZ_RUNDOWN_VILLAGE
+LANG_ENGLISH		"Rundown Village"
+
+REFERENCE		AIZ_SANCTUARY_DESC
+LANG_ENGLISH		"A sanctuary that was broken from\nit's purity by the undead"
+
+REFERENCE		AIZ_SANCTUARY_OF_HELL
+LANG_ENGLISH		"Sanctuary Of Hell"
+
+REFERENCE		AIZ_SCAVENGER
+LANG_ENGLISH		"Scavenge-Aid"
+
+REFERENCE		AIZ_SCAVENGER_DESC
+LANG_ENGLISH		"Scavenge Free Ammo"
+
+REFERENCE		AIZ_SEASIDE_HOTEL_OF_HELL
+LANG_ENGLISH		"Seaside Hotel Of Hell"
+
+REFERENCE		AIZ_SEATOWN_DESC
+LANG_ENGLISH		"A seaside town not safe\nfrom the undead"
+
+REFERENCE		AIZ_SECONDS
+LANG_ENGLISH		"&&1 Seconds"
+
+REFERENCE		AIZ_SERVER_GAMETYPE_NAME_ERROR
+LANG_ENGLISH		"There was an error setting the server gametype name!: "
+
+REFERENCE		AIZ_SERVER_GAMETYPE_NAME_NO_ADDRESSES
+LANG_ENGLISH		"There was an error setting the server gametype name: No addresses found!"
+
+REFERENCE		AIZ_SERVER_GAMETYPE_NAME_SEARCH_CANCELLED
+LANG_ENGLISH		"Server gametype name search was cancelled for an unknown reason."
+
+REFERENCE		AIZ_SHANTYTOWN
+LANG_ENGLISH		"Shantytown"
+
+REFERENCE		AIZ_SHIPWRECKED
+LANG_ENGLISH		"Shipwrecked"
+
+REFERENCE		AIZ_SILLA_CEMENT
+LANG_ENGLISH		"Silla Cement"
+
+REFERENCE		AIZ_SPEEDCOLA
+LANG_ENGLISH		"Speed Cola"
+
+REFERENCE		AIZ_SPEED_DESC
+LANG_ENGLISH		"Reload faster"
+
+REFERENCE		AIZ_STALKER
+LANG_ENGLISH		"Stalker Soda"
+
+REFERENCE		AIZ_STALKER_DESC
+LANG_ENGLISH		"Faster moving while ADS"
+
+REFERENCE		AIZ_STAMINUP
+LANG_ENGLISH		"Stamin-Up"
+
+REFERENCE		AIZ_STAMINUP_DESC
+LANG_ENGLISH		"Sprint faster and longer"
+
+REFERENCE		AIZ_STORAGE_UNIT_OF_HELL
+LANG_ENGLISH		"Storage Unit Of Hell"
+
+REFERENCE		AIZ_STORMY_OUTBREAK
+LANG_ENGLISH		"Stormy Outbreak"
+
+REFERENCE		AIZ_STREETS_OF_DEATH
+LANG_ENGLISH		"Streets of Death"
+
+REFERENCE		AIZ_SUB_TEAM
+LANG_ENGLISH		"Sub Team"
+
+REFERENCE		AIZ_SURVIVE_N_WAVES
+LANG_ENGLISH		"Survive &&1 waves."
+
+REFERENCE		AIZ_TANK_BARRAGE
+LANG_ENGLISH		"Tank Barrage"
+
+REFERENCE		AIZ_TELEPORTER_COOLING_DOWN
+LANG_ENGLISH		"The teleporter is cooling down."
+
+REFERENCE		AIZ_TELEPORTER_LINK_FIRST
+LANG_ENGLISH		"^1You must link the teleporter first!"
+
+REFERENCE		AIZ_TEMP
+LANG_ENGLISH		"Temp"
+
+REFERENCE		AIZ_TERMINAL_DESC
+LANG_ENGLISH		"A russian airport overtaken by the undead"
+
+REFERENCE		AIZ_THE_PIER
+LANG_ENGLISH		"The Pier"
+
+REFERENCE		AIZ_THIRD_PARTY_SCRIPTS_UNLOADED
+LANG_ENGLISH		"All third party scripts have been unloaded from this server due to a conflict with AIZombies."
+
+REFERENCE		AIZ_TOO_MANY_BOTS
+LANG_ENGLISH		"Too many bots deployed."
+
+REFERENCE		AIZ_TRAPPED_CANYON
+LANG_ENGLISH		"Trapped Canyon"
+
+REFERENCE		AIZ_UNABLE_TO_RESTORE_CUSTOM_GAMETYPE
+LANG_ENGLISH		"Unable to restore the custom gamemode string! This may result in a server crash when the map changes!"
+
+REFERENCE		AIZ_UNABLE_TO_SET_CUSTOM_GAMETYPE
+LANG_ENGLISH		"Unable to set custom gametype name."
+
+REFERENCE		AIZ_UNDEAD_FARM
+LANG_ENGLISH		"Undead Farm"
+
+REFERENCE		AIZ_UNDERGROUND_DESC
+LANG_ENGLISH		"Subway station used as an\nevacuation route"
+
+REFERENCE		AIZ_UNDER_CONSTRUCTION
+LANG_ENGLISH		"Under Construction"
+
+REFERENCE		AIZ_UNKNOWN_MAP
+LANG_ENGLISH		"^1Unknown Map!"
+
+REFERENCE		AIZ_UNKNOWN_MAPEDIT_ENTRY
+LANG_ENGLISH		"Unknown MapEdit Entry &&1... ignoring"
+
+REFERENCE		AIZ_UPDATE_AVAILABLE
+LANG_ENGLISH		"There is an update for AIZombies available! Downloading version &&1 now..."
+
+REFERENCE		AIZ_UPDATE_DOWNLOAD_COMPLETE
+LANG_ENGLISH		"Download completed! The updates will take effect once the current game ends."
+
+REFERENCE		AIZ_UPDATE_ERROR
+LANG_ENGLISH		"There was an error downloading the update from the server!: &&1"
+
+REFERENCE		AIZ_UPDATE_ERROR_REPLACING_FILE
+LANG_ENGLISH		"There was an error replacing the old AIZombies file! Make sure the file is not read-only or is opened somewhere else."
+
+REFERENCE		AIZ_U_TURN_DESC
+LANG_ENGLISH		"Desert freeway unsafe from the undead"
+
+REFERENCE		AIZ_VICTORY
+LANG_ENGLISH		"Victory!"
+
+REFERENCE		AIZ_VILLAGE_DESC
+LANG_ENGLISH		"African village ridden\nwith a dangerous disease"
+
+REFERENCE		AIZ_VOLCANO_ALREADY_ERUPTED
+LANG_ENGLISH		"The volcano has already erupted."
+
+REFERENCE		AIZ_VOLCANO_ERUPTION_INCOMING
+LANG_ENGLISH		"Volcano Eruption Imminent!"
+
+REFERENCE		AIZ_VORTEX_DESC
+LANG_ENGLISH		"Abandoned farm hit by\nmore than one problem"
+
+REFERENCE		AIZ_VOTE_FOR_NEXT_MAP
+LANG_ENGLISH		"Vote for the next map!"
+
+REFERENCE		AIZ_VOTE_HELP
+LANG_ENGLISH		"Vote using [{+actionslot 4}], [{+actionslot 5}], and [{+actionslot 6}] for the respective maps!"
+
+REFERENCE		AIZ_WARTORN
+LANG_ENGLISH		"Wartorn"
+
+REFERENCE		AIZ_WAVE
+LANG_ENGLISH		"Wave &&1"
+
+REFERENCE		AIZ_WAVES_SURVIVED
+LANG_ENGLISH		"Waves Survived: &&1"
+
+REFERENCE		AIZ_WAVE_SURVIVED
+LANG_ENGLISH		"Wave &&1 Survived!"
+
+REFERENCE		AIZ_WAYPOINT_HAD_NO_LINKS
+LANG_ENGLISH		"A waypoint had no visible links! Deleting waypoint..."
+
+REFERENCE		AIZ_WEAPON
+LANG_ENGLISH		"Weapon"
+
+REFERENCE		AIZ_WEAPON_DATA_MISSING
+LANG_ENGLISH		"Could not find weapon data for &&1! Please report this error to Slvr99"
+
+REFERENCE		AIZ_WEAPON_PATCH_ERROR
+LANG_ENGLISH		"There was an error finding weapon patch locations: "
+
+REFERENCE		AIZ_WEAPON_PATCH_SEARCH_CANCELLED
+LANG_ENGLISH		"Weapon patch search was cancelled for an unknown reason! This may cause bugs to occur for certain weapons."
+
+REFERENCE		AIZ_WEAPON_UPGRADED
+LANG_ENGLISH		"Weapon Upgraded!"
+
+REFERENCE		AIZ_WIN
+LANG_ENGLISH		"Win"
+
+REFERENCE		AIZ_WIN_1
+LANG_ENGLISH		"Humans Defeated The Zombies!"
+
+REFERENCE		AIZ_WIN_10
+LANG_ENGLISH		"Humans: 1, Zombies: 0"
+
+REFERENCE		AIZ_WIN_11
+LANG_ENGLISH		"Humans Win Bitches!"
+
+REFERENCE		AIZ_WIN_12
+LANG_ENGLISH		"Victory!!!"
+
+REFERENCE		AIZ_WIN_13
+LANG_ENGLISH		"Enemy Down!!!"
+
+REFERENCE		AIZ_WIN_14
+LANG_ENGLISH		"Easy Peasy!"
+
+REFERENCE		AIZ_WIN_2
+LANG_ENGLISH		"Humans Survived!"
+
+REFERENCE		AIZ_WIN_3
+LANG_ENGLISH		"Good Job Humans!"
+
+REFERENCE		AIZ_WIN_4
+LANG_ENGLISH		"Humans Stayed Alive!"
+
+REFERENCE		AIZ_WIN_5
+LANG_ENGLISH		"Human Face: :D!"
+
+REFERENCE		AIZ_WIN_6
+LANG_ENGLISH		"Amazing! Humans Live On!"
+
+REFERENCE		AIZ_WIN_7
+LANG_ENGLISH		"Great Job Humans!"
+
+REFERENCE		AIZ_WIN_8
+LANG_ENGLISH		"Good Job, Get Ready For The Next Attack!"
+
+REFERENCE		AIZ_WIN_9
+LANG_ENGLISH		"Zombies Are Such Perverts... Humans FTW!"
+
+REFERENCE		AIZ_WRONG_MAX_PLAYER_COUNT
+LANG_ENGLISH		"The current max players for AIZombies can only be 8 or below. The current setting is &&1. It has been set to 8."
+
+REFERENCE		AIZ_WRONG_MODE
+LANG_ENGLISH		"You must be running AIZombies Supreme on Team Deathmatch!"
+
+REFERENCE		AIZ_YOU_ALREADY_HAVE
+LANG_ENGLISH		"You already have &&1!"
+
+REFERENCE		AIZ_YOU_HAVE_DIED
+LANG_ENGLISH		"^1You have died. Wait until the next round to respawn."
+
+REFERENCE		AIZ_YOU_LOST
+LANG_ENGLISH		"^1You've lost &&1!"
+
+REFERENCE		AIZ_YOU_WON_NEGATIVE
+LANG_ENGLISH		"^1You've won &&1."
+
+REFERENCE		AIZ_YOU_WON_POSITIVE
+LANG_ENGLISH		"^2You've won &&1!"
+
+REFERENCE		AIZ_ZOMBIES_WON
+LANG_ENGLISH		"Zombies Won This Fight"
+
+REFERENCE		AIZ_ZOMBIE_COUNT
+LANG_ENGLISH		"Zombies: "
+
+REFERENCE		MENU_AIZ_DESC
+LANG_ENGLISH		"AIZombies Placeholder Description"
+
+REFERENCE		MPUI_AIZ
+LANG_ENGLISH		"^2AIZombies Supreme"
+
+REFERENCE		MPUI_AIZ_CAPS
+LANG_ENGLISH		"^2AIZOMBIES SUPREME"
+
+REFERENCE		SPLASHES_CHANGED_DEFCON
+LANG_ENGLISH		"Defcon Level Lowered"
+
+REFERENCE		SPLASHES_ONE_FROM_DEFCON
+LANG_ENGLISH		"One From Defcon"
+
+REFERENCE		SPLASHES_TWO_FROM_DEFCON
+LANG_ENGLISH		"Two From Defcon"

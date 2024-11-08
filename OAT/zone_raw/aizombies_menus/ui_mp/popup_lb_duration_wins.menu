@@ -1,0 +1,510 @@
+{
+    menuDef
+    {
+        name                        "popup_lb_duration_wins"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - 26.25;
+        exp rect Y                  localvarfloat("ui_lb_focused_item_y") - 2;
+        exp rect W                  155;
+        exp rect H                  (((23 * 0) + (16.367 * 0)) + ((select((1), 1, 0) + select((1), 1, 0) + select((1), 1, 0) + select((0), 1, 0) + select((0), 1, 0)) * (20 + 2)) + 5);
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            focusfirst;
+            setfocus popup_lb_duration_0;
+            focusfirst;
+            if ((dvarstring(lb_filter_duration) == "LB_GB_WINS_AT TRK_ALLTIME" && (1)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_WEEKLY" && !(1) && (1)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_MONTHLY" && !(1) && !(1) && (1)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME" && !(1) && !(1) && !(1) && (0)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY" && !(1) && !(1) && !(1) && !(0) && (0)))
+            {
+                setFocus popup_lb_duration_0;
+            }
+            if ((dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_WEEKLY" && (1) && (1)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_MONTHLY" && (!(1) || !(1)) && (1)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME" && ((1) + (1) + (1) == 1) && (0)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY" && ((1) + (1) + (1) + (0) == 1) && (0)))
+            {
+                setFocus popup_lb_duration_1;
+            }
+            if ((dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_MONTHLY" && (1) && (1) && (1)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME" && ((1) + (1) + (1) == 2) && (0)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY" && ((1) + (1) + (1) + (0) == 2) && (0)))
+            {
+                setFocus popup_lb_duration_2;
+            }
+            if ((dvarstring(lb_filter_duration) == "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME" && (1) && (1) && (1) && (0)) || (dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY" && ((1) + (1) + (1) + (0) == 3) && (0)))
+            {
+                setFocus popup_lb_duration_3;
+            }
+            if ((dvarstring(lb_filter_duration) == "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY" && (1) && (1) && (1) && (0) && (0)))
+            {
+                setFocus popup_lb_duration_4;
+            }
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_lb_duration_wins"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.6
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 155 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 0) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * (select((1), 1, 0) + select((1), 1, 0) + select((1), 1, 0) + select((0), 1, 0) + select((0), 1, 0))) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration") && (localvarstring("ui_swfPopupContext") == "popup_lb_duration"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 0) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  155;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration") && (localvarstring("ui_swfPopupContext") == "popup_lb_duration"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 0) + (16.367 * 0)));
+            exp rect w                  155;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration") && (localvarstring("ui_swfPopupContext") == "popup_lb_duration"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 0) + (16.367 * 0)));
+            exp rect w                  155;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration") && (localvarstring("ui_swfPopupContext") == "popup_lb_duration"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 155 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 0) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            name                        "popup_lb_duration_0"
+            rect                        11.667 0 155 22 2 2
+            style                       3
+            type                        1
+            visible                     when((select((1), "@MENU_LB_FILTER_DURATION_ALLTIME", select(!(1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(!(1) && !(1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(!(1) && !(1) && !(1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(!(1) && !(1) && !(1) && !(0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))))) != "");
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "popup_lb_duration";
+                setLocalVarBool ui_swfPopupSelectionButtonVis (((select((1), "@MENU_LB_FILTER_DURATION_ALLTIME", select(!(1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(!(1) && !(1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(!(1) && !(1) && !(1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(!(1) && !(1) && !(1) && !(0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))))) != "") && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis ((select((1), "@MENU_LB_FILTER_DURATION_ALLTIME", select(!(1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(!(1) && !(1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(!(1) && !(1) && !(1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(!(1) && !(1) && !(1) && !(0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))))) != "");
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "popup_lb_duration";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                if ((select((1), 1, select(!(1) && (1), 2, select(!(1) && !(1) && (1), 3, select(!(1) && !(1) && !(1) && (0), 4, select(!(1) && !(1) && !(1) && !(0) && (0), 5, 0)))))) == 1 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_ALLTIME";
+                }
+                if ((select((1), 1, select(!(1) && (1), 2, select(!(1) && !(1) && (1), 3, select(!(1) && !(1) && !(1) && (0), 4, select(!(1) && !(1) && !(1) && !(0) && (0), 5, 0)))))) == 2 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_WEEKLY";
+                }
+                if ((select((1), 1, select(!(1) && (1), 2, select(!(1) && !(1) && (1), 3, select(!(1) && !(1) && !(1) && (0), 4, select(!(1) && !(1) && !(1) && !(0) && (0), 5, 0)))))) == 3 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_MONTHLY";
+                }
+                if ((select((1), 1, select(!(1) && (1), 2, select(!(1) && !(1) && (1), 3, select(!(1) && !(1) && !(1) && (0), 4, select(!(1) && !(1) && !(1) && !(0) && (0), 5, 0)))))) == 4 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME";
+                }
+                if ((select((1), 1, select(!(1) && (1), 2, select(!(1) && !(1) && (1), 3, select(!(1) && !(1) && !(1) && (0), 4, select(!(1) && !(1) && !(1) && !(0) && (0), 5, 0)))))) == 5 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY";
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  155 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 155 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when(((select((1), "@MENU_LB_FILTER_DURATION_ALLTIME", select(!(1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(!(1) && !(1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(!(1) && !(1) && !(1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(!(1) && !(1) && !(1) && !(0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))))) != "") && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    (select((1), "@MENU_LB_FILTER_DURATION_ALLTIME", select(!(1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(!(1) && !(1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(!(1) && !(1) && !(1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(!(1) && !(1) && !(1) && !(0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))))));
+            exp rect y                  (((0 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  155;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_lb_duration_1"
+            rect                        11.667 0 155 22 2 2
+            style                       3
+            type                        1
+            visible                     when((select((1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(((1) + (1) == 1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))))) != "");
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "popup_lb_duration";
+                setLocalVarBool ui_swfPopupSelectionButtonVis (((select((1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(((1) + (1) == 1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))))) != "") && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis ((select((1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(((1) + (1) == 1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))))) != "");
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "popup_lb_duration";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                if ((select((1) && (1), 2, select(((1) + (1) == 1) && (1), 3, select(((1) + (1) + (1) == 1) && (0), 4, select(((1) + (1) + (1) + (0) == 1) && (0), 5, 0))))) == 1 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_ALLTIME";
+                }
+                if ((select((1) && (1), 2, select(((1) + (1) == 1) && (1), 3, select(((1) + (1) + (1) == 1) && (0), 4, select(((1) + (1) + (1) + (0) == 1) && (0), 5, 0))))) == 2 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_WEEKLY";
+                }
+                if ((select((1) && (1), 2, select(((1) + (1) == 1) && (1), 3, select(((1) + (1) + (1) == 1) && (0), 4, select(((1) + (1) + (1) + (0) == 1) && (0), 5, 0))))) == 3 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_MONTHLY";
+                }
+                if ((select((1) && (1), 2, select(((1) + (1) == 1) && (1), 3, select(((1) + (1) + (1) == 1) && (0), 4, select(((1) + (1) + (1) + (0) == 1) && (0), 5, 0))))) == 4 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME";
+                }
+                if ((select((1) && (1), 2, select(((1) + (1) == 1) && (1), 3, select(((1) + (1) + (1) == 1) && (0), 4, select(((1) + (1) + (1) + (0) == 1) && (0), 5, 0))))) == 5 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY";
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((1 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  155 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 155 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when(((select((1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(((1) + (1) == 1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))))) != "") && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    (select((1) && (1), "@MENU_LB_FILTER_DURATION_WEEKLY", select(((1) + (1) == 1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))));
+            exp rect y                  (((1 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  155;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_lb_duration_2"
+            rect                        11.667 0 155 22 2 2
+            style                       3
+            type                        1
+            visible                     when((select((1) && (1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))) != "");
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 2;
+                setLocalVarString ui_buttonNavGroupName_popup "popup_lb_duration";
+                setLocalVarBool ui_swfPopupSelectionButtonVis (((select((1) && (1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))) != "") && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis ((select((1) && (1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))) != "");
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "popup_lb_duration";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                if ((select((1) && (1) && (1), 3, select(((1) + (1) + (1) == 2) && (0), 4, select(((1) + (1) + (1) + (0) == 2) && (0), 5, 0)))) == 1 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_ALLTIME";
+                }
+                if ((select((1) && (1) && (1), 3, select(((1) + (1) + (1) == 2) && (0), 4, select(((1) + (1) + (1) + (0) == 2) && (0), 5, 0)))) == 2 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_WEEKLY";
+                }
+                if ((select((1) && (1) && (1), 3, select(((1) + (1) + (1) == 2) && (0), 4, select(((1) + (1) + (1) + (0) == 2) && (0), 5, 0)))) == 3 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_MONTHLY";
+                }
+                if ((select((1) && (1) && (1), 3, select(((1) + (1) + (1) == 2) && (0), 4, select(((1) + (1) + (1) + (0) == 2) && (0), 5, 0)))) == 4 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME";
+                }
+                if ((select((1) && (1) && (1), 3, select(((1) + (1) + (1) == 2) && (0), 4, select(((1) + (1) + (1) + (0) == 2) && (0), 5, 0)))) == 5 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY";
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((2 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  155 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 155 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when(((select((1) && (1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")))) != "") && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    (select((1) && (1) && (1), "@MENU_LB_FILTER_DURATION_MONTHLY", select(((1) + (1) + (1) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 2) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))));
+            exp rect y                  (((2 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  155;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_lb_duration_3"
+            rect                        11.667 0 155 22 2 2
+            style                       3
+            type                        1
+            visible                     when((select((1) && (1) && (1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 3) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))) != "");
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 3;
+                setLocalVarString ui_buttonNavGroupName_popup "popup_lb_duration";
+                setLocalVarBool ui_swfPopupSelectionButtonVis (((select((1) && (1) && (1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 3) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))) != "") && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis ((select((1) && (1) && (1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 3) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))) != "");
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "popup_lb_duration";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                if ((select((1) && (1) && (1) && (0), 4, select(((1) + (1) + (1) + (0) == 3) && (0), 5, 0))) == 1 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_ALLTIME";
+                }
+                if ((select((1) && (1) && (1) && (0), 4, select(((1) + (1) + (1) + (0) == 3) && (0), 5, 0))) == 2 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_WEEKLY";
+                }
+                if ((select((1) && (1) && (1) && (0), 4, select(((1) + (1) + (1) + (0) == 3) && (0), 5, 0))) == 3 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_MONTHLY";
+                }
+                if ((select((1) && (1) && (1) && (0), 4, select(((1) + (1) + (1) + (0) == 3) && (0), 5, 0))) == 4 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME";
+                }
+                if ((select((1) && (1) && (1) && (0), 4, select(((1) + (1) + (1) + (0) == 3) && (0), 5, 0))) == 5 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY";
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((3 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  155 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 155 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when(((select((1) && (1) && (1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 3) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""))) != "") && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    (select((1) && (1) && (1) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select(((1) + (1) + (1) + (0) == 3) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")));
+            exp rect y                  (((3 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  155;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,3)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "popup_lb_duration_4"
+            rect                        11.667 0 155 22 2 2
+            style                       3
+            type                        1
+            visible                     when((select((1) && (1) && (1) && (0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")) != "");
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 4;
+                setLocalVarString ui_buttonNavGroupName_popup "popup_lb_duration";
+                setLocalVarBool ui_swfPopupSelectionButtonVis (((select((1) && (1) && (1) && (0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")) != "") && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis ((select((1) && (1) && (1) && (0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")) != "");
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "popup_lb_duration";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                if ((select((1) && (1) && (1) && (0) && (0), 5, 0)) == 1 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_ALLTIME";
+                }
+                if ((select((1) && (1) && (1) && (0) && (0), 5, 0)) == 2 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_WEEKLY";
+                }
+                if ((select((1) && (1) && (1) && (0) && (0), 5, 0)) == 3 && (1))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_MONTHLY";
+                }
+                if ((select((1) && (1) && (1) && (0) && (0), 5, 0)) == 4 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_AT TRK_PRESTIGE_ALLTIME";
+                }
+                if ((select((1) && (1) && (1) && (0) && (0), 5, 0)) == 5 && (0))
+                {
+                    setdvar lb_filter_duration "LB_GB_WINS_LT TRK_PRESTIGE_WEEKLY";
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((4 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  155 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 155 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when(((select((1) && (1) && (1) && (0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", "")) != "") && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    (select((1) && (1) && (1) && (0) && (0), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", ""));
+            exp rect y                  (((4 * (20 + 2)) + (0 + 4) + ((23 * 0) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  155;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(popup_lb_duration,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "popup_lb_duration", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+    }
+}

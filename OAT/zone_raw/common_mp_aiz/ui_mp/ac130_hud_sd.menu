@@ -1,0 +1,185 @@
+{
+    menuDef
+    {
+        name                        "ac130_hud_sd"
+        rect                        0 0 640 480 0 0
+        visible                     when(FUNC_55() && !inkillcamnpc() && FUNC_82() && FUNC_107());
+        itemDef
+        {
+            text                        "@AC130_HUD_WEAPON_105MM"
+            rect                        -225 -140 100 30 2 2
+            decoration                  
+            visible                     1
+            textalign                   6
+            textscale                   0.35
+            exp forecolor a             1 - (FUNC_52() * ((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            text                        "@AC130_HUD_WEAPON_40MM"
+            rect                        -225 -120 100 30 2 2
+            decoration                  
+            visible                     1
+            textalign                   6
+            textscale                   0.35
+            exp forecolor a             1 - (FUNC_53() * ((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            text                        "@AC130_HUD_WEAPON_25MM"
+            rect                        -225 -100 100 30 2 2
+            decoration                  
+            visible                     1
+            textalign                   6
+            textscale                   0.35
+            exp forecolor a             1 - (FUNC_54() * ((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            rect                        -320 -240 640 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_52());
+            textscale                   0.55
+            background                  "ac130_overlay_105mm"
+            exp forecolor a             1 - ((((sin(localclientuimilliseconds() / 90)) * 0.65)) * isreloading());
+        }
+        itemDef
+        {
+            rect                        -320 -240 640 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_53());
+            textscale                   0.55
+            background                  "ac130_overlay_40mm"
+            exp forecolor a             1 - ((((sin(localclientuimilliseconds() / 90)) * 0.65)) * isreloading());
+        }
+        itemDef
+        {
+            rect                        -320 -240 640 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_54());
+            textscale                   0.55
+            background                  "ac130_overlay_25mm"
+            exp forecolor a             1 - ((((sin(localclientuimilliseconds() / 90)) * 0.65)) * isreloading());
+        }
+        itemDef
+        {
+            rect                        -100 0 0 0 10 10
+            decoration                  
+            visible                     when(FUNC_21() > 0);
+            textalign                   14
+            textscale                   0.35
+            exp text                    secondsascountdown(FUNC_21());
+        }
+        itemDef
+        {
+            text                        "@AC130_RELOADING"
+            rect                        0 75 0 0 2 2
+            decoration                  
+            visible                     when(isreloading() && FUNC_86() && FUNC_90());
+            textalign                   9
+            textscale                   0.35
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_UI_AC130_TOGGLE_FLIR"
+            rect                        180 105 0 20 9 9
+            decoration                  
+            visible                     when(FUNC_86() && FUNC_90() && FUNC_106());
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            forecolor                   1 1 1 0.65
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_UI_AC130_CHANGE_WEAPON"
+            rect                        180 130 0 20 9 9
+            decoration                  
+            visible                     when(FUNC_86() && FUNC_90() && FUNC_106());
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            forecolor                   1 1 1 0.65
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.9 1 1 0.3
+            background                  "ac130_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        -180 -140 100 30 2 2
+            decoration                  
+            visible                     when(getplayerdata("ac130Ammo105mm") && FUNC_86() && FUNC_90());
+            textalign                   6
+            textscale                   0.32
+            exp text                    getplayerdata("ac130Ammo105mm") + ":1";
+            exp forecolor a             1 - (FUNC_52() * ((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            rect                        -180 -140 100 30 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ac130Ammo105mm") && FUNC_86() && FUNC_90());
+            textalign                   6
+            textscale                   0.35
+            exp text                    getplayerdata("ac130Ammo105mm") + ":1";
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            rect                        -180 -120 100 30 2 2
+            decoration                  
+            visible                     when(getplayerdata("ac130Ammo40mm") && FUNC_86() && FUNC_90());
+            textalign                   6
+            textscale                   0.32
+            exp text                    getplayerdata("ac130Ammo40mm") + ":4";
+            exp forecolor a             1 - (FUNC_53() * ((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            rect                        -180 -120 100 30 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ac130Ammo40mm") && FUNC_86() && FUNC_90());
+            textalign                   6
+            textscale                   0.35
+            exp text                    getplayerdata("ac130Ammo40mm") + ":4";
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+        itemDef
+        {
+            rect                        -180 -100 100 30 2 2
+            decoration                  
+            visible                     when(getplayerdata("ac130Ammo25mm") && FUNC_86() && FUNC_90());
+            textalign                   6
+            textscale                   0.32
+            exp text                    getplayerdata("ac130Ammo25mm") + ":20";
+            exp forecolor a             1 - (FUNC_54() * ((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            rect                        -180 -100 100 30 2 2
+            decoration                  
+            visible                     when(!getplayerdata("ac130Ammo25mm") && FUNC_86() && FUNC_90());
+            textalign                   6
+            textscale                   0.35
+            exp text                    getplayerdata("ac130Ammo25mm") + ":20";
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+        }
+    }
+}

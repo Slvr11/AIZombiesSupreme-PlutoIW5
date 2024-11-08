@@ -1,0 +1,303 @@
+{
+    menuDef
+    {
+        name                        "scoreboard"
+        rect                        0 0 640 480 0 0
+        onESC
+        {
+        }
+        itemDef
+        {
+            rect                        0 3 -640 22 4 1
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            forecolor                   0.5 0.5 0.5 0.75
+            background                  "gradient_fadein"
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_ALLIES" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_AXIS" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis);
+        }
+        itemDef
+        {
+            rect                        0 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_FREE" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        36 22 1 1 1 1
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && !dvarint(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    team("score");
+        }
+        itemDef
+        {
+            rect                        36 22 1 1 1 1
+            decoration                  
+            visible                     when(team("name") == "TEAM_FREE" && !dvarint(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    player("score");
+        }
+        itemDef
+        {
+            rect                        95 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_AXIS" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        95 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis);
+        }
+        itemDef
+        {
+            rect                        95 -4 36 36 1 1
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_ALLIES" && !dvarint(splitscreen));
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis);
+        }
+        itemDef
+        {
+            rect                        134 22 1 1 1 1
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && !dvarint(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    otherteam("score");
+        }
+        itemDef
+        {
+            rect                        0 22 0 0 9 1
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && team("score") > otherteam("score") && timeleft() % 8 > 3 && !dvarint(splitscreen) && !dvarint(ui_bomb_timer));
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SCORE_WINNING_WITH", team("score"), dvarint(ui_scorelimit));
+            exp rect x                  (!dvarbool(widescreen) * 64);
+        }
+        itemDef
+        {
+            rect                        0 22 0 0 9 1
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && team("score") < otherteam("score") && timeleft() % 8 > 3 && !dvarint(splitscreen) && !dvarint(ui_bomb_timer));
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SCORE_LOSING_WITH", team("score"), dvarint(ui_scorelimit));
+            exp rect x                  (!dvarbool(widescreen) * 64);
+        }
+        itemDef
+        {
+            rect                        0 22 0 0 9 1
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && team("score") == otherteam("score") && timeleft() % 8 > 3 && !dvarint(splitscreen) && !dvarint(ui_bomb_timer));
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            textfont                    1
+            exp text                    locstring("@MENU_SCORE_TIED_WITH", team("score"), dvarint(ui_scorelimit));
+            exp rect x                  (!dvarbool(widescreen) * 64);
+        }
+        itemDef
+        {
+            rect                        0 22 0 0 9 1
+            decoration                  
+            visible                     when((dvarint(ui_bomb_timer) || timeleft() % 8 < 4 || timeleft() < 0) && !dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    9
+            exp text                    gametypename();
+            exp rect x                  (!dvarbool(widescreen) * 64);
+        }
+        itemDef
+        {
+            rect                        0 -180 100 20 9 2
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && team("score") > otherteam("score") && timeleft() % 8 > 3 && dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.6666
+            textstyle                   3
+            textfont                    9
+            exp text                    locstring("@MENU_SCORE_WINNING_WITH", team("score"), dvarint(ui_scorelimit));
+        }
+        itemDef
+        {
+            rect                        0 -180 100 20 9 2
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && team("score") < otherteam("score") && timeleft() % 8 > 3 && dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.6666
+            textstyle                   3
+            textfont                    9
+            exp text                    locstring("@MENU_SCORE_LOSING_WITH", team("score"), dvarint(ui_scorelimit));
+        }
+        itemDef
+        {
+            rect                        0 -180 100 20 9 2
+            decoration                  
+            visible                     when((team("name") == "TEAM_ALLIES" || team("name") == "TEAM_AXIS") && team("score") == otherteam("score") && timeleft() % 8 > 3 && dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.6666
+            textstyle                   3
+            textfont                    9
+            exp text                    locstring("@MENU_SCORE_TIED_WITH", team("score"), dvarint(ui_scorelimit));
+        }
+        itemDef
+        {
+            rect                        0 -180 100 20 9 2
+            decoration                  
+            visible                     when((timeleft() % 8 < 4 || timeleft() < 0) && dvarint(splitscreen));
+            textalign                   1
+            textscale                   0.6666
+            textstyle                   3
+            textfont                    9
+            exp text                    gametypename();
+        }
+        itemDef
+        {
+            rect                        36 22 1 1 1 1
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarbool(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    marinesfield("score");
+        }
+        itemDef
+        {
+            rect                        134 22 1 1 1 1
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR" && !dvarbool(splitscreen));
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    opforfield("score");
+        }
+        itemDef
+        {
+            rect                        0 22 1 1 3 1
+            decoration                  
+            visible                     when(timeleft() >= 30 && !dvarint(splitscreen) && !dvarint(ui_bomb_timer));
+            textalign                   2
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            exp text                    secondsascountdown(timeleft());
+        }
+        itemDef
+        {
+            rect                        0 22 1 1 3 1
+            decoration                  
+            visible                     when(timeleft() >= 10 && timeleft() < 30 && !dvarint(splitscreen) && !dvarint(ui_bomb_timer));
+            textalign                   2
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            forecolor                   1 0.75 0 1
+            exp text                    secondsascountdown(timeleft());
+        }
+        itemDef
+        {
+            rect                        0 22 1 1 3 1
+            decoration                  
+            visible                     when(timeleft() >= 0 && timeleft() < 10 && !dvarint(splitscreen) && !dvarint(ui_bomb_timer));
+            textalign                   2
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    10
+            forecolor                   1 0.5 0 1
+            exp text                    secondsascountdown(timeleft());
+        }
+        itemDef
+        {
+            rect                        0 225 640 60 4 0
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "line_horizontal_scorebar"
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+        itemDef
+        {
+            rect                        0 225 640 2 4 0
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            background                  "line_horizontal_scorebar"
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+        itemDef
+        {
+            rect                        0 285 640 2 4 0
+            style                       3
+            decoration                  
+            visible                     when(!dvarint(splitscreen));
+            textscale                   0.55
+            background                  "line_horizontal_scorebar"
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+        itemDef
+        {
+            text                        "@XBOXLIVE_EXTERNALMUTE_TITLE"
+            rect                        320 264 0 0 0 0
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   0.4583
+            textstyle                   3
+            textfont                    1
+            exp forecolor a             scoreboardexternalmutenotice();
+        }
+    }
+}

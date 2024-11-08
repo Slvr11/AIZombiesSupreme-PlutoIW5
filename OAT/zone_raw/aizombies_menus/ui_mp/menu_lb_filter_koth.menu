@@ -1,0 +1,493 @@
+{
+    menuDef
+    {
+        name                        "menu_lb_filter_koth"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((((23 * 1) + (16.367 * 0)) + ((1 + !0 + 1) * (20 + 2)) + 5) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (((23 * 1) + (16.367 * 0)) + ((1 + !0 + 1) * (20 + 2)) + 5);
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            focusfirst;
+            setfocus lb_filter_popup_0;
+            focusfirst;
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            if (dvarstring(lb_filter_group) == "none")
+            {
+                setdvar lb_filter none;
+            }
+            if (dvarstring(lb_filter_group) == "friends")
+            {
+                setdvar lb_filter friends;
+            }
+            if (dvarstring(lb_filter_group) == "facebook_friends")
+            {
+                setdvar lb_filter facebook_friends;
+            }
+            if (dvarstring(lb_filter_group) == "clan")
+            {
+                setdvar lb_filter clan;
+            }
+            if (dvarstring(lb_filter_group) == "lobby_members")
+            {
+                setdvar lb_filter lobby_members;
+            }
+            if (1)
+            {
+                if (dvarint(lb_filter_hardcore) == 0)
+                {
+                    setdvar lb_hardcore 0;
+                }
+                if (dvarint(lb_filter_hardcore) == 1)
+                {
+                    setdvar lb_hardcore 1;
+                }
+            }
+            else
+            {
+                setdvar lb_hardcore 0;
+            }
+            if (0)
+            {
+                uiScript OpenLeaderboardExt lb_file lb_filter_duration;
+            }
+            else
+            {
+                uiScript OpenLeaderboardExt lb_filter_duration;
+            }
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("menu_lb_filter_koth"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.6
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (((23 * 1) + (16.367 * 0)) + ((1 + !0 + 1) * (20 + 2)) + 5) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_LB_FILTER_CAPS";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * ((1 + !0 + 1))) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER") && (localvarstring("ui_swfPopupContext") == "LB_FILTER"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER") && (localvarstring("ui_swfPopupContext") == "LB_FILTER"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER") && (localvarstring("ui_swfPopupContext") == "LB_FILTER"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER") && (localvarstring("ui_swfPopupContext") == "LB_FILTER"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when((0 % 2 == 1) && (1));
+            textscale                   0.55
+            forecolor                   1 1 1 0.075
+            background                  "gradient_fadein"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  (20 * 1) + 2;
+        }
+        itemDef
+        {
+            name                        "LB_FILTER_0"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "LB_FILTER";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "LB_FILTER";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarFloat ui_lb_focused_item_y (getfocuseditemy());
+                if (dvarbool(ui_multiplayer))
+                {
+                    open popup_lb_group;
+                }
+                else
+                {
+                    open popup_lb_so_group;
+                }
+            }
+            exp disabled                0;
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_LB_FILTER_GROUP_CAPS";
+            exp rect y                  (((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((4 > 0 && ((dvarstring(lb_filter_group)) == ("none"))), "@MENU_LB_FILTER_GROUP_ALL", select((4 > 1 && dvarstring(lb_filter_group) == "friends"), "@MENU_LB_FILTER_GROUP_FRIENDS", select((4 > 2 && dvarstring(lb_filter_group) == "facebook_friends"), "@MENU_LB_FILTER_GROUP_FACEBOOKFRIENDS", select((4 > 3 && dvarstring(lb_filter_group) == "lobby_members"), "@MENU_LB_FILTER_GROUP_LOBBY_MEMBERS", select((4 > 4 && dvarstring(lb_filter_group) == ""), "", select((4 > 5 && dvarstring(lb_filter_group) == "CHOICE_GROUP_VAL6"), "CHOICE_GROUP_STR6", ""))))));
+            exp rect x                  ((0 + 8) + (260 * 0.4));
+            exp rect y                  (0 + (0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when((1 % 2 == 1) && (!0));
+            textscale                   0.55
+            forecolor                   1 1 1 0.075
+            background                  "gradient_fadein"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (1 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  (20 * 1) + 2;
+        }
+        itemDef
+        {
+            name                        "LB_FILTER_1"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(!0);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "LB_FILTER";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((!0) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (!0);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "LB_FILTER";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarFloat ui_lb_focused_item_y (getfocuseditemy());
+                open popup_lb_duration_koth;
+            }
+            exp disabled                0;
+            exp rect y                  ((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((!0) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_LB_FILTER_DURATION_CAPS";
+            exp rect y                  (((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(LB_FILTER,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "LB_FILTER", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(!0);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((6 > 0 && ((dvarstring(lb_filter_duration)) == ("LB_GM_KOTH TRK_ALLTIME"))), "@MENU_LB_FILTER_DURATION_ALLTIME", select((6 > 1 && dvarstring(lb_filter_duration) == "LB_GM_KOTH TRK_WEEKLY"), "@MENU_LB_FILTER_DURATION_WEEKLY", select((6 > 2 && dvarstring(lb_filter_duration) == "LB_GM_KOTH TRK_MONTHLY"), "@MENU_LB_FILTER_DURATION_MONTHLY", select((6 > 3 && dvarstring(lb_filter_duration) == "LB_GM_KOTH TRK_PRESTIGE_ALLTIME"), "@MENU_LB_FILTER_DURATION_PRESTIGE_ALLTIME", select((6 > 4 && dvarstring(lb_filter_duration) == "LB_GM_KOTH TRK_PRESTIGE_WEEKLY"), "@MENU_LB_FILTER_DURATION_PRESTIGE_WEEKLY", select((6 > 5 && dvarstring(lb_filter_duration) == "LB_GM_KOTH TRK_PRESTIGE_MONTHLY"), "@MENU_LB_FILTER_DURATION_PRESTIGE_MONTHLY", ""))))));
+            exp rect x                  ((0 + 8) + (260 * 0.4));
+            exp rect y                  (0 + (1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.075
+            background                  "gradient_fadein"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (2 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  (20 * 1) + 2;
+        }
+        itemDef
+        {
+            name                        "lb_filter_2"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(lb_filter,2)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 2;
+                setLocalVarString ui_buttonNavGroupName_popup "lb_filter";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "lb_filter";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString ui_temp (select((2 > 1 && dvarstring(lb_filter_hardcore) == 0), 1, select((2 > 2 && dvarstring(lb_filter_hardcore) == 1), "CHOICE_HARDCORE_VAL3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_VAL4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_VAL5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_VAL6", 0))))));
+                setdvar lb_filter_hardcore localvarstring ( ui_temp );
+                if (!select((2 > 0 && ((dvarstring(lb_filter_hardcore)) == (0))), ((1)), select((2 > 1 && dvarstring(lb_filter_hardcore) == 1), ((1)), select((2 > 2 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), ("CHOICE_HARDCORE_VIS3"), select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), ("CHOICE_HARDCORE_VIS4"), select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), ("CHOICE_HARDCORE_VIS5"), select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL6"), ("CHOICE_HARDCORE_VIS6"), 0)))))))
+                {
+                    setLocalVarString ui_temp (select((2 > 1 && dvarstring(lb_filter_hardcore) == 0), 1, select((2 > 2 && dvarstring(lb_filter_hardcore) == 1), "CHOICE_HARDCORE_VAL3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_VAL4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_VAL5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_VAL6", 0))))));
+                    setdvar lb_filter_hardcore localvarstring ( ui_temp );
+                    if (!select((2 > 0 && ((dvarstring(lb_filter_hardcore)) == (0))), ((1)), select((2 > 1 && dvarstring(lb_filter_hardcore) == 1), ((1)), select((2 > 2 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), ("CHOICE_HARDCORE_VIS3"), select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), ("CHOICE_HARDCORE_VIS4"), select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), ("CHOICE_HARDCORE_VIS5"), select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL6"), ("CHOICE_HARDCORE_VIS6"), 0)))))))
+                    {
+                        setLocalVarString ui_temp (select((2 > 1 && dvarstring(lb_filter_hardcore) == 0), 1, select((2 > 2 && dvarstring(lb_filter_hardcore) == 1), "CHOICE_HARDCORE_VAL3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_VAL4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_VAL5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_VAL6", 0))))));
+                        setdvar lb_filter_hardcore localvarstring ( ui_temp );
+                        if (!select((2 > 0 && ((dvarstring(lb_filter_hardcore)) == (0))), ((1)), select((2 > 1 && dvarstring(lb_filter_hardcore) == 1), ((1)), select((2 > 2 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), ("CHOICE_HARDCORE_VIS3"), select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), ("CHOICE_HARDCORE_VIS4"), select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), ("CHOICE_HARDCORE_VIS5"), select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL6"), ("CHOICE_HARDCORE_VIS6"), 0)))))))
+                        {
+                            setLocalVarString ui_temp (select((2 > 1 && dvarstring(lb_filter_hardcore) == 0), 1, select((2 > 2 && dvarstring(lb_filter_hardcore) == 1), "CHOICE_HARDCORE_VAL3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_VAL4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_VAL5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_VAL6", 0))))));
+                            setdvar lb_filter_hardcore localvarstring ( ui_temp );
+                            if (!select((2 > 0 && ((dvarstring(lb_filter_hardcore)) == (0))), ((1)), select((2 > 1 && dvarstring(lb_filter_hardcore) == 1), ((1)), select((2 > 2 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), ("CHOICE_HARDCORE_VIS3"), select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), ("CHOICE_HARDCORE_VIS4"), select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), ("CHOICE_HARDCORE_VIS5"), select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL6"), ("CHOICE_HARDCORE_VIS6"), 0)))))))
+                            {
+                                setLocalVarString ui_temp (select((2 > 1 && dvarstring(lb_filter_hardcore) == 0), 1, select((2 > 2 && dvarstring(lb_filter_hardcore) == 1), "CHOICE_HARDCORE_VAL3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_VAL4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_VAL5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_VAL6", 0))))));
+                                setdvar lb_filter_hardcore localvarstring ( ui_temp );
+                                if (!select((2 > 0 && ((dvarstring(lb_filter_hardcore)) == (0))), ((1)), select((2 > 1 && dvarstring(lb_filter_hardcore) == 1), ((1)), select((2 > 2 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), ("CHOICE_HARDCORE_VIS3"), select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), ("CHOICE_HARDCORE_VIS4"), select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), ("CHOICE_HARDCORE_VIS5"), select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL6"), ("CHOICE_HARDCORE_VIS6"), 0)))))))
+                                {
+                                    setLocalVarString ui_temp (select((2 > 1 && dvarstring(lb_filter_hardcore) == 0), 1, select((2 > 2 && dvarstring(lb_filter_hardcore) == 1), "CHOICE_HARDCORE_VAL3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_VAL4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_VAL5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_VAL6", 0))))));
+                                    setdvar lb_filter_hardcore localvarstring ( ui_temp );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            exp disabled                0;
+            exp rect y                  ((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_LB_FILTER_HARDCORE_CAPS";
+            exp rect y                  (((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(lb_filter,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "lb_filter", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(lb_filter,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "lb_filter", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(lb_filter,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "lb_filter", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(lb_filter,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "lb_filter", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(lb_filter,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "lb_filter", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(lb_filter,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "lb_filter", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    select((2 > 0 && ((dvarstring(lb_filter_hardcore)) == (0))), "@MENU_LB_FILTER_HARDCORE_OFF", select((2 > 1 && dvarstring(lb_filter_hardcore) == 1), "@MENU_LB_FILTER_HARDCORE_ON", select((2 > 2 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL3"), "CHOICE_HARDCORE_STR3", select((2 > 3 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL4"), "CHOICE_HARDCORE_STR4", select((2 > 4 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL5"), "CHOICE_HARDCORE_STR5", select((2 > 5 && dvarstring(lb_filter_hardcore) == "CHOICE_HARDCORE_VAL6"), "CHOICE_HARDCORE_STR6", ""))))));
+            exp rect x                  ((0 + 8) + (260 * 0.4));
+            exp rect y                  (0 + (2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+    }
+}

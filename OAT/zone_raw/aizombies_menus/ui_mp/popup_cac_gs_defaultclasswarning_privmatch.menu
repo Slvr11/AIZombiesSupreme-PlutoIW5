@@ -1,0 +1,395 @@
+{
+    menuDef
+    {
+        name                        "popup_cac_gs_defaultclasswarning_privmatch"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((localvarint("ui_swfPopupDescResizeHeight")) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (localvarint("ui_swfPopupDescResizeHeight"));
+        onOpen
+        {
+            setLocalVarFloat ui_swfPopupDescResizeTextHeight (getwrappedtextheight(locstring("@MENU_CUSTOM_CLASS_RESET_WARNING"), (float((260 - 16))), 3, 0.375, 0, 0));
+            setLocalVarInt ui_swfPopupDescResizeButtons (int((localvarfloat("ui_swfPopupDescResizeTextHeight") + ((20 + 2) / 2) + 5) / (20 + 2)) + 1);
+            setLocalVarInt ui_swfPopupDescResizeHeight ((((23 * 1) + (16.367 * 0)) + ((localvarint("ui_swfPopupDescResizeButtons") + 0 + 2) * (20 + 2)) + 5));
+            setLocalVarInt ui_swfPopupDescResizeButtonYOffset ((20 + 2) * (localvarint("ui_swfPopupDescResizeButtons") + 0));
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus SWF_COMMON_DESC_RESIZE_POPUP_NAME_1;
+            focusfirst;
+            setLocalVarBool ui_resetAccepted 0;
+        }
+        onClose
+        {
+            if (localvarbool("ui_resetAccepted"))
+            {
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , perks , 0 , localVarString ( loadoutEquipment ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , deathstreak , localVarString ( loadoutDeathStreak ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , perks , 5 , localVarString ( loadoutStreakType ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+            }
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        onFocusDueToClose
+        {
+            setLocalVarFloat ui_swfPopupDescResizeTextHeight (getwrappedtextheight("@MENU_CUSTOM_CLASS_RESET_WARNING", (float((260 - 16))), 3, 0.375, 0, 0));
+            setLocalVarInt ui_swfPopupDescResizeButtons (int((localvarfloat("ui_swfPopupDescResizeTextHeight") + ((20 + 2) / 2) + 5) / (20 + 2)) + 1);
+            setLocalVarInt ui_swfPopupDescResizeHeight ((((23 * 1) + (16.367 * 0)) + ((localvarint("ui_swfPopupDescResizeButtons") + 0 + 2) * (20 + 2)) + 5));
+            setLocalVarInt ui_swfPopupDescResizeButtonYOffset ((20 + 2) * (localvarint("ui_swfPopupDescResizeButtons") + 0));
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_cac_gs_defaultclasswarning_privmatch"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (localvarint("ui_swfPopupDescResizeHeight")) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_RESET_CLASS_CAPS";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CUSTOM_CLASS_RESET_WARNING";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  (0 + (0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 2) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            name                        "SWF_COMMON_DESC_RESIZE_POPUP_NAME_0"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "SWF_COMMON_DESC_RESIZE_POPUP_NAME";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "SWF_COMMON_DESC_RESIZE_POPUP_NAME";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarBool ui_resetAccepted 1;
+                setLocalVarString loadoutPrimary (tablelookup("mp/classTable.csv", 0, "loadoutPrimary", 11 + 1));
+                setLocalVarString loadoutPrimaryAttachment (tablelookup("mp/classTable.csv", 0, "loadoutPrimaryAttachment", 11 + 1));
+                setLocalVarString loadoutPrimaryAttachment2 (tablelookup("mp/classTable.csv", 0, "loadoutPrimaryAttachment2", 11 + 1));
+                if (localvarstring("loadoutPrimaryAttachment2") == "")
+                {
+                    setLocalVarString loadoutPrimaryAttachment2 ("none");
+                }
+                setLocalVarString loadoutPrimaryBuff (tablelookup("mp/classTable.csv", 0, "loadoutPrimaryBuff", 11 + 1));
+                setLocalVarString loadoutPrimaryCamo (tablelookup("mp/classTable.csv", 0, "loadoutPrimaryCamo", 11 + 1));
+                setLocalVarString loadoutPrimaryReticle ("none");
+                setLocalVarString loadoutSecondary (tablelookup("mp/classTable.csv", 0, "loadoutSecondary", 11 + 1));
+                setLocalVarString loadoutSecondaryAttachment (tablelookup("mp/classTable.csv", 0, "loadoutSecondaryAttachment", 11 + 1));
+                setLocalVarString loadoutSecondaryAttachment2 (tablelookup("mp/classTable.csv", 0, "loadoutSecondaryAttachment2", 11 + 1));
+                if (localvarstring("loadoutSecondaryAttachment2") == "")
+                {
+                    setLocalVarString loadoutSecondaryAttachment2 ("none");
+                }
+                setLocalVarString loadoutSecondaryBuff (tablelookup("mp/classTable.csv", 0, "loadoutSecondaryBuff", 11 + 1));
+                setLocalVarString loadoutSecondaryCamo (tablelookup("mp/classTable.csv", 0, "loadoutSecondaryCamo", 11 + 1));
+                setLocalVarString loadoutSecondaryReticle ("none");
+                setLocalVarString loadoutEquipment (tablelookup("mp/classTable.csv", 0, "loadoutEquipment", 11 + 1));
+                setLocalVarString loadoutPerk1 (tablelookup("mp/classTable.csv", 0, "loadoutPerk1", 11 + 1));
+                setLocalVarString loadoutPerk2 (tablelookup("mp/classTable.csv", 0, "loadoutPerk2", 11 + 1));
+                setLocalVarString loadoutPerk3 (tablelookup("mp/classTable.csv", 0, "loadoutPerk3", 11 + 1));
+                setLocalVarString loadoutStreakType (tablelookup("mp/classTable.csv", 0, "loadoutPerk5", 11 + 1));
+                setLocalVarString loadoutKillStreak1 (tablelookup("mp/classTable.csv", 0, "loadoutStreak1", 11 + 1));
+                setLocalVarString loadoutKillStreak2 (tablelookup("mp/classTable.csv", 0, "loadoutStreak2", 11 + 1));
+                setLocalVarString loadoutKillStreak3 (tablelookup("mp/classTable.csv", 0, "loadoutStreak3", 11 + 1));
+                if (localvarstring("loadoutStreakType") == "streaktype_assault")
+                {
+                    setLocalVarString loadoutAssaultKillStreak1 localvarstring("loadoutKillStreak1");
+                    setLocalVarString loadoutAssaultKillStreak2 localvarstring("loadoutKillStreak2");
+                    setLocalVarString loadoutAssaultKillStreak3 localvarstring("loadoutKillStreak3");
+                }
+                if (localvarstring("loadoutStreakType") == "streaktype_support")
+                {
+                    setLocalVarString loadoutDefenseKillStreak1 localvarstring("loadoutKillStreak1");
+                    setLocalVarString loadoutDefenseKillStreak2 localvarstring("loadoutKillStreak2");
+                    setLocalVarString loadoutDefenseKillStreak3 localvarstring("loadoutKillStreak3");
+                }
+                if (localvarstring("loadoutStreakType") == "streaktype_specialist")
+                {
+                    setLocalVarString loadoutSpecialistKillStreak1 localvarstring("loadoutKillStreak1");
+                    setLocalVarString loadoutSpecialistKillStreak2 localvarstring("loadoutKillStreak2");
+                    setLocalVarString loadoutSpecialistKillStreak3 localvarstring("loadoutKillStreak3");
+                }
+                setLocalVarString loadoutDeathStreak (tablelookup("mp/classTable.csv", 0, "loadoutDeathStreak", 11 + 1));
+                setLocalVarString loadoutOffhandSecondary (tablelookup("mp/classTable.csv", 0, "loadoutOffhand", 11 + 1));
+                setLocalVarString loadoutClassName "@" + (tablelookup("mp/classTable.csv", 0, "loadoutName", 11 + 1));
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , name , "" );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , inUse , 0 ) setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , class , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                if (!FUNC_43())
+                {
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_editingTeam ) , localVarInt ( ui_editingClassIndex ) , juggernaut , 0 );
+                    setLocalVarBool loadoutJuggernaut 0;
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((0 * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_YES_CAPS";
+            exp rect y                  (((0 * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "SWF_COMMON_DESC_RESIZE_POPUP_NAME_1"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "SWF_COMMON_DESC_RESIZE_POPUP_NAME";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "SWF_COMMON_DESC_RESIZE_POPUP_NAME";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((1 * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_NO_CAPS";
+            exp rect y                  (((1 * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+    }
+}

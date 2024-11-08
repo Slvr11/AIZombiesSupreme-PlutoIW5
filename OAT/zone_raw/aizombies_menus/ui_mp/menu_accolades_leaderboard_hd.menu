@@ -1,0 +1,854 @@
+{
+    menuDef
+    {
+        name                        "menu_accolades_leaderboard_hd"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_mainmenu_mp"
+        onOpen
+        {
+            if (dvarstring(lb_type) == "accolades")
+            {
+                setLocalVarString ui_leaderboard_text ("@" + tablelookup("mp/awardTable.csv", 1, tablelookupbyrow("mp/awardTable.csv", localvarint("ui_highlightIndex"), 1), 3));
+                setLocalVarString ui_leaderboard_desc_text ("@" + tablelookup("mp/awardTable.csv", 1, tablelookupbyrow("mp/awardTable.csv", localvarint("ui_highlightIndex"), 1), 4));
+                setdvar lb_column_pos_1 647;
+                setdvar lb_column_text_1 "@MENU_AWARDS_CAPS";
+                setdvar lb_column_text_2 "";
+                setdvar lb_column_text_3 "";
+                setdvar lb_column_text_4 "";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_accolades;
+                setdvar lb_filter_duration "LB_ACCOLADES ui_highlightIndex";
+            }
+            setdvar lb_filter friends;
+            setdvar lb_filter_group friends;
+            setdvar lb_filter_hardcore 0;
+            uiScript OpenLeaderboardExt lb_filter_duration;
+            uiScript RefreshLeaderboards;
+            exec refreshfacebookfriends;
+        }
+        onESC
+        {
+            close menu_accolades_leaderboard_hd;
+        }
+        execKeyInt 166
+        {
+            if (getfocuseditemname() != "leaderboard_accolades")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederBottom leaderboard_item_name;
+            }
+        }
+        execKeyInt 165
+        {
+            if (getfocuseditemname() != "leaderboard_accolades")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederTop leaderboard_item_name;
+            }
+        }
+        execKeyInt 164
+        {
+            if (getfocuseditemname() != "leaderboard_accolades")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageUp leaderboard_item_name;
+            }
+        }
+        execKeyInt 163
+        {
+            if (getfocuseditemname() != "leaderboard_accolades")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageDown leaderboard_item_name;
+            }
+        }
+        execKeyInt 167
+        {
+            play mouse_click;
+            if (dvarstring(lb_type) == "accolades")
+            {
+                open menu_lb_filter_accolades;
+            }
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -347 48 694 306 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 48 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 66 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0.43137 0.45882 0.45098 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 66 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarstring(lb_filter) == "facebook_friends" && dvarbool(widescreen)) || (dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) != "mission_team_level" || dvarstring(lb_type) != "survival_team_level" || dvarstring(lb_type) != "chaos_team_level")) || (dvarstring(lb_filter) != "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0.43137 0.45882 0.45098 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 66 694 72 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")));
+            textscale                   0.55
+            forecolor                   0.43137 0.45882 0.45098 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 66 694 8 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 84 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 120 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 156 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 192 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 228 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 264 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 300 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 336 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends" && (dvarbool(widescreen) || (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 102 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarstring(lb_filter) == "facebook_friends" && dvarbool(widescreen)) || (dvarstring(lb_filter) != "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")) || (dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 174 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarstring(lb_filter) == "facebook_friends" && dvarbool(widescreen)) || (dvarstring(lb_filter) != "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")) || (dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 246 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarstring(lb_filter) == "facebook_friends" && dvarbool(widescreen)) || (dvarstring(lb_filter) != "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")) || (dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 318 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarstring(lb_filter) == "facebook_friends" && dvarbool(widescreen)) || (dvarstring(lb_filter) != "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")) || (dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) != "mission_team_level" && dvarstring(lb_type) != "survival_team_level" && dvarstring(lb_type) != "chaos_team_level"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 138 694 72 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 282 694 72 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends" && !dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level")));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 344 694 -14 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 357 694 48 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            text                        "@MENU_RANK_CAPS"
+            rect                        48 101 1 1 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  48 + (35 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            text                        "@MENU_LEVEL_CAPS"
+            rect                        88 101 1 1 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   1
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  88 + (25 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            text                        "@MENU_PLAYER_CAPS"
+            rect                        121 101 1 1 0 0
+            decoration                  
+            visible                     when(1);
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  121 + (25 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 101 1 1 0 0
+            decoration                  
+            visible                     when(dvarstring(lb_column_text_1) != "");
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_1);
+            exp rect x                  dvarint(lb_column_pos_1) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 101 1 1 0 0
+            decoration                  
+            visible                     when(dvarstring(lb_column_text_2) != "");
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_2);
+            exp rect x                  dvarint(lb_column_pos_2) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 101 1 1 0 0
+            decoration                  
+            visible                     when(dvarstring(lb_column_text_3) != "");
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_3);
+            exp rect x                  dvarint(lb_column_pos_3) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 101 1 1 0 0
+            decoration                  
+            visible                     when(dvarstring(lb_column_text_4) != "");
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_4);
+            exp rect x                  dvarint(lb_column_pos_4) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 101 1 1 0 0
+            decoration                  
+            visible                     when(dvarstring(lb_column_text_5) != "");
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_5);
+            exp rect x                  dvarint(lb_column_pos_5) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "none");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_ALL_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "friends");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_FRIENDS_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "facebook_friends");
+            textalign                   4
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text"));
+            exp rect x                  (getTextWidthModCase((locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text")) + "  " + locstring("@MENU_FRIENDS_CAP")), 9, 0.5, 9) + (28 * 0.75)) / (0 - 2);
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "facebook_friends");
+            textalign                   6
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_FRIENDS_CAP");
+            exp rect x                  (getTextWidthModCase((locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text")) + "  " + locstring("@MENU_FRIENDS_CAP")), 9, 0.5, 9) + (28 * 0.75)) / 2;
+        }
+        itemDef
+        {
+            rect                        0 0 28 28 2 1
+            style                       3
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "facebook_friends");
+            textscale                   0.55
+            background                  "facebook"
+            exp rect x                  ((getTextWidthModCase((locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text")) + "  " + locstring("@MENU_FRIENDS_CAP")), 9, 0.5, 9) + (28 * 0.75)) / 2) - (getTextWidthModCase((locstring("@MENU_FRIENDS_CAP") + " "), 9, 0.5, 9) + (28 * 0.75));
+            exp rect y                  0;
+            exp rect w                  28 * 0.75;
+            exp rect h                  28 * 0.75;
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "lobby_members");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_LOBBY_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "clan");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_CLAN_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "none");
+            textalign                   5
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_ALL_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "friends");
+            textalign                   5
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_FRIENDS_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "none");
+            textalign                   5
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_ALL_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "friends");
+            textalign                   5
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_FRIENDS_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 5 0 28 2 1
+            decoration                  
+            visible                     1
+            textalign                   5
+            textaligny                  15
+            textscale                   0.5
+            textfont                    9
+            exp text                    locstring(localvarstring("ui_leaderboard_desc_text"));
+        }
+        itemDef
+        {
+            name                        "leaderboard_accolades"
+            rect                        -29 118 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "accolades" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              0 - (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) + select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+            exp rect y                  118 + (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) + select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+            exp rect h                  272 - (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) - select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     6
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           18 + (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) + select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+        }
+        itemDef
+        {
+            name                        "leaderboard_accolades_player"
+            rect                        -29 100 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "accolades" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              0 - (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) + select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+            exp rect h                  18 + (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) + select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     6
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            exp elementheight           18 + (select(dvarstring(lb_filter) == "facebook_friends", 18, 0) * select(!dvarbool(widescreen) && dvarstring(lb_filter) == "facebook_friends" && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 2, 1)) + select(!dvarbool(widescreen) && (dvarstring(lb_type) == "mission_team_level" || dvarstring(lb_type) == "survival_team_level" || dvarstring(lb_type) == "chaos_team_level"), 18, 0);
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_BACK_SHORTCUT"
+            rect                        0 0 181.333 18 3 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                close self;
+            }
+            exp rect x                  (0 - 30) - select((1 != 0), ((getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 1, 0.375) + 10) * 1), 0);
+            exp rect y                  (18 - 43);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_FILTER_SHORTCUT"
+            rect                        0 0 181.333 18 3 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (dvarstring(lb_type) == "accolades")
+                {
+                    open menu_lb_filter_accolades;
+                }
+            }
+            exp rect x                  (0 - 30) - select((1 != 0), ((getTextWidth(locstring("@PLATFORM_FILTER_SHORTCUT"), 1, 0.375) + 10) * 1), 0);
+            exp rect y                  (18 - 67);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FILTER_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_TOP_SHORTCUT"
+            rect                        0 0 181.333 18 2 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederTop leaderboard_item_name;
+            }
+            exp rect x                  0 - select((0.5 != 0), ((getTextWidth(locstring("@PLATFORM_TOP_SHORTCUT"), 1, 0.375) + 10) * 0.5), 0);
+            exp rect y                  (18 - 67);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_TOP_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_BOTTOM_SHORTCUT"
+            rect                        0 0 181.333 18 2 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederBottom leaderboard_item_name;
+            }
+            exp rect x                  0 - select((0.5 != 0), ((getTextWidth(locstring("@PLATFORM_BOTTOM_SHORTCUT"), 1, 0.375) + 10) * 0.5), 0);
+            exp rect y                  (18 - 43);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BOTTOM_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_PAGE_UP_SHORTCUT"
+            rect                        0 0 181.333 18 1 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageUp leaderboard_item_name;
+            }
+            exp rect x                  30 - select((0 != 0), ((getTextWidth(locstring("@PLATFORM_PAGE_UP_SHORTCUT"), 1, 0.375) + 10) * 0), 0);
+            exp rect y                  (18 - 67);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_PAGE_UP_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_PAGE_DOWN_SHORTCUT"
+            rect                        0 0 181.333 18 1 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageDown leaderboard_item_name;
+            }
+            exp rect x                  30 - select((0 != 0), ((getTextWidth(locstring("@PLATFORM_PAGE_DOWN_SHORTCUT"), 1, 0.375) + 10) * 0), 0);
+            exp rect y                  (18 - 43);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_PAGE_DOWN_SHORTCUT"), 1, 0.375) + 10;
+        }
+    }
+}

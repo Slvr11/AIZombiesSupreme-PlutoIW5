@@ -1,0 +1,931 @@
+{
+    menuDef
+    {
+        name                        "killstreak_unlockconfirm"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((((23 * 1) + (16.367 * 0)) + (3 * (20 + 2)) + 5) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (((23 * 1) + (16.367 * 0)) + (3 * (20 + 2)) + 5);
+        exp closeSound              localvarstring("ui_closeSound");
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus MODE_POPUP_2;
+            focusfirst;
+            setLocalVarString ui_closeSound "mouse_click";
+            setLocalVarString ui_conflicting_ref "";
+            if (FUNC_135())
+            {
+                setLocalVarString ui_conflicting_ref (localvarstring("ui_streak1Name"));
+            }
+            if (FUNC_136())
+            {
+                setLocalVarString ui_conflicting_ref (localvarstring("ui_streak2Name"));
+            }
+            if (FUNC_137())
+            {
+                setLocalVarString ui_conflicting_ref (localvarstring("ui_streak3Name"));
+            }
+            setPlayerData ( featureNew , token_1 , 0 );
+            setPlayerData ( featureNew , token_2 , 0 );
+            setPlayerData ( featureNew , token_3 , 0 );
+            setPlayerData ( featureNew , token_4 , 0 );
+            setPlayerData ( featureNew , token_5 , 0 );
+            setPlayerData ( featureNew , token_6 , 0 );
+            setPlayerData ( featureNew , token_7 , 0 );
+            setPlayerData ( featureNew , token_8 , 0 );
+            setPlayerData ( featureNew , token_9 , 0 );
+            setPlayerData ( featureNew , token_10 , 0 );
+            setPlayerData ( featureNew , token_11 , 0 );
+            setPlayerData ( featureNew , token_12 , 0 );
+            setPlayerData ( featureNew , token_13 , 0 );
+            setPlayerData ( featureNew , token_14 , 0 );
+            setPlayerData ( featureNew , token_15 , 0 );
+            setPlayerData ( featureNew , token_16 , 0 );
+            setPlayerData ( featureNew , token_17 , 0 );
+            setPlayerData ( featureNew , token_18 , 0 );
+            setPlayerData ( featureNew , token_19 , 0 );
+            setPlayerData ( featureNew , token_20 , 0 );
+            setPlayerData ( featureNew , token_21 , 0 );
+            setPlayerData ( featureNew , token_22 , 0 );
+            setPlayerData ( featureNew , token_23 , 0 );
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("killstreak_unlockconfirm"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (((23 * 1) + (16.367 * 0)) + (3 * (20 + 2)) + 5) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (1 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 2) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP") && (localvarstring("ui_swfPopupContext") == "MODE_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP") && (localvarstring("ui_swfPopupContext") == "MODE_POPUP"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP") && (localvarstring("ui_swfPopupContext") == "MODE_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP") && (localvarstring("ui_swfPopupContext") == "MODE_POPUP"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MPUI_UNLOCK_KILLSTREAK";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    select(localvarstring("ui_conflicting_ref") != "", locstring("@MPUI_ATTACHMENT_INCOMPATIBLE", "@" + tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_conflicting_ref"), 2)), select(localvarint("ui_numTokens") > 1, locstring("@MPUI_UNLOCKS_REMAINING_GREEN", localvarint("ui_numTokens")), locstring("@MPUI_UNLOCK_REMAINING_RED", 1)));
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  (0 + (0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            name                        "MODE_POPUP_1"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "MODE_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "MODE_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString ui_closeSound tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 7);
+                setPlayerData ( killstreakUnlocked , localVarString ( ui_selected_ref ) , true );
+                setLocalVarInt ui_unlockedStreaks 0;
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "uav") && "uav" != "uav" && "uav" != "predator_missile" && "uav" != "helicopter" && "uav" != "uav_support" && "uav" != "sam_turret" && "uav" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "airdrop_assault") && "airdrop_assault" != "uav" && "airdrop_assault" != "predator_missile" && "airdrop_assault" != "helicopter" && "airdrop_assault" != "uav_support" && "airdrop_assault" != "sam_turret" && "airdrop_assault" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "ims") && "ims" != "uav" && "ims" != "predator_missile" && "ims" != "helicopter" && "ims" != "uav_support" && "ims" != "sam_turret" && "ims" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "predator_missile") && "predator_missile" != "uav" && "predator_missile" != "predator_missile" && "predator_missile" != "helicopter" && "predator_missile" != "uav_support" && "predator_missile" != "sam_turret" && "predator_missile" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "airdrop_sentry_minigun") && "airdrop_sentry_minigun" != "uav" && "airdrop_sentry_minigun" != "predator_missile" && "airdrop_sentry_minigun" != "helicopter" && "airdrop_sentry_minigun" != "uav_support" && "airdrop_sentry_minigun" != "sam_turret" && "airdrop_sentry_minigun" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "precision_airstrike") && "precision_airstrike" != "uav" && "precision_airstrike" != "predator_missile" && "precision_airstrike" != "helicopter" && "precision_airstrike" != "uav_support" && "precision_airstrike" != "sam_turret" && "precision_airstrike" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "helicopter") && "helicopter" != "uav" && "helicopter" != "predator_missile" && "helicopter" != "helicopter" && "helicopter" != "uav_support" && "helicopter" != "sam_turret" && "helicopter" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "littlebird_flock") && "littlebird_flock" != "uav" && "littlebird_flock" != "predator_missile" && "littlebird_flock" != "helicopter" && "littlebird_flock" != "uav_support" && "littlebird_flock" != "sam_turret" && "littlebird_flock" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "littlebird_support") && "littlebird_support" != "uav" && "littlebird_support" != "predator_missile" && "littlebird_support" != "helicopter" && "littlebird_support" != "uav_support" && "littlebird_support" != "sam_turret" && "littlebird_support" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "remote_mortar") && "remote_mortar" != "uav" && "remote_mortar" != "predator_missile" && "remote_mortar" != "helicopter" && "remote_mortar" != "uav_support" && "remote_mortar" != "sam_turret" && "remote_mortar" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "airdrop_remote_tank") && "airdrop_remote_tank" != "uav" && "airdrop_remote_tank" != "predator_missile" && "airdrop_remote_tank" != "helicopter" && "airdrop_remote_tank" != "uav_support" && "airdrop_remote_tank" != "sam_turret" && "airdrop_remote_tank" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "ac130") && "ac130" != "uav" && "ac130" != "predator_missile" && "ac130" != "helicopter" && "ac130" != "uav_support" && "ac130" != "sam_turret" && "ac130" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "helicopter_flares") && "helicopter_flares" != "uav" && "helicopter_flares" != "predator_missile" && "helicopter_flares" != "helicopter" && "helicopter_flares" != "uav_support" && "helicopter_flares" != "sam_turret" && "helicopter_flares" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "airdrop_juggernaut") && "airdrop_juggernaut" != "uav" && "airdrop_juggernaut" != "predator_missile" && "airdrop_juggernaut" != "helicopter" && "airdrop_juggernaut" != "uav_support" && "airdrop_juggernaut" != "sam_turret" && "airdrop_juggernaut" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "osprey_gunner") && "osprey_gunner" != "uav" && "osprey_gunner" != "predator_missile" && "osprey_gunner" != "helicopter" && "osprey_gunner" != "uav_support" && "osprey_gunner" != "sam_turret" && "osprey_gunner" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "uav_support") && "uav_support" != "uav" && "uav_support" != "predator_missile" && "uav_support" != "helicopter" && "uav_support" != "uav_support" && "uav_support" != "sam_turret" && "uav_support" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "counter_uav") && "counter_uav" != "uav" && "counter_uav" != "predator_missile" && "counter_uav" != "helicopter" && "counter_uav" != "uav_support" && "counter_uav" != "sam_turret" && "counter_uav" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "deployable_vest") && "deployable_vest" != "uav" && "deployable_vest" != "predator_missile" && "deployable_vest" != "helicopter" && "deployable_vest" != "uav_support" && "deployable_vest" != "sam_turret" && "deployable_vest" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "airdrop_trap") && "airdrop_trap" != "uav" && "airdrop_trap" != "predator_missile" && "airdrop_trap" != "helicopter" && "airdrop_trap" != "uav_support" && "airdrop_trap" != "sam_turret" && "airdrop_trap" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "sam_turret") && "sam_turret" != "uav" && "sam_turret" != "predator_missile" && "sam_turret" != "helicopter" && "sam_turret" != "uav_support" && "sam_turret" != "sam_turret" && "sam_turret" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "remote_uav") && "remote_uav" != "uav" && "remote_uav" != "predator_missile" && "remote_uav" != "helicopter" && "remote_uav" != "uav_support" && "remote_uav" != "sam_turret" && "remote_uav" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "triple_uav") && "triple_uav" != "uav" && "triple_uav" != "predator_missile" && "triple_uav" != "helicopter" && "triple_uav" != "uav_support" && "triple_uav" != "sam_turret" && "triple_uav" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "remote_mg_turret") && "remote_mg_turret" != "uav" && "remote_mg_turret" != "predator_missile" && "remote_mg_turret" != "helicopter" && "remote_mg_turret" != "uav_support" && "remote_mg_turret" != "sam_turret" && "remote_mg_turret" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "stealth_airstrike") && "stealth_airstrike" != "uav" && "stealth_airstrike" != "predator_missile" && "stealth_airstrike" != "helicopter" && "stealth_airstrike" != "uav_support" && "stealth_airstrike" != "sam_turret" && "stealth_airstrike" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "emp") && "emp" != "uav" && "emp" != "predator_missile" && "emp" != "helicopter" && "emp" != "uav_support" && "emp" != "sam_turret" && "emp" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "airdrop_juggernaut_recon") && "airdrop_juggernaut_recon" != "uav" && "airdrop_juggernaut_recon" != "predator_missile" && "airdrop_juggernaut_recon" != "helicopter" && "airdrop_juggernaut_recon" != "uav_support" && "airdrop_juggernaut_recon" != "sam_turret" && "airdrop_juggernaut_recon" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                if (dvarbool(xblive_privatematch) || getplayerdata("killstreakUnlocked", "escort_airdrop") && "escort_airdrop" != "uav" && "escort_airdrop" != "predator_missile" && "escort_airdrop" != "helicopter" && "escort_airdrop" != "uav_support" && "escort_airdrop" != "sam_turret" && "escort_airdrop" != "triple_uav")
+                {
+                    setLocalVarInt ui_unlockedStreaks (localvarint("ui_unlockedStreaks") + 1);
+                }
+                setLocalVarInt ui_numTokens 0;
+                setLocalVarString ui_nextToken "";
+                if (isitemunlocked("token_1"))
+                {
+                    setLocalVarInt ui_numTokens 1;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_1");
+                    }
+                }
+                if (isitemunlocked("token_2"))
+                {
+                    setLocalVarInt ui_numTokens 2;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_2");
+                    }
+                }
+                if (isitemunlocked("token_3"))
+                {
+                    setLocalVarInt ui_numTokens 3;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_3");
+                    }
+                }
+                if (isitemunlocked("token_4"))
+                {
+                    setLocalVarInt ui_numTokens 4;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_4");
+                    }
+                }
+                if (isitemunlocked("token_5"))
+                {
+                    setLocalVarInt ui_numTokens 5;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_5");
+                    }
+                }
+                if (isitemunlocked("token_6"))
+                {
+                    setLocalVarInt ui_numTokens 6;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_6");
+                    }
+                }
+                if (isitemunlocked("token_7"))
+                {
+                    setLocalVarInt ui_numTokens 7;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_7");
+                    }
+                }
+                if (isitemunlocked("token_8"))
+                {
+                    setLocalVarInt ui_numTokens 8;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_8");
+                    }
+                }
+                if (isitemunlocked("token_9"))
+                {
+                    setLocalVarInt ui_numTokens 9;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_9");
+                    }
+                }
+                if (isitemunlocked("token_10"))
+                {
+                    setLocalVarInt ui_numTokens 10;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_10");
+                    }
+                }
+                if (isitemunlocked("token_11"))
+                {
+                    setLocalVarInt ui_numTokens 11;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_11");
+                    }
+                }
+                if (isitemunlocked("token_12"))
+                {
+                    setLocalVarInt ui_numTokens 12;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_12");
+                    }
+                }
+                if (isitemunlocked("token_13"))
+                {
+                    setLocalVarInt ui_numTokens 13;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_13");
+                    }
+                }
+                if (isitemunlocked("token_14"))
+                {
+                    setLocalVarInt ui_numTokens 14;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_14");
+                    }
+                }
+                if (isitemunlocked("token_15"))
+                {
+                    setLocalVarInt ui_numTokens 15;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_15");
+                    }
+                }
+                if (isitemunlocked("token_16"))
+                {
+                    setLocalVarInt ui_numTokens 16;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_16");
+                    }
+                }
+                if (isitemunlocked("token_17"))
+                {
+                    setLocalVarInt ui_numTokens 17;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_17");
+                    }
+                }
+                if (isitemunlocked("token_18"))
+                {
+                    setLocalVarInt ui_numTokens 18;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_18");
+                    }
+                }
+                if (isitemunlocked("token_19"))
+                {
+                    setLocalVarInt ui_numTokens 19;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_19");
+                    }
+                }
+                if (isitemunlocked("token_20"))
+                {
+                    setLocalVarInt ui_numTokens 20;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_20");
+                    }
+                }
+                if (isitemunlocked("token_21"))
+                {
+                    setLocalVarInt ui_numTokens 21;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_21");
+                    }
+                }
+                if (isitemunlocked("token_22"))
+                {
+                    setLocalVarInt ui_numTokens 22;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_22");
+                    }
+                }
+                if (isitemunlocked("token_23"))
+                {
+                    setLocalVarInt ui_numTokens 23;
+                }
+                else
+                {
+                    if (localvarstring("ui_nextToken") == "")
+                    {
+                        setLocalVarString ui_nextToken ("token_23");
+                    }
+                }
+                setLocalVarInt ui_numTokens max((localvarint("ui_numTokens") - localvarint("ui_unlockedStreaks")), 0);
+                setLocalVarString temp (debugprint("Stats", "TOKENS AVAILABLE: " + localvarint("ui_numTokens")));
+                if (!localvarint("ui_numTokens"))
+                {
+                    setPlayerData ( featureNew , token_1 , false );
+                    setPlayerData ( featureNew , token_2 , false );
+                    setPlayerData ( featureNew , token_3 , false );
+                    setPlayerData ( featureNew , token_4 , false );
+                    setPlayerData ( featureNew , token_5 , false );
+                    setPlayerData ( featureNew , token_6 , false );
+                    setPlayerData ( featureNew , token_7 , false );
+                    setPlayerData ( featureNew , token_8 , false );
+                    setPlayerData ( featureNew , token_9 , false );
+                    setPlayerData ( featureNew , token_10 , false );
+                    setPlayerData ( featureNew , token_11 , false );
+                    setPlayerData ( featureNew , token_12 , false );
+                    setPlayerData ( featureNew , token_13 , false );
+                    setPlayerData ( featureNew , token_14 , false );
+                    setPlayerData ( featureNew , token_15 , false );
+                    setPlayerData ( featureNew , token_16 , false );
+                    setPlayerData ( featureNew , token_17 , false );
+                    setPlayerData ( featureNew , token_18 , false );
+                    setPlayerData ( featureNew , token_19 , false );
+                    setPlayerData ( featureNew , token_20 , false );
+                    setPlayerData ( featureNew , token_21 , false );
+                    setPlayerData ( featureNew , token_22 , false );
+                    setPlayerData ( featureNew , token_23 , false );
+                }
+                if (0 == localvarint("ui_streak_type"))
+                {
+                    if (((int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)) && localvarstring("ui_selected_ref") != localvarstring("ui_assaultStreak1")) || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) && localvarstring("ui_selected_ref") != localvarstring("ui_assaultStreak2")) || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak3"), 4)) && localvarstring("ui_selected_ref") != localvarstring("ui_assaultStreak3"))))
+                    {
+                        if (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)))
+                        {
+                            setLocalVarString ui_assaultStreak1 localvarstring("ui_selected_ref");
+                        }
+                        else
+                        {
+                            if (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)))
+                            {
+                                setLocalVarString ui_assaultStreak2 localvarstring("ui_selected_ref");
+                            }
+                            else
+                            {
+                                if (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak3"), 4)))
+                                {
+                                    setLocalVarString ui_assaultStreak3 localvarstring("ui_selected_ref");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (localvarstring("ui_assaultStreak1") == "none")
+                        {
+                            setLocalVarString ui_assaultStreak1 localvarstring("ui_selected_ref");
+                        }
+                        else
+                        {
+                            if (localvarstring("ui_assaultStreak2") == "none")
+                            {
+                                setLocalVarString ui_assaultStreak2 localvarstring("ui_selected_ref");
+                            }
+                            else
+                            {
+                                if (localvarstring("ui_assaultStreak3") == "none")
+                                {
+                                    setLocalVarString ui_assaultStreak3 localvarstring("ui_selected_ref");
+                                }
+                                else
+                                {
+                                    if (localvarstring("ui_assaultStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)) && localvarstring("ui_assaultStreak2") != "none"))
+                                    {
+                                        setLocalVarString ui_tempStreak localvarstring("ui_assaultStreak1");
+                                        setLocalVarString ui_assaultStreak1 localvarstring("ui_assaultStreak2");
+                                        setLocalVarString ui_assaultStreak2 localvarstring("ui_tempStreak");
+                                    }
+                                    if (localvarstring("ui_assaultStreak2") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak3"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) && localvarstring("ui_assaultStreak3") != "none"))
+                                    {
+                                        setLocalVarString ui_tempStreak localvarstring("ui_assaultStreak2");
+                                        setLocalVarString ui_assaultStreak2 localvarstring("ui_assaultStreak3");
+                                        setLocalVarString ui_assaultStreak3 localvarstring("ui_tempStreak");
+                                    }
+                                    if (localvarstring("ui_assaultStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)) && localvarstring("ui_assaultStreak2") != "none"))
+                                    {
+                                        setLocalVarString ui_tempStreak localvarstring("ui_assaultStreak1");
+                                        setLocalVarString ui_assaultStreak1 localvarstring("ui_assaultStreak2");
+                                        setLocalVarString ui_assaultStreak2 localvarstring("ui_tempStreak");
+                                    }
+                                    if ((int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)) && localvarstring("ui_selected_ref") != "none"))
+                                    {
+                                        setLocalVarString ui_assaultStreak1 localvarstring("ui_selected_ref");
+                                    }
+                                    else
+                                    {
+                                        if ((int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) && localvarstring("ui_selected_ref") != "none"))
+                                        {
+                                            setLocalVarString ui_assaultStreak2 localvarstring("ui_selected_ref");
+                                        }
+                                        else
+                                        {
+                                            setLocalVarString ui_assaultStreak3 localvarstring("ui_selected_ref");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (localvarstring("ui_assaultStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)) && localvarstring("ui_assaultStreak2") != "none"))
+                    {
+                        setLocalVarString ui_tempStreak localvarstring("ui_assaultStreak1");
+                        setLocalVarString ui_assaultStreak1 localvarstring("ui_assaultStreak2");
+                        setLocalVarString ui_assaultStreak2 localvarstring("ui_tempStreak");
+                    }
+                    if (localvarstring("ui_assaultStreak2") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak3"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) && localvarstring("ui_assaultStreak3") != "none"))
+                    {
+                        setLocalVarString ui_tempStreak localvarstring("ui_assaultStreak2");
+                        setLocalVarString ui_assaultStreak2 localvarstring("ui_assaultStreak3");
+                        setLocalVarString ui_assaultStreak3 localvarstring("ui_tempStreak");
+                    }
+                    if (localvarstring("ui_assaultStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_assaultStreak1"), 4)) && localvarstring("ui_assaultStreak2") != "none"))
+                    {
+                        setLocalVarString ui_tempStreak localvarstring("ui_assaultStreak1");
+                        setLocalVarString ui_assaultStreak1 localvarstring("ui_assaultStreak2");
+                        setLocalVarString ui_assaultStreak2 localvarstring("ui_tempStreak");
+                    }
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , assaultStreaks , 0 , localVarString ( ui_assaultStreak1 ) );
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , assaultStreaks , 1 , localVarString ( ui_assaultStreak2 ) );
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , assaultStreaks , 2 , localVarString ( ui_assaultStreak3 ) );
+                }
+                else
+                {
+                    if (((int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)) && localvarstring("ui_selected_ref") != localvarstring("ui_supportStreak1")) || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) && localvarstring("ui_selected_ref") != localvarstring("ui_supportStreak2")) || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak3"), 4)) && localvarstring("ui_selected_ref") != localvarstring("ui_supportStreak3"))))
+                    {
+                        if (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)))
+                        {
+                            setLocalVarString ui_supportStreak1 localvarstring("ui_selected_ref");
+                        }
+                        else
+                        {
+                            if (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)))
+                            {
+                                setLocalVarString ui_supportStreak2 localvarstring("ui_selected_ref");
+                            }
+                            else
+                            {
+                                if (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) == int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak3"), 4)))
+                                {
+                                    setLocalVarString ui_supportStreak3 localvarstring("ui_selected_ref");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (localvarstring("ui_supportStreak1") == "none")
+                        {
+                            setLocalVarString ui_supportStreak1 localvarstring("ui_selected_ref");
+                        }
+                        else
+                        {
+                            if (localvarstring("ui_supportStreak2") == "none")
+                            {
+                                setLocalVarString ui_supportStreak2 localvarstring("ui_selected_ref");
+                            }
+                            else
+                            {
+                                if (localvarstring("ui_supportStreak3") == "none")
+                                {
+                                    setLocalVarString ui_supportStreak3 localvarstring("ui_selected_ref");
+                                }
+                                else
+                                {
+                                    if (localvarstring("ui_supportStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)) && localvarstring("ui_supportStreak2") != "none"))
+                                    {
+                                        setLocalVarString ui_tempStreak localvarstring("ui_supportStreak1");
+                                        setLocalVarString ui_supportStreak1 localvarstring("ui_supportStreak2");
+                                        setLocalVarString ui_supportStreak2 localvarstring("ui_tempStreak");
+                                    }
+                                    if (localvarstring("ui_supportStreak2") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak3"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) && localvarstring("ui_supportStreak3") != "none"))
+                                    {
+                                        setLocalVarString ui_tempStreak localvarstring("ui_supportStreak2");
+                                        setLocalVarString ui_supportStreak2 localvarstring("ui_supportStreak3");
+                                        setLocalVarString ui_supportStreak3 localvarstring("ui_tempStreak");
+                                    }
+                                    if (localvarstring("ui_supportStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)) && localvarstring("ui_supportStreak2") != "none"))
+                                    {
+                                        setLocalVarString ui_tempStreak localvarstring("ui_supportStreak1");
+                                        setLocalVarString ui_supportStreak1 localvarstring("ui_supportStreak2");
+                                        setLocalVarString ui_supportStreak2 localvarstring("ui_tempStreak");
+                                    }
+                                    if ((int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)) && localvarstring("ui_selected_ref") != "none"))
+                                    {
+                                        setLocalVarString ui_supportStreak1 localvarstring("ui_selected_ref");
+                                    }
+                                    else
+                                    {
+                                        if ((int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_selected_ref"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) && localvarstring("ui_selected_ref") != "none"))
+                                        {
+                                            setLocalVarString ui_supportStreak2 localvarstring("ui_selected_ref");
+                                        }
+                                        else
+                                        {
+                                            setLocalVarString ui_supportStreak3 localvarstring("ui_selected_ref");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (localvarstring("ui_supportStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)) && localvarstring("ui_supportStreak2") != "none"))
+                    {
+                        setLocalVarString ui_tempStreak localvarstring("ui_supportStreak1");
+                        setLocalVarString ui_supportStreak1 localvarstring("ui_supportStreak2");
+                        setLocalVarString ui_supportStreak2 localvarstring("ui_tempStreak");
+                    }
+                    if (localvarstring("ui_supportStreak2") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak3"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) && localvarstring("ui_supportStreak3") != "none"))
+                    {
+                        setLocalVarString ui_tempStreak localvarstring("ui_supportStreak2");
+                        setLocalVarString ui_supportStreak2 localvarstring("ui_supportStreak3");
+                        setLocalVarString ui_supportStreak3 localvarstring("ui_tempStreak");
+                    }
+                    if (localvarstring("ui_supportStreak1") == "none" || (int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak2"), 4)) < int(tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_supportStreak1"), 4)) && localvarstring("ui_supportStreak2") != "none"))
+                    {
+                        setLocalVarString ui_tempStreak localvarstring("ui_supportStreak1");
+                        setLocalVarString ui_supportStreak1 localvarstring("ui_supportStreak2");
+                        setLocalVarString ui_supportStreak2 localvarstring("ui_tempStreak");
+                    }
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , defenseStreaks , 0 , localVarString ( ui_supportStreak1 ) );
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , defenseStreaks , 1 , localVarString ( ui_supportStreak2 ) );
+                    setPlayerData ( localVarString ( ui_customClassLoc ) , localVarInt ( classIndex ) , defenseStreaks , 2 , localVarString ( ui_supportStreak3 ) );
+                }
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_YES";
+            exp rect y                  (((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "MODE_POPUP_2"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 2;
+                setLocalVarString ui_buttonNavGroupName_popup "MODE_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "MODE_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_NO";
+            exp rect y                  (((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+    }
+}

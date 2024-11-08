@@ -1,0 +1,345 @@
+{
+    menuDef
+    {
+        name                        "popup_summary_splitscreen"
+        rect                        -266.667 0 533.333 0 2 2
+        style                       1
+        backcolor                   1 1 1 1
+        focuscolor                  1 1 1 1
+        background                  "white"
+        outOfBoundsClick            
+        popup                       
+        allowedBinding              "+talk"
+        visible                     1
+        exp rect Y                  0 - 357 / 2;
+        exp rect H                  357;
+        onOpen
+        {
+            setLocalVarInt ui_centerPopup 1;
+            open page_summary_splitscreen;
+            setLocalVarString ui_scoreboardType getplayerdatasplitscreen(0, "round", "scoreboardType");
+            if (dvarbool(splitscreen))
+            {
+                if (splitscreenplayercount() >= 1)
+                {
+                    if (isitemunlockedbyclient(0, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(0, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 0 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+                if (splitscreenplayercount() >= 2)
+                {
+                    if (isitemunlockedbyclient(1, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(1, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 1 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+                if (splitscreenplayercount() >= 3)
+                {
+                    if (isitemunlockedbyclient(2, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(2, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 2 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+                if (splitscreenplayercount() >= 4)
+                {
+                    if (isitemunlockedbyclient(3, "cac"))
+                    {
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "uav"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , uav , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "predator_missile"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , predator_missile , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "helicopter"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , helicopter , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "uav_support"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , uav_support , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "sam_turret"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , sam_turret , true );
+                        }
+                        if (!getplayerdatasplitscreen(3, "killstreakUnlocked", "triple_uav"))
+                        {
+                            setPlayerDataSplitScreen ( 3 , killstreakUnlocked , triple_uav , true );
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (isitemunlocked("cac"))
+                {
+                    if (!getplayerdata("killstreakUnlocked", "uav"))
+                    {
+                        setPlayerData ( killstreakUnlocked , uav , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "predator_missile"))
+                    {
+                        setPlayerData ( killstreakUnlocked , predator_missile , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "helicopter"))
+                    {
+                        setPlayerData ( killstreakUnlocked , helicopter , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "uav_support"))
+                    {
+                        setPlayerData ( killstreakUnlocked , uav_support , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "sam_turret"))
+                    {
+                        setPlayerData ( killstreakUnlocked , sam_turret , true );
+                    }
+                    if (!getplayerdata("killstreakUnlocked", "triple_uav"))
+                    {
+                        setPlayerData ( killstreakUnlocked , triple_uav , true );
+                    }
+                }
+            }
+        }
+        onClose
+        {
+            setLocalVarInt ui_centerPopup 0;
+            close page_summary_splitscreen;
+            close page_highlights_splitscreen;
+            close page_scoreboard_splitscreen;
+        }
+        onESC
+        {
+            close self;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when((menuistopmost("page_summary_splitscreen") || menuistopmost("page_highlights_splitscreen") || menuistopmost("page_scoreboard_splitscreen")));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -854 -480 3416 1920 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            background                  "xpbar_stencilbase"
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect h                  357;
+        }
+        itemDef
+        {
+            group                       "left_arrow"
+            rect                        0 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_leftArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_left"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor left_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor left_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_leftArrow"))
+                {
+                    play mouse_click;
+                    PAGE_LEFT ( "" ) focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            group                       "right_arrow"
+            rect                        485.333 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_rightArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_right"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor right_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor right_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_rightArrow"))
+                {
+                    play mouse_click;
+                    PAGE_RIGHT ( "" ) focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "popup_summary_splitscreen";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 1;
+            }
+            exp rect x                  ((533.333)) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 0 0
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popup_summary_splitscreen"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popup_summary_splitscreen"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CONTINUE";
+            exp rect x                  ((533.333)) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popup_summary_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popup_summary_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popup_summary_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+    }
+}

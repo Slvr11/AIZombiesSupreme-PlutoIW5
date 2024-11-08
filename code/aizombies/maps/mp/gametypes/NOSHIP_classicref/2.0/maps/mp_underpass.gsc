@@ -1,0 +1,54 @@
+#include common_scripts\utility;
+#include maps\mp\_utility;
+#include maps\mp\gametypes\_hud_util;
+#include AImod\_OtherFunctions;
+
+WaypointInit()
+{
+	level.botwaypoints[0] = SpawnStruct();
+	level.botwaypoints[0].origin = (4035,3004,432);
+	level.botwaypoints[1] = SpawnStruct();
+	level.botwaypoints[1].origin = (4045,2773,432);
+	level.botwaypoints[2] = SpawnStruct();
+	level.botwaypoints[2].origin = (4048,2364,432);
+	level.botwaypoints[3] = SpawnStruct();
+	level.botwaypoints[3].origin = (4049,2018,432);
+	level.botwaypoints[4] = SpawnStruct();
+	level.botwaypoints[4].origin = (4064,1219,432);
+	level.botwaypoints[5] = SpawnStruct();
+	level.botwaypoints[5].origin = (3091,2595,417);
+	level.botwaypoints[6] = SpawnStruct();
+	level.botwaypoints[6].origin = (3071,2862,426);
+	level.botwaypoints[7] = SpawnStruct();
+	level.botwaypoints[7].origin = (3077,3131,412);
+	level.botwaypoints[8] = SpawnStruct();
+	level.botwaypoints[8].origin = (3163,3380,400);
+	level.botwaypoints[9] = SpawnStruct();
+	level.botwaypoints[9].origin = (3562,3143,400);
+	level.botwaypoints[10] = SpawnStruct();
+	level.botwaypoints[10].origin = (3604,3351,400);
+	level.botwaypoints[11] = SpawnStruct();
+	level.botwaypoints[11].origin = (3569,2352,400);
+	level.botwaypoints[12] = SpawnStruct();
+	level.botwaypoints[12].origin = (3838,2738,400);
+	level.botwaypoints[13] = SpawnStruct();
+	level.botwaypoints[13].origin = (3888,2470,400);
+	level.botwaypoints[14] = SpawnStruct();
+	level.botwaypoints[14].origin = (3888,1986,400);
+	level.botwaypoints[15] = SpawnStruct();
+	level.botwaypoints[15].origin = (3481,1786,400);
+	level.botwaypoints[16] = SpawnStruct();
+	level.botwaypoints[16].origin = (3488,1358,400);
+	level.botwaypoints[17] = SpawnStruct();
+	level.botwaypoints[17].origin = (3800,1339,400);
+	level.botwaypoints[18] = SpawnStruct();
+	level.botwaypoints[18].origin = (3924,1878,400);
+	level.botwaypoints[19] = SpawnStruct();
+	level.botwaypoints[19].origin = (3251,2396,430);
+	level.botwaypoints[20] = SpawnStruct();
+	level.botwaypoints[20].origin = (3540,2548,400);
+	level.botwaypoints[21] = SpawnStruct();
+	level.botwaypoints[21].origin = (3699,2556,400);
+	level.botwaypoints[22] = SpawnStruct();
+	level.botwaypoints[22].origin = (3820,3132,400);
+}

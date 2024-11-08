@@ -1,0 +1,21 @@
+{
+    menuDef
+    {
+        name                        "popup_ready"
+        rect                        0 0 640 480 0 0
+        style                       1
+        border                      1
+        focuscolor                  1 1 1 1
+        popup                       
+        onOpen
+        {
+            exec "xpartyready 1";
+        }
+        onESC
+        {
+            play mouse_click;
+            exec "xpartyready 0";
+            close popup_ready;
+        }
+    }
+}

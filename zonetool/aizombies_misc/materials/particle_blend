@@ -1,0 +1,31 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 4,
+    "constantTable": [
+        {
+            "literal": [
+                1.0,
+                1.0,
+                0.0,
+                0.0
+            ],
+            "name": "uvScale",
+            "nameHash": 3809220315
+        }
+    ],
+    "gameFlags": 0,
+    "maps": null,
+    "name": "particle_blend",
+    "sortKey": 34,
+    "stateFlags": 3,
+    "stateMap": [
+        [
+            404916578,
+            3759013890
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "particle_blend",
+    "unknown": 0
+}

@@ -1,0 +1,150 @@
+{
+    menuDef
+    {
+        name                        "popup_friends"
+        rect                        -266.667 20 533.333 370 2 1
+        focuscolor                  1 1 1 1
+        background                  "white"
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        allowedBinding              "+talk"
+        visible                     1
+        onOpen
+        {
+            setLocalVarInt ui_centerPopup 1;
+            if (localvarint("ui_vault_load"))
+            {
+                setdvar ui_onlineRequired 1;
+            }
+            execnow refreshfacebookfriends;
+            execnow eliteclan_refresh;
+            open page_friends;
+            if (!isusersignedintolive() || isguest())
+            {
+                close self;
+            }
+        }
+        onClose
+        {
+            execnow "decnosplitscreencontrol popup_friends";
+            setLocalVarInt ui_centerPopup 0;
+            if (localvarint("ui_vault_load"))
+            {
+                setdvar ui_onlineRequired 0;
+            }
+            close popup_friend_report;
+            close popup_recent_report;
+            close popup_facebook_report;
+            close popup_clan_report;
+            close popup_friend_list_actions;
+            close popup_recent_list_actions;
+            close popup_facebook_list_actions;
+            close popup_clan_list_actions;
+            close page_friends;
+            close page_recent;
+            close page_facebook;
+            close page_elite_clan;
+        }
+        onESC
+        {
+            close self;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when((menuistopmost("page_friends") || menuistopmost("page_recent") || menuistopmost("page_party") || menuistopmost("page_facebook") || menuistopmost("page_elite_clan")));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 370 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            backcolor                   0.2118 0.2314 0.22 1
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 24 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            backcolor                   0.1569 0.1725 0.1608 1
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 40 0 0
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  0 + 24;
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 40 0 0
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  80 + 24;
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 40 0 0
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  160 + 24;
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 40 0 0
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            backcolor                   0 0 0 0.15
+            exp rect y                  240 + 24;
+        }
+        itemDef
+        {
+            rect                        0 24 533.333 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 324.667 533.333 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 346 533.333 24 0 0
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            backcolor                   0.3098 0.349 0.2745 1
+        }
+    }
+}

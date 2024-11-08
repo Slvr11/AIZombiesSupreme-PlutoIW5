@@ -1,0 +1,1541 @@
+{
+    menuDef
+    {
+        name                        "vault_friend_browser"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_mainmenu_mp"
+        onOpen
+        {
+            setLocalVarString ui_buttonNavGroupName "PLAYLIST_BUTTON_LIST";
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarBool ui_swfSelectionBarVis 1;
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarBool ui_vault_firstfocus 1;
+            setfocus file_list;
+            if (localvarstring("ui_vault_friend") != getOnlineVaultFriendGamerTag())
+            {
+                setLocalVarString ui_feeder_name "file_list";
+                feedertop ui_feeder_name;
+            }
+            setLocalVarString ui_vault_friend getOnlineVaultFriendGamerTag();
+        }
+        onClose
+        {
+        }
+        onESC
+        {
+            uiScript onlinevault pop;
+            close self;
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        237.5 -36 640 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "background_image_blur_less_dest_alpha_masked"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 54.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 94.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 134.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 174.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 214.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 254.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 294.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 334.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 374.667 301.333 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.251 0.271 0.247 0.309
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -68 52 305.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "PLAYLIST_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((getFeederData("file_list", "selection") - getFeederData("file_list", "start")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        -68 34.667 305.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "PLAYLIST_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((getFeederData("file_list", "selection") - getFeederData("file_list", "start")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "PLAYLIST_BUTTON_LIST") && getFeederData("file_list", "enabled"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((getFeederData("file_list", "selection") - getFeederData("file_list", "start")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            name                        "file_list"
+            rect                        -64 30.834 312.667 364 1 1
+            type                        6
+            visible                     when(1);
+            textscale                   0.375
+            textfont                    1
+            backcolor                   0.5 0.5 0.5 0
+            outlinecolor                0.9 0.9 0.925 0
+            disablecolor                0.7 0.7 0.7 1
+            onFocus
+            {
+                setLocalVarString ui_buttonNavGroupName "PLAYLIST_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionBarVis 1;
+                setLocalVarBool ui_swfSelectionButtonVis 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+            }
+            exp rect y                  34.667;
+            exp rect h                  (20 * min(18, getFeederData("file_list", "count"))) + 4;
+            elementwidth                596.667
+            elementheight               20
+            feeder                      36
+            columns                     3
+                                        114 -3 0 0 50 2
+                                        132 -3 144 0 158 2
+                                        281 0 17 17 20 2
+            doubleclick
+            {
+                play mouse_click;
+                if (!isContentServerTaskInProgress("writefile"))
+                {
+                    if (getOnlineVaultSelectedItemData("isCustomGamemode"))
+                    {
+                        open popup_vault_friend_actions_cgm;
+                    }
+                    else
+                    {
+                        if (getOnlineVaultSelectedItemData("isScreenshot"))
+                        {
+                            open popup_vault_friend_actions_screenshot;
+                        }
+                        else
+                        {
+                            open popup_vault_friend_actions_film;
+                        }
+                    }
+                }
+            }
+            selectBorder                0.8 0.95 1 0
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 25 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   10
+            textscale                   0.5
+            textfont                    9
+            exp text                    "@MENU_FRIENDS_ONLINEVAULT_TITLE";
+        }
+        itemDef
+        {
+            rect                        91 52.333 272 153.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))) && getOnlineVaultSelectedItemData("isFilm"));
+            textscale                   0.55
+            exp material                getOnlineVaultSelectedItemData("mapImage");
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 52.333 163.2 153.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))) && getOnlineVaultSelectedItemData("isCustomGameMode"));
+            textscale                   0.55
+            background                  "playlist_custom"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (272 * 0.2);
+        }
+        itemDef
+        {
+            rect                        91 52.333 272 153.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))) && (getOnlineVaultSelectedItemData("isScreenShot") || getOnlineVaultSelectedItemData("isClip")));
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            name                        "thumbnail"
+            rect                        91 52.333 272 153.333 2 1
+            decoration                  
+            type                        8
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))) && (getOnlineVaultSelectedItemData("isScreenShot") || getOnlineVaultSelectedItemData("isClip")));
+            ownerdraw                   380
+            textscale                   0.375
+            textfont                    3
+            backcolor                   0.1569 0.1725 0.1608 1
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        203 104.999 48 48 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))) && !((getOnlineVaultSelectedItemData("isClip") || getOnlineVaultSelectedItemData("isScreenShot")) && !getOnlineVaultSelectedItemData("isThumbnailLoaded")) && !getOnlineVaultSelectedItemData("isCustomGameMode"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  (((select(dvarbool(widescreen), 0, (0 - 90)))) + (91 + (272 / 2) - 24) + (0));
+        }
+        itemDef
+        {
+            rect                        203 104.999 48 48 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))) && !((getOnlineVaultSelectedItemData("isClip") || getOnlineVaultSelectedItemData("isScreenShot")) && !getOnlineVaultSelectedItemData("isThumbnailLoaded")) && !getOnlineVaultSelectedItemData("isCustomGameMode"));
+            textscale                   0.55
+            exp material                getOnlineVaultSelectedItemData("filetypeIcon");
+            exp rect x                  (((select(dvarbool(widescreen), 0, (0 - 90)))) + (91 + (272 / 2) - 24) + (0));
+        }
+        itemDef
+        {
+            rect                        91 52.333 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((!getOnlineVaultSelectedItemData("isEmptySlot")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + ((91)) + (0);
+        }
+        itemDef
+        {
+            rect                        91 195 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((!getOnlineVaultSelectedItemData("isEmptySlot")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + ((91)) + (0);
+        }
+        itemDef
+        {
+            rect                        91 36 272 16.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))));
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 32.667 272 20.833 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    getOnlineVaultSelectedItemData("localizedName");
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + ((91)) + (0);
+            exp forecolor a             select((getTextWidth(getOnlineVaultSelectedItemData("localizedName"), 9, 0.43) <= 250), 1, 0);
+        }
+        itemDef
+        {
+            rect                        91 32.667 272 20.833 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot"))));
+            textalign                   9
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("localizedName"), 9, 0.3, 272 - 20);
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + ((91)) + (0);
+            exp forecolor a             select((getTextWidth(getOnlineVaultSelectedItemData("localizedName"), 9, 0.43) > 250), 1, 0);
+        }
+        itemDef
+        {
+            rect                        91 205.667 272 9.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!getOnlineVaultSelectedItemData("isEmptySlot")));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 90 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((0 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_CREATOR";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("author"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_CREATOR"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((1 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((2 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((3 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 232.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DESCRIPTION";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 256 36 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textalign                   4
+            textscale                   0.383333
+            textfont                    3
+            exp text                    getOnlineVaultSelectedItemData("localizedDesc");
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 286.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((4 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 286.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_BASEGAMEMODE";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 286.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("gametype"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_BASEGAMEMODE"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 304.667 272 10.5 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode"))));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 294 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isCustomGameMode")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 126 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((0 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_CREATOR";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("author"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_CREATOR"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((1 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_GAMETYPE";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 232.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("gametype"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_GAMETYPE"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((2 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_MAP";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("map"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_MAP"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((3 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DURATION";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 268.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("duration"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_DURATION"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 286.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((4 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 304.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((5 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 322.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((6 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 286.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DESCRIPTION";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 304.667 256 36 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textalign                   4
+            textscale                   0.383333
+            textfont                    3
+            exp text                    getOnlineVaultSelectedItemData("localizedDesc");
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 340.667 272 10.5 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip"))));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 330 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isClip")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 126 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((0 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_CREATOR";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("author"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_CREATOR"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((1 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_GAMETYPE";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 232.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("gametype"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_GAMETYPE"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((2 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_MAP";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("map"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_MAP"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((3 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DATETIME";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 268.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("createTime"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_DATETIME"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 286.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((4 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 304.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((5 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 322.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((6 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 286.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DESCRIPTION";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 304.667 256 36 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textalign                   4
+            textscale                   0.383333
+            textfont                    3
+            exp text                    getOnlineVaultSelectedItemData("localizedDesc");
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 340.667 272 10.5 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot"))));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 330 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isScreenShot")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 126 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((0 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_CREATOR";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("author"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_CREATOR"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 214.667 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((1 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 232.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_GAMETYPE";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 232.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("gametype"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_GAMETYPE"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((2 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 250.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_MAP";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 250.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("map"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_MAP"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((3 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 268.667 272 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DURATION";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 268.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   10
+            textscale                   0.383333
+            textfont                    3
+            exp text                    truncateTextWithEllipsis(getOnlineVaultSelectedItemData("duration"), 3, 0.383333, 272 - 48 - getTextWidthModCase(locstring("@MPUI_VAULT_DURATION"), 3, 0.383333, 9));
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 286.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((4 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 304.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((5 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 322.667 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+            exp forecolor a             select((6 % 2 == 0), 0, 0.15);
+        }
+        itemDef
+        {
+            rect                        91 286.667 256 18 2 1
+            style                       1
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            forecolor                   0.761 0.761 0.757 1
+            exp text                    "@MPUI_VAULT_DESCRIPTION";
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 304.667 256 36 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textalign                   4
+            textscale                   0.383333
+            textfont                    3
+            exp text                    getOnlineVaultSelectedItemData("localizedDesc");
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (8);
+        }
+        itemDef
+        {
+            rect                        91 340.667 272 10.5 2 1
+            style                       3
+            decoration                  
+            visible                     when((((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm"))));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        91 330 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!getOnlineVaultSelectedItemData("isEmptySlot")) && getOnlineVaultSelectedItemData("isFilm")));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 90)))) + (91) + (0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "vault_friend_browser";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "vault_friend_browser"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "vault_friend_browser"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "vault_friend_browser"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "vault_friend_browser"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "vault_friend_browser"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+    }
+}

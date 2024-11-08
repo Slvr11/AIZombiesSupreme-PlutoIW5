@@ -1,0 +1,40 @@
+{
+    "animationX": 4,
+    "animationY": 8,
+    "cameraRegion": 4,
+    "constantTable": [
+        {
+            "literal": [
+                1.0,
+                1.0,
+                0.0,
+                0.0
+            ],
+            "name": "uvScale",
+            "nameHash": 3809220315
+        }
+    ],
+    "gameFlags": 0,
+    "maps": [
+        {
+            "firstCharacter": 100,
+            "image": "watersheeting_fx_distortion",
+            "lastCharacter": 112,
+            "sampleState": 11,
+            "semantic": 3,
+            "typeHash": 3948059469
+        }
+    ],
+    "name": "watersheeting_color_distort_blur",
+    "sortKey": 34,
+    "stateFlags": 3,
+    "stateMap": [
+        [
+            403867666,
+            3759013890
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "watersheeting_color_distort_blur",
+    "unknown": 0
+}

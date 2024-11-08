@@ -1,0 +1,20 @@
+{
+    menuDef
+    {
+        name                        "class_marines"
+        rect                        0 0 0 0 0 0
+        onOpen
+        {
+            if (dvarint(xblive_privatematch) || (dvarint(xblive_competitionmatch) && dvarint(com_svDedicated)))
+            {
+                setLocalVarString ui_customClassLoc "privateMatchCustomClasses";
+            }
+            else
+            {
+                setLocalVarString ui_customClassLoc "customClasses";
+            }
+            setLocalVarString ui_team "marines";
+            open class close self;
+        }
+    }
+}

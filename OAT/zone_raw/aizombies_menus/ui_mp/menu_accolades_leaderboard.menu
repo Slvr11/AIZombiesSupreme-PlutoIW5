@@ -1,0 +1,19 @@
+{
+    menuDef
+    {
+        name                        "menu_accolades_leaderboard"
+        rect                        0 0 0 0 0 0
+        onOpen
+        {
+            close self;
+            if (dvarbool(widescreen))
+            {
+                open menu_accolades_leaderboard_hd;
+            }
+            else
+            {
+                open menu_accolades_leaderboard_sd;
+            }
+        }
+    }
+}

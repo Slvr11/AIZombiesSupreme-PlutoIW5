@@ -1,0 +1,31 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 4,
+    "constantTable": [
+        {
+            "literal": [
+                1.0,
+                1.0,
+                0.0,
+                0.0
+            ],
+            "name": "uvScale",
+            "nameHash": 3809220315
+        }
+    ],
+    "gameFlags": 0,
+    "maps": null,
+    "name": "pixel_cost_add_depth_disable",
+    "sortKey": 47,
+    "stateFlags": 3,
+    "stateMap": [
+        [
+            403867938,
+            2
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "pixel_cost_add",
+    "unknown": 0
+}

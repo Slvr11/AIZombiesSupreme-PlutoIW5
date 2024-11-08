@@ -1,0 +1,170 @@
+{
+    menuDef
+    {
+        name                        "connect"
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "$levelbriefing"
+        }
+        itemDef
+        {
+            rect                        -426.667 -236 853.333 -400 2 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "gradient_bottom"
+        }
+        itemDef
+        {
+            rect                        -426.667 -163 853.333 200 2 3
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "gradient_bottom"
+        }
+        itemDef
+        {
+            rect                        32 29 280 14 1 1
+            decoration                  
+            visible                     1
+            textalign                   4
+            textscale                   0.5833
+            textstyle                   8
+            textfont                    9
+            exp text                    gametypename();
+            exp rect x                  select(dvarbool(widescreen), 32, 20);
+        }
+        itemDef
+        {
+            rect                        32 55 280 10 1 1
+            decoration                  
+            visible                     1
+            textalign                   4
+            textscale                   0.4583
+            textstyle                   8
+            textfont                    9
+            forecolor                   0.7843 0.7843 0.7843 1
+            exp text                    getmapname();
+            exp rect x                  select(dvarbool(widescreen), 32, 20);
+        }
+        itemDef
+        {
+            rect                        -32 -92 0 26 3 3
+            decoration                  
+            visible                     1
+            textalign                   6
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    connectioninfo();
+            exp rect x                  0 - (select(dvarbool(widescreen), 32, 20));
+        }
+        itemDef
+        {
+            rect                        -32 -92 0 26 3 3
+            decoration                  
+            visible                     when(connectioninfo() != "" && ((sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.25));
+            textalign                   4
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    "";
+            exp rect x                  0 - (select(dvarbool(widescreen), 32, 20));
+        }
+        itemDef
+        {
+            rect                        -32 -92 0 26 3 3
+            decoration                  
+            visible                     when(connectioninfo() != "" && ((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.25 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.5));
+            textalign                   4
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    ".";
+            exp rect x                  0 - (select(dvarbool(widescreen), 32, 20));
+        }
+        itemDef
+        {
+            rect                        -32 -92 0 26 3 3
+            decoration                  
+            visible                     when(connectioninfo() != "" && ((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.5 && (sin(milliseconds() * 0.005) + 1) * 0.5 <= 0.75));
+            textalign                   4
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    "..";
+            exp rect x                  0 - (select(dvarbool(widescreen), 32, 20));
+        }
+        itemDef
+        {
+            rect                        -32 -92 0 26 3 3
+            decoration                  
+            visible                     when(connectioninfo() != "" && ((sin(milliseconds() * 0.005) + 1) * 0.5 > 0.75));
+            textalign                   4
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    "...";
+            exp rect x                  0 - (select(dvarbool(widescreen), 32, 20));
+        }
+        itemDef
+        {
+            rect                        32 -71 504 7 1 3
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            backcolor                   0.2 0.2 0.2 1
+            exp rect x                  select(dvarbool(widescreen), 32, 20);
+            exp rect w                  select(dvarbool(widescreen), 661, 504);
+        }
+        itemDef
+        {
+            name                        "loadbar"
+            rect                        32 -71 504 7 1 3
+            style                       6
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 1
+            background                  "white"
+            exp rect x                  select(dvarbool(widescreen), 32, 20);
+            exp rect w                  select(dvarbool(widescreen), 661, 504);
+        }
+        itemDef
+        {
+            rect                        32 -64 504 2 1 3
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp rect x                  select(dvarbool(widescreen), 32, 20);
+            exp rect w                  select(dvarbool(widescreen), 661, 504);
+            dvar                        "didyouknow"
+        }
+        itemDef
+        {
+            text                        "@MENU_INTEL"
+            rect                        32 -92 410 2 1 3
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.4583
+            textstyle                   8
+            textfont                    9
+            exp rect x                  select(dvarbool(widescreen), 32, 20);
+        }
+    }
+}

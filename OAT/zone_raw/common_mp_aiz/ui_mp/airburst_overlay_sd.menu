@@ -1,0 +1,100 @@
+{
+    menuDef
+    {
+        name                        "airburst_overlay_sd"
+        rect                        0 0 960 480 2 2
+        visible                     when(isusingairburst() && (playerads() >= 1) && FUNC_107() && FUNC_105());
+        itemDef
+        {
+            name                        "airburst_hint"
+            rect                        -80 -100 0 0 2 2
+            visible                     when(FUNC_80() && FUNC_106());
+            textscale                   0.375
+            textstyle                   3
+            exp text                    locstring("@WEAPON_AIRBURST_HINT", keybinding("+holdbreath", "true"));
+        }
+        itemDef
+        {
+            name                        "airburst_25mm"
+            rect                        -225 -200 72 18 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_xm25_25mm"
+        }
+        itemDef
+        {
+            name                        "airburst_dist_description"
+            rect                        -280 -158 72 18 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_xm25_dist"
+        }
+        itemDef
+        {
+            name                        "airburst_current_distance"
+            rect                        -140 -158 18 18 2 2
+            type                        8
+            visible                     when(getcrosshairtracemeters() > 0);
+            ownerdraw                   209
+            textscale                   0.55
+            background                  "hud_xm25_number_strip"
+        }
+        itemDef
+        {
+            name                        "airburst_targ_description"
+            rect                        -280 -140 72 18 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_xm25_targ"
+        }
+        itemDef
+        {
+            name                        "airburst_mark_distance"
+            rect                        -140 -140 18 18 2 2
+            type                        8
+            visible                     when(getairburstmeters() > 0);
+            ownerdraw                   210
+            textscale                   0.55
+            background                  "hud_xm25_number_strip"
+        }
+        itemDef
+        {
+            name                        "airburstBG_mp_left_top"
+            rect                        -427 -240 427 240 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_mp_xm25_overlay"
+        }
+        itemDef
+        {
+            name                        "airburstBG_mp_right_top"
+            rect                        0 -240 -427 240 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_mp_xm25_overlay"
+        }
+        itemDef
+        {
+            name                        "airburstBG_mp_left_bottom"
+            rect                        -427 0 427 -240 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_mp_xm25_overlay"
+        }
+        itemDef
+        {
+            name                        "airburstBG_mp_right_bottom"
+            rect                        0 0 -427 -240 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "hud_mp_xm25_overlay"
+        }
+    }
+}

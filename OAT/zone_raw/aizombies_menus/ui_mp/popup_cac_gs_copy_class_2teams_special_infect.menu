@@ -1,0 +1,510 @@
+{
+    menuDef
+    {
+        name                        "popup_cac_gs_copy_class_2teams_special_infect"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((((23 * 1) + (16.367 * 0)) + (4 * (20 + 2)) + 5) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (((23 * 1) + (16.367 * 0)) + (4 * (20 + 2)) + 5);
+        onOpen
+        {
+            setLocalVarInt ui_copyDestClassIndex (0 - 1);
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus COPYCLASS_POPUP_1;
+            focusfirst;
+        }
+        onClose
+        {
+            if (localvarint("ui_copyDestClassIndex") > (0 - 1))
+            {
+                setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , perks , 5 , localVarString ( loadoutStreakType ) );
+                if ((!((dvarstring(ui_gametype) == "infect") || (((dvarstring(ui_gametype) == "tjugg") || (dvarstring(ui_gametype) == "tdef") || (dvarstring(ui_gametype) == "ctf") || (dvarstring(ui_gametype) == "sab") || (dvarstring(ui_gametype) == "sd")) && (localvarint("ui_copyDestClassIndex") == 5)))))
+                {
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , assaultStreaks , 0 , localVarString ( loadoutAssaultKillStreak1 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , assaultStreaks , 1 , localVarString ( loadoutAssaultKillStreak2 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , assaultStreaks , 2 , localVarString ( loadoutAssaultKillStreak3 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , defenseStreaks , 0 , localVarString ( loadoutDefenseKillStreak1 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , defenseStreaks , 1 , localVarString ( loadoutDefenseKillStreak2 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , defenseStreaks , 2 , localVarString ( loadoutDefenseKillStreak3 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , specialistStreaks , 0 , localVarString ( loadoutSpecialistKillStreak1 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , specialistStreaks , 1 , localVarString ( loadoutSpecialistKillStreak2 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , specialistStreaks , 2 , localVarString ( loadoutSpecialistKillStreak3 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , specialistStreakKills , 0 , localVarInt ( loadoutSpecialistKills1 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , specialistStreakKills , 1 , localVarInt ( loadoutSpecialistKills2 ) );
+                    setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , specialistStreakKills , 2 , localVarInt ( loadoutSpecialistKills3 ) );
+                }
+                setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , class , deathstreak , localVarString ( loadoutDeathStreak ) );
+                setMatchRulesData ( defaultClasses , localVarString ( ui_copyDestClassTeam ) , localVarInt ( ui_copyDestClassIndex ) , juggernaut , localVarBool ( loadoutJuggernaut ) );
+            }
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_cac_gs_copy_class_2teams_special_infect"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (((23 * 1) + (16.367 * 0)) + (4 * (20 + 2)) + 5) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_DESTINATION";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (1 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 2) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (4 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 1) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP") && (localvarstring("ui_swfPopupContext") == "COPYCLASS_POPUP"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_team1Name");
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  (0 + (0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_1"
+            rect                        43.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0)));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarInt ui_copyDestClassIndex 0;
+                setLocalVarString ui_copyDestClassTeam "axis";
+                setMatchRulesData ( defaultClasses , axis , 0 , class , inUse , 1 ) setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , perks , 0 , localVarString ( loadoutEquipment ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setMatchRulesData ( defaultClasses , axis , 0 , class , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setLocalVarString ui_copyclassname FUNC_49();
+                setMatchRulesData ( defaultClasses , axis , 0 , class , name , localvarstring ( ui_copyclassname ) );
+                close self;
+            }
+            exp disabled                ((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0));
+            exp rect y                  ((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (32 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        43.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    select(getmatchrulesdata("defaultClasses", "axis", 0, "class", "name") == "", truncateTextWithEllipsis(locstring("@MPUI_CLASS_1"), 3, 0.375, 225), getmatchrulesdata("defaultClasses", "axis", 0, "class", "name"));
+            exp rect y                  (((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 0)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (32 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_2"
+            rect                        43.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 2;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5)));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarInt ui_copyDestClassIndex 5;
+                setLocalVarString ui_copyDestClassTeam "axis";
+                setMatchRulesData ( defaultClasses , axis , 5 , class , inUse , 1 ) setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , perks , 0 , localVarString ( loadoutEquipment ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setMatchRulesData ( defaultClasses , axis , 5 , class , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setLocalVarString ui_copyclassname FUNC_49();
+                setMatchRulesData ( defaultClasses , axis , 5 , class , name , localvarstring ( ui_copyclassname ) );
+                close self;
+            }
+            exp disabled                ((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5));
+            exp rect y                  ((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (32 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        43.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    select(getmatchrulesdata("defaultClasses", "axis", 5, "class", "name") == "", truncateTextWithEllipsis(locstring(localvarstring("ui_specialClassName")), 3, 0.375, 225), getmatchrulesdata("defaultClasses", "axis", 5, "class", "name"));
+            exp rect y                  (((2 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(((localvarstring("ui_editingTeam") == "axis") && (localvarint("ui_editingClassIndex") == 5)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,2)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (32 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_team2Name");
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  (0 + (3 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            name                        "COPYCLASS_POPUP_4"
+            rect                        43.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0)));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 4;
+                setLocalVarString ui_buttonNavGroupName_popup "COPYCLASS_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0))));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0)));
+                setLocalVarString ui_swfPopupContext "COPYCLASS_POPUP";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarInt ui_copyDestClassIndex 0;
+                setLocalVarString ui_copyDestClassTeam "allies";
+                setMatchRulesData ( defaultClasses , allies , 0 , class , inUse , 1 ) setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 0 , weapon , localVarString ( loadoutPrimary ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 0 , attachment , 0 , localVarString ( loadoutPrimaryAttachment ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 0 , attachment , 1 , localVarString ( loadoutPrimaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 0 , buff , localVarString ( loadoutPrimaryBuff ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 0 , camo , localVarString ( loadoutPrimaryCamo ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 0 , reticle , localVarString ( loadoutPrimaryReticle ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 1 , weapon , localVarString ( loadoutSecondary ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 1 , attachment , 0 , localVarString ( loadoutSecondaryAttachment ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 1 , attachment , 1 , localVarString ( loadoutSecondaryAttachment2 ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 1 , buff , localVarString ( loadoutSecondaryBuff ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 1 , camo , localVarString ( loadoutSecondaryCamo ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , weaponSetups , 1 , reticle , localVarString ( loadoutSecondaryReticle ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , perks , 0 , localVarString ( loadoutEquipment ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , perks , 1 , localVarString ( loadoutPerk1 ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , perks , 2 , localVarString ( loadoutPerk2 ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , perks , 3 , localVarString ( loadoutPerk3 ) );
+                setMatchRulesData ( defaultClasses , allies , 0 , class , perks , 6 , localVarString ( loadoutOffhandSecondary ) );
+                setLocalVarString ui_copyclassname FUNC_49();
+                setMatchRulesData ( defaultClasses , allies , 0 , class , name , localvarstring ( ui_copyclassname ) );
+                close self;
+            }
+            exp disabled                ((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0));
+            exp rect y                  ((4 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (32 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        43.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    select(getmatchrulesdata("defaultClasses", "allies", 0, "class", "name") == "", truncateTextWithEllipsis(locstring("@MPUI_CLASS_1"), 3, 0.375, 225), getmatchrulesdata("defaultClasses", "allies", 0, "class", "name"));
+            exp rect y                  (((4 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(((localvarstring("ui_editingTeam") == "allies") && (localvarint("ui_editingClassIndex") == 0)), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(COPYCLASS_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "COPYCLASS_POPUP", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (32 + (0 + 8));
+        }
+    }
+}

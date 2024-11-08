@@ -1,0 +1,20 @@
+{
+    "animationX": 1,
+    "animationY": 1,
+    "cameraRegion": 4,
+    "constantTable": null,
+    "gameFlags": 0,
+    "maps": null,
+    "name": "shadowoverlay",
+    "sortKey": 34,
+    "stateFlags": 3,
+    "stateMap": [
+        [
+            403867666,
+            3759013890
+        ]
+    ],
+    "surfaceTypeBits": 0,
+    "techniqueSet->name": "shadowoverlay",
+    "unknown": 0
+}

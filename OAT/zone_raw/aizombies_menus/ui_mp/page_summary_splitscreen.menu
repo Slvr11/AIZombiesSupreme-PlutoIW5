@@ -1,0 +1,2013 @@
+{
+    menuDef
+    {
+        name                        "page_summary_splitscreen"
+        rect                        0 26 533.333 357 2 1
+        style                       1
+        focuscolor                  1 1 1 1
+        exp rect X                  - (533.333 / 2);
+        onOpen
+        {
+            setLocalVarString ui_currentPage "page_summary_splitscreen";
+            if ("page_summary_splitscreen" == "page_summary_splitscreen")
+            {
+                setLocalVarInt ui_leftArrow 0;
+                if ((getclientmatchdatadef() != ""))
+                {
+                    setLocalVarInt ui_rightArrow 1;
+                }
+                else
+                {
+                    setLocalVarInt ui_rightArrow 0;
+                }
+            }
+            if ("page_summary_splitscreen" == "page_highlights_splitscreen")
+            {
+                setLocalVarInt ui_leftArrow 1;
+                if ((getclientmatchdatadef() != ""))
+                {
+                    setLocalVarInt ui_rightArrow 1;
+                }
+                else
+                {
+                    setLocalVarInt ui_rightArrow 0;
+                }
+            }
+            if ("page_summary_splitscreen" == "page_scoreboard_splitscreen")
+            {
+                setLocalVarInt ui_leftArrow 1;
+                setLocalVarInt ui_rightArrow 0;
+            }
+            if (localvarint("ui_autoopened"))
+            {
+                play mp_ingame_summary;
+                setLocalVarInt popup_summary_time_start milliseconds();
+                setLocalVarInt ui_autoopened 0;
+            }
+        }
+        onESC
+        {
+            close self;
+            close popup_summary_splitscreen;
+        }
+        execKeyInt 157
+        {
+            if ("page_summary_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_summary_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 186
+        {
+            if ("page_summary_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_summary_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 23
+        {
+            if ("page_summary_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_summary_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 31
+        {
+            if ("page_summary_splitscreen" == "page_summary_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_highlights_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+            if ("page_summary_splitscreen" == "page_highlights_splitscreen")
+            {
+                if ((getclientmatchdatadef() != ""))
+                {
+                    close self;
+                    open page_scoreboard_splitscreen;
+                    play tabs_slide;
+                    setLocalVarInt ui_switchTime (milliseconds());
+                    setLocalVarInt ui_switchDir 1;
+                }
+            }
+        }
+        execKeyInt 1
+        {
+            close self;
+            close popup_summary_splitscreen;
+        }
+        itemDef
+        {
+            text                        "@MPUI_SUMMARY"
+            rect                        0 0 533.333 48 0 0
+            style                       1
+            decoration                  
+            visible                     1
+            textalign                   9
+            textscale                   0.55
+            textstyle                   9
+            textfont                    9
+            backcolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 48 533.333 21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 24 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  357 - 24;
+        }
+        itemDef
+        {
+            rect                        0 0 533.333 -21.333 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  357 - 24 - 21.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "page_summary_splitscreen";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 1;
+            }
+            exp rect x                  ((533.333)) - (1 * 5) - 20 - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 0 0
+            style                       3
+            decoration                  
+            visible                     when((1) && (!1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_summary_splitscreen"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_summary_splitscreen"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  ((533.333)) - (1 * 5) - (20) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CONTINUE";
+            exp rect x                  ((533.333)) - (1 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp rect y                  (((357 - 24) + 2));
+            exp rect w                  getTextWidth(locstring("@MENU_CONTINUE"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_summary_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_summary_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "page_summary_splitscreen"), select(isdemoplaying(), FUNC_36(), FUNC_35()), 1);
+        }
+        itemDef
+        {
+            group                       "left_arrow"
+            rect                        0 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_leftArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_left"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor left_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor left_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_leftArrow"))
+                {
+                    play mouse_click;
+                    setLocalVarFloat ui_arrow_flash_left_time milliseconds();
+                    if ("" == "page_scoreboard")
+                    {
+                        if (!dvarbool(xblive_privatematch))
+                        {
+                            close self;
+                            open page_challenges;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                    }
+                    if ("" == "page_challenges")
+                    {
+                        close self;
+                        open page_weapon_xp;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_weapon_xp")
+                    {
+                        close self;
+                        open page_highlights;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_highlights")
+                    {
+                        close self;
+                        open page_accolades;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_accolades")
+                    {
+                        close self;
+                        open page_progress;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    if ("" == "page_progress")
+                    {
+                        close self;
+                        open page_summary;
+                        play tabs_slide;
+                        setLocalVarInt ui_switchTime (milliseconds());
+                        setLocalVarInt ui_switchDir 1;
+                    }
+                    focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            group                       "right_arrow"
+            rect                        485.333 0 48 48 0 0
+            style                       3
+            type                        1
+            visible                     when(localvarint("ui_rightArrow"));
+            textalign                   10
+            textscale                   0.55
+            background                  "arrow_right"
+            onFocus
+            {
+                play mouse_over;
+                setItemColor right_arrow forecolor 1 1 "0.5" 1;
+            }
+            leaveFocus
+            {
+                setItemColor right_arrow forecolor 1 1 1 1;
+            }
+            action
+            {
+                if (localvarint("ui_rightArrow"))
+                {
+                    play mouse_click;
+                    setLocalVarFloat ui_arrow_flash_right_time milliseconds();
+                    if ((getclientmatchdatadef() != ""))
+                    {
+                        if ("" == "page_summary")
+                        {
+                            close self;
+                            open page_progress;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_progress")
+                        {
+                            close self;
+                            open page_accolades;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_accolades")
+                        {
+                            close self;
+                            open page_highlights;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_highlights")
+                        {
+                            close self;
+                            open page_weapon_xp;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_weapon_xp")
+                        {
+                            close self;
+                            open page_challenges;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                        if ("" == "page_challenges")
+                        {
+                            close self;
+                            open page_scoreboard;
+                            play tabs_slide;
+                            setLocalVarInt ui_switchTime (milliseconds());
+                            setLocalVarInt ui_switchDir 1;
+                        }
+                    }
+                    focusfirst;
+                }
+            }
+            exp forecolor a             ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5);
+        }
+        itemDef
+        {
+            rect                        0 119.25 533.333 71.25 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 261.75 533.333 71.25 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  ((((533.333 - 480) / 2)));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0)));
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  ((((533.333 - 480) / 2))) + 1.333;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && !localvarbool("browsingCardIcon"));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 1, 0), 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 2.533;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && !localvarbool("browsingCardTitle"));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 5);
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 28.8 28.8 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                "clanlvl_box";
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (28 * 0.9));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + (0 - 4.1) - (11 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(22, 1, 0);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (25.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(21, 1, 0);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (13.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && !localvarbool("browsingCardTitle"));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            exp text                    getplayercardinfo(14, 1, 0);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 0), 5);
+            exp backcolor a             0;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((0 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 0) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 0);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 0), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((0 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 0) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 0);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 0), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 1, 0), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((0 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 0) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getplayercardinfo(11, 1, 0), 9, (0.375 * 0.6), 140);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 0), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && getplayercardinfo(12, 1, 0) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 1, 0) + "]";
+            exp rect x                  ((((533.333 - 480) / 2))) + 188;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && (getplayercardinfo(4, 1, 0) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 1, 0), (getplayercardinfo(5, 1, 0) + 1));
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && (getplayercardinfo(4, 1, 0) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 1, 0), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && (getplayercardinfo(6, 1, 0) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 0), 6);
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && (getplayercardinfo(6, 1, 0) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 0), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && getplayercardinfo(10, 1, 0));
+            textscale                   0.55
+            exp material                "xp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) - 14.267;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 0) != 0) && getplayercardinfo(15, 1, 0));
+            textscale                   0.55
+            exp material                "gxp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  select(getplayercardinfo(10, 1, 0), ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) - 1.1, ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 0))) - 14.267);
+        }
+        itemDef
+        {
+            rect                        310.667 50 198 24 0 0
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textalign                   6
+            textalignx                  -2
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MPUI_SCORE_PRE_N", getplayerdatasplitscreen(0, "round", "score"));
+        }
+        itemDef
+        {
+            rect                        310.667 50 18 18 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(0, "round", "awardCount") && (0 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(0, "round", "awards", 0, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        310.667 50 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(0, "round", "awardCount") && (0 < splitscreenplayercount()));
+            textalign                   4
+            textalignx                  20
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(0, "round", "awards", 0, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        310.667 75 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(0, "round", "awardCount") && (0 < splitscreenplayercount()));
+            textalign                   4
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(0, "round", "awards", 0, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        26.6665 108 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        24.6665 106 484 12 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        26.6665 108 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect w                  (min((getplayerdatasplitscreen(0, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 2)) / (tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 2)), 0.9999) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)) * 480;
+        }
+        itemDef
+        {
+            rect                        26.6665 108 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+        }
+        itemDef
+        {
+            rect                        42.6665 91 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), getplayerdatasplitscreen(0, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        26.6665 88 16 20 0 0
+            decoration                  
+            visible                     when((0 < splitscreenplayercount()));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 14);
+        }
+        itemDef
+        {
+            rect                        470.667 91 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(0, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (0 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(0, "experience")) + 1), getplayerdatasplitscreen(0, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        490.667 88 16 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(0, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (0 < splitscreenplayercount()));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(0, "experience")) + 1), 14);
+        }
+        itemDef
+        {
+            rect                        26.6665 90 480 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(0, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (0 < splitscreenplayercount()));
+            textalign                   1
+            textaligny                  18
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 0.498039 1
+            exp text                    locstring("@MPUI_X_SLASH_Y_XP", int((getplayerdatasplitscreen(0, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 2)) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)), int(tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(0, "experience")), 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  ((((533.333 - 480) / 2)));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1)));
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  ((((533.333 - 480) / 2))) + 1.333;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && !localvarbool("browsingCardIcon"));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 1, 1), 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 2.533;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && !localvarbool("browsingCardTitle"));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 5);
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 28.8 28.8 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 1) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                "clanlvl_box";
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (28 * 0.9));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + (0 - 4.1) - (11 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 1) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(22, 1, 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (25.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 1) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(21, 1, 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (13.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && !localvarbool("browsingCardTitle"));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            exp text                    getplayercardinfo(14, 1, 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 1), 5);
+            exp backcolor a             0;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((1 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 1) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 1), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((1 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 1) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 1), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 1, 1), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((1 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 1) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getplayercardinfo(11, 1, 1), 9, (0.375 * 0.6), 140);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 1), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && getplayercardinfo(12, 1, 1) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 1, 1) + "]";
+            exp rect x                  ((((533.333 - 480) / 2))) + 188;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && (getplayercardinfo(4, 1, 1) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 1, 1), (getplayercardinfo(5, 1, 1) + 1));
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && (getplayercardinfo(4, 1, 1) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 1, 1), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && (getplayercardinfo(6, 1, 1) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 1), 6);
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && (getplayercardinfo(6, 1, 1) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 1), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && getplayercardinfo(10, 1, 1));
+            textscale                   0.55
+            exp material                "xp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) - 14.267;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 1) != 0) && getplayercardinfo(15, 1, 1));
+            textscale                   0.55
+            exp material                "gxp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  select(getplayercardinfo(10, 1, 1), ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) - 1.1, ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 1))) - 14.267);
+        }
+        itemDef
+        {
+            rect                        310.667 121.25 198 24 0 0
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textalign                   6
+            textalignx                  -2
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MPUI_SCORE_PRE_N", getplayerdatasplitscreen(1, "round", "score"));
+        }
+        itemDef
+        {
+            rect                        310.667 121.25 18 18 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(1, "round", "awardCount") && (1 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(1, "round", "awards", 0, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        310.667 121.25 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(1, "round", "awardCount") && (1 < splitscreenplayercount()));
+            textalign                   4
+            textalignx                  20
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(1, "round", "awards", 0, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        310.667 146.25 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(1, "round", "awardCount") && (1 < splitscreenplayercount()));
+            textalign                   4
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(1, "round", "awards", 0, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        26.6665 179.25 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        24.6665 177.25 484 12 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        26.6665 179.25 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect w                  (min((getplayerdatasplitscreen(1, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 2)) / (tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 2)), 0.9999) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)) * 480;
+        }
+        itemDef
+        {
+            rect                        26.6665 179.25 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+        }
+        itemDef
+        {
+            rect                        42.6665 162.25 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), getplayerdatasplitscreen(1, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        26.6665 159.25 16 20 0 0
+            decoration                  
+            visible                     when((1 < splitscreenplayercount()));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 14);
+        }
+        itemDef
+        {
+            rect                        470.667 162.25 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(1, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (1 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(1, "experience")) + 1), getplayerdatasplitscreen(1, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        490.667 159.25 16 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(1, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (1 < splitscreenplayercount()));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(1, "experience")) + 1), 14);
+        }
+        itemDef
+        {
+            rect                        26.6665 161.25 480 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(1, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (1 < splitscreenplayercount()));
+            textalign                   1
+            textaligny                  18
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 0.498039 1
+            exp text                    locstring("@MPUI_X_SLASH_Y_XP", int((getplayerdatasplitscreen(1, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 2)) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)), int(tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(1, "experience")), 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  ((((533.333 - 480) / 2)));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  ((((533.333 - 480) / 2))) + 1.333;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && !localvarbool("browsingCardIcon"));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 1, 2), 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 2.533;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && !localvarbool("browsingCardTitle"));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 5);
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 28.8 28.8 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 2) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                "clanlvl_box";
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (28 * 0.9));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + (0 - 4.1) - (11 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 2) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(22, 1, 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (25.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 2) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(21, 1, 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (13.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && !localvarbool("browsingCardTitle"));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            exp text                    getplayercardinfo(14, 1, 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 2), 5);
+            exp backcolor a             0;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((2 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 2) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 2), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((2 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 2) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 2), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 1, 2), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((2 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 2) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getplayercardinfo(11, 1, 2), 9, (0.375 * 0.6), 140);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 2), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && getplayercardinfo(12, 1, 2) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 1, 2) + "]";
+            exp rect x                  ((((533.333 - 480) / 2))) + 188;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && (getplayercardinfo(4, 1, 2) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 1, 2), (getplayercardinfo(5, 1, 2) + 1));
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && (getplayercardinfo(4, 1, 2) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 1, 2), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && (getplayercardinfo(6, 1, 2) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 2), 6);
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && (getplayercardinfo(6, 1, 2) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 2), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && getplayercardinfo(10, 1, 2));
+            textscale                   0.55
+            exp material                "xp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) - 14.267;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 2) != 0) && getplayercardinfo(15, 1, 2));
+            textscale                   0.55
+            exp material                "gxp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  select(getplayercardinfo(10, 1, 2), ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) - 1.1, ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 2))) - 14.267);
+        }
+        itemDef
+        {
+            rect                        310.667 192.5 198 24 0 0
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textalign                   6
+            textalignx                  -2
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MPUI_SCORE_PRE_N", getplayerdatasplitscreen(2, "round", "score"));
+        }
+        itemDef
+        {
+            rect                        310.667 192.5 18 18 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(2, "round", "awardCount") && (2 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(2, "round", "awards", 0, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        310.667 192.5 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(2, "round", "awardCount") && (2 < splitscreenplayercount()));
+            textalign                   4
+            textalignx                  20
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(2, "round", "awards", 0, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        310.667 217.5 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(2, "round", "awardCount") && (2 < splitscreenplayercount()));
+            textalign                   4
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(2, "round", "awards", 0, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        26.6665 250.5 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        24.6665 248.5 484 12 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        26.6665 250.5 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect w                  (min((getplayerdatasplitscreen(2, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 2)) / (tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 2)), 0.9999) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)) * 480;
+        }
+        itemDef
+        {
+            rect                        26.6665 250.5 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+        }
+        itemDef
+        {
+            rect                        42.6665 233.5 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), getplayerdatasplitscreen(2, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        26.6665 230.5 16 20 0 0
+            decoration                  
+            visible                     when((2 < splitscreenplayercount()));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 14);
+        }
+        itemDef
+        {
+            rect                        470.667 233.5 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(2, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (2 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(2, "experience")) + 1), getplayerdatasplitscreen(2, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        490.667 230.5 16 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(2, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (2 < splitscreenplayercount()));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(2, "experience")) + 1), 14);
+        }
+        itemDef
+        {
+            rect                        26.6665 232.5 480 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(2, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (2 < splitscreenplayercount()));
+            textalign                   1
+            textaligny                  18
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 0.498039 1
+            exp text                    locstring("@MPUI_X_SLASH_Y_XP", int((getplayerdatasplitscreen(2, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 2)) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)), int(tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(2, "experience")), 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  ((((533.333 - 480) / 2)));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3)));
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  ((((533.333 - 480) / 2))) + 1.333;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && !localvarbool("browsingCardIcon"));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 1, 3), 1);
+            exp rect x                  ((((533.333 - 480) / 2))) + 2.533;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && !localvarbool("browsingCardTitle"));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 2);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 5);
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 28.8 28.8 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 3) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                "clanlvl_box";
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (28 * 0.9));
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + (0 - 4.1) - (11 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 3) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(22, 1, 3);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (25.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 1, 3) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(21, 1, 3);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9 + ((156.667) - (13.5 * 0.9));
+            exp rect y                  (((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && !localvarbool("browsingCardTitle"));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            exp text                    getplayercardinfo(14, 1, 3);
+            exp rect x                  ((((533.333 - 480) / 2))) + 33.9;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 1, 3), 5);
+            exp backcolor a             0;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((3 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 3) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 3);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 3), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((3 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 3) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 1, 3);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 3), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 1, 3), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((3 < splitscreenplayercount())) && (getplayercardinfo(0, 1, 3) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getplayercardinfo(11, 1, 3), 9, (0.375 * 0.6), 140);
+            exp rect x                  ((((533.333 - 480) / 2))) + 40;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 1, 3), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && getplayercardinfo(12, 1, 3) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 1, 3) + "]";
+            exp rect x                  ((((533.333 - 480) / 2))) + 188;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && (getplayercardinfo(4, 1, 3) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 1, 3), (getplayercardinfo(5, 1, 3) + 1));
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && (getplayercardinfo(4, 1, 3) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 1, 3), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && (getplayercardinfo(6, 1, 3) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 3), 6);
+            exp rect x                  ((((533.333 - 480) / 2))) + 192;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && (getplayercardinfo(6, 1, 3) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 1, 3), 14);
+            exp rect x                  ((((533.333 - 480) / 2))) + 212;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && getplayercardinfo(10, 1, 3));
+            textscale                   0.55
+            exp material                "xp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) - 14.267;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()) && (getplayercardinfo(0, 1, 3) != 0) && getplayercardinfo(15, 1, 3));
+            textscale                   0.55
+            exp material                "gxp";
+            exp rect x                  ((((533.333 - 480) / 2))) + 228.667;
+            exp rect y                  select(getplayercardinfo(10, 1, 3), ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) - 1.1, ((((48) + 2) + ((((357 - (48 + 24)) / 4) + 0) * 3))) - 14.267);
+        }
+        itemDef
+        {
+            rect                        310.667 263.75 198 24 0 0
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textalign                   6
+            textalignx                  -2
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MPUI_SCORE_PRE_N", getplayerdatasplitscreen(3, "round", "score"));
+        }
+        itemDef
+        {
+            rect                        310.667 263.75 18 18 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(3, "round", "awardCount") && (3 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(3, "round", "awards", 0, "award"), 2);
+        }
+        itemDef
+        {
+            rect                        310.667 263.75 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(3, "round", "awardCount") && (3 < splitscreenplayercount()));
+            textalign                   4
+            textalignx                  20
+            textaligny                  -2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 0.8 0.4 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(3, "round", "awards", 0, "award"), 3);
+        }
+        itemDef
+        {
+            rect                        310.667 288.75 232 24 0 0
+            decoration                  
+            visible                     when(getplayerdatasplitscreen(3, "round", "awardCount") && (3 < splitscreenplayercount()));
+            textalign                   4
+            textscale                   0.35
+            textstyle                   3
+            textfont                    3
+            forecolor                   0.701961 0.701961 0.729412 1
+            exp text                    "@" + tablelookup("mp/awardTable.csv", 1, getplayerdatasplitscreen(3, "round", "awards", 0, "award"), 4);
+        }
+        itemDef
+        {
+            rect                        26.6665 321.75 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        24.6665 319.75 484 12 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        26.6665 321.75 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect w                  (min((getplayerdatasplitscreen(3, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 2)) / (tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 2)), 0.9999) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)) * 480;
+        }
+        itemDef
+        {
+            rect                        26.6665 321.75 480 8 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+        }
+        itemDef
+        {
+            rect                        42.6665 304.75 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), getplayerdatasplitscreen(3, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        26.6665 301.75 16 20 0 0
+            decoration                  
+            visible                     when((3 < splitscreenplayercount()));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 14);
+        }
+        itemDef
+        {
+            rect                        470.667 304.75 16 16 0 0
+            style                       3
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(3, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (3 < splitscreenplayercount()));
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(3, "experience")) + 1), getplayerdatasplitscreen(3, "prestige") + 1);
+        }
+        itemDef
+        {
+            rect                        490.667 301.75 16 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(3, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (3 < splitscreenplayercount()));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/ranktable.csv", 0, (levelforexperiencemp(getplayerdatasplitscreen(3, "experience")) + 1), 14);
+        }
+        itemDef
+        {
+            rect                        26.6665 303.75 480 20 0 0
+            decoration                  
+            visible                     when(levelforexperiencemp(getplayerdatasplitscreen(3, "experience")) < int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1)) && (3 < splitscreenplayercount()));
+            textalign                   1
+            textaligny                  18
+            textscale                   0.3333
+            textstyle                   3
+            textfont                    3
+            forecolor                   1 1 0.498039 1
+            exp text                    locstring("@MPUI_X_SLASH_Y_XP", int((getplayerdatasplitscreen(3, "experience") - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 2)) * min(max((milliseconds() - localvarint("popup_summary_time_start")) / 500, 0), 1)), int(tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 7) - tablelookup("mp/rankTable.csv", 0, levelforexperiencemp(getplayerdatasplitscreen(3, "experience")), 2)));
+        }
+    }
+}

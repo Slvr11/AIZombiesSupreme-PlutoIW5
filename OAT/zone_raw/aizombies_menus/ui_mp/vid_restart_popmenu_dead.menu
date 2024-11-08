@@ -1,0 +1,250 @@
+{
+    menuDef
+    {
+        name                        "vid_restart_popmenu_dead"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((localvarint("ui_swfPopupDescResizeHeight")) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (localvarint("ui_swfPopupDescResizeHeight"));
+        onOpen
+        {
+            setLocalVarFloat ui_swfPopupDescResizeTextHeight (getwrappedtextheight("@MENU_CANT_CHANGE_SETTINGS_WHILE_DEAD", (float((260 - 16))), 3, 0.375, 0, 0));
+            setLocalVarInt ui_swfPopupDescResizeButtons (int((localvarfloat("ui_swfPopupDescResizeTextHeight") + ((20 + 2) / 2) + 5) / (20 + 2)) + 1);
+            setLocalVarInt ui_swfPopupDescResizeHeight ((((23 * 1) + (16.367 * 0)) + ((localvarint("ui_swfPopupDescResizeButtons") + 0 + 1) * (20 + 2)) + 5));
+            setLocalVarInt ui_swfPopupDescResizeButtonYOffset ((20 + 2) * (localvarint("ui_swfPopupDescResizeButtons") + 0));
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus SWF_COMMON_DESC_RESIZE_POPUP_1_NAME_0;
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        onFocusDueToClose
+        {
+            setLocalVarFloat ui_swfPopupDescResizeTextHeight (getwrappedtextheight("@MENU_CANT_CHANGE_SETTINGS_WHILE_DEAD", (float((260 - 16))), 3, 0.375, 0, 0));
+            setLocalVarInt ui_swfPopupDescResizeButtons (int((localvarfloat("ui_swfPopupDescResizeTextHeight") + ((20 + 2) / 2) + 5) / (20 + 2)) + 1);
+            setLocalVarInt ui_swfPopupDescResizeHeight ((((23 * 1) + (16.367 * 0)) + ((localvarint("ui_swfPopupDescResizeButtons") + 0 + 1) * (20 + 2)) + 5));
+            setLocalVarInt ui_swfPopupDescResizeButtonYOffset ((20 + 2) * (localvarint("ui_swfPopupDescResizeButtons") + 0));
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("vid_restart_popmenu_dead"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0;
+            exp rect h                  (localvarint("ui_swfPopupDescResizeHeight")) + 0;
+            exp rect x                  0;
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0);
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_APPLY_SETTINGS";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 244 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_CANT_CHANGE_SETTINGS_WHILE_DEAD";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  (0 + (0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 1) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            name                        "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME_0"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                close self;
+            }
+            exp disabled                0;
+            exp rect y                  ((0 * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_OK";
+            exp rect y                  (((0 * (20 + 2)) + (localvarint("ui_swfPopupDescResizeButtonYOffset")) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_DESC_RESIZE_POPUP_1_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_DESC_RESIZE_POPUP_1_NAME", select(isdemoplaying(), FUNC_36(), FUNC_35()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+    }
+}

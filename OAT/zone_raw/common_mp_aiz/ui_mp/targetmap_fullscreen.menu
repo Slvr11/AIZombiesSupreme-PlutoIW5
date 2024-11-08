@@ -1,0 +1,304 @@
+{
+    menuDef
+    {
+        name                        "targetmap_fullscreen"
+        rect                        0 0 0 0 0 0
+        visible                     when(FUNC_101() && FUNC_94());
+        itemDef
+        {
+            name                        "targetmap_border"
+            rect                        0 0 0 0 9 9
+            border                      1
+            borderSize                  0.666667
+            visible                     1
+            textscale                   0.55
+            bordercolor                 1 1 1 0.35
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 9
+            style                       3
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.89 0.98 0.95 0.05
+            background                  "minimap_scanlines"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            name                        "targetmap_map"
+            rect                        0 0 0 0 9 9
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   181
+            textscale                   0.55
+            background                  "compass_map_default"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            name                        "targetmap_friendlies"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   185
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_enemies"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   188
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_objectives"
+            rect                        0 0 0 0 9 9
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   182
+            textscale                   0.55
+            background                  "objective_line"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            name                        "targetmap_vehicles"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   190
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_planes"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   191
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_sentries"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   189
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_portable_radars"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   192
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_trophy_systems"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   193
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_scramblers"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   194
+            textscale                   0.55
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "targetmap_player"
+            rect                        0 0 0 0 9 9
+            type                        8
+            visible                     1
+            ownerdraw                   183
+            textscale                   0.55
+            background                  "compassping_player"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 9
+            style                       3
+            decoration                  
+            visible                     when(radarisjammed());
+            textscale                   0.55
+            forecolor                   0.64 0.74 0.71 1
+            background                  "white"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             radarjamintensity();
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 9
+            style                       3
+            decoration                  
+            visible                     when(radarisjammed());
+            textscale                   0.55
+            forecolor                   0.89 0.98 0.95 1
+            background                  "ac130_overlay_grain"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+            exp forecolor a             radarjamintensity();
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 9
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "stencil_base"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 9
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "scanlines_stencil"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 1.5) + (0 - (FUNC_152() * 2) * FUNC_180());
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 9
+            style                       3
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.89 0.98 0.95 1
+            background                  "stencil_fill"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            name                        "targetmap_locator"
+            rect                        0 0 0 0 9 9
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   186
+            textscale                   0.55
+            background                  "compass_map_default"
+            exp rect x                  0 - (FUNC_152() * 0.425);
+            exp rect y                  0 - (FUNC_152() * 0.5);
+            exp rect h                  FUNC_152() * 0.85;
+            exp rect w                  FUNC_152() * 0.85;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 9 10
+            decoration                  
+            visible                     when(FUNC_106());
+            textalign                   1
+            textscale                   0.4
+            textstyle                   3
+            exp rect y                  0 - 24 - (20 * selecting_direction());
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_USE_BUTTONLOOK_TO_AIM"
+            rect                        0 -24 0 0 9 10
+            decoration                  
+            visible                     when(selecting_direction() && FUNC_106());
+            textalign                   1
+            textscale                   0.4
+            textstyle                   3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_PRESS_BUTTON_TO_CONFIRM_TARGET"
+            rect                        0 -4 0 0 9 10
+            decoration                  
+            visible                     when(FUNC_106());
+            textalign                   1
+            textscale                   0.4
+            textstyle                   3
+        }
+    }
+}

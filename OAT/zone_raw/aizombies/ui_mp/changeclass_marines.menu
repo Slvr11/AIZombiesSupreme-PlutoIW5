@@ -1,0 +1,28 @@
+{
+    menuDef
+    {
+        name                        "changeclass_marines"
+        rect                        0 0 0 0 0 0
+        onOpen
+        {
+            if (dvarint(xblive_privatematch) || (dvarint(xblive_competitionmatch) && dvarint(com_svDedicated)))
+            {
+                setLocalVarString ui_customClassLoc "privateMatchCustomClasses";
+            }
+            else
+            {
+                setLocalVarString ui_customClassLoc "customClasses";
+            }
+            setLocalVarString ui_team "marines";
+            if (dvarbool(splitscreen) && dvarbool(onlinegame))
+            {
+                open changeclass_marines_splitscreen;
+            }
+            else
+            {
+                open changeclass;
+            }
+            close self;
+        }
+    }
+}

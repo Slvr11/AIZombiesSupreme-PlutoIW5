@@ -1,0 +1,92 @@
+{
+    menuDef
+    {
+        name                        "killstreak"
+        decoration                  
+        rect                        0 0 640 480 1 1
+        onOpen
+        {
+            lerp alpha from 0 to 1 over "0.15";
+            lerp x from 0 to 0 over 0;
+            lerp y from 0 to 0 over 0;
+            lerp scale from 1 to 1 over 0;
+            setLocalVarString tempName (tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 0));
+            setLocalVarString ui_ksHint localvarstring("tempName");
+            forceClose splash;
+            forceClose challenge;
+            forceClose defcon;
+            forceClose killstreak_pickup;
+            forceClose killstreak_minisplash;
+            forceClose perk_challenge;
+            forceClose promotion;
+        }
+        onRequestClose
+        {
+            lerp alpha from 1 to 0 over "0.15";
+            lerp x from 0 to 500 over "0.15" lerp y from 0 to 400 over "0.15" lerp scale from 1 to "0.2" over "0.15";
+        }
+        itemDef
+        {
+            name                        "killstreak_description"
+            rect                        0 -130 0 0 2 2
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            textfont                    9
+            exp text                    getsplashdescription(0);
+            exp glowcolor r             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 8);
+        }
+        itemDef
+        {
+            name                        "killstreak_title"
+            rect                        0 -115 0 0 2 2
+            decoration                  
+            visible                     when(FUNC_162());
+            textalign                   1
+            textscale                   0.375
+            textstyle                   3
+            exp text                    getsplashtext(0);
+        }
+        itemDef
+        {
+            name                        "killstreak_icon"
+            rect                        -24 -190 40 40 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_162() && FUNC_186() && FUNC_86());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 1, localvarstring("tempName"), 14);
+        }
+        itemDef
+        {
+            name                        "killstreak_title_ss"
+            rect                        0 -135 0 0 2 2
+            decoration                  
+            visible                     when(FUNC_161());
+            textalign                   1
+            textscale                   0.87495
+            textstyle                   3
+            textfont                    9
+            exp text                    getsplashtext(0);
+            exp glowcolor r             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("mp/splashTable.csv", splashrownum(0), 8);
+        }
+        itemDef
+        {
+            name                        "killstreak_icon_ss"
+            rect                        -20 -135 40 40 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_161() && FUNC_186() && FUNC_86());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 1, localvarstring("tempName"), 14);
+        }
+    }
+}

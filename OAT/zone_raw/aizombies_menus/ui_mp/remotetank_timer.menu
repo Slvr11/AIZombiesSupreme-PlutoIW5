@@ -1,0 +1,13 @@
+{
+    menuDef
+    {
+        name                        "remotetank_timer"
+        decoration                  
+        rect                        0 0 640 1 1 0
+        onOpen
+        {
+            setLocalVarInt ui_remoteTankTimer (milliseconds() + (dvarint(ui_remoteTankUseTime) * 1000));
+            close self;
+        }
+    }
+}

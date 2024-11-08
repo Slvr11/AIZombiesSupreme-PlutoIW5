@@ -1,0 +1,29 @@
+{
+    menuDef
+    {
+        name                        "killstreak_hint"
+        decoration                  
+        rect                        0 0 640 480 1 1
+        onOpen
+        {
+            lerp alpha from 0 to 1 over "0.15";
+        }
+        onRequestClose
+        {
+            lerp x from 0 to 400 over "1.0";
+            lerp y from 0 to 400 over "1.0";
+            lerp alpha from 1 to 0 over "1.0";
+        }
+        itemDef
+        {
+            name                        "killstreak_icon"
+            rect                        -24 -190 48 48 2 2
+            style                       3
+            decoration                  
+            visible                     when(FUNC_162() && FUNC_186() && FUNC_86() && !ui_active());
+            textscale                   0.55
+            exp material                tablelookup("mp/killstreakTable.csv", 1, localvarstring("ui_ksHint"), 16);
+            exp rect y                  - 190 + (FUNC_185() * 40);
+        }
+    }
+}

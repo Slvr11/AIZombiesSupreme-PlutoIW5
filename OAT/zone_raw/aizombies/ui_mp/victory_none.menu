@@ -1,0 +1,108 @@
+{
+    menuDef
+    {
+        name                        "victory_none"
+        rect                        0 0 640 480 4 4
+        itemDef
+        {
+            text                        "DRAW"
+            rect                        320 120 0 0 0 0
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   1
+            textstyle                   6
+            textfont                    6
+            backcolor                   0 0 0 1
+            forecolor                   1 1 0 1
+        }
+        itemDef
+        {
+            rect                        320 130 0 0 0 0
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   0.4
+            textstyle                   6
+            textfont                    6
+            backcolor                   0 0 0 1
+            exp text                    "@" + dvarstring(ui_text_endreason);
+        }
+        itemDef
+        {
+            rect                        -130 -90 60 60 2 2
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_ALLIES");
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies) + "_blue";
+        }
+        itemDef
+        {
+            rect                        -130 -90 60 60 2 2
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR");
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies);
+        }
+        itemDef
+        {
+            rect                        -130 -90 60 60 2 2
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_AXIS");
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Allies) + "_blue";
+        }
+        itemDef
+        {
+            rect                        70 -90 60 60 2 2
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_ALLIES");
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis) + "_red";
+        }
+        itemDef
+        {
+            rect                        70 -90 60 60 2 2
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_SPECTATOR");
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis);
+        }
+        itemDef
+        {
+            rect                        70 -90 60 60 2 2
+            style                       3
+            decoration                  
+            visible                     when(team("name") == "TEAM_AXIS");
+            textscale                   0.55
+            exp material                dvarstring(g_TeamIcon_Axis) + "_red";
+        }
+        itemDef
+        {
+            rect                        -100 30 1 1 2 2
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   1
+            textstyle                   6
+            textfont                    6
+            exp text                    marinesfield("score");
+        }
+        itemDef
+        {
+            rect                        100 30 1 1 2 2
+            decoration                  
+            visible                     1
+            textalign                   1
+            textscale                   1
+            textstyle                   6
+            textfont                    6
+            exp text                    opforfield("score");
+        }
+    }
+}

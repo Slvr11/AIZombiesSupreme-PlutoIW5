@@ -1,0 +1,137 @@
+{
+    menuDef
+    {
+        name                        "remote_chopper_overlay"
+        rect                        0 0 640 480 0 0
+        visible                     when(FUNC_59() && FUNC_82());
+        itemDef
+        {
+            rect                        -200 -190 400 20 2 2
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   145
+            textscale                   0.55
+            forecolor                   1 1 1 0.65
+            background                  "viper_heading_mp"
+        }
+        itemDef
+        {
+            text                        "@AC130_HUD_WEAPON_25MM"
+            rect                        0 -30 100 30 8 10
+            decoration                  
+            visible                     1
+            textalign                   8
+            textscale                   0.625
+            exp forecolor a             0.65 - (((sin(localclientuimilliseconds() / 90)) * 0.65));
+        }
+        itemDef
+        {
+            rect                        -170 150 30 30 2 2
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   161
+            textalign                   8
+            textscale                   0.625
+            forecolor                   0.65 0.65 0.65 0.65
+        }
+        itemDef
+        {
+            rect                        -200 112 30 30 2 2
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   160
+            textalign                   8
+            textscale                   0.625
+            forecolor                   0.65 0.65 0.65 0.25
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.65
+            background                  "viper_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        -32 -32 40 40 2 2
+            style                       3
+            decoration                  
+            visible                     when(!weaplockblink(11));
+            textscale                   0.55
+            forecolor                   1 1 1 0.325
+            background                  "viper_locked_box"
+            exp rect x                  - 32 + (sin(localclientuimilliseconds() / 420) * 100);
+            exp rect y                  - 32 + (sin(localclientuimilliseconds() / 490) * 100);
+        }
+        itemDef
+        {
+            rect                        -20 -20 64 64 5 5
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(0));
+            textscale                   0.55
+            forecolor                   1 1 1 0.65
+            background                  "viper_locking_box"
+            exp rect x                  weaplockscreenposx() - 32;
+            exp rect y                  weaplockscreenposy() - 42;
+        }
+        itemDef
+        {
+            rect                        -20 -20 64 64 5 5
+            style                       3
+            decoration                  
+            visible                     when(weaplockblink(5) && weaplocked());
+            textscale                   0.55
+            background                  "viper_locked_box"
+            exp rect x                  weaplockscreenposx() - 32;
+            exp rect y                  weaplockscreenposy() - 42;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "javelin_overlay_grain"
+        }
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.65
+            background                  "nightvision_overlay_goggles"
+        }
+        itemDef
+        {
+            name                        "VehicleWeaponReticle"
+            rect                        -320 -240 640 480 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   200
+            textscale                   0.55
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_UI_AC130_TOGGLE_THERMAL"
+            rect                        180 105 0 20 9 9
+            decoration                  
+            visible                     when(FUNC_86() && FUNC_90() && FUNC_106());
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            forecolor                   1 1 1 0.65
+        }
+    }
+}

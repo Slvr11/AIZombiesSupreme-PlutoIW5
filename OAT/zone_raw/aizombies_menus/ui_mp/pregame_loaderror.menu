@@ -1,0 +1,98 @@
+{
+    menuDef
+    {
+        name                        "pregame_loaderror"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        backcolor                   1 1 1 0
+        focuscolor                  1 1 1 1
+        onOpen
+        {
+            setdvar ui_SaveLoadVisible 0;
+        }
+        onClose
+        {
+            uiScript clearError;
+        }
+        onESC
+        {
+            uiScript playerstart;
+        }
+        itemDef
+        {
+            rect                        -107 0 854 480 0 0
+            style                       1
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   377
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            background                  "cinematic"
+        }
+        itemDef
+        {
+            name                        "profile"
+            rect                        40 40 560 400 0 0
+            decoration                  
+            type                        8
+            visible                     1
+            ownerdraw                   364
+            textscale                   0.55
+        }
+        itemDef
+        {
+            name                        "errorinfo"
+            rect                        120 142 400 255 0 0
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     1
+            textalign                   5
+            textscale                   0.8
+            forecolor                   1 0.2 0.2 1
+            dvar                        "com_errorMessage"
+        }
+        itemDef
+        {
+            text                        "@MENU_CLICK_TO_START_THE_MISSION"
+            rect                        0 388 640 45 0 0
+            style                       1
+            decoration                  
+            type                        1
+            visible                     when(!dvarbool(ui_isSaving) && dvarstring(credits) != "1" && 1);
+            textalign                   5
+            textaligny                  4
+            textscale                   0.375
+            forecolor                   1 1 1 0.4
+            bordercolor                 1 1 1 1
+        }
+        itemDef
+        {
+            text                        "@MENU_CLICK_TO_CONTINUE"
+            rect                        0 388 640 45 0 0
+            style                       1
+            decoration                  
+            type                        1
+            visible                     when(!dvarbool(ui_isSaving) && dvarstring(mapname) == "credits" && 1);
+            textalign                   5
+            textaligny                  4
+            textscale                   0.375
+            forecolor                   1 1 1 0.4
+            bordercolor                 1 1 1 1
+        }
+        itemDef
+        {
+            rect                        -128 0 896 480 0 0
+            type                        1
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            action
+            {
+                uiScript playerstart;
+            }
+        }
+    }
+}

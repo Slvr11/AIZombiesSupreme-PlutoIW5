@@ -1,0 +1,2059 @@
+{
+    menuDef
+    {
+        name                        "menu_leaderboard_hd"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_mainmenu_mp"
+        onOpen
+        {
+            if (dvarstring(lb_type) == "experience")
+            {
+                setdvar lb_column_pos_1 400;
+                setdvar lb_column_pos_2 495;
+                setdvar lb_column_pos_3 565;
+                setdvar lb_column_pos_4 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_TIME_PLAYED_CAPS";
+                setdvar lb_column_text_3 "@MENU_GAMES_CAPS";
+                setdvar lb_column_text_4 "@MENU_AVG_SCORE_CAPS";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_experience;
+                setdvar lb_filter_duration "LB_GB_TOTALXP_AT TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_SCORE_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "wins")
+            {
+                setdvar lb_column_pos_1 450;
+                setdvar lb_column_pos_2 520;
+                setdvar lb_column_pos_3 580;
+                setdvar lb_column_pos_4 647;
+                setdvar lb_column_text_1 "@MENU_WINS_CAPS";
+                setdvar lb_column_text_2 "@MENU_LOSSES_CAPS";
+                setdvar lb_column_text_3 "@MENU_RATIO_CAPS";
+                setdvar lb_column_text_4 "@MENU_STREAK_CAPS";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_wins;
+                setdvar lb_filter_duration "LB_GB_WINS_AT TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_WINS_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "kills")
+            {
+                setdvar lb_column_pos_1 400;
+                setdvar lb_column_pos_2 465;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 580;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MENU_KILLS_CAPS";
+                setdvar lb_column_text_2 "@MENU_DEATHS_CAPS";
+                setdvar lb_column_text_3 "@MENU_RATIO_CAPS";
+                setdvar lb_column_text_4 "@MENU_STREAK_CAPS";
+                setdvar lb_column_text_5 "@MENU_AVG_KILLS_CAPS";
+                setdvar lb_settings_filter settings_filter_kills;
+                setdvar lb_filter_duration "LB_GB_KILLS_AT TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_KILLS_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "accuracy")
+            {
+                setdvar lb_column_pos_1 520;
+                setdvar lb_column_pos_2 580;
+                setdvar lb_column_pos_3 647;
+                setdvar lb_column_text_1 "@MENU_ACCURACY_CAPS";
+                setdvar lb_column_text_2 "@MENU_HITS_CAPS";
+                setdvar lb_column_text_3 "@MENU_MISSES_CAPS";
+                setdvar lb_column_text_4 "";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_accuracy;
+                setdvar lb_filter_duration "LB_GB_ACCURACY_AT TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_ACCURACY_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "dm")
+            {
+                setdvar lb_column_pos_1 455;
+                setdvar lb_column_pos_2 520;
+                setdvar lb_column_pos_3 590;
+                setdvar lb_column_pos_4 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_KILLS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEATHS_CAPS";
+                setdvar lb_column_text_4 "@MENU_RATIO_CAPS";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_dm;
+                setdvar lb_filter_duration "LB_GM_DM TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_DEATHMATCH_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "war")
+            {
+                setdvar lb_column_pos_1 395;
+                setdvar lb_column_pos_2 450;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 575;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_KILLS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEATHS_CAPS";
+                setdvar lb_column_text_4 "@MENU_RATIO_CAPS";
+                setdvar lb_column_text_5 "@MENU_ASSISTS_CAPS";
+                setdvar lb_settings_filter settings_filter_war;
+                setdvar lb_filter_duration "LB_GM_WAR TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_TEAM_DEATHMATCH_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "sd")
+            {
+                setdvar lb_column_pos_1 370;
+                setdvar lb_column_pos_2 445;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 595;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_PLANTS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEFUSES_CAPS";
+                setdvar lb_column_text_4 "@MENU_DEFENDS_CAPS";
+                setdvar lb_column_text_5 "@MENU_KILLS_CAPS";
+                setdvar lb_settings_filter settings_filter_sd;
+                setdvar lb_filter_duration "LB_GM_SD TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_SEARCH_AND_DESTROY_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "sab")
+            {
+                setdvar lb_column_pos_1 370;
+                setdvar lb_column_pos_2 440;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 595;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_PLANTS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEFUSES_CAPS";
+                setdvar lb_column_text_4 "@MENU_DEFENDS_CAPS";
+                setdvar lb_column_text_5 "@MENU_KILLS_CAPS";
+                setdvar lb_settings_filter settings_filter_sab;
+                setdvar lb_filter_duration "LB_GM_SAB TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_SABOTAGE_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "dom")
+            {
+                setdvar lb_column_pos_1 440;
+                setdvar lb_column_pos_2 520;
+                setdvar lb_column_pos_3 595;
+                setdvar lb_column_pos_4 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_CAPTURES_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEFENDS_CAPS";
+                setdvar lb_column_text_4 "@MENU_KILLS_CAPS";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_dom;
+                setdvar lb_filter_duration "LB_GM_DOM TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_DOMINATION_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "koth")
+            {
+                setdvar lb_column_pos_1 343;
+                setdvar lb_column_pos_2 418;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 595;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_CAPTURES_CAPS";
+                setdvar lb_column_text_3 "@MENU_DESTRUCTIONS_CAPS";
+                setdvar lb_column_text_4 "@MENU_DEFENDS_CAPS";
+                setdvar lb_column_text_5 "@MENU_KILLS_CAPS";
+                setdvar lb_settings_filter settings_filter_koth;
+                setdvar lb_filter_duration "LB_GM_KOTH TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_HEADQUARTERS_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "ctf")
+            {
+                setdvar lb_column_pos_1 370;
+                setdvar lb_column_pos_2 450;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 595;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_CAPTURES_CAPS";
+                setdvar lb_column_text_3 "@MENU_RETURNS_CAPS";
+                setdvar lb_column_text_4 "@MENU_DEFENDS_CAPS";
+                setdvar lb_column_text_5 "@MENU_KILLS_CAPS";
+                setdvar lb_settings_filter settings_filter_ctf;
+                setdvar lb_filter_duration "LB_GM_CTF TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_CTF_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "dd")
+            {
+                setdvar lb_column_pos_1 380;
+                setdvar lb_column_pos_2 445;
+                setdvar lb_column_pos_3 520;
+                setdvar lb_column_pos_4 595;
+                setdvar lb_column_pos_5 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_PLANTS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEFUSES_CAPS";
+                setdvar lb_column_text_4 "@MENU_DEFENDS_CAPS";
+                setdvar lb_column_text_5 "@MENU_KILLS_CAPS";
+                setdvar lb_settings_filter settings_filter_dd;
+                setdvar lb_filter_duration "LB_GM_DD TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_DD_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "conf")
+            {
+                setdvar lb_column_pos_1 430;
+                setdvar lb_column_pos_2 515;
+                setdvar lb_column_pos_3 590;
+                setdvar lb_column_pos_4 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_CONFIRMS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DENIES_CAPS";
+                setdvar lb_column_text_4 "@MENU_KILLS_CAPS";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_conf;
+                setdvar lb_filter_duration "LB_GM_CONF TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_CONF_CAPS";
+                }
+            }
+            if (dvarstring(lb_type) == "tdef")
+            {
+                setdvar lb_column_pos_1 450;
+                setdvar lb_column_pos_2 507;
+                setdvar lb_column_pos_3 578;
+                setdvar lb_column_pos_4 647;
+                setdvar lb_column_text_1 "@MPUI_SCORE_CAPS";
+                setdvar lb_column_text_2 "@MENU_KILLS_CAPS";
+                setdvar lb_column_text_3 "@MENU_DEATHS_CAPS";
+                setdvar lb_column_text_4 "@MENU_ASSISTS_CAPS";
+                setdvar lb_column_text_5 "";
+                setdvar lb_settings_filter settings_filter_tdef;
+                setdvar lb_filter_duration "LB_GM_TDEF TRK_ALLTIME";
+                if (localvarstring("ui_leaderboard_text") == "")
+                {
+                    setLocalVarString ui_leaderboard_text "@MPUI_TDEF_CAPS";
+                }
+            }
+            if (localvarbool("ui_lobby_leaderboard") == 0)
+            {
+                setdvar lb_filter friends;
+                setdvar lb_filter_group friends;
+                setdvar lb_filter_hardcore 0;
+            }
+            if (localvarbool("ui_lobby_leaderboard") == 1)
+            {
+                setLocalVarBool ui_lobby_leaderboard 0;
+                setdvar lb_filter lobby_members;
+                setdvar lb_filter_group lobby_members;
+            }
+            execnow "incnosplitscreencontrol menu_leaderboard_hd";
+            uiScript OpenLeaderboardExt lb_filter_duration;
+            uiScript RefreshLeaderboards;
+            exec refreshfacebookfriends;
+        }
+        onClose
+        {
+            setdvar lb_hardcore 0;
+            execnow "decnosplitscreencontrol menu_leaderboard_hd";
+        }
+        onESC
+        {
+            close menu_leaderboard_hd;
+        }
+        execKeyInt 166
+        {
+            if (getfocuseditemname() != "leaderboard_experience" && getfocuseditemname() != "leaderboard_wins" && getfocuseditemname() != "leaderboard_kills" && getfocuseditemname() != "leaderboard_accuracy" && getfocuseditemname() != "leaderboard_dm" && getfocuseditemname() != "leaderboard_war" && getfocuseditemname() != "leaderboard_sd" && getfocuseditemname() != "leaderboard_sab" && getfocuseditemname() != "leaderboard_dom" && getfocuseditemname() != "leaderboard_koth" && getfocuseditemname() != "leaderboard_ctf" && getfocuseditemname() != "leaderboard_dd" && getfocuseditemname() != "leaderboard_conf" && getfocuseditemname() != "leaderboard_tdef")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederBottom leaderboard_item_name;
+            }
+        }
+        execKeyInt 165
+        {
+            if (getfocuseditemname() != "leaderboard_experience" && getfocuseditemname() != "leaderboard_wins" && getfocuseditemname() != "leaderboard_kills" && getfocuseditemname() != "leaderboard_accuracy" && getfocuseditemname() != "leaderboard_dm" && getfocuseditemname() != "leaderboard_war" && getfocuseditemname() != "leaderboard_sd" && getfocuseditemname() != "leaderboard_sab" && getfocuseditemname() != "leaderboard_dom" && getfocuseditemname() != "leaderboard_koth" && getfocuseditemname() != "leaderboard_ctf" && getfocuseditemname() != "leaderboard_dd" && getfocuseditemname() != "leaderboard_conf" && getfocuseditemname() != "leaderboard_tdef")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederTop leaderboard_item_name;
+            }
+        }
+        execKeyInt 164
+        {
+            if (getfocuseditemname() != "leaderboard_experience" && getfocuseditemname() != "leaderboard_wins" && getfocuseditemname() != "leaderboard_kills" && getfocuseditemname() != "leaderboard_accuracy" && getfocuseditemname() != "leaderboard_dm" && getfocuseditemname() != "leaderboard_war" && getfocuseditemname() != "leaderboard_sd" && getfocuseditemname() != "leaderboard_sab" && getfocuseditemname() != "leaderboard_dom" && getfocuseditemname() != "leaderboard_koth" && getfocuseditemname() != "leaderboard_ctf" && getfocuseditemname() != "leaderboard_dd" && getfocuseditemname() != "leaderboard_conf" && getfocuseditemname() != "leaderboard_tdef")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageUp leaderboard_item_name;
+            }
+        }
+        execKeyInt 163
+        {
+            if (getfocuseditemname() != "leaderboard_experience" && getfocuseditemname() != "leaderboard_wins" && getfocuseditemname() != "leaderboard_kills" && getfocuseditemname() != "leaderboard_accuracy" && getfocuseditemname() != "leaderboard_dm" && getfocuseditemname() != "leaderboard_war" && getfocuseditemname() != "leaderboard_sd" && getfocuseditemname() != "leaderboard_sab" && getfocuseditemname() != "leaderboard_dom" && getfocuseditemname() != "leaderboard_koth" && getfocuseditemname() != "leaderboard_ctf" && getfocuseditemname() != "leaderboard_dd" && getfocuseditemname() != "leaderboard_conf" && getfocuseditemname() != "leaderboard_tdef")
+            {
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageDown leaderboard_item_name;
+            }
+        }
+        execKeyInt 167
+        {
+            play mouse_click;
+            if (dvarstring(lb_type) == "experience")
+            {
+                open menu_lb_filter_experience;
+            }
+            if (dvarstring(lb_type) == "wins")
+            {
+                open menu_lb_filter_wins;
+            }
+            if (dvarstring(lb_type) == "kills")
+            {
+                open menu_lb_filter_kills;
+            }
+            if (dvarstring(lb_type) == "accuracy")
+            {
+                open menu_lb_filter_accuracy;
+            }
+            if (dvarstring(lb_type) == "dm")
+            {
+                open menu_lb_filter_dm;
+            }
+            if (dvarstring(lb_type) == "war")
+            {
+                open menu_lb_filter_war;
+            }
+            if (dvarstring(lb_type) == "sd")
+            {
+                open menu_lb_filter_sd;
+            }
+            if (dvarstring(lb_type) == "sab")
+            {
+                open menu_lb_filter_sab;
+            }
+            if (dvarstring(lb_type) == "dom")
+            {
+                open menu_lb_filter_dom;
+            }
+            if (dvarstring(lb_type) == "koth")
+            {
+                open menu_lb_filter_koth;
+            }
+            if (dvarstring(lb_type) == "ctf")
+            {
+                open menu_lb_filter_ctf;
+            }
+            if (dvarstring(lb_type) == "dd")
+            {
+                open menu_lb_filter_dd;
+            }
+            if (dvarstring(lb_type) == "conf")
+            {
+                open menu_lb_filter_conf;
+            }
+            if (dvarstring(lb_type) == "tdef")
+            {
+                open menu_lb_filter_tdef;
+            }
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -347 33 694 306 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 33 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 51 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0.43137 0.45882 0.45098 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 51 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0.43137 0.45882 0.45098 1
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 51 694 8 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 69 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 105 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 141 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 177 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 213 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 249 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 285 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 321 694 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) != "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 87 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 159 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 231 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 303 694 36 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarstring(lb_filter) == "facebook_friends"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            exp material                "white";
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 327 694 -14 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            rect                        -347 340 694 48 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  - 347 * select(dvarbool(widescreen), 1, 0.82);
+            exp rect w                  694 * select(dvarbool(widescreen), 1, 0.82);
+        }
+        itemDef
+        {
+            text                        "@MENU_RANK_CAPS"
+            rect                        10 86 1 1 0 0
+            decoration                  
+            visible                     when(1);
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  10 + (35 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            text                        "@MENU_LEVEL_CAPS"
+            rect                        92 86 1 1 0 0
+            decoration                  
+            visible                     when(1);
+            textalign                   1
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  92 + (25 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            text                        "@MENU_PLAYER_CAPS"
+            rect                        127 86 1 1 0 0
+            decoration                  
+            visible                     when(1);
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  127 + (21 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 86 1 1 0 0
+            decoration                  
+            visible                     when(((dvarstring(lb_column_text_1) != "") && (dvarint(lb_column_align_1) == 0)));
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_1);
+            exp rect x                  dvarint(lb_column_pos_1) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 86 1 1 0 0
+            decoration                  
+            visible                     when(((dvarstring(lb_column_text_2) != "") && (dvarint(lb_column_align_2) == 0)));
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_2);
+            exp rect x                  dvarint(lb_column_pos_2) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 86 1 1 0 0
+            decoration                  
+            visible                     when(((dvarstring(lb_column_text_3) != "") && (dvarint(lb_column_align_3) == 0)));
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_3);
+            exp rect x                  dvarint(lb_column_pos_3) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 86 1 1 0 0
+            decoration                  
+            visible                     when(((dvarstring(lb_column_text_4) != "") && (dvarint(lb_column_align_4) == 0)));
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_4);
+            exp rect x                  dvarint(lb_column_pos_4) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 86 1 1 0 0
+            decoration                  
+            visible                     when(((dvarstring(lb_column_text_5) != "") && (dvarint(lb_column_align_5) == 0)));
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp text                    dvarstring(lb_column_text_5);
+            exp rect x                  dvarint(lb_column_pos_5) - (55 * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "none");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_ALL_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "friends");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_FRIENDS_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "facebook_friends");
+            textalign                   4
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text"));
+            exp rect x                  (getTextWidthModCase((locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text")) + "  " + locstring("@MENU_FRIENDS_CAP")), 9, 0.5, 9) + (28 * 0.75)) / (0 - 2);
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "facebook_friends");
+            textalign                   6
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_FRIENDS_CAP");
+            exp rect x                  (getTextWidthModCase((locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text")) + "  " + locstring("@MENU_FRIENDS_CAP")), 9, 0.5, 9) + (28 * 0.75)) / 2;
+        }
+        itemDef
+        {
+            rect                        0 0 28 28 2 1
+            style                       3
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "facebook_friends");
+            textscale                   0.55
+            background                  "facebook"
+            exp rect x                  ((getTextWidthModCase((locstring("@MENU_MW3_LEADERBOARD_SLASH", localvarstring("ui_leaderboard_text")) + "  " + locstring("@MENU_FRIENDS_CAP")), 9, 0.5, 9) + (28 * 0.75)) / 2) - (getTextWidthModCase((locstring("@MENU_FRIENDS_CAP") + " "), 9, 0.5, 9) + (28 * 0.75));
+            exp rect y                  0;
+            exp rect w                  28 * 0.75;
+            exp rect h                  28 * 0.75;
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "lobby_members");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_LOBBY_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "clan");
+            textalign                   5
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_CLAN_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "none");
+            textalign                   5
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_ALL_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "friends");
+            textalign                   5
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_FRIENDS_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "none");
+            textalign                   5
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_ALL_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            rect                        0 0 0 28 2 1
+            decoration                  
+            visible                     when(dvarstring(lb_filter) == "friends");
+            textalign                   5
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_MW3_LEADERBOARD_FRIENDS_CAPS", localvarstring("ui_leaderboard_text"));
+        }
+        itemDef
+        {
+            name                        "leaderboard_experience"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "experience" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        327 0 100 0 15 2
+                                        444 0 75 0 15 2
+                                        542 0 50 0 15 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_experience_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "experience" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        327 0 100 0 15 2
+                                        444 0 75 0 15 2
+                                        542 0 50 0 15 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_wins"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "wins" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        427 0 50 0 15 2
+                                        497 0 50 0 15 2
+                                        559 0 50 0 15 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_wins_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "wins" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        427 0 50 0 15 2
+                                        497 0 50 0 15 2
+                                        559 0 50 0 15 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_kills"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "kills" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        327 0 100 0 10 2
+                                        392 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        557 0 50 0 10 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_kills_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "kills" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        327 0 100 0 10 2
+                                        392 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        557 0 50 0 10 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_accuracy"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "accuracy" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     8
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        497 0 50 0 10 2
+                                        559 0 50 0 10 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_accuracy_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "accuracy" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     8
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        497 0 50 0 10 2
+                                        559 0 50 0 10 2
+                                        622 0 50 0 15 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_dm"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "dm" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        382 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        555 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_dm_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "dm" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        382 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        555 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_war"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "war" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        322 0 100 0 10 2
+                                        427 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        552 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_war_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "war" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        322 0 100 0 10 2
+                                        427 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        552 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_sd"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "sd" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        299 0 100 0 10 2
+                                        422 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_sd_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "sd" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        299 0 100 0 10 2
+                                        422 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_sab"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "sab" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        299 0 100 0 10 2
+                                        419 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_sab_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "sab" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        299 0 100 0 10 2
+                                        419 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_dom"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "dom" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        367 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_dom_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "dom" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        367 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_koth"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "koth" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        272 0 100 0 10 2
+                                        398 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_koth_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "koth" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        272 0 100 0 10 2
+                                        398 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_ctf"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "ctf" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        299 0 100 0 10 2
+                                        427 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_ctf_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "ctf" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        299 0 100 0 10 2
+                                        427 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_dd"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "dd" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        308 0 100 0 10 2
+                                        420 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_dd_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "dd" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     10
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        308 0 100 0 10 2
+                                        420 0 50 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_conf"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "conf" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        359 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_conf_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "conf" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        359 0 100 0 10 2
+                                        497 0 50 0 10 2
+                                        572 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_tdef"
+            rect                        -29 103 698 272 0 0
+            style                       1
+            type                        6
+            visible                     when(dvarstring(lb_type) == "tdef" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            outlinecolor                0.6 0.6314 0.6 1
+            execKeyInt 168
+            {
+                feederTop;
+            }
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect y                  select(dvarstring(lb_filter) == "facebook_friends", 121, 103);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 254, 272);
+            usepaging                   
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        375 0 100 0 10 2
+                                        435 0 100 0 10 2
+                                        550 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            doubleclick
+            {
+                play mouse_click;
+                uiScript ViewGamerCard;
+            }
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            name                        "leaderboard_tdef_player"
+            rect                        -29 85 698 18 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when(dvarstring(lb_type) == "tdef" && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0 0 0 1
+            exp textaligny              select(dvarstring(lb_filter) == "facebook_friends", 0 - 18, 0);
+            exp rect h                  select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      35
+            columns                     9
+                                        2 0 75 0 10 2
+                                        97 0 20 18 10 2
+                                        117 0 20 0 10 1
+                                        149 0 175 0 55 0
+                                        375 0 100 0 10 2
+                                        435 0 100 0 10 2
+                                        550 0 50 0 10 2
+                                        622 0 50 0 10 2
+                                        133 21 14 14 15 2
+            exp elementheight           select(dvarstring(lb_filter) == "facebook_friends", 36, 18);
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_BACK_SHORTCUT"
+            rect                        0 0 181.333 18 3 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                close self;
+            }
+            exp rect x                  (0 - 30) - select((1 != 0), ((getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 1, 0.375) + 10) * 1), 0);
+            exp rect y                  (0 - 43);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_FILTER_SHORTCUT"
+            rect                        0 0 181.333 18 3 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                if (dvarstring(lb_type) == "experience")
+                {
+                    open menu_lb_filter_experience;
+                }
+                if (dvarstring(lb_type) == "wins")
+                {
+                    open menu_lb_filter_wins;
+                }
+                if (dvarstring(lb_type) == "kills")
+                {
+                    open menu_lb_filter_kills;
+                }
+                if (dvarstring(lb_type) == "accuracy")
+                {
+                    open menu_lb_filter_accuracy;
+                }
+                if (dvarstring(lb_type) == "dm")
+                {
+                    open menu_lb_filter_dm;
+                }
+                if (dvarstring(lb_type) == "war")
+                {
+                    open menu_lb_filter_war;
+                }
+                if (dvarstring(lb_type) == "sd")
+                {
+                    open menu_lb_filter_sd;
+                }
+                if (dvarstring(lb_type) == "sab")
+                {
+                    open menu_lb_filter_sab;
+                }
+                if (dvarstring(lb_type) == "dom")
+                {
+                    open menu_lb_filter_dom;
+                }
+                if (dvarstring(lb_type) == "koth")
+                {
+                    open menu_lb_filter_koth;
+                }
+                if (dvarstring(lb_type) == "ctf")
+                {
+                    open menu_lb_filter_ctf;
+                }
+                if (dvarstring(lb_type) == "dd")
+                {
+                    open menu_lb_filter_dd;
+                }
+                if (dvarstring(lb_type) == "conf")
+                {
+                    open menu_lb_filter_conf;
+                }
+                if (dvarstring(lb_type) == "tdef")
+                {
+                    open menu_lb_filter_tdef;
+                }
+            }
+            exp rect x                  (0 - 30) - select((1 != 0), ((getTextWidth(locstring("@PLATFORM_FILTER_SHORTCUT"), 1, 0.375) + 10) * 1), 0);
+            exp rect y                  (0 - 67);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FILTER_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_TOP_SHORTCUT"
+            rect                        0 0 181.333 18 2 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederTop leaderboard_item_name;
+            }
+            exp rect x                  0 - select((0.5 != 0), ((getTextWidth(locstring("@PLATFORM_TOP_SHORTCUT"), 1, 0.375) + 10) * 0.5), 0);
+            exp rect y                  (0 - 67);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_TOP_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_BOTTOM_SHORTCUT"
+            rect                        0 0 181.333 18 2 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederBottom leaderboard_item_name;
+            }
+            exp rect x                  0 - select((0.5 != 0), ((getTextWidth(locstring("@PLATFORM_BOTTOM_SHORTCUT"), 1, 0.375) + 10) * 0.5), 0);
+            exp rect y                  (0 - 43);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BOTTOM_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_PAGE_UP_SHORTCUT"
+            rect                        0 0 181.333 18 1 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageUp leaderboard_item_name;
+            }
+            exp rect x                  30 - select((0 != 0), ((getTextWidth(locstring("@PLATFORM_PAGE_UP_SHORTCUT"), 1, 0.375) + 10) * 0), 0);
+            exp rect y                  (0 - 67);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_PAGE_UP_SHORTCUT"), 1, 0.375) + 10;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_PAGE_DOWN_SHORTCUT"
+            rect                        0 0 181.333 18 1 3
+            style                       1
+            type                        1
+            visible                     1
+            textalign                   9
+            textscale                   0.375
+            textfont                    1
+            background                  "white"
+            onFocus
+            {
+                setItemColor self backcolor ".6" ".6314" ".6" 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setItemColor self backcolor 0 0 0 0;
+            }
+            action
+            {
+                play mouse_click;
+                setLocalVarString leaderboard_item_name "leaderboard_" + dvarstring(lb_type);
+                feederPageDown leaderboard_item_name;
+            }
+            exp rect x                  30 - select((0 != 0), ((getTextWidth(locstring("@PLATFORM_PAGE_DOWN_SHORTCUT"), 1, 0.375) + 10) * 0), 0);
+            exp rect y                  (0 - 43);
+            exp rect w                  getTextWidth(locstring("@PLATFORM_PAGE_DOWN_SHORTCUT"), 1, 0.375) + 10;
+        }
+    }
+}

@@ -1,0 +1,216 @@
+{
+    menuDef
+    {
+        name                        "minimap_fullscreen"
+        rect                        6 6 0 0 8 8
+        hiddenDuringScope           
+        hiddenDuringFlashbang       
+        visible                     when(FUNC_113() && FUNC_99() && FUNC_104() && FUNC_94());
+        itemDef
+        {
+            name                        "minimap_border"
+            rect                        0 0 100 100 0 0
+            border                      1
+            borderSize                  0.666667
+            visible                     1
+            textscale                   0.55
+            bordercolor                 1 1 1 0.35
+        }
+        itemDef
+        {
+            rect                        0 0 100 100 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.89 0.98 0.95 0.05
+            background                  "minimap_scanlines"
+        }
+        itemDef
+        {
+            name                        "minimap_map"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   159
+            textscale                   0.55
+            background                  "compass_map_default"
+        }
+        itemDef
+        {
+            name                        "minimap_friendlies"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   158
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_objectives"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   152
+            textscale                   0.55
+            background                  "objective_line"
+        }
+        itemDef
+        {
+            name                        "minimap_enemies"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   175
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_vehicles"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   155
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_planes"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   156
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_sentries"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   165
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_portable_radars"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   157
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_trophy_systems"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   167
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_scramblers"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   168
+            textscale                   0.55
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            name                        "minimap_player"
+            rect                        0 0 100 100 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   150
+            textscale                   0.55
+            background                  "compassping_player"
+            exp forecolor a             1 - radarjamintensity();
+        }
+        itemDef
+        {
+            rect                        0 0 100 100 0 0
+            style                       3
+            visible                     when(radarisjammed());
+            textscale                   0.55
+            forecolor                   0.64 0.74 0.71 1
+            background                  "white"
+            exp forecolor a             radarjamintensity();
+        }
+        itemDef
+        {
+            rect                        0 0 100 100 0 0
+            style                       3
+            visible                     when(radarisjammed());
+            textscale                   0.55
+            forecolor                   0.89 0.98 0.95 1
+            background                  "ac130_overlay_grain"
+            exp forecolor a             radarjamintensity();
+        }
+        itemDef
+        {
+            rect                        0 0 100 100 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "stencil_base"
+        }
+        itemDef
+        {
+            rect                        0 0 100 100 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            background                  "scanlines_stencil"
+            exp rect y                  (0 - 100) + ((100 * 2) * FUNC_49());
+        }
+        itemDef
+        {
+            rect                        0 0 100 100 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.89 0.98 0.95 1
+            background                  "stencil_fill"
+        }
+        itemDef
+        {
+            name                        "minimap_ticker_background"
+            rect                        0 0 100 0 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            background                  "white"
+        }
+        itemDef
+        {
+            name                        "minimap_ticker"
+            rect                        0 0 100 9 0 0
+            type                        8
+            visible                     1
+            ownerdraw                   146
+            textscale                   0.55
+            background                  "minimap_tickertape_mp"
+        }
+        itemDef
+        {
+            name                        "minimap_ticker_foreground"
+            rect                        0 0 100 0 0 0
+            style                       3
+            visible                     1
+            textscale                   0.55
+            forecolor                   0 0 0 0.65
+            background                  "gradient_center"
+        }
+    }
+}

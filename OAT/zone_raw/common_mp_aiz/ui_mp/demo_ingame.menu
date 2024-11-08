@@ -1,0 +1,806 @@
+{
+    menuDef
+    {
+        name                        "demo_ingame"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        blurWorld                   4.8
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarString ui_buttonNavGroupName "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            focusfirst;
+        }
+        onESC
+        {
+            close self;
+        }
+        onFocusDueToClose
+        {
+            focusfirst;
+        }
+        execKeyInt 14
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(widescreen) && localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(widescreen) && localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -264 -236 501.5 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.5
+            textfont                    9
+            exp text                    "@MENU_DEMO_FILMS";
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROL_OPTIONS"
+            rect                        232 0 364 28 1 1
+            decoration                  
+            visible                     1
+            textalign                   5
+            textscale                   0.5
+            textfont                    9
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_JUMP_BACK"
+            rect                        232 28 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_JUMP_BACK_KEY"
+            rect                        610 28 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_JUMP_FORWARD"
+            rect                        232 48 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_JUMP_FORWARD_KEY"
+            rect                        610 48 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_PREVIOUS_PLAYER"
+            rect                        232 68 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_PREVIOUS_PLAYER_KEY"
+            rect                        610 68 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_NEXT_PLAYER"
+            rect                        232 88 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_NEXT_PLAYER_KEY"
+            rect                        610 88 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_INCREASE_PLAYBACK_SPEED"
+            rect                        232 108 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_INCREASE_PLAYBACK_SPEED_KEY"
+            rect                        610 108 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_DECREASE_PLAYBACK_SPEED"
+            rect                        232 128 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_DECREASE_PLAYBACK_SPEED_KEY"
+            rect                        610 128 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SPEED_1X"
+            rect                        232 148 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SPEED_1X_KEY"
+            rect                        610 148 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SPEED_NEG1X"
+            rect                        232 168 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SPEED_NEG1X_KEY"
+            rect                        610 168 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SWITCH_CAMERA"
+            rect                        232 188 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SWITCH_CAMERA_KEY"
+            rect                        610 188 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SCREENSHOT"
+            rect                        232 208 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_SCREENSHOT_KEY"
+            rect                        610 208 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_RECORD"
+            rect                        232 228 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_RECORD_KEY"
+            rect                        610 228 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_PLAY"
+            rect                        232 248 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_DEMO_CONTROLS_PLAY_KEY"
+            rect                        610 248 364 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  -180
+            textscale                   0.375
+            textfont                    3
+        }
+        itemDef
+        {
+            rect                        -88 34.667 325.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "DEMO_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "DEMO_LIST"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + (0.667);
+        }
+        itemDef
+        {
+            name                        "DEMO_LIST_0"
+            rect                        -68 34.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "DEMO_LIST_0";
+                setLocalVarInt ui_buttonNavGroupCurrent 0;
+                setLocalVarString ui_buttonNavGroupName "DEMO_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !((getdemosegmentcount() <= 0 || !canuseraccessonlinevault())));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled ((getdemosegmentcount() <= 0 || !canuseraccessonlinevault()));
+                if ((5 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (5 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!((getdemosegmentcount() <= 0 || !canuseraccessonlinevault())))
+                {
+                    play mouse_click;
+                    open clip_save_screen;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 33.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_DEMO_UPLOAD_CLIP";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+            exp forecolor r             select((getdemosegmentcount() <= 0 || !canuseraccessonlinevault()), select(localvarstring("ui_swf_selection") == "DEMO_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select((getdemosegmentcount() <= 0 || !canuseraccessonlinevault()), select(localvarstring("ui_swf_selection") == "DEMO_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select((getdemosegmentcount() <= 0 || !canuseraccessonlinevault()), select(localvarstring("ui_swf_selection") == "DEMO_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "DEMO_LIST_1"
+            rect                        -68 54.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "DEMO_LIST_1";
+                setLocalVarInt ui_buttonNavGroupCurrent 1;
+                setLocalVarString ui_buttonNavGroupName "DEMO_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(getdemosegmentcount() <= 0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (getdemosegmentcount() <= 0);
+                if ((5 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (5 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(getdemosegmentcount() <= 0))
+                {
+                    play mouse_click;
+                    execNow "set cl_demo_ui_selected_segment -1";
+                    execNow "set cl_demo_ui_segment_position -1";
+                    open demo_manage_segments;
+                    close self;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 53.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_DEMO_MANAGE_SEGMENTS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+            exp forecolor r             select(getdemosegmentcount() <= 0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(getdemosegmentcount() <= 0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(getdemosegmentcount() <= 0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "DEMO_LIST_2"
+            rect                        -68 74.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "DEMO_LIST_2";
+                setLocalVarInt ui_buttonNavGroupCurrent 2;
+                setLocalVarString ui_buttonNavGroupName "DEMO_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((5 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (5 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open pc_options_video_ingame;
+                    close self;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 73.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_OPTIONS";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "DEMO_LIST_3"
+            rect                        -68 94.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "DEMO_LIST_3";
+                setLocalVarInt ui_buttonNavGroupCurrent 3;
+                setLocalVarString ui_buttonNavGroupName "DEMO_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(isdemocliprecording()));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (isdemocliprecording());
+                if ((5 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (5 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(isdemocliprecording()))
+                {
+                    play mouse_click;
+                    exec cl_demo_jumptostart;
+                    close self;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 93.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_DEMO_JUMP_TO_START";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+            exp forecolor r             select(isdemocliprecording(), select(localvarstring("ui_swf_selection") == "DEMO_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(isdemocliprecording(), select(localvarstring("ui_swf_selection") == "DEMO_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(isdemocliprecording(), select(localvarstring("ui_swf_selection") == "DEMO_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "DEMO_LIST_4"
+            rect                        -68 114.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "DEMO_LIST_4";
+                setLocalVarInt ui_buttonNavGroupCurrent 4;
+                setLocalVarString ui_buttonNavGroupName "DEMO_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((5 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (5 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    if (isclipmodified())
+                    {
+                        open popup_enddemo_clipmodified;
+                    }
+                    else
+                    {
+                        open popup_enddemo_clipnotmodified;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        -64 113.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_DEMO_END_FILM";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "DEMO_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "DEMO_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "DEMO_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "DEMO_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "demo_ingame";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_ingame"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_ingame"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_ingame"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_ingame"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "demo_ingame"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+    }
+}

@@ -1,0 +1,934 @@
+// Dumped from fastfile "patch_mp".
+// In their original format the strings might have been separated in multiple files.
+VERSION             "1"
+CONFIG              "C:/trees/cod3/cod3/bin/StringEd.cfg"
+FILENOTES           ""
+
+REFERENCE           CHALLENGE_AVENGER
+LANG_ENGLISH        "...with a Vengeance."
+
+REFERENCE           CHALLENGE_DAILY_CHALLENGE
+LANG_ENGLISH        "Daily Challenge"
+
+REFERENCE           CHALLENGE_DAILY_CHALLENGES
+LANG_ENGLISH        "Daily Challenges"
+
+REFERENCE           CHALLENGE_DESC_FLAG_LUXEMBURG
+LANG_ENGLISH        "Luxembourg"
+
+REFERENCE           CHALLENGE_DESC_REAPER
+LANG_ENGLISH        "Kill 4 enemies with a single Predator Missile."
+
+REFERENCE           CHALLENGE_PATCH_DAILY_CHALLENGE
+LANG_ENGLISH        "Daily Challenge"
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_AR
+LANG_ENGLISH        "Get &&1 kills with Assault Rifles."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_HANDGUN
+LANG_ENGLISH        "Get &&1 kills with Handguns."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_LAUNCHER
+LANG_ENGLISH        "Get &&1 kills with Launchers."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_LMG
+LANG_ENGLISH        "Get &&1 kills with Light Machine Guns."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_MACHINEPISTOL
+LANG_ENGLISH        "Get &&1 kills with Machine Pistols."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_RIOT
+LANG_ENGLISH        "Get &&1 kills with Riot Shield."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_SHOTGUN
+LANG_ENGLISH        "Get &&1 kills with Shotguns."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_SMG
+LANG_ENGLISH        "Get &&1 kills with Sub Machine Guns."
+
+REFERENCE           CHALLENGE_PATCH_GET_N_KILLS_SNIPER
+LANG_ENGLISH        "Get &&1 kills with Sniper Rifles."
+
+REFERENCE           CHALLENGE_PATCH_KILL_N_VEHICLES
+LANG_ENGLISH        "Kill &&1 vehicles with this weapon."
+
+REFERENCE           CHALLENGE_PATCH_WEEKLY_CHALLENGE
+LANG_ENGLISH        "Weekly Challenge"
+
+REFERENCE           CHALLENGE_WEEKLY_CHALLENGE
+LANG_ENGLISH        "Weekly Challenge"
+
+REFERENCE           CHALLENGE_WEEKLY_CHALLENGES
+LANG_ENGLISH        "Weekly Challenges"
+
+REFERENCE           DLC_10
+LANG_ENGLISH        "DLC 10"
+
+REFERENCE           DLC_11
+LANG_ENGLISH        "DLC 11"
+
+REFERENCE           DLC_12
+LANG_ENGLISH        "DLC 12"
+
+REFERENCE           DLC_13
+LANG_ENGLISH        "DLC 13"
+
+REFERENCE           DLC_14
+LANG_ENGLISH        "DLC 14"
+
+REFERENCE           DLC_15
+LANG_ENGLISH        "DLC 15"
+
+REFERENCE           DLC_16
+LANG_ENGLISH        "DLC 16"
+
+REFERENCE           DLC_17
+LANG_ENGLISH        "DLC 17"
+
+REFERENCE           DLC_18
+LANG_ENGLISH        "DLC 18"
+
+REFERENCE           DLC_19
+LANG_ENGLISH        "DLC 19"
+
+REFERENCE           DLC_20
+LANG_ENGLISH        "DLC 20"
+
+REFERENCE           DLC_21
+LANG_ENGLISH        "DLC 21"
+
+REFERENCE           DLC_22
+LANG_ENGLISH        "DLC 22"
+
+REFERENCE           DLC_23
+LANG_ENGLISH        "DLC 23"
+
+REFERENCE           DLC_24
+LANG_ENGLISH        "DLC 24"
+
+REFERENCE           DLC_25
+LANG_ENGLISH        "DLC 25"
+
+REFERENCE           DLC_26
+LANG_ENGLISH        "DLC 26"
+
+REFERENCE           DLC_3
+LANG_ENGLISH        "DLC 3"
+
+REFERENCE           DLC_4
+LANG_ENGLISH        "DLC 4"
+
+REFERENCE           DLC_5
+LANG_ENGLISH        "DLC 5"
+
+REFERENCE           DLC_6
+LANG_ENGLISH        "DLC 6"
+
+REFERENCE           DLC_7
+LANG_ENGLISH        "DLC 7"
+
+REFERENCE           DLC_8
+LANG_ENGLISH        "DLC 8"
+
+REFERENCE           DLC_9
+LANG_ENGLISH        "DLC 9"
+
+REFERENCE           DLC_MAPSTORE
+LANG_ENGLISH        "GET MORE MAPS"
+
+REFERENCE           DLC_PLAYER_DOESNT_HAVE_MAP_PACK
+LANG_ENGLISH        "&&2 disabled!  &&1 does not have the map pack."
+
+REFERENCE           DLC_SEARCH_TOGGLE_OFF
+LANG_ENGLISH        "DLC Disabled"
+
+REFERENCE           DLC_SEARCH_TOGGLE_ON
+LANG_ENGLISH        "DLC Enabled"
+
+REFERENCE           EXE_ERR_UNAUTHORIZED_IP
+LANG_ENGLISH        "The Call of Duty: Modern Warfare 3 server has rejected access from this IP address."
+
+REFERENCE           EXE_GETTINGINFOFORSERVERS2
+LANG_ENGLISH        "Getting info for &&1/&&2 servers"
+
+REFERENCE           EXE_SV_INFO_DEDICATED
+LANG_ENGLISH        "Server Type"
+
+REFERENCE           EXE_SV_INFO_DEDICATED_0
+LANG_ENGLISH        "Listen Server"
+
+REFERENCE           EXE_SV_INFO_DEDICATED_1
+LANG_ENGLISH        "Dedicated LAN Server"
+
+REFERENCE           EXE_SV_INFO_DEDICATED_2
+LANG_ENGLISH        "Dedicated Internet Server"
+
+REFERENCE           EXE_SV_INFO_VOICE_0
+LANG_ENGLISH        "No Chat"
+
+REFERENCE           EXE_SV_INFO_VOICE_1
+LANG_ENGLISH        "Open Chat"
+
+REFERENCE           EXE_SV_INFO_VOICE_2
+LANG_ENGLISH        "Team Chat"
+
+REFERENCE           GAME_VOTINGTOOSOON
+LANG_ENGLISH        "Its too soon to call a vote."
+
+REFERENCE           KILLSTREAKS_ESCORT_AIRDROP_DESC
+LANG_ENGLISH        "An Osprey delivers and defends several Care Packages."
+
+REFERENCE           KILLSTREAKS_OSPREY_GUNNER_DESC
+LANG_ENGLISH        "Be the gunner of an Osprey delivering several Care Packages."
+
+REFERENCE           MENU_CANCEL_REFRESH
+LANG_ENGLISH        "Cancel Refresh"
+
+REFERENCE           MENU_CONNECT
+LANG_ENGLISH        "Connect"
+
+REFERENCE           MENU_CONTENT_NOT_AVAILABLE
+LANG_ENGLISH        "Content package is no longer available."
+
+REFERENCE           MENU_DEDICATED_PLAYER_COUNT
+LANG_ENGLISH        "Players &&1 (&&2)"
+
+REFERENCE           MENU_DEDICATED_SERVER
+LANG_ENGLISH        "Dedicated Server"
+
+REFERENCE           MENU_DEDICATED_SERVER_COUNT
+LANG_ENGLISH        "Servers &&1 (&&2)"
+
+REFERENCE           MENU_DISPLAY_MODE
+LANG_ENGLISH        "Display Mode"
+
+REFERENCE           MENU_ENABLE_SERVER_BROWSER
+LANG_ENGLISH        "Enable Server Browser"
+
+REFERENCE           MENU_ENABLE_SERVER_REMOTE_CONSOLE
+LANG_ENGLISH        "Enable Remote Console"
+
+REFERENCE           MENU_ENTER_ANOTHER_FILE_NAME
+LANG_ENGLISH        "Enter another file name"
+
+REFERENCE           MENU_EVERYONE
+LANG_ENGLISH        "Everyone"
+
+REFERENCE           MENU_FACEBOOK_AUTH_FAIL_ON_REGISTER
+LANG_ENGLISH        "Login failed. Please re-enter your account details.\n"
+
+REFERENCE           MENU_FAILED_TO_ADD_FAVORITE
+LANG_ENGLISH        "Failed to add favorite."
+
+REFERENCE           MENU_FAILED_TO_REMOVE_FAVORITE
+LANG_ENGLISH        "Failed to remove favorite."
+
+REFERENCE           MENU_FAVORITES_CAPS
+LANG_ENGLISH        "FAVORITES"
+
+REFERENCE           MENU_FILE_OVERWRITE_CONFIRM
+LANG_ENGLISH        "File exists, do you want to overwrite it?"
+
+REFERENCE           MENU_FILTERS
+LANG_ENGLISH        "Filters"
+
+REFERENCE           MENU_FRIENDLY_FIRE2
+LANG_ENGLISH        "Friendly Fire:"
+
+REFERENCE           MENU_GAME_TYPE2
+LANG_ENGLISH        "Game Mode:"
+
+REFERENCE           MENU_HARDCORE
+LANG_ENGLISH        "Hardcore:"
+
+REFERENCE           MENU_HISTORY_CAPS
+LANG_ENGLISH        "HISTORY"
+
+REFERENCE           MENU_INTERNET_CAPS
+LANG_ENGLISH        "INTERNET"
+
+REFERENCE           MENU_INVALID_FILE_NAME
+LANG_ENGLISH        "Invalid file name."
+
+REFERENCE           MENU_KILLSTREAK_REWARD_SLOT_1
+LANG_ENGLISH        "Killstreak Reward Slot 1"
+
+REFERENCE           MENU_KILLSTREAK_REWARD_SLOT_2
+LANG_ENGLISH        "Killstreak Reward Slot 2"
+
+REFERENCE           MENU_KILLSTREAK_REWARD_SLOT_3
+LANG_ENGLISH        "Killstreak Reward Slot 3"
+
+REFERENCE           MENU_KILLSTREAK_REWARD_SLOT_4
+LANG_ENGLISH        "Killstreak Reward Slot 4"
+
+REFERENCE           MENU_LOAD_RECIPE_CAPS
+LANG_ENGLISH        "LOAD RECIPE"
+
+REFERENCE           MENU_LOAD_RECIPE_FROM_DISK
+LANG_ENGLISH        "Load Recipe From Disk"
+
+REFERENCE           MENU_MAP_PRE2
+LANG_ENGLISH        "Map:"
+
+REFERENCE           MENU_MAX_PING
+LANG_ENGLISH        "Max Ping:"
+
+REFERENCE           MENU_MODE_FULLSCREEN
+LANG_ENGLISH        "Fullscreen"
+
+REFERENCE           MENU_MODE_WINDOWED
+LANG_ENGLISH        "Windowed"
+
+REFERENCE           MENU_MODE_WINDOWED_NO_BORDER
+LANG_ENGLISH        "Windowed (No Border)"
+
+REFERENCE           MENU_NO_VOICE
+LANG_ENGLISH        "No Voice"
+
+REFERENCE           MENU_ONLINE_STATS_RESET
+LANG_ENGLISH        "Your stats have been reset due to a recent ban.\n\nPlease view the Official Code of Conduct at www.callofduty.com/mw3/help"
+
+REFERENCE           MENU_PASSWORD3
+LANG_ENGLISH        "Password:"
+
+REFERENCE           MENU_PRIVATE_PASSWORD
+LANG_ENGLISH        "Private Password"
+
+REFERENCE           MENU_REMOVE
+LANG_ENGLISH        "Remove"
+
+REFERENCE           MENU_REMOVE_FROM_FAVORITES
+LANG_ENGLISH        "Remove from Favorites"
+
+REFERENCE           MENU_SAVE_RECIPE_TO_DISK
+LANG_ENGLISH        "Save Recipe To Disk"
+
+REFERENCE           MENU_SB_FILTER_CAPS
+LANG_ENGLISH        "SERVER FILTER"
+
+REFERENCE           MENU_SB_INTERNET_FILTER_EMPTY
+LANG_ENGLISH        "Not showing empty servers"
+
+REFERENCE           MENU_SB_INTERNET_FILTER_FULL
+LANG_ENGLISH        "Not showing full servers"
+
+REFERENCE           MENU_SB_INTERNET_FILTER_FULL_AND_EMPTY
+LANG_ENGLISH        "Not showing full nor empty servers"
+
+REFERENCE           MENU_SB_PLAYER_COUNT
+LANG_ENGLISH        "Filtered players ( total players )"
+
+REFERENCE           MENU_SB_QUERYING_SERVER_FOR_INFO
+LANG_ENGLISH        "Querying Server Info"
+
+REFERENCE           MENU_SB_SERVER_COUNT
+LANG_ENGLISH        "Filtered servers ( total servers )"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_ADD_TO_FAVORITES_DISABLED
+LANG_ENGLISH        "Please select a non-LAN server"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_ADD_TO_FAVORITES_ENABLED
+LANG_ENGLISH        "Add selected server to the favorite list"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_CANCEL_REFRESHING
+LANG_ENGLISH        "Cancel server refreshing"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_CONNECT_DISABLED
+LANG_ENGLISH        "Please select a server to connect"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_CONNECT_ENABLED
+LANG_ENGLISH        "Connect to the selected server"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_FILTERS
+LANG_ENGLISH        "Change filter conditions"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_REFRESH
+LANG_ENGLISH        "Refresh servers"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_REMOVE_FROM_FAVORITES_DISABLED
+LANG_ENGLISH        "Please select a server to remove"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_REMOVE_FROM_FAVORITES_ENABLED
+LANG_ENGLISH        "Remove selected server from the favorite list"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_RESET_FILTER
+LANG_ENGLISH        "Reset filter options"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_SERVER_INFO_DISABLED
+LANG_ENGLISH        "Please select a server"
+
+REFERENCE           MENU_SB_TOOLTIP_BTN_SERVER_INFO_ENABLED
+LANG_ENGLISH        "Show details of the selected server"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_GAME_MODE
+LANG_ENGLISH        "Sort by game mode"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_MAP_NAME
+LANG_ENGLISH        "Sort by map name"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_PASSWORD_PROTECTION
+LANG_ENGLISH        "Sort by password protection"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_PING
+LANG_ENGLISH        "Sort by ping"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_PLAYER_COUNT
+LANG_ENGLISH        "Sort by player count"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_PURE_SERVER
+LANG_ENGLISH        "Sort by pure server"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_SERVER_NAME
+LANG_ENGLISH        "Sort by server name"
+
+REFERENCE           MENU_SB_TOOLTIP_COL_HEADER_TEAM_CHAT
+LANG_ENGLISH        "Sort by voice chat"
+
+REFERENCE           MENU_SB_TOOLTIP_EVERYONE_HEARS_EVERYONE
+LANG_ENGLISH        "Open Chat"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_EMPTY_NO
+LANG_ENGLISH        "Hide empty servers "
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_EMPTY_YES
+LANG_ENGLISH        "Show empty servers"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_ALL
+LANG_ENGLISH        "No friendly fire filter"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_NO
+LANG_ENGLISH        "Show friendly fire disabled servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_FRIENDLY_FIRE_YES
+LANG_ENGLISH        "Show friendly fire enabled servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_FULL_NO
+LANG_ENGLISH        "Hide full servers "
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_FULL_YES
+LANG_ENGLISH        "Show full servers"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_GAME_MODE
+LANG_ENGLISH        "Filter servers by game mode"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_HARDCORE_ALL
+LANG_ENGLISH        "No hardcore filter"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_HARDCORE_NO
+LANG_ENGLISH        "Show hardcore disabled servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_HARDCORE_YES
+LANG_ENGLISH        "Show hardcore enabled servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_KILLCAM_ALL
+LANG_ENGLISH        "No kill cam filter"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_KILLCAM_NO
+LANG_ENGLISH        "Show kill cam disabled servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_KILLCAM_YES
+LANG_ENGLISH        "Show kill cam enabled servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_MAP
+LANG_ENGLISH        "Filter servers by map name"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PASSWORD_ALL
+LANG_ENGLISH        "Show public and password protected servers"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PASSWORD_NO
+LANG_ENGLISH        "Show public servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PASSWORD_YES
+LANG_ENGLISH        "Show password protected servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PING
+LANG_ENGLISH        "Filter servers by max ping"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PURE_ALL
+LANG_ENGLISH        "Show pure and non-pure servers"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PURE_NO
+LANG_ENGLISH        "Show non-pure servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_PURE_YES
+LANG_ENGLISH        "Show pure servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_VOICE_CHAT_ALL
+LANG_ENGLISH        "Show 'Open Chat' servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_VOICE_CHAT_TEAM
+LANG_ENGLISH        "Show 'Team Chat' servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_VOICE_NO_FILTER
+LANG_ENGLISH        "No server chat filter"
+
+REFERENCE           MENU_SB_TOOLTIP_FILTER_VOICE_NO_VOICE
+LANG_ENGLISH        "Show 'No Chat' servers only"
+
+REFERENCE           MENU_SB_TOOLTIP_INTERNET_FILTER
+LANG_ENGLISH        "Change filter then click refresh to show empty and/or full servers"
+
+REFERENCE           MENU_SB_TOOLTIP_NO_VOICE
+LANG_ENGLISH        "No Chat"
+
+REFERENCE           MENU_SB_TOOLTIP_PASSWORD_PROTECTED
+LANG_ENGLISH        "Password protected"
+
+REFERENCE           MENU_SB_TOOLTIP_PUBLIC_SERVER
+LANG_ENGLISH        "Public server"
+
+REFERENCE           MENU_SB_TOOLTIP_TAB_FAVORITE_SERVERS
+LANG_ENGLISH        "Favorite servers"
+
+REFERENCE           MENU_SB_TOOLTIP_TAB_FRIEND_SERVERS
+LANG_ENGLISH        "Servers your friends are playing on"
+
+REFERENCE           MENU_SB_TOOLTIP_TAB_HISTORY_SERVERS
+LANG_ENGLISH        "History servers"
+
+REFERENCE           MENU_SB_TOOLTIP_TAB_INTERNET_SERVERS
+LANG_ENGLISH        "Internet servers"
+
+REFERENCE           MENU_SB_TOOLTIP_TAB_LAN_SERVERS
+LANG_ENGLISH        "LAN servers"
+
+REFERENCE           MENU_SB_TOOLTIP_TEAM_CHAT
+LANG_ENGLISH        "Team Chat"
+
+REFERENCE           MENU_SELECT_ANOTHER_FILE
+LANG_ENGLISH        "Select another file"
+
+REFERENCE           MENU_SERVERS_CAPS
+LANG_ENGLISH        "SERVERS"
+
+REFERENCE           MENU_SERVERS_DESC
+LANG_ENGLISH        "Browse dedicated servers."
+
+REFERENCE           MENU_SERVER_BROWSER
+LANG_ENGLISH        "Server Browser"
+
+REFERENCE           MENU_SERVER_BROWSER_CAPS
+LANG_ENGLISH        "SERVER BROWSER"
+
+REFERENCE           MENU_SHOW_INTERNET_SERVERS
+LANG_ENGLISH        "Show Internet servers"
+
+REFERENCE           MENU_SPECTATE_CAPS
+LANG_ENGLISH        "SPECTATE"
+
+REFERENCE           MENU_STORE_DESC
+LANG_ENGLISH        "Purchase downloadable game content."
+
+REFERENCE           MENU_SUCCESSFULLY_ADDED_FAVORITE
+LANG_ENGLISH        "Successfully added favorite."
+
+REFERENCE           MENU_SUCCESSFULLY_REMOVED_FAVORITE
+LANG_ENGLISH        "Successfully removed favorite."
+
+REFERENCE           MENU_TOP
+LANG_ENGLISH        "Top"
+
+REFERENCE           MESSAGEBOX_CALL_OF_DUTY_COULDNT
+LANG_ENGLISH        "Modern Warfare 3 couldn't write a file. The hard drive is probably full."
+
+REFERENCE           MESSAGEBOX_IT_APPEARS_THAT_CALL
+LANG_ENGLISH        "It appears that Modern Warfare 3 did not quit properly the last time it ran. Do you want to run the game in safe mode? This is recommended for most people. It will change your system settings but not your controls."
+
+REFERENCE           MESSAGEBOX_IT_LOOKS_LIKE_YOU_ARE
+LANG_ENGLISH        "It looks like you are low on virtual memory. This can cause the game to run slowly and it may stop completely. It is highly recommended that you close some programs before running Modern Warfare 3. Do you want to run Modern Warfare 3 anyway?"
+
+REFERENCE           MESSAGEBOX_THE_RECOMMENDED_SETTINGS
+LANG_ENGLISH        "The recommended settings have been updated since the last time you ran Modern Warfare 3. Would you like the game to configure itself optimally with these new settings? This is recommended for most people. It will change your system settings but not your controls."
+
+REFERENCE           MESSAGEBOX_YOUR_COMPUTER_APPEARS
+LANG_ENGLISH        "Your computer appears to have changed since the last time you ran Modern Warfare 3. Would you like the game to configure itself optimally for your new hardware? This is recommended for most people. It will change your system settings but not your controls."
+
+REFERENCE           MPUI_AGROUND_SS
+LANG_ENGLISH        "Aground"
+
+REFERENCE           MPUI_BOARDWALK
+LANG_ENGLISH        "Boardwalk"
+
+REFERENCE           MPUI_BURN_SS
+LANG_ENGLISH        "U-Turn"
+
+REFERENCE           MPUI_CEMENT
+LANG_ENGLISH        "Foundation"
+
+REFERENCE           MPUI_COURTYARD_SS
+LANG_ENGLISH        "Erosion"
+
+REFERENCE           MPUI_CROSSWALK_SS
+LANG_ENGLISH        "Intersection"
+
+REFERENCE           MPUI_DESC_MAP_AGROUND_SS
+LANG_ENGLISH        "Shipwreck on the Irish coast.  Open layout allows for long distance engagements"
+
+REFERENCE           MPUI_DESC_MAP_BOARDWALK
+LANG_ENGLISH        "Jersey shore amusement boardwalk.  Elevated main path set off by close quarters flanks."
+
+REFERENCE           MPUI_DESC_MAP_BURN_SS
+LANG_ENGLISH        "War torn section of mid-east highway.  Plentiful cover and close quarter fighting"
+
+REFERENCE           MPUI_DESC_MAP_CEMENT
+LANG_ENGLISH        "Korean cement factory.  Great for close quarter combat and tactical maneuvering."
+
+REFERENCE           MPUI_DESC_MAP_COURTYARD_SS
+LANG_ENGLISH        "Roman ruins near Mt. Vesuvius.  Strong interiors offset by multi-level flanks"
+
+REFERENCE           MPUI_DESC_MAP_CROSSWALK_SS
+LANG_ENGLISH        "Metro intersection on lockdown.  Strong interior locations and tactical urban combat"
+
+REFERENCE           MPUI_DESC_MAP_HILLSIDE_SS
+LANG_ENGLISH        "Upscale beachside retreat.  Multi-tiered run and gun combat haven"
+
+REFERENCE           MPUI_DESC_MAP_ITALY
+LANG_ENGLISH        "A small coastal Italian town. Features tight close quarter combat."
+
+REFERENCE           MPUI_DESC_MAP_METEORA
+LANG_ENGLISH        "Greek Monastery on a sandstone pillar.  Features both medium and long range combat ."
+
+REFERENCE           MPUI_DESC_MAP_MOAB
+LANG_ENGLISH        "Abandoned Utah mining settlement.  Features an open layout and strong flanks."
+
+REFERENCE           MPUI_DESC_MAP_MORNINGWOOD
+LANG_ENGLISH        "Air Force One crash site. Very open map with a few homes that provide cover."
+
+REFERENCE           MPUI_DESC_MAP_NOLA
+LANG_ENGLISH        "New Orleans under assault.  Features fast-paced matches with abundant close quarters fighting."
+
+REFERENCE           MPUI_DESC_MAP_OVERWATCH
+LANG_ENGLISH        "Unfinished top of a skyscraper. Features tense Demolition matches."
+
+REFERENCE           MPUI_DESC_MAP_PARK
+LANG_ENGLISH        "Large New York park set in autumn. Great for long distance fire fights."
+
+REFERENCE           MPUI_DESC_MAP_QADEEM
+LANG_ENGLISH        "Luxury resort in Dubai.  Features intense Domination matches "
+
+REFERENCE           MPUI_DESC_MAP_RESTREPO_SS
+LANG_ENGLISH        "Remote outpost in Afghanistan.  Tight, sparse interiors linked by open lanes and overlooks "
+
+REFERENCE           MPUI_DESC_MAP_ROUGHNECK
+LANG_ENGLISH        "Deep Water drilling rig.  Medium to Long range engagements between multi-tiered, joined platforms."
+
+REFERENCE           MPUI_DESC_MAP_SHIPBREAKER
+LANG_ENGLISH        "Ship scavenging operation on the Indian coast.  Dominant overwatch positions and strong flank routes."
+
+REFERENCE           MPUI_DESC_MAP_SIX_SS
+LANG_ENGLISH        "American farm in the path of a monster tornado.  Sparse interiors and well-defined lanes"
+
+REFERENCE           MPUI_DESC_MAP_TERMINAL_CLS
+LANG_ENGLISH        "Russian  airport terminal under siege.  The classic fan favorite is back"
+
+REFERENCE           MPUI_DLC_COMING_SOON
+LANG_ENGLISH        "Available to Purchase"
+
+REFERENCE           MPUI_DLC_GO_TO_STORE
+LANG_ENGLISH        "You can go to the store to purchase game content."
+
+REFERENCE           MPUI_GRND
+LANG_ENGLISH        "Drop Zone"
+
+REFERENCE           MPUI_GRND_CAPS
+LANG_ENGLISH        "DROP ZONE"
+
+REFERENCE           MPUI_HILLSIDE_SS
+LANG_ENGLISH        "Getaway"
+
+REFERENCE           MPUI_INFECT_SPECIAL_CLASS
+LANG_ENGLISH        "Initial Infected"
+
+REFERENCE           MPUI_ITALY
+LANG_ENGLISH        "Piazza"
+
+REFERENCE           MPUI_METEORA
+LANG_ENGLISH        "Sanctuary"
+
+REFERENCE           MPUI_MOAB
+LANG_ENGLISH        "Gulch"
+
+REFERENCE           MPUI_MORNINGWOOD
+LANG_ENGLISH        "Black Box"
+
+REFERENCE           MPUI_NOLA
+LANG_ENGLISH        "Parish"
+
+REFERENCE           MPUI_OVERWATCH
+LANG_ENGLISH        "Overwatch"
+
+REFERENCE           MPUI_PARK
+LANG_ENGLISH        "Liberation"
+
+REFERENCE           MPUI_QADEEM
+LANG_ENGLISH        "Oasis"
+
+REFERENCE           MPUI_RECIPE_LOAD_SUCCEEDED
+LANG_ENGLISH        "Load custom gamemode succeeded."
+
+REFERENCE           MPUI_RECIPE_SAVE_SUCCEEDED
+LANG_ENGLISH        "Save custom gamemode succeeded."
+
+REFERENCE           MPUI_RESTREPO_SS
+LANG_ENGLISH        "Lookout"
+
+REFERENCE           MPUI_ROUGHNECK
+LANG_ENGLISH        "Off Shore"
+
+REFERENCE           MPUI_SERVER_INFO_FAILED
+LANG_ENGLISH        "Failed to retrieve server info"
+
+REFERENCE           MPUI_SHIPBREAKER
+LANG_ENGLISH        "Decommission"
+
+REFERENCE           MPUI_SIX_SS
+LANG_ENGLISH        "Vortex"
+
+REFERENCE           MPUI_TERMINAL_CLS
+LANG_ENGLISH        "Terminal"
+
+REFERENCE           MP_PATCH_DESTROY_TI
+LANG_ENGLISH        "Press and hold ^3&&1^7 to smash Tactical Insertion"
+
+REFERENCE           MP_PATCH_PICKUP_PORTABLE_RADAR
+LANG_ENGLISH        "Press and hold ^3&&1^7 to pick up Portable Radar"
+
+REFERENCE           MP_PATCH_PICKUP_SCRAMBLER
+LANG_ENGLISH        "Press and hold ^3&&1^7 to pick up Scrambler"
+
+REFERENCE           MP_PATCH_PICKUP_TI
+LANG_ENGLISH        "Press and hold ^3&&1^7 to pick up Tactical Insertion"
+
+REFERENCE           OBJECTIVES_CONF_HINT
+LANG_ENGLISH        "Recover Dog Tags for the win."
+
+REFERENCE           OBJECTIVES_INFECT
+LANG_ENGLISH        "Eliminated Survivors become Infected.  Infect everyone, or survive the game to win."
+
+REFERENCE           PERKS_DESC_TACTICAL
+LANG_ENGLISH        "Faster melee attack."
+
+REFERENCE           PERKS_DESC_VARIABLE_ZOOM_SCOPE
+LANG_ENGLISH        "Scope with multiple zoom levels."
+
+REFERENCE           PLATFORM_BOTTOM_SHORTCUT
+LANG_ENGLISH        "Bottom ^2END^7"
+
+REFERENCE           PLATFORM_CHALLENGES_SHORTCUT
+LANG_ENGLISH        "Challenges ^2F1^7"
+
+REFERENCE           PLATFORM_CLEAR_KILLSTREAKS
+LANG_ENGLISH        "Clear Killstreaks ^2X^7"
+
+REFERENCE           PLATFORM_DYK_IW5_MSG6
+LANG_ENGLISH        "Use the Sitrep Perk to identify enemy equipment and care package traps."
+
+REFERENCE           PLATFORM_FILTER_SHORTCUT
+LANG_ENGLISH        "Filter ^2F1^7"
+
+REFERENCE           PLATFORM_HIGH_QUALITY
+LANG_ENGLISH        "High Quality"
+
+REFERENCE           PLATFORM_JOIN_WRONG_EXE_SP
+LANG_ENGLISH        "This friend is currently playing single-player. You must return to the main menu to join this player."
+
+REFERENCE           PLATFORM_KICKEDFROMPARTY
+LANG_ENGLISH        "You were kicked from the party."
+
+REFERENCE           PLATFORM_LEADERBOARDS_SHORTCUT
+LANG_ENGLISH        "Leaderboards ^2Right Mouse^7/^2F1^7"
+
+REFERENCE           PLATFORM_LOW_QUALITY
+LANG_ENGLISH        "Low Quality"
+
+REFERENCE           PLATFORM_P2PAUTH_BAD_CLIENT
+LANG_ENGLISH        "Disconnected due to bad client."
+
+REFERENCE           PLATFORM_P2PAUTH_BAD_HOST
+LANG_ENGLISH        "Disconnected due to bad host."
+
+REFERENCE           PLATFORM_P2PAUTH_BAD_SELF
+LANG_ENGLISH        "Disconnected due to VAC timeout."
+
+REFERENCE           PLATFORM_P2PAUTH_BAD_SELF_INVALID_TICKET
+LANG_ENGLISH        "Disconnected due to VAC."
+
+REFERENCE           PLATFORM_P2PAUTH_INVALID_PLAYER
+LANG_ENGLISH        "Disconnected by host."
+
+REFERENCE           PLATFORM_PAGE_DOWN_SHORTCUT
+LANG_ENGLISH        "Page Down ^2PGDN^7"
+
+REFERENCE           PLATFORM_PAGE_UP_SHORTCUT
+LANG_ENGLISH        "Page Up ^2PGUP^7"
+
+REFERENCE           PLATFORM_REMOTE_UAV_ASCEND
+LANG_ENGLISH        "^3[{+gostand}]^7 Ascend"
+
+REFERENCE           PLATFORM_REMOTE_UAV_DESCEND
+LANG_ENGLISH        "Descend ^3[{+sprint}]^7"
+
+REFERENCE           PLATFORM_RESTRICT_SHORTCUT
+LANG_ENGLISH        "Restrict ^2Right Mouse^7/^2F1^7"
+
+REFERENCE           PLATFORM_SAVETOVAULT_SHORTCUT
+LANG_ENGLISH        "Save to Vault ^2Right Mouse^7/^2F1^7"
+
+REFERENCE           PLATFORM_THEATER_RECORDING
+LANG_ENGLISH        "Theater Recording"
+
+REFERENCE           PLATFORM_THEATER_RECORDING_DESC
+LANG_ENGLISH        "Enable or disable theater demo recording."
+
+REFERENCE           PLATFORM_TOP_SHORTCUT
+LANG_ENGLISH        "Top ^2HOME^7"
+
+REFERENCE           PLATFORM_UI_SHOW_SCORES
+LANG_ENGLISH        "Show Scores"
+
+REFERENCE           PLATFORM_VOTE_NO
+LANG_ENGLISH        "Vote No"
+
+REFERENCE           PLATFORM_VOTE_YES
+LANG_ENGLISH        "Vote Yes"
+
+REFERENCE           PRESENCE_CONF
+LANG_ENGLISH        "Kill Confirmed"
+
+REFERENCE           PRESENCE_CTF
+LANG_ENGLISH        "Capture the Flag"
+
+REFERENCE           PRESENCE_DD
+LANG_ENGLISH        "Demolition"
+
+REFERENCE           PRESENCE_DM
+LANG_ENGLISH        "Free-for-all"
+
+REFERENCE           PRESENCE_DOM
+LANG_ENGLISH        "Domination"
+
+REFERENCE           PRESENCE_JUGG
+LANG_ENGLISH        "Juggernaut"
+
+REFERENCE           PRESENCE_KOTH
+LANG_ENGLISH        "Headquarters"
+
+REFERENCE           PRESENCE_MP_AGROUND_SS
+LANG_ENGLISH        "Aground"
+
+REFERENCE           PRESENCE_MP_BOARDWALK
+LANG_ENGLISH        "Boardwalk"
+
+REFERENCE           PRESENCE_MP_BURN_SS
+LANG_ENGLISH        "U-Turn"
+
+REFERENCE           PRESENCE_MP_CEMENT
+LANG_ENGLISH        "Foundation"
+
+REFERENCE           PRESENCE_MP_COURTYARD_SS
+LANG_ENGLISH        "Erosion"
+
+REFERENCE           PRESENCE_MP_CROSSWALK_SS
+LANG_ENGLISH        "Intersection"
+
+REFERENCE           PRESENCE_MP_HILLSIDE_SS
+LANG_ENGLISH        "Getaway"
+
+REFERENCE           PRESENCE_MP_ITALY
+LANG_ENGLISH        "Piazza"
+
+REFERENCE           PRESENCE_MP_METEORA
+LANG_ENGLISH        "Sanctuary"
+
+REFERENCE           PRESENCE_MP_MOAB
+LANG_ENGLISH        "Gulch"
+
+REFERENCE           PRESENCE_MP_MORNINGWOOD
+LANG_ENGLISH        "Black Box"
+
+REFERENCE           PRESENCE_MP_NOLA
+LANG_ENGLISH        "Parish"
+
+REFERENCE           PRESENCE_MP_OVERWATCH
+LANG_ENGLISH        "Overwatch"
+
+REFERENCE           PRESENCE_MP_PARK
+LANG_ENGLISH        "Liberation"
+
+REFERENCE           PRESENCE_MP_QADEEM
+LANG_ENGLISH        "Oasis"
+
+REFERENCE           PRESENCE_MP_RESTREPO_SS
+LANG_ENGLISH        "Lookout"
+
+REFERENCE           PRESENCE_MP_ROUGHNECK
+LANG_ENGLISH        "Off Shore"
+
+REFERENCE           PRESENCE_MP_SHIPBREAKER
+LANG_ENGLISH        "Decommission"
+
+REFERENCE           PRESENCE_MP_SIX_SS
+LANG_ENGLISH        "Vortex"
+
+REFERENCE           PRESENCE_MP_TERMINAL_CLS
+LANG_ENGLISH        "Terminal"
+
+REFERENCE           PRESENCE_OIC
+LANG_ENGLISH        "One in the Chamber"
+
+REFERENCE           PRESENCE_PLAYINGSO_SURVIVAL_CHAOS
+LANG_ENGLISH        "Playing Special Ops Chaos in &&1"
+
+REFERENCE           PRESENCE_SAB
+LANG_ENGLISH        "Sabotage"
+
+REFERENCE           PRESENCE_SD
+LANG_ENGLISH        "Search and Destroy"
+
+REFERENCE           PRESENCE_SO_COOP_VLAD_EP01
+LANG_ENGLISH        "Kill Switch"
+
+REFERENCE           PRESENCE_SO_DEMOLITION_SLAVA_HUNT
+LANG_ENGLISH        "Arctic Recon"
+
+REFERENCE           PRESENCE_SO_ESCAPE_HAMBURG
+LANG_ENGLISH        "Iron Clad"
+
+REFERENCE           PRESENCE_SO_ESCAPE_RESCUE_2_SO
+LANG_ENGLISH        "Black Ice"
+
+REFERENCE           PRESENCE_SO_INFILTRATE_INTRO
+LANG_ENGLISH        "Negotiator"
+
+REFERENCE           PRESENCE_SO_ROOFTOP_DUBAI_SPECOPS
+LANG_ENGLISH        "Vertigo"
+
+REFERENCE           PRESENCE_SO_SPOTLIGHT_CASTLE
+LANG_ENGLISH        "Light 'Em Up"
+
+REFERENCE           PRESENCE_SO_SUPPORT_DAM_SPECOPS
+LANG_ENGLISH        "Special Delivery"
+
+REFERENCE           PRESENCE_SURVIVAL_CHAOS
+LANG_ENGLISH        "CHAOS"
+
+REFERENCE           PRESENCE_TDEF
+LANG_ENGLISH        "Team Defender"
+
+REFERENCE           PRESENCE_TJUGG
+LANG_ENGLISH        "Team Juggernaut"
+
+REFERENCE           PRESENCE_WAR
+LANG_ENGLISH        "Team Deathmatch"
+
+REFERENCE           SPLASHES_DESTROYED_PREDATOR_MISSILE
+LANG_ENGLISH        "Destroyed Predator Missile!"
+
+REFERENCE           XBOXLIVE_PLAYLISTUSERCOUNT
+LANG_ENGLISH        "&&1/&&2 Players in Playlists"
+
+REFERENCE           XBOXLIVE_TITLE
+LANG_ENGLISH        "Playing Call of Duty: Modern Warfare 3"
+
+ENDMARKER

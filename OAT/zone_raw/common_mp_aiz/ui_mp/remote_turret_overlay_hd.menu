@@ -1,0 +1,61 @@
+{
+    menuDef
+    {
+        name                        "remote_turret_overlay_hd"
+        rect                        0 0 640 480 0 0
+        visible                     when(FUNC_60() && !inkillcamnpc() && FUNC_82() && FUNC_107());
+        itemDef
+        {
+            rect                        -427 -240 854 480 2 2
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "remote_turret_overlay_mp"
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("remoteTurretDamageFade") < 1 && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            forecolor                   1 1 1 0.5
+            background                  "javelin_overlay_grain"
+            exp forecolor g             getplayerdata("remoteTurretDamageFade");
+            exp forecolor b             getplayerdata("remoteTurretDamageFade");
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("remoteTurretDamageFade") < 1 && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "javelin_overlay_tearing"
+            exp forecolor a             ((cos(localclientuimilliseconds()) + 1) * 0.5) * (1 - 0.1) + 0.1;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("remoteTurretDamageState") >= 7 && FUNC_86() && FUNC_90());
+            textscale                   0.55
+            background                  "javelin_overlay_tearing"
+            exp forecolor g             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor b             1 - ((sin(localclientuimilliseconds() / 90)) * 0.65);
+            exp forecolor a             ((cos(localclientuimilliseconds()) + 1) * 0.5) * (1 - 0.1) + 0.1;
+        }
+        itemDef
+        {
+            rect                        0 0 640 480 4 4
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.65
+            background                  "nightvision_overlay_goggles"
+        }
+    }
+}
