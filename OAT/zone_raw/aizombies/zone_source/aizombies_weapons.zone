@@ -2175,8 +2175,6 @@ sound,weap_m1911colt45_new_chamber_plr
 sound,weap_m1911colt45_new_clift_plr
 sound,weap_m1911colt45_new_clipin_plr
 sound,weap_m1911colt45_new_clipout_plr
-sound,weap_m1911colt45_new_fire_plr
-sound,weap_m1911colt45_new_fire_npc
 weapon,iw4_colt45_mp
 weapon,iw4_colt45upgraded_mp
 
@@ -2281,3 +2279,5 @@ xanim,,viewmodel_uav_radio_drop
 xanim,,viewmodel_uav_radio_raise
 weapon,killstreak_airstrike_mp
 weapon,killstreak_super_airstrike_mp
+
+weapon,cobra_20mm_mp

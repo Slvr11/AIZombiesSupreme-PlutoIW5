@@ -61,6 +61,9 @@ init()
 checkKillstreak()
 {
     streak = self.kills;
+    if (streak == 25 && array_contains(level.classicMaps, level._mapname))
+        self scoreMessage(level.gameStrings[216]);
+
     if (streak == 50)
     {
         self playLocalSound("US_1mc_achieve_predator");
@@ -3008,7 +3011,7 @@ initMapKillstreak()
             loadFX("fire/jet_afterburner_harrier");
             loadFX("smoke/jet_contrail");
             loadFX("misc/aircraft_light_red_blink");
-            level.fx_rayGun = loadFx("misc/aircraft_light_wingtip_green");
+            //level.a10_tracer = loadFX("misc/tracer_incoming");
             break;
         default:
             return;//Return so we dont precache extra assets
@@ -4024,39 +4027,22 @@ spawnA10()
 
     level.mapStreakOut = true;
 
-    a10 = spawnHelicopter(self, (-25000, 0, level.heliHeight), (0, 0, 0), "harrier_mp", "vehicle_a10_warthog");//spawnPlane(self, "script_model", (-15000, 0, level.heliHeight), "compass_objpoint_reaper_friendly", "compass_objpoint_reaper_enemy");
+    a10 = spawnHelicopter(self, (-25000, 0, level.heliHeight + 5000), (0, 0, 0), "harrier_mp", "vehicle_a10_warthog");//spawnPlane(self, "script_model", (-15000, 0, level.heliHeight), "compass_objpoint_reaper_friendly", "compass_objpoint_reaper_enemy");
 
     a10.owner = self;
     a10 setVehicleTeam("allies");
-    a10.mapCenter = (-800, -30, level.heliHeight);
+    a10.mapCenter = (-800, -30, level.heliHeight + 5000);
     a10.state = "strafing";
     a10.hasFired = false;
     a10.timeLeft = 90;
-    a10 Vehicle_SetSpeed(300, 50, 50);
+    a10 Vehicle_SetSpeed(300, 100, 100);
     //a10 vehicle_setSpeedImmediate(300);
     a10 setCanDamage(false);
     a10 setMaxPitchRoll(0, 75);
     a10 setYawSpeed(50, 25, 20, .5);
-    a10 setVehWeapon("ac130_25mm_mp");
-    //self playSound("US_1mc_use_a10");
+    a10 setVehWeapon("cobra_20mm_mp");
     self playSound("US_1mc_use_strafe");
     self teamSplash("used_a10_support");
-
-    a10Sound = [];
-    for (i = 0; i < 5; i++)
-    {
-        a10Sound[i] = spawn("script_origin", a10.origin);
-        a10Sound[i] linkTo(a10);
-    }
-    a10.sound = a10Sound;
-
-    a10Brr = [];
-    for (i = 0; i < 5; i++)
-    {
-        a10Brr[i] = spawn("script_origin", a10.origin);
-        a10Brr[i] linkTo(a10);
-    }
-    a10.brrSound = a10Brr;
 
     a10 thread doA10FlyBy();
     a10 thread playA10FX();
@@ -4086,7 +4072,7 @@ a10_targeting()
 
     while (true)
     {
-        wait(.1);
+        waitframe();
 
         if (self.state != "strafing") continue;
         if (isDefined(self.targetEnt)) continue;
@@ -4105,10 +4091,6 @@ a10_targeting()
             self.targetEnt = bot;
             self setTurretTargetEnt(botHitbox);
             self thread a10_fireWeapon(botHitbox);
-            self playLoopSound("pavelow_mg_loop");//Start our firing sound here
-            a10Sound = self.sound;
-            foreach (sound in a10Sound)
-                sound playLoopSound("veh_ac130_ext_close");
             break;//Found a target, leave this loop to target that bot only
         }
 
@@ -4122,13 +4104,13 @@ a10_monitorGoalPos()
 
     while (true)
     {
-        wait(.1);
+        waitframe();
 
         if (!isDefined(self.owner)) break;
         if (self.state != "strafing") continue;
 
-        if (distance2D(self.origin, self.mapCenter) < 256)
-            self thread a10_uturn();
+        if (distance2D(self.origin, self.mapCenter) < 128)
+            self a10_uturn();
     }
 }
 a10_uturn()
@@ -4142,18 +4124,20 @@ a10_uturn()
 
     self setVehGoalPos(turnDirector, false);
 
+    wait(0.5);
+
+    self.state = "uturn";
+
+    if (self.hasFired)
+    {
+        playSoundAtPos(self.mapCenter, "bln_a10_airstrike_roar");
+        self.hasFired = false;
+    }
+    
     wait(1);
-
-    foreach (sound in self.sound)
-        sound stopLoopSound();
-
-    wait(.5);
-
-    if (self.hasFired) self thread a10_playBrr();
 
     if (!isDefined(self.owner)) return;//In case it left during this part of the uturn
 
-    self.state = "uturn";
     turnDirector[1] = turnDirector[1] - (right[1] * 4000);
     self setVehGoalPos(turnDirector, false);
 
@@ -4162,6 +4146,10 @@ a10_uturn()
     //self vehicle_setSpeedImmediate(300);
     self setVehGoalPos(self.mapCenter, false);
     self.state = "strafing";
+
+    wait(0.5);
+
+    self playSound("bln_a10_airstrike_flyby");
 }
 vecscale(vec, scalar)
 {
@@ -4174,6 +4162,8 @@ a10_leave()
     while (self.state != "strafing")
         wait(.5);
 
+    self.state = "leaving";
+
     self.owner = undefined;
 
     forward = anglesToForward(self.angles);
@@ -4184,12 +4174,6 @@ a10_leave()
     self.state = undefined;
     self.mapCenter = undefined;
     self.timeLeft = undefined;
-    a10Sound = self.sound;
-    foreach (sound in a10Sound)
-        sound delete();
-    brrSound = self.brrSound;
-    foreach (sound in brrSound)
-        sound delete();
     self freeHelicopter();
     self delete();
     level.mapStreakOut = false;
@@ -4199,36 +4183,32 @@ a10_fireWeapon(target)
     level endon("game_ended");
     self endon("death");
 
-    while (true)
+    self playSound("bln_a10_airstrike_fire");
+    self.hasFired = true;
+
+    gunTag = self getTagOrigin("tag_gun");
+    for (i = 0; i < 8; i++)
     {
-        wait(.1);
-
-        if (!isDefined(self.owner)) break;
-        if (!isDefined(self.targetEnt)) break;
-
-        if (!target.parent.isAlive)
-        {
-            self.targetEnt = undefined;//Target mysteriously died
-            self clearTurretTarget();
-            self stopLoopSound();//Stop our fire sound
-            break;
-        }
-
-        self.hasFired = true;
-
-        gunTag = self getTagOrigin("tag_gun");
-        magicBullet("ac130_25mm_mp", gunTag, target.origin, self.owner);
+        //magicBullet("cobra_20mm_mp", gunTag, target.origin, self.owner);
         //self fireWeapon("tag_gun", target);
+        target notify("damage", 15, self, (0, 0, 0), (0, 0, 0), "MOD_PASSTHRU", "", "", "", 0, "cobra_20mm_mp");
+        /*
+        angles = vectorToAngles(gunTag - target.origin);
+        forward = anglesToForward(angles);
+        up = anglesToUp(angles);
+        playFX(level.a10_tracer, target.origin, forward, up);
+        */
 
-        trace = sightTracePassed(gunTag, target.origin, false, target, self);
-        if (!trace)
-        {
-            self.targetEnt = undefined;//Lost sight of the target
-            self clearTurretTarget();
-            self stopLoopSound();//Stop our fire sound
-            break;
-        }
+        waitframe();
     }
+
+    trace = sightTracePassed(gunTag, target.origin, false, target, self);
+    if (!trace || !target.parent.isAlive || self.state == "uturn")
+    {
+        self.targetEnt = undefined;
+        self clearTurretTarget();
+    }
+    else self thread a10_fireWeapon(target);
 }
 a10_timer()
 {
@@ -4246,22 +4226,6 @@ a10_timer()
         }
 
         wait(1);
-    }
-}
-a10_playBrr()
-{
-    self.hasFired = false;
-    brrSound = self.brrSound;
-    foreach (brr in brrSound)
-    {
-        brr playLoopSound("ac130_40mm_fire_npc");
-    }
-
-    wait(1);
-
-    foreach (brr in brrSound)
-    {
-        brr stopLoopSound();
     }
 }
 playA10FX()

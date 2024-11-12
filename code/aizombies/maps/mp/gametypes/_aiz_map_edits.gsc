@@ -974,7 +974,7 @@ checkPlayerUsables()
     //Check revive triggers first
     foreach (usable in level.usables)
     {
-        if (usable.usabletype != "revive") continue;
+        if (!isDefined(usable.usabletype) || usable.usabletype != "revive") continue;
 
         if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
         {
@@ -984,7 +984,7 @@ checkPlayerUsables()
     }
     foreach (usable in level.usables)
     {
-        if (usable.usabletype == "giftTrigger" && usable.owner == self) continue;
+        //if (usable.usabletype == "giftTrigger" && usable.owner == self) continue;
 
         if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
         {
@@ -1554,20 +1554,52 @@ perkCrate(origin, angles, perk)
             icon = "specialty_fastreload_upgrade";
             break;
         case 4:
-            cost = 4000;
-            icon = "specialty_twoprimaries_upgrade";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                cost = 6500;
+                icon = "cardicon_bullets_50cal";
+            }
+            else
+            {
+                cost = 4000;
+                icon = "specialty_twoprimaries_upgrade";
+            }
             break;
         case 5:
-            cost = 2000;
-            icon = "weapon_attachment_rof";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                cost = 2500;
+                icon = "specialty_bulletdamage_upgrade";
+            }
+            else
+            {
+                cost = 2000;
+                icon = "weapon_attachment_rof";
+            }
             break;
         case 6:
-            cost = 1500;
-            icon = "specialty_stalker_upgrade";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                cost = 2000;
+                icon = "specialty_steadyaim_upgrade";
+            }
+            else
+            {
+                cost = 1500;
+                icon = "specialty_stalker_upgrade";
+            }
             break;
         case 7:
-            cost = 1500;
-            icon = "waypoint_revive";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                cost = 2500;
+                icon = "specialty_pistoldeath_upgrade";
+            }
+            else
+            {
+                cost = 1500;
+                icon = "waypoint_revive";
+            }
             break;
         case 8:
             cost = 4000;
@@ -2294,8 +2326,11 @@ useBox(box)
             level.currentZappers++;
         }
 
-        if ((self.perksBought[3] && self.newGunReady && self.perk4weapon == "") || (self.perksBought[3] && self.perk4weapon != name && currentWeapon == self.perk4weapon))
-            self.perk4weapon = name;
+        if (!array_contains(level.classicMaps, level._mapname))
+        {
+            if ((self.perksBought[3] && self.newGunReady && self.perk4weapon == "") || (self.perksBought[3] && self.perk4weapon != name && currentWeapon == self.perk4weapon))
+                self.perk4weapon = name;
+        }
 
         if (isThunderGun(currentWeapon))
             level.currentThunderguns--;
@@ -3122,15 +3157,18 @@ gamblerRoll(box)
                     }
                     self.perksBought[3] = false;
                     self.perk4weapon = undefined;
+                    self.ammoMatic = false;
                 }
                 if (self.perksBought[4])
                 {
                     self _unSetPerk("specialty_rof");
+                    self _unSetPerk("specialty_bulletdamage");
                     self.perksBought[4] = false;
                 }
                 if (self.perksBought[5])
                 {
                     self _unSetPerk("specialty_stalker");
+                    self _unSetPerk("specialty_bulletaccuracy");
                     self.perksBought[5] = false;
                 }
                 if (self.perksBought[6] > 0)
@@ -3194,15 +3232,18 @@ gamblerRoll(box)
                     }
                     self.perksBought[3] = false;
                     self.perk4weapon = undefined;
+                    self.ammoMatic = false;
                 }
                 if (self.perksBought[4])
                 {
                     self _unSetPerk("specialty_rof");
+                    self _unSetPerk("specialty_bulletdamage");
                     self.perksBought[4] = false;
                 }
                 if (self.perksBought[5])
                 {
                     self _unSetPerk("specialty_stalker");
+                    self _unSetPerk("specialty_bulletaccuracy");
                     self.perksBought[5] = false;
                 }
                 if (self.perksBought[6] > 0)
@@ -3791,22 +3832,56 @@ usePerk(box, perk)
             icon = "specialty_fastreload_upgrade";
             break;
         case 4:
-            name = level.gameStrings[269];
-            icon = "specialty_twoprimaries_upgrade";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                name = level.gameStrings[329];
+                icon = "cardicon_bullets_50cal";
+            }
+            else
+            {
+                name = level.gameStrings[269];
+                icon = "specialty_twoprimaries_upgrade";
+            }
             break;
         case 5:
-            name = level.gameStrings[270];
-            perks[perks.size] = "specialty_rof";
-            icon = "weapon_attachment_rof";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                name = level.gameStrings[333];
+                perks[perks.size] = "specialty_bulletdamage";
+                icon = "specialty_bulletdamage_upgrade";
+            }
+            else
+            {
+                name = level.gameStrings[270];
+                perks[perks.size] = "specialty_rof";
+                icon = "weapon_attachment_rof";
+            }
             break;
         case 6:
-            name = level.gameStrings[271];
-            perks[perks.size] = "specialty_stalker";
-            icon = "specialty_stalker_upgrade";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                name = level.gameStrings[331];
+                perks[perks.size] = "specialty_bulletaccuracy";
+                icon = "specialty_steadyaim_upgrade";
+            }
+            else
+            {
+                name = level.gameStrings[271];
+                perks[perks.size] = "specialty_stalker";
+                icon = "specialty_stalker_upgrade";
+            }
             break;
         case 7:
-            name = level.gameStrings[272];
-            icon = "waypoint_revive";
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                name = level.gameStrings[335];
+                icon = "specialty_pistoldeath_upgrade";
+            }
+            else
+            {
+                name = level.gameStrings[272];
+                icon = "waypoint_revive";
+            }
             break;
         case 8:
             name = level.gameStrings[273];
@@ -3828,12 +3903,19 @@ usePerk(box, perk)
     }
     else if (perk == 4)
     {
-        self.newGunReady = true;
-        if (self.weaponsList.size < 2)
+        if (array_contains(level.classicMaps, level._mapname))
         {
-            //Give hand-gun to fill second slot if the player only has one gun
-            self giveWeapon("defaultweapon_mp");
-            self updatePlayerWeaponsList("defaultweapon_mp");
+            self.ammoMatic = true;
+        }
+        else
+        {
+            self.newGunReady = true;
+            if (self.weaponsList.size < 2)
+            {
+                //Give hand-gun to fill second slot if the player only has one gun
+                self giveWeapon("defaultweapon_mp");
+                self updatePlayerWeaponsList("defaultweapon_mp");
+            }
         }
     }
     else if (perk == 7)
@@ -4097,24 +4179,55 @@ getUsableText(player)
             else return [level.gameStrings[29], &"NULL_EMPTY", 3000];
         case "perk4":
             if (!level.powerActivated) return [level.gameStrings[282]];
-            if (player.perksBought[3]) return [level.gameStrings[293], level.gameStrings[269]];
+            if (player.perksBought[3]) 
+            {
+                if (array_contains(level.classicMaps, level._mapname))
+                    return [level.gameStrings[293], level.gameStrings[329]];
+                return [level.gameStrings[293], level.gameStrings[269]];
+            }
             if (player.totalPerkCount >= level.perkLimit && level.perkLimit > 0) return [level.gameStrings[295], &"NULL_EMPTY", level.perkLimit];
+            else if (array_contains(level.classicMaps, level._mapname)) return [level.gameStrings[34], &"NULL_EMPTY", 6500];
             else return [level.gameStrings[30], &"NULL_EMPTY", 4000];
         case "perk5":
             if (!level.powerActivated) return [level.gameStrings[282]];
-            if (player.perksBought[4]) return [level.gameStrings[293], level.gameStrings[270]];
+            if (player.perksBought[4])
+            if (player.perksBought[4]) 
+            {
+                if (array_contains(level.classicMaps, level._mapname))
+                    return [level.gameStrings[293], level.gameStrings[333]];
+                return [level.gameStrings[293], level.gameStrings[270]];
+            }
             if (player.totalPerkCount >= level.perkLimit && level.perkLimit > 0) return [level.gameStrings[295], &"NULL_EMPTY", level.perkLimit];
+            else if (array_contains(level.classicMaps, level._mapname)) return [level.gameStrings[36], &"NULL_EMPTY", 2500];
             else return [level.gameStrings[31], &"NULL_EMPTY", 2000];
         case "perk6":
             if (!level.powerActivated) return [level.gameStrings[282]];
-            if (player.perksBought[5]) return [level.gameStrings[293], level.gameStrings[271]];
+            if (player.perksBought[5])
+            if (player.perksBought[5]) 
+            {
+                if (array_contains(level.classicMaps, level._mapname))
+                    return [level.gameStrings[293], level.gameStrings[331]];
+                return [level.gameStrings[293], level.gameStrings[271]];
+            }
             if (player.totalPerkCount >= level.perkLimit && level.perkLimit > 0) return [level.gameStrings[295], &"NULL_EMPTY", level.perkLimit];
+            else if (array_contains(level.classicMaps, level._mapname)) return [level.gameStrings[35], &"NULL_EMPTY", 2000];
             else return [level.gameStrings[32], &"NULL_EMPTY", 1500];
         case "perk7":
             if (!level.powerActivated) return [level.gameStrings[282]];
-            if (player.autoRevive) return [level.gameStrings[293], level.gameStrings[272]];
-            else if (player.perksBought[6] >= 3) return [&"You already bought Quick Revive Pro three times!"];
+            if (player.autoRevive)
+            {
+                if (array_contains(level.classicMaps, level._mapname))
+                    return [level.gameStrings[293], level.gameStrings[335]];
+                return [level.gameStrings[293], level.gameStrings[272]];
+             }
+            else if (player.perksBought[6] >= 3)
+            {
+                if (array_contains(level.classicMaps, level._mapname))
+                    return [level.gameStrings[336]];
+                return [level.gameStrings[337]];
+            }
             if (player.totalPerkCount >= level.perkLimit && level.perkLimit > 0) return [level.gameStrings[295], &"NULL_EMPTY", level.perkLimit];
+            else if (array_contains(level.classicMaps, level._mapname)) return [level.gameStrings[37], &"NULL_EMPTY", 2500];
             else return [level.gameStrings[33], &"NULL_EMPTY", 1500];
         case "perk8":
             if (!level.powerActivated) return [level.gameStrings[282]];

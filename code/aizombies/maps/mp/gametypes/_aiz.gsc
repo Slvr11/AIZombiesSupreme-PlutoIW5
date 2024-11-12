@@ -67,7 +67,7 @@ init()
     //level.maxPlayerHealth_Jugg = 251;
     level.powerActivated = false;
     level.tempPowerActivated = false;
-    level.version = "1.0";
+    level.version = "1.1";
     level.dev = "Slvr99";
 
     level.pauseMenu = "class";
@@ -542,6 +542,13 @@ onPrecacheGameType()
     preCacheShader("weapon_attachment_rof");//Double Tap
     preCacheShader("specialty_stalker_upgrade");//Stalker soda
     //preCacheShader("specialty_scavenger_upgrade");
+    if (array_contains(level.classicMaps, level._mapname))
+    {
+        preCacheShader("cardicon_bullets_50cal");
+        preCacheShader("specialty_bulletdamage_upgrade");
+        preCacheShader("specialty_steadyaim_upgrade");
+        preCacheShader("specialty_pistoldeath_upgrade");
+    }
     preCacheShader("specialty_bulletpenetration");//Death Machine
     preCacheShader("specialty_bling");//Double points
     preCacheShader("cardicon_skull_black");//Instakill
@@ -882,6 +889,7 @@ spawnPlayer()
     self.killstreaks = [];
     self.pers["killstreaks"] = [];
     self.pers["voicePrefix"] = "US";
+    self.wasTI = false;
     self.maxHealth = level.maxPlayerHealth;
     self.health = level.maxPlayerHealth;
     self takeAllWeapons();
@@ -1010,6 +1018,7 @@ onPlayerSpawn()
     //mapEdit init
 
     self.ammoCostAddition = 0;
+    self.ammoMatic = false;
 
     self thread maps\mp\gametypes\_aiz_map_edits::trackUsablesForPlayer();
 
@@ -1528,8 +1537,15 @@ watchWeaponChange()
         else if (self.hasAlteredROF && !isWeaponDeathMachine(weapon))
         {
             self setClientDvar("perk_weapRateMultiplier", "0.75");
-            if (!self.perksBought[4]) self _unSetPerk("specialty_rof");
-            else if (self.perksBought[4] && !self _hasPerk("specialty_rof")) self givePerk("specialty_rof", false);
+            if (array_contains(level.classicMaps, level._mapname))
+            {
+                self _unSetPerk("specialty_rof");
+            }
+            else
+            {
+                if (!self.perksBought[4]) self _unSetPerk("specialty_rof");
+                else if (self.perksBought[4] && !self _hasPerk("specialty_rof")) self givePerk("specialty_rof", false);
+            }
             self.hasAlteredROF = false;
             continue;
         }
@@ -2470,11 +2486,18 @@ onPlayerLastStand(inflictor, attacker, damage, mod, weapon, dir, hitLoc, timeOff
                         self updatePlayerWeaponsList(currentWeapon, true);
                     }
                     self.perk4weapon = "";
+                    self.ammoMatic = false;
                 }
                 else if (i == 4)
+                {
                     self _unSetPerk("specialty_rof");
+                    self _unSetPerk("specialty_bulletdamage");
+                }
                 else if (i == 5)
+                {
                     self _unSetPerk("specialty_stalker");
+                    self _unSetPerk("specialty_bulletaccuracy");
+                }
                 self.perksBought[i] = false;
             }
         }
@@ -2727,7 +2750,10 @@ autoRevive_pulseIcon(pulse)
 
         wait(0.65);
 
-        pulse setShader("waypoint_revive", 30, 30);
+        shaderName = "waypoint_revive";
+        if (array_contains(level.classicMaps, level._mapname))
+            shaderName = "specialty_pistoldeath_upgrade";
+        pulse setShader(shaderName, 30, 30);
 
         wait(0.85);
     }
@@ -3162,7 +3188,7 @@ getWeaponUpgradeModel(weapon)
     else return getWeaponModel(weapon, 11);
 }
 /*
-getWeaponClipModel(string weapon)
+getWeaponClipModel(weapon)
 {
     if (weapon == "rpg_mp") return "projectile_rpg7";
     else if (weapon == "iw5_smaw_mp") return "projectile_smaw";
@@ -3186,6 +3212,35 @@ getWeaponClipModel(string weapon)
     return "tag_origin";
 }
 */
+
+getWeaponAmmoMaticValue(weapon)
+{
+    value = 0;
+    if (cointoss() || weapon == "iw4_javelin_mp" || weapon == "iw4_stinger_mp" || weapon == "stinger_mp" || isWeaponDeathMachine(weapon) || isThunderGun(weapon))
+        return value;
+    
+    switch (weaponClass(weapon))
+    {
+        case "pistol":
+            value = 1;
+        case "spread":
+            value = 1;
+        case "mg":
+            value = 2;
+        case "rocketlauncher":
+            value = 1;
+        case "sniper":
+            vale = 1;
+        case "smg":
+            value = 2;
+        case "rifle":
+            value = 3;
+    }
+    if (weaponIsUpgrade(weapon))
+        value *= 2;
+
+    return value;
+}
 
 isWeaponDeathMachine(weapon)
 {

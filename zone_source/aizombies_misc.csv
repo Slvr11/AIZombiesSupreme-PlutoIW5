@@ -22,6 +22,9 @@ material,specialty_airdrop_emergency_crate
 material,killstreak_tank
 material,killstreak_mobile_mortar
 material,killstreak_a10_support
+material,cardicon_bullets_50cal
+material,specialty_bulletdamage_upgrade
+material,specialty_pistoldeath_upgrade
 
 sound,ray_reload_open
 sound,ray_reload_battery_out
@@ -156,6 +159,7 @@ sound,aiz_upgrade_loop
 sound,aiz_upgrade_start
 sound,explo_mine
 sound,US_1mc_aizombies
+sound,a10_airstrike_fire
 
 material,mc/mtl_weapon_ump45
 material,mc/mtl_weapon_ump45_ironsight

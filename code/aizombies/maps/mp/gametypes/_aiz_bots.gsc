@@ -25,17 +25,6 @@ spawnBot(spawnLoc, isCrawler)
     bot.origin = level.botSpawns[spawnLoc] + (randomInt(20), randomInt(20), 0);
     bot.angles = level.botSpawnAngles[spawnLoc];
 
-    if (level.randomBotModels == 1 || (level.randomBotModels == 2 && array_contains(level.classicMaps, level._mapname)))
-    {
-        randomModel = randomInt(level.botModel.size);
-        bot setModel(level.botModel[randomModel]);
-    }
-    if (!isCrawler && (level.randomBotModels == 1 || (level.randomBotModels == 2 && array_contains(level.classicMaps, level._mapname))))
-    {
-        randomHead = randomInt(level.botHeadModel.size);
-        bot.head setModel(level.botHeadModel[randomHead]);
-    }
-
     bot show();
     bot showAllParts();
 
@@ -621,7 +610,8 @@ ai_attackPlayer(target, isCrawler, isBoss)
     wait(0.2);
 
     time = getTime();
-    if (distanceSquared(self.origin, target.origin) <= 2500 && time > target.lastDamageTime + level.damageGracePeriod)//Only connect the attack if the player is close to the bot at this point and after a grace period.
+    hitRange = randomFloatRange(2500, 3600);
+    if (distanceSquared(self.hitbox.origin, target.origin) <= hitRange && time > target.lastDamageTime + level.damageGracePeriod)//Only connect the attack if the player is close enough to the bot at this point and after a grace period.
     {
         target.lastDamageTime = time;
         playFX(level.fx_blood, target.origin + (0, 0, 30));

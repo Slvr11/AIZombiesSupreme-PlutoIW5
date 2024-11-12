@@ -45,6 +45,9 @@ sound,aiz_upgrade_loop
 sound,aiz_upgrade_start
 sound,explo_mine
 sound,US_1mc_aizombies
+sound,bln_a10_airstrike_flyby
+sound,bln_a10_airstrike_fire
+sound,bln_a10_airstrike_roar
 material,killstreak_dragonfly_drone
 material,killstreak_dragonfly_drone_crate
 material,killstreak_heli_sniper_crate
@@ -59,6 +62,9 @@ material,specialty_airdrop_emergency_crate
 material,killstreak_tank
 material,killstreak_mobile_mortar
 material,killstreak_a10_support
+material,cardicon_bullets_50cal
+material,specialty_bulletdamage_upgrade
+material,specialty_pistoldeath_upgrade
 
 include,aizombies_weapons
 

@@ -2,6 +2,9 @@ VERSION			"1"
 CONFIG			"C:/ trees / cod3 / cod3 / bin / StringEd.cfg"
 FILENOTES		""
 
+REFERENCE		AIZ_25_KILLSTREAK
+LANG_ENGLISH		"25 Killstreak!"
+
 REFERENCE		AIZ_A10_SUPPORT
 LANG_ENGLISH		"A-10 Support"
 
@@ -19,6 +22,12 @@ LANG_ENGLISH		"&&1 is already being revived!"
 
 REFERENCE		AIZ_AMMO
 LANG_ENGLISH		"Ammo!"
+
+REFERENCE		AIZ_AMMOMATIC
+LANG_ENGLISH		"Amm-O-Matic"
+
+REFERENCE		AIZ_AMMOMATIC_DESC
+LANG_ENGLISH		"Regenerate ammo with kills"
 
 REFERENCE		AIZ_AMMO_AKIMBO
 LANG_ENGLISH		"&&1|"
@@ -308,6 +317,12 @@ LANG_ENGLISH		"Vision Restorer"
 REFERENCE		AIZ_KILLSTREAK_VOLCANIC_ERUPTION
 LANG_ENGLISH		"Volcanic Eruption"
 
+REFERENCE		AIZ_LASTSTAND
+LANG_ENGLISH		"Last Stand Pro"
+
+REFERENCE		AIZ_LASTSTAND_MAX_USES
+LANG_ENGLISH		"You already bought Last Stand Pro three times!"
+
 REFERENCE		AIZ_LIBERATION_DESC
 LANG_ENGLISH		"A military base built in a park\nfor protection against the undead"
 
@@ -461,6 +476,9 @@ LANG_ENGLISH		"Press ^3[{+activate}] ^7to activate Power [Cost: 10000]"
 REFERENCE		AIZ_PRESS_TO_BUY
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy &&1 [Cost: &&2]"
 
+REFERENCE		AIZ_PRESS_TO_BUY_AMMOMATIC
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Amm-O-Matic [Cost: &&1]"
+
 REFERENCE		AIZ_PRESS_TO_BUY_AUTOREVIVE
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Quick Revive Pro [Cost: &&1]"
 
@@ -469,6 +487,9 @@ LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Double Tap [Cost: &&1]"
 
 REFERENCE		AIZ_PRESS_TO_BUY_JUGG
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Juggernog [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_LASTSTAND
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Last Stand Pro [Cost: &&1]"
 
 REFERENCE		AIZ_PRESS_TO_BUY_MULE
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Mule Kick [Cost: &&1]"
@@ -481,6 +502,12 @@ LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Stalker Soda [Cost: &&1]"
 
 REFERENCE		AIZ_PRESS_TO_BUY_STAMINUP
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Stamin-Up [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_STEADYAIM
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Steady Aim [Cost: &&1]"
+
+REFERENCE		AIZ_PRESS_TO_BUY_STOPPINGPOWER
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy Stopping Power [Cost: &&1]"
 
 REFERENCE		AIZ_PRESS_TO_GIFT
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to gift $^2500 ^7to &&1"
@@ -514,6 +541,9 @@ LANG_ENGLISH		"Press ^3[{+activate}] ^7to withdraw from the ATM [Amount: 1000] [
 
 REFERENCE		AIZ_QUICKREVIVE
 LANG_ENGLISH		"Quick Revive Pro"
+
+REFERENCE		AIZ_QUICKREVIVE_MAX_USES
+LANG_ENGLISH		"You already bought Quick Revive Pro three times!"
 
 REFERENCE		AIZ_RANDOM
 LANG_ENGLISH		"^5Random"
@@ -562,6 +592,18 @@ LANG_ENGLISH		"Stamin-Up"
 
 REFERENCE		AIZ_STAMINUP_DESC
 LANG_ENGLISH		"Sprint faster and longer"
+
+REFERENCE		AIZ_STEADYAIM
+LANG_ENGLISH		"Steady Aim"
+
+REFERENCE		AIZ_STEADYAIM_DESC
+LANG_ENGLISH		"More accurate hip fire"
+
+REFERENCE		AIZ_STOPPINGPOWER
+LANG_ENGLISH		"Stopping Power"
+
+REFERENCE		AIZ_STOPPINGPOWER_DESC
+LANG_ENGLISH		"Extra damage"
 
 REFERENCE		AIZ_SUB_TEAM
 LANG_ENGLISH		"Sub Team"

@@ -238,7 +238,14 @@ createBot(isCrawler)
         if (level.useAltBodies)
             bot setModel("defaultactor");
         else
-            bot setModel(level.botModel[0]);
+        {
+            if (level.randomBotModels == 1 || (level.randomBotModels == 2 && array_contains(level.classicMaps, level._mapname)))
+            {
+                randomModel = randomInt(level.botModel.size);
+                bot setModel(level.botModel[randomModel]);
+            }
+            else bot setModel(level.botModel[0]);
+        }
         bothead = spawn("script_model", bot.origin);
         if (level.useAltHeads)
         {
@@ -254,14 +261,28 @@ createBot(isCrawler)
                     bothead setModel("chicken_black_white");
                     break;
                 default:
-                    bothead setModel(level.botHeadModel[0]);
+                    if (level.randomBotModels == 1 || (level.randomBotModels == 2 && array_contains(level.classicMaps, level._mapname)))
+                    {
+                        randomHead = randomInt(level.botHeadModel.size);
+                        bothead setModel(level.botHeadModel[randomHead]);
+                    }
+                    else
+                        bothead setModel(level.botHeadModel[0]);
+
                     break;
             }
             bothead linkTo(bot, "j_spine4", (0, 0, 0), (0, 70, 90));
         }
         else
         {
-            bothead setModel(level.botHeadModel[0]);
+            if (level.randomBotModels == 1 || (level.randomBotModels == 2 && array_contains(level.classicMaps, level._mapname)))
+            {
+                randomHead = randomInt(level.botHeadModel.size);
+                bothead setModel(level.botHeadModel[randomHead]);
+            }
+            else
+                bothead setModel(level.botHeadModel[0]);
+
             bothead linkTo(bot, "j_spine4", (0, 0, 0), (0, 0, 0));
         }
         bot.head = bothead;
@@ -417,10 +438,11 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
             player = attacker.owner;
             type = "MOD_PASSTHRU";
         }
-        else if (weapon == "a10_30mm_mp")//A10 tweaks
+        else if (weapon == "cobra_20mm_mp")//A10 tweaks
         {
-            //player = attacker.owner;
+            player = attacker.owner;
             type = "MOD_PASSTHRU";
+            damage = 15;
         }
         else if (isDefined(level.lastAttackingBot) && (weapon == level.botWeapon_subBot || weapon == level.botWeapon_LMGBot || weapon == "") && !isDefined(attacker.name))//Killstreak bot weapons. In GSC these report as empty strings
         {
@@ -506,6 +528,15 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
                 pointNumber = player.hud_point;
                 pointNumber setValue(player.points);
             }
+
+            if (player.ammoMatic)
+            {
+                currentWeapon = player getCurrentWeapon();
+                stock = player getWeaponAmmoStock(currentWeapon);
+                player setWeaponAmmoStock(currentWeapon, stock + getWeaponAmmoMaticValue(weapon));
+                player maps\mp\gametypes\_aiz_hud::updateAmmoHud(false);
+            }
+
             player maps\mp\gametypes\_aiz_killstreaks::checkKillstreak();
             currentBot moveTo(currentBot.origin, 0.05);
 
@@ -662,6 +693,8 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
     if (weaponIsUpgrade(weapon)) hitDamage = damage / 2;//Base upgraded damage
     else if (level.isHellMap) hitDamage = damage / 4;//Hellmap damage
     else hitDamage = damage / (1 + (level.wave / 2));//Base damage
+
+    if (array_contains(level.classicMaps, level._mapname) && player.perksBought[4]) hitDamage *= 1.4;
 
     if (MOD == "MOD_MELEE") hitDamage = damage / ((level.wave + 1) / 2);//Melee damage
     if (weapon == "iw5_p99_mp_tactical_xmags" && MOD == "MOD_MELEE") hitDamage = 350;//P99 Upgraded damage

@@ -1641,7 +1641,7 @@ updatePerksHud(reset, instant)
 
     if (self.isAlive)
     {
-        if (perk == "waypoint_revive")//Check for autoRevive first
+        if (perk == "waypoint_revive" || perk == "specialty_pistoldeath_upgrade")//Check for autoRevive first
         {
             if (isDefined(instant) && instant)
                 self setPerkHudSlot(6, perk);
@@ -1689,6 +1689,15 @@ showBoughtPerk(name, imageName, index)
 {
     desc = self createFontString("hudsmall", 1.5);
     desc.label = level.perkDescs[index];
+    if (array_contains(level.classicMaps, level._mapname))
+    {
+        if (index == 3)
+            desc.label = level.gameStrings[330];
+        else if (index == 4)
+            desc.label = level.gameStrings[334];
+        else if (index == 5)
+            desc.label = level.gameStrings[332];
+    }
     desc setPoint("CENTER", "CENTER", 0, -100);
     desc.color = (1, 1, 0.8);
     desc.hideWhenInMenu = true;
@@ -3039,7 +3048,10 @@ createReviveOverlayIcon()
     icon.alignY = perk.alignY;
     icon.vertAlign = perk.vertAlign;
     icon.horzAlign = perk.horzAlign;
-    icon setShader("waypoint_revive", perk.width, perk.height);
+    shaderName = "waypoint_revive";
+    if (array_contains(level.classicMaps, level._mapname))
+        shaderName = "specialty_pistoldeath_upgrade";
+    icon setShader(shaderName, perk.width, perk.height);
     icon.hideWhenInMenu = true;
     icon.foreground = true;
     icon.archived = false;
