@@ -36,6 +36,8 @@ This version of the mod has many new features that the TeknoMW3 version does not
 4. Start your server with the dvar `g_gametype` set to `aiz`
 5. Have fun!
 
+You may also play in a private match by loading the mod using the console command `loadmod aizombies3` and starting a game on any supported map with Team Deathmatch as the gamemode.
+
 ## Dvars/Tweaks
 AIZombies Supreme includes a list of dvars that can tweak the experience. These dvars are included to allow server hosters to customize the gameplay to make it easier or harder.
 
@@ -56,11 +58,11 @@ AIZombies Supreme includes a list of dvars that can tweak the experience. These 
 - `aiz_perkLimit`: the limit to how many max perks a player can have. 0 is infinite
 - `aiz_zombieDeathVoice`: enables or disables death voices from playing when a zombie is killed. Valid options are `0` (no voices play when a zombie dies), `1` (voices always play when a zombie dies), and `2` (voices only play on MW2 maps)
 - `aiz_newPowerupModels`: enables or disables using the new Black Ops style powerup models. Setting this to 0 will use the old models that were used in the TeknoMW3 version of the mod
-- `aiz_mw2Weapons`: enables or disables the entire list of MW2 weapons from appearing in the random weapon box. Valid options are `0` (no MW2 weapons are allowed in the box), `1` (MW2 weapons are in the box on all maps), and `1` (MW2 weapons are in the box only on MW2 maps)
+- `aiz_mw2Weapons`: enables or disables the entire list of MW2 weapons from appearing in the random weapon box. Valid options are `0` (no MW2 weapons are allowed in the box), `1` (MW2 weapons are in the box on all maps), and `2` (MW2 weapons are in the box only on MW2 maps)
 - `aiz_mw2Killstreaks`: enables or disables the AIZombies eXtreme killstreaks. Valid options are `0` (MW2 killstreaks are disabled), `1` (MW2 killstreaks are available on all maps), and `2` (MW2 killstreaks are only available on MW2 maps)
 - `aiz_boWonderWeapons`: enables or disables the Black Ops Raygun and Thundergun in the weapon box
 - `aiz_maxZombies`: the max amount of zombies that can be active at once
-- `aiz_maxZombiesUnderLoad`: the max amount of zombies that can be active at once when there are 4 or more players in the game. This can be used to lower the zmax zombie counts with higher player counts to reduce server lag
+- `aiz_maxZombiesUnderLoad`: the max amount of zombies that can be active at once when there are 4 or more players in the game. This can be used to lower the max zombie counts with higher player counts to reduce server lag
 - `aiz_fullFireSale`: enables or disables a fire sale powerup activating all box locations during the sale or only the current active box
 - `aiz_damageGracePeriod`: a grace period that dictates how long it takes to allow a player to be hurt again after getting hurt from a zombie
 - `aiz_variedZombieSpeed`: enables or disables zombie walking speeds being randomized or not. Valid options are `0` (zombie speeds are always the same as they are in the TeknoMW3 mod), `1` (zombie speeds are randomized on all maps), and `2` (zombie speeds are randomized on MW2 maps only)
