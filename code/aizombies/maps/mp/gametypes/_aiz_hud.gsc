@@ -155,7 +155,7 @@ init()
     level.classicMapNames[level.classicMapNames.size] = &"Invasion";
     level.classicMapNames[level.classicMapNames.size] = &"Skidrow";
     level.classicMapNames[level.classicMapNames.size] = &"Quarry";
-    //level.classicMapNames[level.classicMapNames.size] = &"Rundown";
+    level.classicMapNames[level.classicMapNames.size] = &"Rundown";
     level.classicMapNames[level.classicMapNames.size] = &"Rust";
     level.classicMapNames[level.classicMapNames.size] = &"Sub Base";
     //level.classicMapNames[level.classicMapNames.size] = &"Terminal (MW2)";
