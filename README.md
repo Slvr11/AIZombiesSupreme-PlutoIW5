@@ -60,6 +60,7 @@ AIZombies Supreme includes a list of dvars that can tweak the experience. These 
 - `aiz_newPowerupModels`: enables or disables using the new Black Ops style powerup models. Setting this to 0 will use the old models that were used in the TeknoMW3 version of the mod
 - `aiz_mw2Weapons`: enables or disables the entire list of MW2 weapons from appearing in the random weapon box. Valid options are `0` (no MW2 weapons are allowed in the box), `1` (MW2 weapons are in the box on all maps), and `2` (MW2 weapons are in the box only on MW2 maps)
 - `aiz_mw2Killstreaks`: enables or disables the AIZombies eXtreme killstreaks. Valid options are `0` (MW2 killstreaks are disabled), `1` (MW2 killstreaks are available on all maps), and `2` (MW2 killstreaks are only available on MW2 maps)
+- `aiz_mw2Perks`: enables or disables the AIZombies eXtreme perks. Valid options are `0` (MW2 perks are disabled), `1` (MW2 perks are available on all maps), and `2` (MW2 perks are only available on MW2 maps)
 - `aiz_boWonderWeapons`: enables or disables the Black Ops Raygun and Thundergun in the weapon box
 - `aiz_maxZombies`: the max amount of zombies that can be active at once
 - `aiz_maxZombiesUnderLoad`: the max amount of zombies that can be active at once when there are 4 or more players in the game. This can be used to lower the max zombie counts with higher player counts to reduce server lag
