@@ -610,7 +610,7 @@ ai_attackPlayer(target, isCrawler, isBoss)
     wait(0.2);
 
     time = getTime();
-    hitRange = randomFloatRange(2500, 3600);
+    hitRange = randomFloatRange(2500, 5000);
     if (distanceSquared(self.hitbox.origin, target.origin) <= hitRange && time > target.lastDamageTime + level.damageGracePeriod)//Only connect the attack if the player is close enough to the bot at this point and after a grace period.
     {
         target.lastDamageTime = time;

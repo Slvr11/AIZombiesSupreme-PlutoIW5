@@ -67,7 +67,7 @@ init()
     //level.maxPlayerHealth_Jugg = 251;
     level.powerActivated = false;
     level.tempPowerActivated = false;
-    level.version = "1.1";
+    level.version = "1.2";
     level.dev = "Slvr99";
 
     level.pauseMenu = "class";
@@ -542,7 +542,7 @@ onPrecacheGameType()
     preCacheShader("weapon_attachment_rof");//Double Tap
     preCacheShader("specialty_stalker_upgrade");//Stalker soda
     //preCacheShader("specialty_scavenger_upgrade");
-    if (array_contains(level.classicMaps, level._mapname))
+    if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
     {
         preCacheShader("cardicon_bullets_50cal");
         preCacheShader("specialty_bulletdamage_upgrade");
@@ -2751,7 +2751,7 @@ autoRevive_pulseIcon(pulse)
         wait(0.65);
 
         shaderName = "waypoint_revive";
-        if (array_contains(level.classicMaps, level._mapname))
+        if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             shaderName = "specialty_pistoldeath_upgrade";
         pulse setShader(shaderName, 30, 30);
 
@@ -2781,6 +2781,7 @@ loadConfig()
     setDvarIfUninitialized("aiz_newPowerupModels", 1);
     setDvarIfUninitialized("aiz_mw2Weapons", 2);
     setDvarIfUninitialized("aiz_mw2Killstreaks", 2);
+    setDvarIfUninitialized("aiz_mw2Perks", 2);
     setDvarIfUninitialized("aiz_boWonderWeapons", 0);
     setDvarIfUninitialized("aiz_maxZombies", 25);
     setDvarIfUninitialized("aiz_maxZombiesUnderLoad", 20);
@@ -2808,6 +2809,7 @@ setGameDvars()
     level.classicMapsEnabled = getDvarInt("aiz_mw2Maps");
     level.classicMapsOnly = getDvarInt("aiz_mw2MapsOnly");
     level.classicKillstreaks = getDvarInt("aiz_mw2Killstreaks");
+    level.classicPerks = getDvarInt("aiz_mw2Perks");
     level.wawMapsEnabled = getDvarInt("aiz_wawMaps");
     level.perkLimit = getDvarInt("aiz_perkLimit");
     level.botDeathVoice = getDvarInt("aiz_zombieDeathVoice");
@@ -3223,18 +3225,25 @@ getWeaponAmmoMaticValue(weapon)
     {
         case "pistol":
             value = 1;
+            break;
         case "spread":
             value = 1;
+            break;
         case "mg":
             value = 2;
+            break;
         case "rocketlauncher":
             value = 1;
+            break;
         case "sniper":
-            vale = 1;
+            value = 1;
+            break;
         case "smg":
             value = 2;
+            break;
         case "rifle":
             value = 3;
+            break;
     }
     if (weaponIsUpgrade(weapon))
         value *= 2;

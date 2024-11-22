@@ -460,20 +460,48 @@ giveRandomPerk(perk)
             self.lastBoughtPerk = "specialty_fastreload_upgrade";
             break;
         case 3:
-            self.newGunReady = true;
-            self.lastBoughtPerk = "specialty_twoprimaries_upgrade";
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
+            {
+                self.ammoMatic = true;
+                self.lastBoughtPerk = "cardicon_bullets_50cal";
+            }
+            else
+            {
+                self.newGunReady = true;
+                self.lastBoughtPerk = "specialty_twoprimaries_upgrade";
+            }
             break;
         case 4:
-            self givePerk("specialty_rof", false);
-            self.lastBoughtPerk = "weapon_attachment_rof";
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
+            {
+                self givePerk("specialty_bulletdamage", false);
+                self.lastBoughtPerk = "specialty_bulletdamage_upgrade";
+            }
+            else
+            {
+                self givePerk("specialty_rof", false);
+                self.lastBoughtPerk = "weapon_attachment_rof";
+            }
             break;
         case 5:
-            self givePerk("specialty_stalker", false);
-            self.lastBoughtPerk = "specialty_stalker_upgrade";
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
+            {
+                self givePerk("specialty_bulletaccuracy", false);
+                self.lastBoughtPerk = "specialty_steadyaim_upgrade";
+            }
+            else
+            {
+                self givePerk("specialty_stalker", false);
+                self.lastBoughtPerk = "specialty_stalker_upgrade";
+            }
             break;
         case 6:
             self.autoRevive = true;
-            self.lastBoughtPerk = "waypoint_revive";
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
+                self.lastBoughtPerk = "specialty_pistoldeath_upgrade";
+            else
+                self.lastBoughtPerk = "waypoint_revive";
+                
             break;
         case 7:
             self givePerk("specialty_scavenger", false);

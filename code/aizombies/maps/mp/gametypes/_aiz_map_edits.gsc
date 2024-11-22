@@ -1554,7 +1554,7 @@ perkCrate(origin, angles, perk)
             icon = "specialty_fastreload_upgrade";
             break;
         case 4:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 cost = 6500;
                 icon = "cardicon_bullets_50cal";
@@ -1566,7 +1566,7 @@ perkCrate(origin, angles, perk)
             }
             break;
         case 5:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 cost = 2500;
                 icon = "specialty_bulletdamage_upgrade";
@@ -1578,7 +1578,7 @@ perkCrate(origin, angles, perk)
             }
             break;
         case 6:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 cost = 2000;
                 icon = "specialty_steadyaim_upgrade";
@@ -1590,7 +1590,7 @@ perkCrate(origin, angles, perk)
             }
             break;
         case 7:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 cost = 2500;
                 icon = "specialty_pistoldeath_upgrade";
@@ -2346,7 +2346,7 @@ useBox(box)
                 if (isSubStr(currentWeapon, "alt_iw5_") || isSubStr(currentWeapon, "alt_iw4_"))//Fix alt weapons allowing players to take multiple weapons
                 {
                     tokens = strTok(currentWeapon, "_");
-                    currentWeapon = "iw5";
+                    currentWeapon = tokens[1];
                     for (i = 2; i < tokens.size; i++)
                         currentWeapon += "_" + tokens[i];
                 }
@@ -3832,7 +3832,7 @@ usePerk(box, perk)
             icon = "specialty_fastreload_upgrade";
             break;
         case 4:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 name = level.gameStrings[329];
                 icon = "cardicon_bullets_50cal";
@@ -3844,7 +3844,7 @@ usePerk(box, perk)
             }
             break;
         case 5:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 name = level.gameStrings[333];
                 perks[perks.size] = "specialty_bulletdamage";
@@ -3858,7 +3858,7 @@ usePerk(box, perk)
             }
             break;
         case 6:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 name = level.gameStrings[331];
                 perks[perks.size] = "specialty_bulletaccuracy";
@@ -3872,7 +3872,7 @@ usePerk(box, perk)
             }
             break;
         case 7:
-            if (array_contains(level.classicMaps, level._mapname))
+            if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
             {
                 name = level.gameStrings[335];
                 icon = "specialty_pistoldeath_upgrade";
