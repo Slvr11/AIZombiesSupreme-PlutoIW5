@@ -705,7 +705,13 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
     {
         if (isSubStr(weapon, "iw5_deserteagle_mp") || isSubStr(weapon, "iw5_deserteagletactical_mp") || weapon == "at4_mp" || isSubStr(weapon, "iw5_44magnum_mp") || isSubStr(weapon, "iw4_coltanaconda") || isSubStr(weapon, "iw5_mp412")) hitDamage = damage;//Specials damage
         //Weapon tweaks
-        if (isSniper(weapon) || isSubStr(weapon, "iw5_dragunov_mp")) hitDamage = int(damage * 2);//Sniper damage
+        if (isSniper(weapon) || isSubStr(weapon, "iw5_dragunov_mp"))//Sniper damage
+        {
+            mult = 4;
+            if (weaponIsUpgrade(weapon))
+                mult = 2;
+            hitDamage = int(hitDamage * mult);
+        }
         if (isShotgun(weapon))
         {
             hitDamage = (hitDamage * 8);//Shotgun multiplier

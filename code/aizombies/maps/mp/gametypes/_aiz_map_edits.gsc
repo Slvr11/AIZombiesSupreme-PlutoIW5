@@ -659,7 +659,7 @@ initializeBoxWeapons()
         currentIndex++;
         level.localizedWeaponNames[currentIndex] = &"WEAPON_M4_CARBINE_SILENCER";
         currentIndex++;
-        level.localizedWeaponNames[currentIndex] = &"WEAPON_ACR_LEGACY";
+        level.localizedWeaponNames[currentIndex] = &"WEAPON_ACR_IW4";
         currentIndex++;
         level.localizedWeaponNames[currentIndex] = &"WEAPON_MG4";
         currentIndex++;

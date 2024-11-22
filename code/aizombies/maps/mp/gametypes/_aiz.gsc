@@ -22,6 +22,7 @@ init()
 	level.sentrySettings = [];
 	level.sentrySettings["sentry_minigun"] = spawnStruct();
 	level.sentrySettings["sentry_minigun"].spinupTime = 0.05;
+    level.killstreakSpawnShield = 0;
     
     loadConfig();
 
@@ -937,8 +938,10 @@ onPlayerSpawn()
     self.gamblerInUse = false;
     self.autoRevive = false;
     self.isAlive = true;
-    self.lastDamageTime = getTime();
-    self.lastSpawnTime = getTime();
+    currentTime = getTime();
+    self.lastDamageTime = currentTime;
+    self.lastSpawnTime = currentTime;
+    self.spawnTime = currentTime;
     self.weaponsList = [];
 
     self thread setSpawnModel();
