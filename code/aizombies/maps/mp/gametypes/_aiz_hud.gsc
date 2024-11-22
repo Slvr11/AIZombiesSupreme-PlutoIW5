@@ -3049,7 +3049,7 @@ createReviveOverlayIcon()
     icon.vertAlign = perk.vertAlign;
     icon.horzAlign = perk.horzAlign;
     shaderName = "waypoint_revive";
-    if (array_contains(level.classicMaps, level._mapname))
+    if ((level.classicPerks == 1 && !array_contains(level.wawMaps, level._mapname)) || (level.classicPerks == 2 && array_contains(level.classicMaps, level._mapname)))
         shaderName = "specialty_pistoldeath_upgrade";
     icon setShader(shaderName, perk.width, perk.height);
     icon.hideWhenInMenu = true;

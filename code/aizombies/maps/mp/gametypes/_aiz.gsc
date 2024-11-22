@@ -938,6 +938,7 @@ onPlayerSpawn()
     self.autoRevive = false;
     self.isAlive = true;
     self.lastDamageTime = getTime();
+    self.lastSpawnTime = getTime();
     self.weaponsList = [];
 
     self thread setSpawnModel();

@@ -2231,7 +2231,7 @@ getbaseweaponname( var_0 )
 {
     var_1 = strtok( var_0, "_" );
 
-    if ( var_1[0] == "iw5" )
+    if ( var_1[0] == "iw5" || var_1[0] == "iw4" )
         var_1[0] = var_1[0] + "_" + var_1[1];
     else if ( var_1[0] == "alt" )
         var_1[0] = var_1[1] + "_" + var_1[2];
