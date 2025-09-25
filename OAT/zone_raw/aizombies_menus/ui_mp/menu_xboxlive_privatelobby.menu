@@ -14,6 +14,8 @@
             setLocalVarString sharedBackgroundMusic "music_mainmenu_mp";
             execnow "xblive_privatematch 1";
             exec "exec dvar_defaults.cfg";
+			setdvar g_gametype aiz;
+			setdvar ui_gametype aiz;
             if (dvarbool(ui_opensummary))
             {
                 setLocalVarInt ui_autoopened 1;
@@ -484,6 +486,8 @@
                 if (!(FUNC_162()))
                 {
                     play mouse_click;
+					setdvar g_gametype aiz;
+					setdvar ui_gametype aiz;
                     exec xpartygo;
                 }
             }
@@ -1163,7 +1167,7 @@
             textalign                   10
             textscale                   0.340278
             textfont                    3
-            exp text                    gametypenameAbbreviated();
+            exp text                    "@MPUI_AIZ";
         }
         itemDef
         {

@@ -2052,6 +2052,14 @@ endGame(win)
     wait(18);
 
     //setGameEndTime(0);
+
+    if (getDvarInt("xblive_privatematch") == 1)
+    {
+        level notify("exitLevel_called");
+        exitLevel(false);
+        return;
+    }
+
     if (level.voting)
     {
         if (isDefined(endGameScreen) && endGameScreen.size > 0)

@@ -267,7 +267,7 @@ spawnBonusDrop(type, loc)
             bonus setModel("zombie_pickup_perk_bottle");
     }
 
-    if (type != DROPTYPE_NUKE && type != DROPTYPE_FREEZE && type != DROPTYPE_DOUBLEPOINTS)
+    if (!level.legacyPowerupModels && type != DROPTYPE_NUKE && type != DROPTYPE_FREEZE && type != DROPTYPE_DOUBLEPOINTS)
     {
         angles = (90, 0, 0);
         powerupFx = spawnFX(level.fx_powerup, bonus.origin);
@@ -311,8 +311,7 @@ checkForPowerupCollection(bonus)
             player thread activateBonusDrop(bonus);
             if (isDefined(bonus.attachedFX))
             {
-                fx = bonus.attachedFX;
-                fx delete();
+                bonus.attachedFX delete();
             }
             if (bonus.type != DROPTYPE_NUKE && bonus.type != DROPTYPE_FREEZE)
             {

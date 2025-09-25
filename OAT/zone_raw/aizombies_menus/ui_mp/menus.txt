@@ -837,12 +837,12 @@
     functionDef
     {
         name                        "FUNC_167"
-        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "timeLimit") == 5), "@MPUI_RULES_5MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 10), "@MPUI_RULES_10MINUTES", select((getmatchrulesdata("commonOption", "timeLimit") == 20), "@MPUI_RULES_20MINUTES", "@MPUI_RULES_30MINUTES"))));
+        value                       dvarint("aiz_maxZombies");
     }
     functionDef
     {
         name                        "FUNC_168"
-        value                       select((getmatchrulesdata("commonOption", "timeLimit") == 0), 5, select((getmatchrulesdata("commonOption", "timeLimit") == 5), 10, select((getmatchrulesdata("commonOption", "timeLimit") == 10), 20, select((getmatchrulesdata("commonOption", "timeLimit") == 20), 30, 0))));
+        value                       select((dvarint("aiz_maxZombies") == 10), 15, select((dvarint("aiz_maxZombies") == 15), 20, select((dvarint("aiz_maxZombies") == 20), 25, select((dvarint("aiz_maxZombies") == 25), 30, 10))));
     }
     functionDef
     {
@@ -882,12 +882,12 @@
     functionDef
     {
         name                        "FUNC_176"
-        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), "@MPUI_RULES_2500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), "@MPUI_RULES_5000POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), "@MPUI_RULES_7500POINTS", select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), "@MPUI_RULES_10000POINTS", "@MPUI_RULES_15000POINTS")))));
+        value                       select((dvarint("aiz_spawnType") == 0), "@MPUI_RULES_NORMAL", "@MENU_RANDOM");
     }
     functionDef
     {
         name                        "FUNC_177"
-        value                       select((getmatchrulesdata("commonOption", "scoreLimit") == 0), 2500, select((getmatchrulesdata("commonOption", "scoreLimit") == 2500), 5000, select((getmatchrulesdata("commonOption", "scoreLimit") == 5000), 7500, select((getmatchrulesdata("commonOption", "scoreLimit") == 7500), 10000, select((getmatchrulesdata("commonOption", "scoreLimit") == 10000), 15000, 0)))));
+        value                       select((dvarint("aiz_spawnType") == 0), 1, 0);
     }
     functionDef
     {
@@ -1647,12 +1647,12 @@
     functionDef
     {
         name                        "FUNC_329"
-        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), "@MENU_DISABLED", select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), select(dvarbool(ui_recipeIsTeamBased), "@MPUI_RULES_PLAYERS_ONLY", "@MPUI_RULES_TEAM_ONLY"), "@MPUI_RULES_FREE"));
+        value                       select((dvarint("aiz_botStartingHealth") == 50), "@MPUI_RULES_HALF", select((dvarint("aiz_botStartingHealth") == 200), "@MPUI_RULES_DOUBLE", "@MPUI_RULES_NORMAL"));
     }
     functionDef
     {
         name                        "FUNC_330"
-        value                       select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 0), 1, select((getmatchrulesdata("commonOption", "spectateModeAllowed") == 1), 2, 0));
+        value                       select((dvarint("aiz_botStartingHealth") == 100), 200, select((dvarint("aiz_botStartingHealth") == 200), 50, 100));
     }
     functionDef
     {
@@ -1662,12 +1662,12 @@
     functionDef
     {
         name                        "FUNC_332"
-        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_crawlerHealth") == 55), "@MPUI_RULES_HALF", select((dvarint("aiz_crawlerHealth") == 220), "@MPUI_RULES_DOUBLE", "@MPUI_RULES_NORMAL"));
     }
     functionDef
     {
         name                        "FUNC_333"
-        value                       select((getmatchrulesdata("commonOption", "showKillcam") == 0), 1, 0);
+        value                       select((dvarint("aiz_crawlerHealth") == 110), 220, select((dvarint("aiz_crawlerHealth") == 220), 55, 110));
     }
     functionDef
     {
@@ -1677,12 +1677,12 @@
     functionDef
     {
         name                        "FUNC_335"
-        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), "@MENU_NO", "@MENU_YES");
+        value                       select((dvarint("aiz_bossHealth") == 1250), "@MPUI_RULES_HALF", select((dvarint("aiz_bossHealth") == 5000), "@MPUI_RULES_DOUBLE", "@MPUI_RULES_NORMAL"));
     }
     functionDef
     {
         name                        "FUNC_336"
-        value                       select((getmatchrulesdata("commonOption", "radarAlwaysOn") == 0), 1, 0);
+        value                       select((dvarint("aiz_bossHealth") == 2500), 5000, select((dvarint("aiz_bossHealth") == 5000), 1250, 2500));
     }
     functionDef
     {
@@ -1692,12 +1692,12 @@
     functionDef
     {
         name                        "FUNC_338"
-        value                       select((getmatchrulesdata("commonOption", "respawnDelay") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("commonOption", "respawnDelay") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("commonOption", "respawnDelay") == 7.5), "@MPUI_RULES_7_5SECONDS", select((getmatchrulesdata("commonOption", "respawnDelay") == 10), "@MPUI_RULES_10SECONDS", select((getmatchrulesdata("commonOption", "respawnDelay") == 15), "@MPUI_RULES_15SECONDS", "@MPUI_RULES_30SECONDS")))));
+        value                       select((dvarint("aiz_botDamage") == 25), "@MPUI_RULES_HALF", select((dvarint("aiz_botDamage") == 100), "@MPUI_RULES_DOUBLE", "@MPUI_RULES_NORMAL"));
     }
     functionDef
     {
         name                        "FUNC_339"
-        value                       select((getmatchrulesdata("commonOption", "respawnDelay") == 0), 5, select((getmatchrulesdata("commonOption", "respawnDelay") == 5), 7.5, select((getmatchrulesdata("commonOption", "respawnDelay") == 7.5), 10, select((getmatchrulesdata("commonOption", "respawnDelay") == 10), 15, select((getmatchrulesdata("commonOption", "respawnDelay") == 15), 30, 0)))));
+        value                       select((dvarint("aiz_botDamage") == 50), 100, select((dvarint("aiz_botDamage") == 100), 25, 50));
     }
     functionDef
     {
@@ -1707,12 +1707,12 @@
     functionDef
     {
         name                        "FUNC_341"
-        value                       select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 5), "@MPUI_RULES_5SECONDS", select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 10), "@MPUI_RULES_10SECONDS", select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 15), "@MPUI_RULES_15SECONDS", "@MPUI_RULES_30SECONDS"))));
+        value                       select((dvarint("aiz_variedZombieSpeed") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_342"
-        value                       select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 0), 5, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 5), 10, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 10), 15, select((getmatchrulesdata("commonOption", "waveRespawnDelay") == 15), 30, 0))));
+        value                       select((dvarint("aiz_variedZombieSpeed") == 0), 1, 0);
     }
     functionDef
     {
@@ -1722,12 +1722,12 @@
     functionDef
     {
         name                        "FUNC_344"
-        value                       select((getmatchrulesdata("commonOption", "forceRespawn") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_randomZombieModels") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_345"
-        value                       select((getmatchrulesdata("commonOption", "forceRespawn") == 0), 1, 0);
+        value                       select((dvarint("aiz_randomZombieModels") == 0), 1, 0);
     }
     functionDef
     {
@@ -1797,12 +1797,12 @@
     functionDef
     {
         name                        "FUNC_359"
-        value                       select((getmatchrulesdata("commonOption", "allowPerks") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_perkDrops") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_360"
-        value                       select((getmatchrulesdata("commonOption", "allowPerks") == 0), 1, 0);
+        value                       select((dvarint("aiz_perkDrops") == 0), 1, 0);
     }
     functionDef
     {
@@ -1812,12 +1812,12 @@
     functionDef
     {
         name                        "FUNC_362"
-        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_perkLimit") == 0), "@MENU_NONE", dvarint("aiz_perkLimit"));
     }
     functionDef
     {
         name                        "FUNC_363"
-        value                       select((getmatchrulesdata("commonOption", "hardcoreModeOn") == 0), 1, 0);
+        value                       select((dvarint("aiz_perkLimit") == 0), 1, select((dvarint("aiz_perkLimit") == 1), 2, select((dvarint("aiz_perkLimit") == 2), 3, select((dvarint("aiz_perkLimit") == 3), 4, select((dvarint("aiz_perkLimit") == 4), 5, select((dvarint("aiz_perkLimit") == 5), 6, 0))))));
     }
     functionDef
     {
@@ -1827,12 +1827,12 @@
     functionDef
     {
         name                        "FUNC_365"
-        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_mw2Weapons") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_366"
-        value                       select((getmatchrulesdata("commonOption", "forceThirdPersonView") == 0), 1, 0);
+        value                       select((dvarint("aiz_mw2Weapons") == 0), 1, 0);
     }
     functionDef
     {
@@ -1842,12 +1842,12 @@
     functionDef
     {
         name                        "FUNC_368"
-        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_mw2Killstreaks") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_369"
-        value                       select((getmatchrulesdata("commonOption", "headshotsOnly") == 0), 1, 0);
+        value                       select((dvarint("aiz_mw2Killstreaks") == 0), 1, 0);
     }
     functionDef
     {
@@ -1857,12 +1857,12 @@
     functionDef
     {
         name                        "FUNC_371"
-        value                       select((getmatchrulesdata("commonOption", "allowKillstreaks") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_mw2Perks") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_372"
-        value                       select((getmatchrulesdata("commonOption", "allowKillstreaks") == 0), 1, 0);
+        value                       select((dvarint("aiz_mw2Perks") == 0), 1, 0);
     }
     functionDef
     {
@@ -1872,12 +1872,12 @@
     functionDef
     {
         name                        "FUNC_374"
-        value                       select((getmatchrulesdata("commonOption", "allowCustomClasses") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
+        value                       select((dvarint("aiz_boWonderWeapons") == 0), "@MENU_DISABLED", "@MENU_ENABLED");
     }
     functionDef
     {
         name                        "FUNC_375"
-        value                       select((getmatchrulesdata("commonOption", "allowCustomClasses") == 0), 1, 0);
+        value                       select((dvarint("aiz_boWonderWeapons") == 0), 1, 0);
     }
     functionDef
     {
@@ -1932,12 +1932,12 @@
     functionDef
     {
         name                        "FUNC_386"
-        value                       select((getmatchrulesdata("commonOption", "numLives") == 0), "@MPUI_RULES_UNLIMITED", select((getmatchrulesdata("commonOption", "numLives") == 1), "@MPUI_RULES_ITEM_LIFE", select((getmatchrulesdata("commonOption", "numLives") == 2), "@MPUI_RULES_ITEM_2LIVES", select((getmatchrulesdata("commonOption", "numLives") == 3), "@MPUI_RULES_ITEM_3LIVES", select((getmatchrulesdata("commonOption", "numLives") == 5), "@MPUI_RULES_ITEM_5LIVES", "@MPUI_RULES_ITEM_9LIVES")))));
+        value                       select((dvarint("aiz_maxHealth") == 51), "@MPUI_RULES_HALF", select((dvarint("aiz_maxHealth") == 202), "@MPUI_RULES_DOUBLE", "@MPUI_RULES_NORMAL"));
     }
     functionDef
     {
         name                        "FUNC_387"
-        value                       select((getmatchrulesdata("commonOption", "numLives") == 0), 1, select((getmatchrulesdata("commonOption", "numLives") == 1), 2, select((getmatchrulesdata("commonOption", "numLives") == 2), 3, select((getmatchrulesdata("commonOption", "numLives") == 3), 5, select((getmatchrulesdata("commonOption", "numLives") == 5), 9, 0)))));
+        value                       select((dvarint("aiz_maxHealth") == 101), 202, select((dvarint("aiz_maxHealth") == 202), 51, 101));
     }
     functionDef
     {
@@ -1947,12 +1947,12 @@
     functionDef
     {
         name                        "FUNC_389"
-        value                       select((getmatchrulesdata("commonOption", "maxHealth") == 30), "@MPUI_RULES_MINISCULE", select((getmatchrulesdata("commonOption", "maxHealth") == 50), "@MPUI_RULES_HALF", select((getmatchrulesdata("commonOption", "maxHealth") == 100), "@MPUI_RULES_NORMAL", "@MPUI_RULES_DOUBLE")));
+        value                       select((dvarint("aiz_maxHealth_jugg") == 126), "@MPUI_RULES_HALF", select((dvarint("aiz_maxHealth_jugg") == 502), "@MPUI_RULES_DOUBLE", "@MPUI_RULES_NORMAL"));
     }
     functionDef
     {
         name                        "FUNC_390"
-        value                       select((getmatchrulesdata("commonOption", "maxHealth") == 30), 50, select((getmatchrulesdata("commonOption", "maxHealth") == 50), 100, select((getmatchrulesdata("commonOption", "maxHealth") == 100), 200, 30)));
+        value                       select((dvarint("aiz_maxHealth_jugg") == 251), 502, select((dvarint("aiz_maxHealth_jugg") == 502), 126, 251));
     }
     functionDef
     {
@@ -1962,12 +1962,12 @@
     functionDef
     {
         name                        "FUNC_392"
-        value                       select((getmatchrulesdata("commonOption", "healthRegen") == 0), "@MPUI_RULES_NONE", select((getmatchrulesdata("commonOption", "healthRegen") == 2), "@MPUI_RULES_FAST", select((getmatchrulesdata("commonOption", "healthRegen") == 5), "@MPUI_RULES_NORMAL", "@MPUI_RULES_SLOW")));
+        value                       select((dvarstring("aiz_damageGracePeriod") == "0.125"), "@MPUI_RULES_HALF", select((dvarstring("aiz_damageGracePeriod") == "0.5"), "@MPUI_RULES_DOUBLE", select((dvarstring("aiz_damageGracePeriod") == "0"), "@MPUI_RULES_NONE", "@MPUI_RULES_NORMAL")));
     }
     functionDef
     {
         name                        "FUNC_393"
-        value                       select((getmatchrulesdata("commonOption", "healthRegen") == 0), 2, select((getmatchrulesdata("commonOption", "healthRegen") == 2), 5, select((getmatchrulesdata("commonOption", "healthRegen") == 5), 10, 0)));
+        value                       select((dvarstring("aiz_damageGracePeriod") == "0.25"), 0.5, select((dvarstring("aiz_damageGracePeriod") == "0.5"), 0, select((dvarstring("aiz_damageGracePeriod") == "0"), 0.125, 0.25)));
     }
     functionDef
     {

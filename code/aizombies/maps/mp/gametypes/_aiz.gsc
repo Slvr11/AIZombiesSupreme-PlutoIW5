@@ -68,7 +68,7 @@ init()
     //level.maxPlayerHealth_Jugg = 251;
     level.powerActivated = false;
     level.tempPowerActivated = false;
-    level.version = "1.2";
+    level.version = "1.3";
     level.dev = "Slvr99";
 
     level.pauseMenu = "class";
@@ -2127,7 +2127,7 @@ runFlameFX(startPos, direction, upgrade)
                     damage = 140 - distance(bot.hitbox.origin, pos);
                 weapon = "iw4_tmpsilencer_mp";
                 if (upgrade)
-                    weapon = "iw4_tmpsilencerupgrade_mp";
+                    weapon = "iw4_tmpsilencerupgraded_mp";
 
                 bot.hitbox notify("damage", damage, self, (0, 0, 0), pos, "MOD_FLAME", "", "", "", 0, weapon);
             }
@@ -2775,7 +2775,7 @@ loadConfig()
     setDvarIfUninitialized("aiz_botHealthFactor", 2);
     setDvarIfUninitialized("aiz_botDamage", 50);
     setDvarIfUninitialized("aiz_perkDrops", 1);
-    setDvarIfUninitialized("aiz_mapVoting", 1);
+    setDvarIfUninitialized("aiz_mapVoting", getDvarInt("xblive_privateMatch") == 0);
     setDvarIfUninitialized("aiz_dlcMaps", 1);
     setDvarIfUninitialized("aiz_mw2Maps", 1);
     setDvarIfUninitialized("aiz_mw2MapsOnly", 0);

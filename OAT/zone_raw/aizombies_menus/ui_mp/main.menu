@@ -225,7 +225,7 @@
             textstyle                   9
             textfont                    9
             exp text                    locstring("@MENU_AIZ_CAPS");
-            exp forecolor a             select((getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.5) <= 200), 1, 0);
+            exp forecolor a             select((getTextWidth(locstring("@MENU_AIZ_CAPS"), 9, 0.5) <= 200), 1, 0);
         }
         itemDef
         {
@@ -238,7 +238,7 @@
             textstyle                   9
             textfont                    9
             exp text                    locstring("@MENU_AIZ_CAPS");
-            exp forecolor a             select(((getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.4) <= 200)), 1, 0);
+            exp forecolor a             select(((getTextWidth(locstring("@MENU_AIZ_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_AIZ_CAPS"), 9, 0.4) <= 200)), 1, 0);
         }
         itemDef
         {
@@ -251,7 +251,7 @@
             textstyle                   9
             textfont                    9
             exp text                    locstring("@MENU_AIZ_CAPS");
-            exp forecolor a             select((getTextWidth(locstring("@MENU_MULTIPLAYER_CAPS"), 9, 0.4) > 200), 1, 0);
+            exp forecolor a             select((getTextWidth(locstring("@MENU_AIZ_CAPS"), 9, 0.4) > 200), 1, 0);
         }
         itemDef
         {
