@@ -18,6 +18,7 @@ scriptfile,maps/mp/_animatedmodels
 scriptfile,maps/mp/gametypes/_spawnlogic
 scriptfile,maps/mp/gametypes/aiz
 scriptfile,maps/mp/gametypes/war
+scriptfile,maps/mp/gametypes/dm
 scriptfile,maps/mp/gametypes/_aiz
 scriptfile,maps/mp/gametypes/_aiz_bonus_drops
 scriptfile,maps/mp/gametypes/_aiz_bot_util

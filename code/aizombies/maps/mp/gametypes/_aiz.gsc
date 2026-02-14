@@ -23,6 +23,13 @@ init()
 	level.sentrySettings["sentry_minigun"] = spawnStruct();
 	level.sentrySettings["sentry_minigun"].spinupTime = 0.05;
     level.killstreakSpawnShield = 0;
+
+    if (getDvar("g_gametype") != "aiz")
+    {
+        setDvar("g_gametype", "aiz");
+        map_restart(false);
+        return;
+    }
     
     loadConfig();
 
@@ -49,10 +56,8 @@ init()
     level.gameEnded = false;
     level.gameStarted = false;
     level.intermissionTimerNum = 30;
-    //level.firstIntermission = true;
     level.timePlayedMinutes = 0;
     level.timePlayed = 0;
-    //level.secondsTimerStarted = false;
     level.intermissionTimerStarted = false;
     level.zombieDeath = [];
 
@@ -68,7 +73,7 @@ init()
     //level.maxPlayerHealth_Jugg = 251;
     level.powerActivated = false;
     level.tempPowerActivated = false;
-    level.version = "1.3";
+    level.version = "1.31";
     level.dev = "Slvr99";
 
     level.pauseMenu = "class";

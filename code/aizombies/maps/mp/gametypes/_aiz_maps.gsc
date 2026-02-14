@@ -4241,16 +4241,16 @@ loadMapEdits()
                 spawnMapEditObject("model", "mil_tntbomb_mp", (-323,-3859,47),(90,90,0));//TNTBomb
                 spawnMapEditObject("model", "vehicle_mig29_desert", (-959,-4294,-40),(32,90,45));//Mig
                 spawnMapEditObject("model", "vehicle_mig29_desert", (-1140,-3913,-211),(32,-90,45));//Mig
-                FXFire((-929,-4227,-20));
-	            SmokeFx((-930,-4519,92));
-	            SmokeFx((-974,-4495,126));
-	            LightFxRed((-1106,-4355,192));
+                level thread FXFire((-929,-4227,-20));
+	            level thread SmokeFx((-930,-4519,92));
+	            level thread SmokeFx((-974,-4495,126));
+	            level thread LightFxRed((-1106,-4355,192));
 
                 spawnMapEditObject("randombox", (-208,-4142,27),(0,90,0), (-412,-6440,0),(0,0,0));
                 spawnMapEditObject("bank", (5040,-1235,-52),(0,90,0));
                 spawnMapEditObject("ammo", (-495,-4193,17),(0,90,0));
                 spawnMapEditObject("gambler", (-488,-4360,25),(0,90,0));
-                spawnMapEditObject("killstreak", (-488,-4677,20),(0,0,0));
+                spawnMapEditObject("killstreak", (-488,-4677,20),(0,90,0));
                 spawnMapEditObject("pap", (-339,-6440,11),(0,0,0));
                 spawnMapEditObject("perk7", (-215,-4328,22),(0,90,0));
                 spawnMapEditObject("spawn", (-254,-3903,16), (0, 0, 0));
@@ -4912,26 +4912,45 @@ loadMapEdits()
 
 FXFire(pos)
 {
-    fx = level.fx_smallFire;
-    fxEnt = spawnFX(fx, pos);
-	triggerFX(fx);
+    while (true)
+    {
+        playFx(level.fx_smallFire, pos);
+        wait 30;
+    }
 }
 SmokeFx(pos)
 {
-    fx = level.fx_flamethrowerImpact;
-    fxEnt = spawnFX(fx, pos);
-	triggerFX(fxEnt);
+    fx = loadFx("smoke/thin_black_smoke_m");
+    smoke = spawnFX(fx, pos);
+    triggerFX(smoke);
 }
 LightFxGreen(pos)
 {
-    fxEnt = spawnFX(level.fx_greenSmoke, pos);
-	triggerFX(fxEnt);
+    fxEnt = spawn("script_model", pos);
+    fxEnt setModel("tag_origin");
+    for(;;)
+	{
+        level waittill("connected", player);
+
+        wait(1);
+
+        playFxOnTagForClients(level.fx_rayGun, fxEnt, "tag_origin", player);
+    }
 }
 
 LightFxRed(pos)
 {
-    fx = loadFX("fx/misc/aircraft_light_red_blink");
-    playFX(fx, pos);
+    fx = loadFX("misc/aircraft_light_red_blink");
+    fxEnt = spawn("script_model", pos);
+    fxEnt setModel("tag_origin");
+    for(;;)
+	{
+        level waittill("connected", player);
+
+        wait(1);
+
+        playFxOnTagForClients(fx, fxEnt, "tag_origin", player);
+    }
 }
 
 deleteDestructables(excludedModel)
