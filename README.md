@@ -68,6 +68,7 @@ AIZombies Supreme includes a list of dvars that can tweak the experience. These 
 - `aiz_damageGracePeriod`: a grace period that dictates how long it takes to allow a player to be hurt again after getting hurt from a zombie
 - `aiz_variedZombieSpeed`: enables or disables zombie walking speeds being randomized or not. Valid options are `0` (zombie speeds are always the same as they are in the TeknoMW3 mod), `1` (zombie speeds are randomized on all maps), and `2` (zombie speeds are randomized on MW2 maps only)
 - `aiz_randomZombieModels`: enables or disables zombies using random models. Valid options are `0` (zombies will use a single model like they do in the TeknoMW3 mod), `1` (zombies will always use a random body and head model), and `2` (zombies will use a random body and head model on MW2 maps only)
+- `aiz_allowCashGifting`: enables or disables the ability for players to gift cash to each other
 
 ## Building The Mod
 This mod uses several tools and files to build itself. You will need extensive knowledge on these tools and how to make mods for PlutoIW5 to build this mod.
