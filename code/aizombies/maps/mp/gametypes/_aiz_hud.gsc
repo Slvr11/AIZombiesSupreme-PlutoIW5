@@ -99,6 +99,8 @@ init()
     level.mapList[currentIndex] = "mp_moab";
     currentIndex++;
     level.mapList[currentIndex] = "mp_boardwalk";
+    currentIndex++;
+    level.mapList[currentIndex] = "so_deltacamp";
     //level.mapSelection = 0;
     level.mapVotes = [];
     for (i = 0; i < 3; i++)
@@ -833,10 +835,48 @@ updateWeaponName(weapon)
     weaponName setText(getWeaponName(weapon));
     weaponName.color = getWeaponNameColor(weapon);
 
+    if (isIW4Weapon(weapon) || isIW3Weapon(weapon) || isT5Weapon(weapon))
+    {
+        icon = "logo_mw2";
+        if (isIW3Weapon(weapon))
+            icon = "logo_cod4";
+        else if (isT5Weapon(weapon))
+            icon = "logo_blackops";
+
+        if (isDefined(self.hud_classicWeaponIcon))
+        {
+            self.hud_classicWeaponIcon.alpha = 1;
+            self.hud_classicWeaponIcon setShader(icon, 16, 16);
+        }
+        else
+        {
+            classicIcon = self createIcon(icon, 16, 16);
+            classicIcon setParent(self.hud_weaponName);
+            classicIcon setPoint("RIGHT", "RIGHT", 22, -2);
+            classicIcon.hideWhenInMenu = true;
+            classicIcon.hideWhenDead = true;
+            classicIcon.archived = false;
+            classicIcon.alpha = 1;
+            classicIcon.sort = 0;
+            self.hud_classicWeaponIcon = classicIcon;
+        }
+    }
+    else if (isDefined(self.hud_classicWeaponIcon))
+    {
+        self.hud_classicWeaponIcon destroy();
+        self.hud_classicWeaponIcon = undefined;
+    }
+
     wait(1);
 
     weaponName fadeOverTime(1);
     weaponName.alpha = 0;
+
+    if (isDefined(self.hud_classicWeaponIcon))
+    {
+        self.hud_classicWeaponIcon fadeOverTime(1);
+        self.hud_classicWeaponIcon.alpha = 0;
+    }
 }
 
 getWeaponName(weapon)
@@ -1310,10 +1350,8 @@ getWeaponNameColor(weapon)
 
     switch (weapon)
     {
-        case "iw4_beretta_mp":
         case "iw5_ak47_mp_xmags_camo01":
         case "iw5_m60jugg_mp_silencer_camo07":
-        case "iw4_aug_mp":
         case "iw5_m60jugg_mp_silencer_thermal_camo08":
         case "iw4_augupgraded2_mp":
         case "t5_raygun_mp":
@@ -1331,48 +1369,7 @@ getWeaponNameColor(weapon)
         case "iw5_pp90m1_mp_akimbo_silencer_xmags_camo11":
         case "iw5_1887_mp_akimbo_camo11":
         case "iw5_ump45_mp_akimbo_xmags_camo11":
-        case "iw4_fn2000_mp":
-        case "iw4_pp2000_mp":
-        case "iw4_m240_mp":
-        case "iw4_kriss_mp":
-        case "iw4_m1014_mp":
-        case "iw4_m16_mp":
-        case "iw4_spas12_mp":
-        case "iw4_ump45_mp":
-        case "iw4_p90_mp":
-        case "iw4_dragunov_mp":
-        case "iw4_uzi_mp":
-        case "iw4_sa80_mp":
-        case "iw4_glock_mp":
-        case "iw4_rpd_mp":
-        case "m79_mp":
-        case "iw4_aa12_mp":
-        case "iw4_ak47_mp":
-        case "iw4_barrett_mp":
-        case "iw4_beretta393_mp":
-        case "iw4_coltanaconda_mp":
-        case "iw5_deserteagletactical_mp":
-        case "iw4_fal_mp":
-        case "iw4_famas_mp":
-        case "iw4_m21_mp":
-        case "iw4_m4reflex_mp":
-        case "iw4_m4silencer_mp":
-        case "iw4_masada_mp":
-        case "iw4_mg4_mp":
-        case "iw4_model1887_mp":
-        case "iw4_model1887fmj_mp":
-        case "iw4_mp5k_mp":
-        case "iw4_ranger_mp":
-        case "iw4_scar_mp":
-        case "iw4_striker_mp":
-        case "iw4_tavor_mp":
-        case "iw4_tmp_mp":
-        case "iw4_wa2000_mp":
-        case "iw4_javelin_mp":
-        case "iw4_rpg_mp":
         case "iw4_onemanarmy_mp":
-        case "iw5_cheytac_mp_cheytacscope2":
-        case "iw4_colt45_mp":
             return (0, 1, 0);
         case "iw5_usp45_mp_akimbo_silencer02":
         case "iw4_berettaupgraded_mp":
@@ -1547,6 +1544,49 @@ getWeaponNameColor(weapon)
         case "none":
         case "iw5_ak74u_mp":
         case "iw5_cheytac_mp_cheytacscope":
+        case "iw4_beretta_mp":
+        case "iw4_aug_mp":
+        case "iw4_fn2000_mp":
+        case "iw4_pp2000_mp":
+        case "iw4_m240_mp":
+        case "iw4_kriss_mp":
+        case "iw4_m1014_mp":
+        case "iw4_m16_mp":
+        case "iw4_spas12_mp":
+        case "iw4_ump45_mp":
+        case "iw4_p90_mp":
+        case "iw4_dragunov_mp":
+        case "iw4_uzi_mp":
+        case "iw4_sa80_mp":
+        case "iw4_glock_mp":
+        case "iw4_rpd_mp":
+        case "m79_mp":
+        case "iw4_aa12_mp":
+        case "iw4_ak47_mp":
+        case "iw4_barrett_mp":
+        case "iw4_beretta393_mp":
+        case "iw4_coltanaconda_mp":
+        case "iw5_deserteagletactical_mp":
+        case "iw4_fal_mp":
+        case "iw4_famas_mp":
+        case "iw4_m21_mp":
+        case "iw4_m4reflex_mp":
+        case "iw4_m4silencer_mp":
+        case "iw4_masada_mp":
+        case "iw4_mg4_mp":
+        case "iw4_model1887_mp":
+        case "iw4_model1887fmj_mp":
+        case "iw4_mp5k_mp":
+        case "iw4_ranger_mp":
+        case "iw4_scar_mp":
+        case "iw4_striker_mp":
+        case "iw4_tavor_mp":
+        case "iw4_tmp_mp":
+        case "iw4_wa2000_mp":
+        case "iw4_javelin_mp":
+        case "iw4_rpg_mp":
+        case "iw5_cheytac_mp_cheytacscope2":
+        case "iw4_colt45_mp":
         default:
             return (1, 1, 1);
     }
@@ -1557,7 +1597,7 @@ scorePopup(amount)
     if (isDefined(level.isBlackFriday) && amount < 0)
     {
         amount /= 2;
-        self.cash += abs(amount);//Yeah I know it's lazy but who gives a fuck =P
+        self.cash += int(abs(amount));//Yeah I know it's lazy but who gives a fuck =P
     }
 
     if (!isDefined(self.aizHud_created)) return;
@@ -2682,6 +2722,13 @@ initVoting()
             currentMapDescs[i] setText(&"NULL_EMPTY");
             continue;
         }
+        else if (level.mapList[level.mapLists[i]] == "so_deltacamp")
+        {
+            currentMapNames[i].label = level.gameStrings[109];
+            currentMapDescs[i] setText(&"NULL_EMPTY");
+            continue;
+        }
+
         currentMapNames[i].label = level.mapNames[level.mapLists[i]];
         currentMapDescs[i] setText(level.mapDesc[level.mapLists[i]]);
     }

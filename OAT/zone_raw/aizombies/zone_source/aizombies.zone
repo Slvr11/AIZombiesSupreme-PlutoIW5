@@ -32,6 +32,7 @@ scriptfile,maps/mp/gametypes/_aiz_round_system
 scriptfile,maps/mp/gametypes/_aiz_waypoints
 scriptfile,maps/mp/gametypes/_aiz_nacht_der_untoten
 scriptfile,maps/mp/gametypes/_aiz_der_riese
+scriptfile,maps/mp/gametypes/_aiz_deltacamp
 rawfile,mp/recipes/aiz.recipe
 rawfile,mp/basemaps.arena
 xmodel,com_teddy_bear
@@ -46,6 +47,7 @@ sound,aiz_upgrade_loop
 sound,aiz_upgrade_start
 sound,explo_mine
 sound,US_1mc_aizombies
+sound,US_1mc_aizombies_intro
 sound,bln_a10_airstrike_flyby
 sound,bln_a10_airstrike_fire
 sound,bln_a10_airstrike_roar
@@ -66,6 +68,9 @@ material,killstreak_a10_support
 material,cardicon_bullets_50cal
 material,specialty_bulletdamage_upgrade
 material,specialty_pistoldeath_upgrade
+material,logo_cod4
+material,logo_mw2
+material,logo_blackops
 
 include,aizombies_weapons
 

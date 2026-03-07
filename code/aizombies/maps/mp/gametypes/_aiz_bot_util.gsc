@@ -67,6 +67,8 @@ init()
     level.freezerActivated = false;
     level.perkDropsEnabled = true;
     level.nukeOffsetScalar = 1;
+
+    level.hasDogCrawlers = array_contains(level.wawMaps, level._mapname) || level._mapname == "so_deltacamp";
 }
 
 startBotSpawn()
@@ -226,7 +228,7 @@ createBot(isCrawler)
     if (isCrawler)
     {
         bot setModel(level.botCrawlerModel);
-        if (array_contains(level.wawMaps, level._mapname))
+        if (level.hasDogCrawlers)
         {
             bot setModel("german_sheperd_dog");
             bot playAnimOnBot("dog_idle");
@@ -438,7 +440,7 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
             player = attacker.owner;
             type = "MOD_PASSTHRU";
         }
-        else if (weapon == "cobra_20mm_mp")//A10 tweaks
+        else if (weapon == "ac130_25mm_mp" && attacker.classname == "script_vehicle")//A10 tweaks
         {
             player = attacker.owner;
             type = "MOD_PASSTHRU";
@@ -518,7 +520,7 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
 
                 if ((level.botDeathVoice == 1 || (level.botDeathVoice == 2 && array_contains(level.classicMaps, level._mapname))) && !isCrawler && type != "MOD_BLEEDOUT" && type != "MOD_HEADSHOT" && level.instaKillTime == 0)
                     currentBot playSound("generic_death_russian_" + randomIntRange(1, 9));
-                else if (isCrawler && array_contains(level.wawMaps, level._mapname))
+                else if (isCrawler && level.hasDogCrawlers)
                     currentBot playSound("anml_dog_die_front");
             }
             player.kills++;
@@ -549,7 +551,7 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
 
             if (isCrawler || isDefined(currentBot.hasBeenCrippled))
             {
-                if (array_contains(level.wawMaps, level._mapname) && !isDefined(currentBot.hasBeenCrippled)) currentBot playAnimOnBot("dog_death");
+                if (level.hasDogCrawlers && !isDefined(currentBot.hasBeenCrippled)) currentBot playAnimOnBot("dog_death");
                 else currentBot playAnimOnBot("crawlerAnim_death");
             }
             else
@@ -572,7 +574,7 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
 
             if (isDefined(currentBot.hasBeenCrippled)) currentBot.hasBeenCrippled = undefined;
 
-            if (isCrawler && !array_contains(level.wawMaps, level._mapname))
+            if (isCrawler && !level.hasDogCrawlers)
             {
                 wait(0.5);
                 currentBot moveTo(currentBot.origin + (0, 0, 2500), 5);
@@ -596,7 +598,7 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
             }
 
             wait(5);
-            if (isCrawler && !array_contains(level.wawMaps, level._mapname))
+            if (isCrawler && !level.hasDogCrawlers)
                 playFX(level.fx_flamethrowerDeathFX, currentBot.origin);
             currentBot despawnBot(isCrawler, isBoss);
         }
@@ -637,7 +639,7 @@ killBotOnNuke(isCrawler, boss)
         deathAnim = undefined;
         if (isCrawler || isDefined(self.hasBeenCrippled))
         {
-            if (array_contains(level.wawMaps, level._mapname) && !isDefined(self.hasBeenCrippled)) deathAnim = "dog_death";
+            if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled)) deathAnim = "dog_death";
             else deathAnim = "crawlerAnim_death";
         }
         else deathAnim = "z_death_nuke";
@@ -654,7 +656,7 @@ killBotOnNuke(isCrawler, boss)
             if (isDefined(self.hasBeenCrippled)) self.hasBeenCrippled = undefined;
         }
 
-        if (isCrawler && !array_contains(level.wawMaps, level._mapname))
+        if (isCrawler && !level.hasDogCrawlers)
         {
             wait(0.5);
             self moveTo(self.origin + (0, 0, 2500), 5);
@@ -707,14 +709,20 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
         //Weapon tweaks
         if (isSniper(weapon) || isSubStr(weapon, "iw5_dragunov_mp"))//Sniper damage
         {
-            mult = 4;
-            if (weaponIsUpgrade(weapon))
+            mult = 6;
+            if (isSubStr(weapon, "iw5_dragunov_mp") || isSubStr(weapon, "iw5_rsass_mp") || weapon == "rsass_hybrid_mp" || weapon == "rsass_hybrid_reflex_mp")
                 mult = 2;
+            else if (weaponIsUpgrade(weapon))
+                mult = 4;
             hitDamage = int(hitDamage * mult);
         }
         if (isShotgun(weapon))
         {
-            hitDamage = (hitDamage * 8);//Shotgun multiplier
+            if (weapon == "iw4_m1014_mp" || weapon == "iw4_m1014upgraded_mp")
+                hitDamage = (hitDamage * 4);
+            else
+                hitDamage = (hitDamage * 8);//Shotgun multiplier
+
             botHitbox thread bot_setCanDamage();//Shotgun pellet delay. This fixes the bug where shotgun hits count every pellet for score
         }
 
@@ -722,12 +730,12 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
         else if (weapon == "iw5_xm25_mp" || weapon == "iw4_m21_mp" || weapon == "javelin_mp" || weapon == "t5_raygun_mp" || weapon == "t5_raygunupgraded_mp") hitDamage = damage;
         else if (weapon == "m320_mp" || weapon == "m79_mp") hitDamage = max(damage - (level.wave * 3), 15);
         else if (weapon == "xm25_mp") hitDamage = damage * 2;
-        else if (weapon == "iw5_mk14_mp" || weapon == "iw4_fal_mp") hitDamage *= 2;
-        else if (isSubStr(weapon, "iw5_mk14_mp_reflex_xmags_camo11") || weapon == "iw4_falupgraded_mp" || weapon == "iw5_deserteagletactical_mp_camo01") hitDamage *= 3;
+        else if (weapon == "iw5_mk14_mp" || isSubStr(weapon, "iw5_mk14_mp_reflex_xmags_camo11") || weapon == "iw4_fal_mp") hitDamage = int(hitDamage * 1.5);
+        else if (weapon == "iw4_falupgraded_mp" || weapon == "iw5_deserteagletactical_mp_camo01") hitDamage *= 3;
         else if (weapon == "iw5_1887_mp_camo11") hitDamage = 200;
         else if (weapon == "iw5_1887_mp_akimbo_camo11" || weapon == "iw4_model1887upgraded_mp") hitDamage = 150;
         else if (weapon == "iw5_mk12spr_mp_acog_xmags") hitDamage = 500;//Heli Sniper damage
-        else if (weapon == "iw5_ak47_mp_xmags_camo01") hitdamage = int(hitDamage * 1.5);
+        else if (weapon == "iw5_ak47_mp_xmags_camo01") hitDamage = int(hitDamage * 1.5);
 
         //if (isThunderGun(weapon)) hitDamage = damage;//Thundergun
     }
@@ -754,7 +762,7 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
         if (level.instaKillTime == 0) botHitbox thread runBotBleedout(player);
     }
 
-    if (!botHitbox.parent.primedForNuke)
+    if (!botHitbox.parent.primedForNuke && isDefined(player))
     {
         pointGain = 5;
         if (level.isHellMap) pointGain = 10;

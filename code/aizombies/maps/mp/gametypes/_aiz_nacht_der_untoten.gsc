@@ -35,7 +35,7 @@ initSpawnZones()
     level.nacht_zoneSpawns[0][1] = [(214.863, -1085.17, 111.625), (0, 90, 0)];
     level.nacht_zoneSpawns[0][2] = [(866.042, -1062.44, 105.625), (0, 90, 0)];
     level.nacht_zoneSpawns[0][3] = [(1036.43, -588.881, 107.769), (0, -180, 0)];
-    level.nacht_zoneSpawns[0][3] = [(339.979, -479.361, 112.6), (0, -90, 0)];
+    level.nacht_zoneSpawns[0][4] = [(339.979, -479.361, 112.6), (0, -90, 0)];
     level.nacht_zoneSpawns[1][0] = [(-878.778, 225.975, 106.496), (0, -90, 0)];
     level.nacht_zoneSpawns[1][1] = [(-514.339, -163.522, 106.086), (0, 180, 0)];
     level.nacht_zoneSpawns[2][0] = [(-1130.05, -585.759, 238.192), (0, 0, 0)];

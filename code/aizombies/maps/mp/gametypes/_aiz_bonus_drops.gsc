@@ -264,7 +264,10 @@ spawnBonusDrop(type, loc)
             bonus.attachedFX = powerupFx;
         }
         else
+        {
             bonus setModel("zombie_pickup_perk_bottle");
+            bonus.angles = (0, 0, 35);
+        }
     }
 
     if (!level.legacyPowerupModels && type != DROPTYPE_NUKE && type != DROPTYPE_FREEZE && type != DROPTYPE_DOUBLEPOINTS)

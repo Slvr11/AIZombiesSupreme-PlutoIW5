@@ -587,7 +587,6 @@ initWallBuys()
 }
 initLaptops()
 {
-    //TODO: add an EE here
     level.laptops = [];
     for (i = 18; i < 2000; i++)
     {

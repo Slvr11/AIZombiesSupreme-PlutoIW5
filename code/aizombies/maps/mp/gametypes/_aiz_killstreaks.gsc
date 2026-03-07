@@ -1749,9 +1749,6 @@ dragonfly_targeting()
             {
                 forward = vectorToAngles(self.targetEnt.origin - self.origin);
                 self setGoalYaw(forward[1]);
-                //flashTag = self getTagOrigin("tag_flash");
-                //owner = self.owner;
-                //magicBullet("cobra_20mm_mp", flashTag, target.origin, owner);
                 self setTurretTargetEnt(self.targetEnt);
                 self fireWeapon("tag_flash", self.targetEnt);
                 //self playUAVFireSounds();
@@ -3692,7 +3689,7 @@ tank_engageTarget(target)
 }
 tank_flee()
 {
-    missile = MagicBullet("remote_mortar_missile_mp", self.perchPos + (0, 0, 5000), self.perchPos);
+    missile = MagicBullet("uav_strike_projectile_mp", self.perchPos + (0, 0, 5000), self.perchPos);
     missile thread tank_waitForMissileImpact(self);
 }
 tank_waitForMissileImpact(tank)
@@ -4040,7 +4037,7 @@ spawnA10()
     a10 setCanDamage(false);
     a10 setMaxPitchRoll(0, 75);
     a10 setYawSpeed(50, 25, 20, .5);
-    a10 setVehWeapon("cobra_20mm_mp");
+    a10 setVehWeapon("ac130_25mm_mp");
     self playSound("US_1mc_use_strafe");
     self teamSplash("used_a10_support");
 
@@ -4189,9 +4186,9 @@ a10_fireWeapon(target)
     gunTag = self getTagOrigin("tag_gun");
     for (i = 0; i < 8; i++)
     {
-        //magicBullet("cobra_20mm_mp", gunTag, target.origin, self.owner);
+        //magicBullet("ac130_25mm_mp", gunTag, target.origin, self.owner);
         //self fireWeapon("tag_gun", target);
-        target notify("damage", 15, self, (0, 0, 0), (0, 0, 0), "MOD_PASSTHRU", "", "", "", 0, "cobra_20mm_mp");
+        target notify("damage", 15, self, (0, 0, 0), (0, 0, 0), "MOD_PASSTHRU", "", "", "", 0, "ac130_25mm_mp");
         /*
         angles = vectorToAngles(gunTag - target.origin);
         forward = anglesToForward(angles);

@@ -113,6 +113,9 @@ LANG_ENGLISH		"Defcon Trigger System"
 REFERENCE		AIZ_DEFEAT
 LANG_ENGLISH		"Defeat!"
 
+REFERENCE		AIZ_DELTACAMP
+LANG_ENGLISH		"Delta Camp"
+
 REFERENCE		AIZ_DEVELOPER_IMPERSONATOR
 LANG_ENGLISH		" Please do not impersonate the developer."
 

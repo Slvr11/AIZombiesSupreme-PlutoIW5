@@ -1,0 +1,14 @@
+xmodel,mil_wireless_dsm_obj_full
+xmodel,com_clipboard_wpaper_obj
+
+xmodel,german_sheperd_dog
+xanim,german_shepherd_idle
+xanim,german_shepherd_run
+xanim,german_shepherd_walk
+xanim,german_shepherd_death_front
+xanim,german_shepherd_attack_player
+xanim,german_shepherd_attackidle_bark
+sound,anml_dog_die_front_collar
+sound,anml_dog_die_front
+sound,anml_dog_attack_npc_idle_collar
+sound,anml_dog_attack_npc_idle

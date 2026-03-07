@@ -5183,7 +5183,6 @@ xmodelsurfs,bouncing_betty_explosive_lod110
 xmodelsurfs,bouncing_betty_explosive_lod210
 physpreset,can_metal
 xmodel,projectile_bouncing_betty_grenade
-weapon,bomb_site_mp
 xmodelsurfs,weapon_ak47_clip_high11
 xmodelsurfs,weapon_ak47_clip_med10
 xmodel,weapon_ak47_clip
@@ -6350,7 +6349,6 @@ xmodelsurfs,weapon_javelin_lod010
 xmodelsurfs,weapon_javelin_lod110
 xmodelsurfs,weapon_javelin_lod210
 xmodel,weapon_javelin
-weapon,uav_strike_missile_mp
 image,lightglow_red_trail
 material,gfx_lightglow_red_trail
 fx,misc/light_semtex_geotrail
@@ -6394,7 +6392,6 @@ fx,fire/firelp_huge_pm_nolight
 image,fxt_smk_def_4
 material,gfx_fxt_smk_def_4_atlas21_z40
 fx,explosions/reaper_explosion_mp
-weapon,remote_mortar_missile_mp
 xanim,viewmodel_backpack_idle
 xanim,viewmodel_backpack_throw
 xanim,viewmodel_backpack_prep
@@ -9814,7 +9811,6 @@ material,hud_icon_riot_shield
 image,death_riot_shield
 material,death_riot_shield
 weapon,iw5_riotshield_mp
-weapon,iw5_riotshieldjugg_mp
 weapon,riotshield_mp
 fx,misc/claymore_laser
 xanim,viewmodel_claymore_empty_idle

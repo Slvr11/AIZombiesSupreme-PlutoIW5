@@ -30,7 +30,7 @@ spawnBot(spawnLoc, isCrawler)
 
     if (isCrawler)
     {
-        if (array_contains(level.wawMaps, level._mapname)) bot playAnimOnBot("dog_idle");
+        if (level.hasDogCrawlers) bot playAnimOnBot("dog_idle");
         else bot playAnimOnBot("crawlerAnim_idle");
     }
     else bot playAnimOnBot("z_idle");
@@ -91,6 +91,10 @@ spawnBot(spawnLoc, isCrawler)
             break;
         }
     }
+
+    if (level._mapname == "so_deltacamp")
+        bot.currentWaypoint = undefined;//Setting this to undefined so that it forces the bot to find the closest (entry) node rather than by sight in the list
+
     if (!isDefined(bot.currentWaypoint))
     {
         //If we haven't found a waypoint with the sightTrace, then find the closest waypoint and use that instead
@@ -101,8 +105,7 @@ spawnBot(spawnLoc, isCrawler)
             if (!isDefined(v))
                 continue;
             
-            heightDiff = bot.origin[2] - v.origin[2];
-            if (heightDiff < 0) heightDiff *= -1;
+            heightDiff = abs(bot.origin[2] - v.origin[2]);
             if (distanceSquared(bot.origin, v.origin) < closestDist && heightDiff < 100)
             {
                 closestDist = distanceSquared(bot.origin, v.origin);
@@ -185,6 +188,10 @@ spawnBossBot(spawnLoc)
             break;
         }
     }
+
+    if (level._mapname == "so_deltacamp")
+        bot.currentWaypoint = undefined;//Setting this to undefined so that it forces the bot to find the closest (entry) node rather than by sight in the list
+
     if (!isDefined(bot.currentWaypoint))
     {
         //If we haven't found a waypoint with the sightTrace, then find the closest waypoint and use that instead
@@ -195,8 +202,7 @@ spawnBossBot(spawnLoc)
             if (!isDefined(v))
                 continue;
             
-            heightDiff = bot.origin[2] - v.origin[2];
-            if (heightDiff < 0) heightDiff *= -1;
+            heightDiff = abs(bot.origin[2] - v.origin[2]);
             if (distanceSquared(bot.origin, v.origin) < closestDist && heightDiff < 100)
             {
                 closestDist = distanceSquared(bot.origin, v.origin);
@@ -443,7 +449,7 @@ botAI(botHitbox, isCrawler, isBoss)
             speed = ai.moveSpeed;
             distance = distance(botOrigin, targetOrigin);
 
-            if (((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) && !isDefined(ai.hasBeenCrippled)) || isBoss || (array_contains(level.wawMaps, level._mapname) && isCrawler && isPlayer(target)))
+            if (((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) && !isDefined(ai.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler && isPlayer(target)))
                 speed = 170;
             else if (isDefined(ai.hasBeenCrippled))
                 speed = 30;
@@ -460,8 +466,8 @@ botAI(botHitbox, isCrawler, isBoss)
             {
                 if (isCrawler || isDefined(ai.hasBeenCrippled))
                 {
-                    if (array_contains(level.wawMaps, level._mapname) && !isDefined(ai.hasBeenCrippled) && isPlayer(target)) ai playAnimOnBot("dog_run");
-                    else if (array_contains(level.wawMaps, level._mapname) && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_walk");
+                    if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled) && isPlayer(target)) ai playAnimOnBot("dog_run");
+                    else if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_walk");
                     else ai playAnimOnBot("crawlerAnim_walk");
                 }
                 else if (isBoss) ai playAnimOnBot("z_run");
@@ -486,7 +492,7 @@ botAI(botHitbox, isCrawler, isBoss)
             {
                 distance = distance(botOrigin, targetOrigin);
 
-                if (((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) && !isDefined(ai.hasBeenCrippled)) || isBoss || (array_contains(level.wawMaps, level._mapname) && isCrawler))
+                if (((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) && !isDefined(ai.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler))
                     speed = 170;
                 else if (isDefined(ai.hasBeenCrippled))
                     speed = 30;
@@ -501,7 +507,7 @@ botAI(botHitbox, isCrawler, isBoss)
             else if (state != "dancing")
             {
                 ai.origin = botOrigin;
-                if (array_contains(level.wawMaps, level._mapname) && isCrawler) ai playAnimOnBot("dog_lose");
+                if (level.hasDogCrawlers && isCrawler) ai playAnimOnBot("dog_lose");
                 else ai playAnimOnBot("z_lose");
                 ai.state = "dancing";
                 continue;
@@ -510,7 +516,7 @@ botAI(botHitbox, isCrawler, isBoss)
             {
                 if (isCrawler)
                 {
-                    if (array_contains(level.wawMaps, level._mapname)) ai playAnimOnBot("dog_run");
+                    if (level.hasDogCrawlers) ai playAnimOnBot("dog_run");
                     else ai playAnimOnBot("crawlerAnim_walk");
                 }
                 else if (speed > 120) ai playAnimOnBot("z_run");
@@ -528,7 +534,7 @@ botAI(botHitbox, isCrawler, isBoss)
             speed = ai.moveSpeed;
             distance = distance(botOrigin, targetOrigin);
 
-            if ((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) || isBoss || (array_contains(level.wawMaps, level._mapname) && isCrawler && isPlayer(target)))
+            if ((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler && isPlayer(target)))
                 speed = 170;
             else if (isDefined(ai.hasBeenCrippled))
                 speed = 30;
@@ -545,8 +551,8 @@ botAI(botHitbox, isCrawler, isBoss)
             {
                 if (isCrawler || isDefined(ai.hasBeenCrippled))
                 {
-                    if (array_contains(level.wawMaps, level._mapname) && !isDefined(ai.hasBeenCrippled) && isPlayer(target)) ai playAnimOnBot("dog_run");
-                    else if (array_contains(level.wawMaps, level._mapname) && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_walk");
+                    if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled) && isPlayer(target)) ai playAnimOnBot("dog_run");
+                    else if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_walk");
                     else ai playAnimOnBot("crawlerAnim_walk");
                 }
                 else if (isBoss) ai playAnimOnBot("z_run");
@@ -566,7 +572,7 @@ botAI(botHitbox, isCrawler, isBoss)
             {
                 if (isCrawler || isDefined(ai.hasBeenCrippled))
                 {
-                    if (array_contains(level.wawMaps, level._mapname) && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_idle");
+                    if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_idle");
                     else ai playAnimOnBot("crawlerAnim_idle");
                 }
                 else ai playAnimOnBot("z_idle");
@@ -598,7 +604,7 @@ ai_attackPlayer(target, isCrawler, isBoss)
     }
     else if (isCrawler || isDefined(self.hasBeenCrippled))
     {
-        if (array_contains(level.wawMaps, level._mapname) && !isDefined(self.hasBeenCrippled))
+        if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled))
         {
             self playAnimOnBot("dog_attack");
             self playSound("anml_dog_attack_npc_idle");
@@ -637,7 +643,7 @@ ai_attackPlayer(target, isCrawler, isBoss)
 
     if ((isCrawler || isDefined(self.hasBeenCrippled)) && self.isAlive)
     {
-        if (array_contains(level.wawMaps, level._mapname) && !isDefined(self.hasBeenCrippled)) self playAnimOnBot("dog_run");
+        if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled)) self playAnimOnBot("dog_run");
         else self playAnimOnBot("crawlerAnim_walk");
     }
     else if (isBoss && self.isAlive)

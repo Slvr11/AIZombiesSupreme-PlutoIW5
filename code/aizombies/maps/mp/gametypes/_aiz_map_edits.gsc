@@ -883,6 +883,8 @@ handleUsableMessage()
     self endon ("disconnect");
     self endon ("track_usable_messages");
 
+    self clearLowerMessage("usable_message");
+
     while (true)
     {
         wait(0.25);
@@ -892,13 +894,26 @@ handleUsableMessage()
 
         foreach (usable in level.usables)
         {
-            if (!isDefined(usable.range)) continue;
-
-            if (usable.usabletype == "giftTrigger" && usable.owner == self) continue;
+            if (usable.usabletype == "giftTrigger") continue;
 
             if (distanceSquared(self.origin, usable.origin) < usable.range)
             {
                 self displayUsableHintMessage(usable);
+                break;
+            }
+        }
+        if (level.allowGifting && !self.hasMessageUp)//Check gift triggers last so it can't interfere with other usables
+        {
+            foreach (usable in level.usables)
+            {
+                if (usable.usabletype != "giftTrigger") continue;
+                if (usable.owner == self) continue;
+
+                if (distanceSquared(self.origin, usable.origin) < usable.range)
+                {
+                    self displayUsableHintMessage(usable);
+                    break;
+                }
             }
         }
     }
@@ -984,12 +999,26 @@ checkPlayerUsables()
     }
     foreach (usable in level.usables)
     {
-        //if (usable.usabletype == "giftTrigger" && usable.owner == self) continue;
+        if (usable.usabletype == "giftTrigger") continue;
 
         if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
         {
             executeUsable(usable.usabletype, self, usable);
             return;//We found a usable close enough, get out of this loop
+        }
+    }
+    if (level.allowGifting)
+    {
+        foreach (usable in level.usables)//Check gift triggers last so players cannot interfere with usables
+        {
+            if (usable.usabletype != "giftTrigger") continue;
+            if (usable.owner == self) continue;
+
+            if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
+            {
+                executeUsable(usable.usabletype, self, usable);
+                return;//We found a gift trigger close enough, get out of this loop
+            }
         }
     }
 }
@@ -1310,7 +1339,7 @@ heliSniper_boardHeli_holdLogicLoop(node)
 
 givePlayerCash(recipient)
 {
-    if (!recipient.isDown) return;
+    if (recipient.isDown) return;
     if (self == recipient) return;
     if (!recipient.IsAlive || !self.IsAlive) return;
     if (self.cash < 500) return;
@@ -1611,7 +1640,7 @@ perkCrate(origin, angles, perk)
     }
     if (perk == -1)
     {
-        cosr = 2500;
+        cost = 2500;
         icon = "specialty_light_armor";
     }
 
@@ -1747,6 +1776,8 @@ wallWeapon(origin, angles, weapon, price)
 {
     wep = spawn("script_model", origin);
     model = getWeaponModel(weapon);
+    if (weapon == "frag_grenade_mp")
+        model = "weapon_m67_grenade";
     wep setModel(model);
     if (isSubStr("iw4_", weapon))
     {
@@ -2748,50 +2779,13 @@ usePapBox(box, currentGun)
         else weapon showPart("tag_sight_on");
     }
 
-    wait(1);
-
-    box playLoopSound("aiz_upgrade_loop");
-    if (array_contains(level.wawMaps, level._mapname))
-        weapon moveTo(box.origin + (0, 20, 60), 2);
-    else
-        weapon moveTo(box.origin + (0, 0, 10), 2);
-
-    wait(2);
-
-    wep = box.weaponName;
-    weapon setModel(getWeaponUpgradeModel(currentGun));
-
-    if ((isSubStr(upgradeWeapon, "iw4_") && upgradeWeapon != "iw4_onemanarmy_mp") || upgradeWeapon == "rsass_hybrid_mp")
-    {
-        weapon hideAllParts();
-        weapon showPart("tag_weapon");
-        weapon showPart("tag_clip");
-        if (upgradeWeapon == "iw4_pp2000upgraded2_mp" || upgradeWeapon == "iw4_ak47thermalupgraded_mp") weapon showPart("tag_thermal_scope");
-        if (upgradeWeapon == "iw4_pp2000upgraded_mp" || upgradeWeapon == "iw4_krissupgraded_mp" || upgradeWeapon == "iw4_masadaupgraded_mp" || upgradeWeapon == "iw4_falupgraded_mp") weapon showPart("tag_red_dot");
-        if (upgradeWeapon == "iw4_augupgraded2_mp") weapon showPart("tag_steyr_scope");
-        if (upgradeWeapon == "iw4_sa80upgraded2_mp") weapon showPart("tag_sa80_scope");
-        if (upgradeWeapon == "iw4_fn2000upgraded_mp") weapon showPart("tag_fn2000_scope");
-        if (upgradeWeapon == "iw4_tavorupgraded_mp") weapon showPart("tag_tavor_scope");
-        if (upgradeWeapon == "iw4_augupgraded2_mp" || upgradeWeapon == "iw4_pp2000upgraded2_mp" || upgradeWeapon == "iw4_uziupgraded_mp" || upgradeWeapon == "iw4_tmpsilencerupgraded_mp" || upgradeWeapon == "iw4_m4silencerupgraded_mp" || upgradeWeapon == "iw4_tmpsilencerupgraded_mp" || upgradeWeapon == "iw4_krissupgraded2_mp") weapon showPart("tag_silencer");
-        if (upgradeWeapon == "iw4_uziupgraded_mp" || upgradeWeapon == "iw4_dragunovupgraded_mp" || upgradeWeapon == "iw4_wa2000upgraded_mp" || upgradeWeapon == "iw4_famasupgraded_mp" || upgradeWeapon == "iw4_barrettupgraded_mp" || upgradeWeapon == "iw4_m21upgraded_mp" || upgradeWeapon == "iw4_m4silencerupgraded_mp") weapon showPart("tag_acog_2");
-        if (upgradeWeapon == "iw4_mg4upgraded_mp" || upgradeWeapon == "iw4_m240upgraded_mp" || upgradeWeapon == "iw4_rpdupgraded_mp" || upgradeWeapon == "iw4_ump45upgraded_mp" || upgradeWeapon == "iw4_m16upgraded_mp" || upgradeWeapon == "iw4_m4reflexupgraded_mp" || upgradeWeapon == "iw4_augupgraded_mp" || upgradeWeapon == "iw4_scarupgraded_mp" || upgradeWeapon == "iw4_raygunupgraded_mp") weapon showPart("tag_eotech");
-        if (upgradeWeapon == "iw4_rpdupgraded_mp" || upgradeWeapon == "iw4_sa80upgraded_mp" || upgradeWeapon == "iw4_aa12upgraded_mp" || upgradeWeapon == "iw4_spas12upgraded_mp" || upgradeWeapon == "iw4_striker_mp") weapon showPart("tag_foregrip");
-        if (upgradeWeapon == "iw4_m4reflexupgraded_mp") weapon showPart("tag_shotgun");
-        if (upgradeWeapon == "iw4_ak47thermalupgraded_mp") weapon showPart("tag_gp25");
-        if (upgradeWeapon == "iw4_colt45upgraded_mp") weapon showPart("j_pistol_grip");
-        if (upgradeWeapon == "rsass_hybrid_mp")
-        {
-            weapon showPart("tag_thermal_scope");
-            weapon showPart("tag_red_dot");
-        }
-    }
-
     tag = "tag_origin";
     tagOffset = (0, 0, 0);
     model = "tag_origin";
-    tokenizedWeapon = strTok(wep, "_");
+    tokenizedWeapon = strTok(currentGun, "_");
+    attachEnts = box.attachments;
 
-    foreach (a in maps\mp\gametypes\_aiz::getWeaponAttachments(wep))
+    foreach (a in getWeaponAttachments(currentGun))
     {
         switch (a)
         {
@@ -2906,7 +2900,183 @@ usePapBox(box, currentGun)
 
         tagOrigin = weapon getTagOrigin(tag);
         tagAngles = weapon getTagAngles(tag);
-        attachEnts = box.attachments;
+
+        if (attachEnts[0].model == "tag_origin")
+        {
+            attachEnts[0] show();
+            attachEnts[0] unlink();
+            attachEnts[0].angles = tagAngles;
+            attachEnts[0] setModel(model);
+            attachEnts[0].origin = tagOrigin + tagOffset;
+            attachEnts[0] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+        }
+        else
+        {
+            attachEnts[1] show();
+            attachEnts[1] unlink();
+            attachEnts[1].angles = tagAngles;
+            attachEnts[1] setModel(model);
+            attachEnts[1].origin = tagOrigin + tagOffset;
+            attachEnts[1] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+        }
+    }
+
+    wait(1);
+
+    box playLoopSound("aiz_upgrade_loop");
+    if (array_contains(level.wawMaps, level._mapname))
+        weapon moveTo(box.origin + (0, 20, 60), 2);
+    else
+        weapon moveTo(box.origin + (0, 0, 10), 2);
+
+    wait(2);
+
+    weapon setModel(getWeaponUpgradeModel(currentGun));
+
+    if ((isSubStr(upgradeWeapon, "iw4_") && upgradeWeapon != "iw4_onemanarmy_mp") || upgradeWeapon == "rsass_hybrid_mp")
+    {
+        weapon hideAllParts();
+        weapon showPart("tag_weapon");
+        weapon showPart("tag_clip");
+        if (upgradeWeapon == "iw4_pp2000upgraded2_mp" || upgradeWeapon == "iw4_ak47thermalupgraded_mp") weapon showPart("tag_thermal_scope");
+        if (upgradeWeapon == "iw4_pp2000upgraded_mp" || upgradeWeapon == "iw4_krissupgraded_mp" || upgradeWeapon == "iw4_masadaupgraded_mp" || upgradeWeapon == "iw4_falupgraded_mp") weapon showPart("tag_red_dot");
+        if (upgradeWeapon == "iw4_augupgraded2_mp") weapon showPart("tag_steyr_scope");
+        if (upgradeWeapon == "iw4_sa80upgraded2_mp") weapon showPart("tag_sa80_scope");
+        if (upgradeWeapon == "iw4_fn2000upgraded_mp") weapon showPart("tag_fn2000_scope");
+        if (upgradeWeapon == "iw4_tavorupgraded_mp") weapon showPart("tag_tavor_scope");
+        if (upgradeWeapon == "iw4_augupgraded2_mp" || upgradeWeapon == "iw4_pp2000upgraded2_mp" || upgradeWeapon == "iw4_uziupgraded_mp" || upgradeWeapon == "iw4_tmpsilencerupgraded_mp" || upgradeWeapon == "iw4_m4silencerupgraded_mp" || upgradeWeapon == "iw4_tmpsilencerupgraded_mp" || upgradeWeapon == "iw4_krissupgraded2_mp") weapon showPart("tag_silencer");
+        if (upgradeWeapon == "iw4_uziupgraded_mp" || upgradeWeapon == "iw4_dragunovupgraded_mp" || upgradeWeapon == "iw4_wa2000upgraded_mp" || upgradeWeapon == "iw4_famasupgraded_mp" || upgradeWeapon == "iw4_barrettupgraded_mp" || upgradeWeapon == "iw4_m21upgraded_mp" || upgradeWeapon == "iw4_m4silencerupgraded_mp") weapon showPart("tag_acog_2");
+        if (upgradeWeapon == "iw4_mg4upgraded_mp" || upgradeWeapon == "iw4_m240upgraded_mp" || upgradeWeapon == "iw4_rpdupgraded_mp" || upgradeWeapon == "iw4_ump45upgraded_mp" || upgradeWeapon == "iw4_m16upgraded_mp" || upgradeWeapon == "iw4_m4reflexupgraded_mp" || upgradeWeapon == "iw4_augupgraded_mp" || upgradeWeapon == "iw4_scarupgraded_mp" || upgradeWeapon == "iw4_raygunupgraded_mp") weapon showPart("tag_eotech");
+        if (upgradeWeapon == "iw4_rpdupgraded_mp" || upgradeWeapon == "iw4_sa80upgraded_mp" || upgradeWeapon == "iw4_aa12upgraded_mp" || upgradeWeapon == "iw4_spas12upgraded_mp" || upgradeWeapon == "iw4_striker_mp") weapon showPart("tag_foregrip");
+        if (upgradeWeapon == "iw4_m4reflexupgraded_mp") weapon showPart("tag_shotgun");
+        if (upgradeWeapon == "iw4_ak47thermalupgraded_mp") weapon showPart("tag_gp25");
+        if (upgradeWeapon == "iw4_colt45upgraded_mp") weapon showPart("j_pistol_grip");
+        if (upgradeWeapon == "rsass_hybrid_mp")
+        {
+            weapon showPart("tag_thermal_scope");
+            weapon showPart("tag_red_dot");
+        }
+    }
+
+    attachEnts[0] setModel("tag_origin");
+    attachEnts[1] setModel("tag_origin");
+    tokenizedWeapon = strTok(upgradeWeapon, "_");
+
+    foreach (a in getWeaponAttachments(upgradeWeapon))
+    {
+        switch (a)
+        {
+            case "reflex":
+            case "reflexsmg":
+            case "reflexlmg":
+                tag = "tag_red_dot";
+                model = "weapon_reflex_iw5";
+                break;
+            case "acog":
+            case "acogsmg":
+            case "acoglmg":
+                tag = "tag_acog_2";
+                model = "weapon_acog";
+                break;
+            case "grip":
+                tag = "tag_foregrip";
+                model = "weapon_remington_foregrip";
+                break;
+            case "akimbo":
+                tag = "tag_weapon";
+                tagOffset = (6, 5, 2);
+                model = weapon.model;
+                break;
+            case "thermal":
+            case "thermalsmg":
+            case "thermallmg":
+                tag = "tag_thermal_scope";
+                model = "weapon_thermal_scope";
+                break;
+            case "shotgun":
+                tag = "tag_shotgun";
+                model = "weapon_shotgun";
+                break;
+            case "heartbeat":
+                tag = "tag_heartbeat";
+                model = "weapon_heartbeat_iw5";
+                break;
+            case "eotech":
+            case "eotechsmg":
+            case "eotechlmg":
+                tag = "tag_eotech";
+                model = "weapon_eotech";
+                break;
+            case "gl":
+                tag = "tag_m203";
+                model = "weapon_m203";
+                break;
+            case "gp25":
+                tag = "tag_gp25";
+                model = "weapon_gp25";
+                break;
+            case "m320":
+                tag = "tag_m320";
+                model = "weapon_m320";
+                break;
+            case "silencer":
+                tag = "tag_flash";
+                model = "weapon_silencer_01";
+                break;
+            case "silencer02":
+                tag = "tag_flash";
+                model = "weapon_silencer_02";
+                break;
+            case "silencer03":
+                tag = "tag_flash";
+                model = "weapon_silencer_03";
+                break;
+            case "hamrhybrid":
+                tag = "tag_hamr_hybrid";
+                model = "weapon_hamr_hybrid";
+                break;
+            case "hybrid":
+                tag = "tag_magnifier";
+                model = "weapon_magnifier";
+                break;
+            case "tactical":
+                tag = "tag_weapon";
+                model = "weapon_parabolic_knife";
+                tagOffset = (2, 0, -3);
+                break;
+            case "dragunovscopevz":
+            case "rsassscopevz":
+            case "as50scopevz":
+            case "dragunovscope":
+            case "rsassscope":
+            case "as50scope":
+                tag = "tag_" + tokenizedWeapon[1] + "_scope";
+                model = "weapon_" + tokenizedWeapon[1] + "_scope_iw5";
+                break;
+            case "l96a1scope":
+            case "l96a1scopevz":
+                tag = "tag_scope";
+                model = "weapon_" + tokenizedWeapon[1] + "_scope_iw5";
+                break;
+            case "barrettscope":
+            case "barrettscopevz":
+                tag = "tag_m82_scope";
+                model = "weapon_m82_scope_iw5";
+                break;
+            case "msrscope":
+            case "msrscopevz":
+                tag = "tag_scope";
+                model = "weapon_remington_" + tokenizedWeapon[1] + "_scope_iw5";
+                break;
+            case "cheytacscope":
+            case "cheytacscope2":
+                tag = "tag_cheytac_scope";
+                model = "weapon_cheytac_scope";
+                break;
+        }
+
+        tagOrigin = weapon getTagOrigin(tag);
+        tagAngles = weapon getTagAngles(tag);
 
         if (attachEnts[0].model == "tag_origin")
         {
@@ -3744,8 +3914,8 @@ elevator_dropOffPlayer(player, start, drop)
 }
 useZipline(zipline)
 {
-    if (self.isDown || !level.powerActivated || !self.isAlive/* || self.cash < 5000*/ || zipline.isMoving) return;
-    //self.cash -= 5000;
+    if (self.isDown || !level.powerActivated || !self.isAlive || self.cash < 5000 || zipline.isMoving) return;
+    self.cash -= 5000;
     self maps\mp\gametypes\_aiz_hud::scorePopup(-5000);
     self maps\mp\gametypes\_aiz_hud::scoreMessage(&"Zipline!");
     self.notTargetable = true;//Setting this flag to make the user not targeted by bots
@@ -3779,15 +3949,29 @@ zipline_ridePath(player, start, path)
     for (i = 0; i < path.size; i++)
     {
         self moveTo(path[i], travelTime);
+
         wait(travelTime);
+
         travelTime = 10;
+        if (level._mapname == "so_deltacamp" && level.mapVariation == 0)
+            travelTime = 2;
+    }
+
+    if (level._mapname == "so_deltacamp" && level.mapVariation == 0)
+    {
+        if (player.isAlive)
+        {
+            player unlink();
+            player setOrigin(path[path.size - 1] + (0, 0, 100));
+            player.notTargetable = false;
+        }
     }
 
     self moveTo(start, 5);
 
     wait(5);
 
-    if (player.isAlive)
+    if (player.isAlive && (level._mapname != "so_deltacamp" || (level._mapname == "so_deltacamp" && level.mapVariation != 0)))
     {
         player unlink();
         player setOrigin(start + (0, 0, 50));

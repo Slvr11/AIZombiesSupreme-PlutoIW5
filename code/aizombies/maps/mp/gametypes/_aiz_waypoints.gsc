@@ -107,6 +107,8 @@ getWaypointsForMap()
     switch (currentMap)
     {
         case "mp_aground_ss":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (733.652,1636.66,496.9419);
             waypoints[waypoints.size] = (226.6237,1550.334,440.343);
             waypoints[waypoints.size] = (-637.0939,1039.916,343.7559);
@@ -145,6 +147,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (439.6286,1289.428,425.9085);
             waypoints[waypoints.size] = (282.8477,1236.392,408.9233);
             waypoints[waypoints.size] = (-23.04194,812.4047,256.2316);
+        }
         break;
         case "mp_alpha":
         if (level.mapVariation == 0)
@@ -205,6 +208,8 @@ getWaypointsForMap()
         }
         break;
         case "mp_boardwalk":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (-1014.913,401.7431,128);
             waypoints[waypoints.size] = (-678.6538,396.5154,128);
             waypoints[waypoints.size] = (-612.5169,615.4767,128);
@@ -226,6 +231,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (-990.6927,2897.237,128);
             waypoints[waypoints.size] = (-1095.524,2798.089,128);
             waypoints[waypoints.size] = (-845.6041,2504.747,128);
+        }
         break;
         case "mp_bootleg":
         if (level.mapVariation == 0)
@@ -395,6 +401,8 @@ getWaypointsForMap()
         }
         break;
         case "mp_cement":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (-6540.343,1889.919,296.1241);
             waypoints[waypoints.size] = (-6301.234,1766.983,296.125);
             waypoints[waypoints.size] = (-6582.174,1342.147,296.1248);
@@ -412,8 +420,11 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (-4987.105,74.91043,296.1249);
             waypoints[waypoints.size] = (-4817.042,-196.4114,296);
             waypoints[waypoints.size] = (-5041.343,-627.3614,296.125);
+        }
         break;
         case "mp_courtyard_ss":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (765.4263,123.6526,121.1011);
             waypoints[waypoints.size] = (274.5121,146.3001,127.9569);
             waypoints[waypoints.size] = (548.4968,114.0349,0.6397166);
@@ -446,6 +457,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (-250.255,-667.8112,-1.375128);
             waypoints[waypoints.size] = (-231.8368,-818.8183,-1.516071);
             waypoints[waypoints.size] = (160.351,-813.4573,0.5000032);
+        }
         break;
         case "mp_crosswalk_ss":
         if (level.mapVariation == 0)
@@ -754,6 +766,8 @@ getWaypointsForMap()
         }
         break;
         case "mp_interchange":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (-329.9671,479.1274,66.11772);
             waypoints[waypoints.size] = (29.56694,198.2987,97.69564);
             waypoints[waypoints.size] = (-294.1086,16.41811,70.28242);
@@ -778,6 +792,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (503.2209,-724.1669,158.8839);
             waypoints[waypoints.size] = (675.0354,-834.9918,149.0804);
             waypoints[waypoints.size] = (302.5191,-280.1024,100.7017);
+        }
         break;
         case "mp_italy":
         if (level.mapVariation == 0)
@@ -948,6 +963,8 @@ getWaypointsForMap()
         }
         break;
         case "mp_moab":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (1196.604,3350.236,418.2322);
             waypoints[waypoints.size] = (1741.884,2884.154,450.9742);
             waypoints[waypoints.size] = (1824.33,1785.374,494.4743);
@@ -964,6 +981,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (1119.763,3154.987,369.2847);
             waypoints[waypoints.size] = (1417.254,3109.489,372.5394);
             waypoints[waypoints.size] = (1602.485,2977.34,407.0193);
+        }
         break;
         case "mp_mogadishu":
         if (level.mapVariation == 0)
@@ -1443,6 +1461,8 @@ getWaypointsForMap()
         }
         break;
         case "mp_restrepo_ss":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (529.7711,-197.3505,1767.419);
             waypoints[waypoints.size] = (838.9585,-186.4518,1773.339);
             waypoints[waypoints.size] = (832.6954,-111.1965,1767.125);
@@ -1457,8 +1477,11 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (570.2711,453.4537,1822.251);
             waypoints[waypoints.size] = (549.6586,543.2178,1820.502);
             waypoints[waypoints.size] = (10.91213, 242.3685, 1664.692);
+        }
         break;
         case "mp_roughneck":
+        if (level.mapVariation == 0)
+        {
             waypoints[waypoints.size] = (-1483.544,352.4547,-7.875003);
             waypoints[waypoints.size] = (-1378.604,472.1647,-7.875003);
             waypoints[waypoints.size] = (-1232.354,582.1242,-7.874998);
@@ -1474,6 +1497,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (-469.2297,364.0029,-7.875004);
             waypoints[waypoints.size] = (-65.10684,815.3013,-7.875001);
             waypoints[waypoints.size] = (-825.7244,-72.64057,-7.875003);
+        }
         break;
         case "mp_seatown":
         if (level.mapVariation == 0)
@@ -2695,6 +2719,33 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (-559.811, -726.157, 244.374);
             waypoints[waypoints.size] = (-233.579, -724.74, 244.415);
             waypoints[waypoints.size] = (-229.425, -441.876, 285.125);
+        }
+        break;
+        case "so_deltacamp":
+        if (level.mapVariation == 0)
+        {
+            waypoints[waypoints.size] = (-529.562, -1439.03, 100.125);
+            waypoints[waypoints.size] = (-107.178, -1461.24, 64.125);
+            waypoints[waypoints.size] = (100.146, -1320.36, 64.125);
+            waypoints[waypoints.size] = (-97.5518, -1015.42, 64.125);
+            waypoints[waypoints.size] = (-16.4089, -357.002, 1.84189);
+            waypoints[waypoints.size] = (312.357, 45.8377, 0.125002);
+            waypoints[waypoints.size] = (98.8552, 375.557, 0.124993);
+            waypoints[waypoints.size] = (-212.32, 383.833, 0.124999);
+            waypoints[waypoints.size] = (-261.798, 533.971, 20);
+            waypoints[waypoints.size] = (-719.419, 405.894, 0.124999);
+            waypoints[waypoints.size] = (-877.155, 253.1, 64.125);
+            waypoints[waypoints.size] = (-892.204, 9.94323, 192.125);
+            waypoints[waypoints.size] = (-814.483, -636.892, 192.125);
+            waypoints[waypoints.size] = (-348.087, -608.247, 192.125);
+            waypoints[waypoints.size] = (294.078, -666.538, 192.125);
+            waypoints[waypoints.size] = (500.993, -641.559, 256.125);
+            waypoints[waypoints.size] = (714.418, -644.624, 256.125);
+            waypoints[waypoints.size] = (728.136, -955.418, 256.125);
+            waypoints[waypoints.size] = (656.656, -1014.5, 248.125);
+            waypoints[waypoints.size] = (-744.875, -1465.33, 130);
+            waypoints[waypoints.size] = (-744.875, -1340.05, 130);
+            waypoints[waypoints.size] = (-744.875, -1221.73, 130);
         }
         break;
     }

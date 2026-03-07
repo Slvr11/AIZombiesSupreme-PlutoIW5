@@ -62,7 +62,7 @@ setRandomMapVariation()
             variations = 2;
         break;
         case "mp_interchange":
-            variations = 1;
+            variations = 2;
         break;
         case "mp_italy":
             variations = 2;
@@ -215,6 +215,9 @@ setRandomMapVariation()
             variations = 1;
         break;
         case "mp_factory_sh":
+            variations = 1;
+        break;
+        case "so_deltacamp":
             variations = 1;
         break;
     }
@@ -1060,7 +1063,7 @@ loadMapEdits()
                 spawnMapEditObject("zombiespawn", (-757.5242, -197.3448, -408.4955), (0, 64.31972, 0));
                 spawnMapEditObject("zombiespawn", (-815.6216, 1462.184, -247.1191), (0, -35.96349, 0));
                 spawnMapEditObject("killstreak", (1429.588, 661.9382, -303.2302), (0, -9, 0));
-                //spawnMapEditObject("bank", (1172.833, 1423.236, -228.8413), (90, 0, 0));
+                spawnMapEditObject("bank", (1172.833, 1423.236, -228.8413), (90, 0, 0));
                 spawnMapEditObject("timedTeleporter", (689.1306, 728.9147, -378.4062), (0, -10, 0), (477.4431, -1271.998, -355.7211), (0, 55.05823, 0), (650.3278, 1576.241, -254.875), (90, 85, 0), 60);
                 spawnMapEditObject("maxWave", 30);
                 spawnMapEditObject("mapname", "Desert Outpost");
@@ -1521,6 +1524,51 @@ loadMapEdits()
                 spawnMapEditObject("perk1Interchange", 0);
                 spawnMapEditObject("maxWave", 30);
                 spawnMapEditObject("mapname", "Demolished Underpass");
+            }
+            else if (level.mapVariation == 1)
+            {
+                spawnMapEditObject("ramp", (3610.07, 340.182, 90), (2994.87, -37.1345, 90));
+                spawnMapEditObject("ramp", (3296.37, 59.185, 90), (3025.06, -103.134, 90));
+                spawnMapEditObject("ramp", (3313.47, -29.266, 90), (3072.04, -175.5, 90));
+                spawnMapEditObject("ramp", (3382.51, -83.592, 90), (3114.01, -250.172, 90));
+                spawnMapEditObject("ramp", (3427.14, -157.554, 90),  (3161.37, -319.751, 90));
+                spawnMapEditObject("crate", (3116.37, -97.6399, 90),  (0, 158, 0));
+                spawnMapEditObject("crate", (3051.3, -145.332, 90),  (0, 120, 0));
+
+                spawnMapEditObject("invisiblewall", (2665.19, -906.308, 200), (3404.53, -1391.91, 250));
+                spawnMapEditObject("invisiblewall", (3404.53, -1391.91, 200), (3947.02, -1015.32, 350));
+
+                spawnMapEditObject("model", "com_trafficcone02", (3532, 555.57, 90.4201), (0, -133.125, 0));
+                spawnMapEditObject("model", "com_trafficcone02", (3563, 504.976, 90.0161), (0, -132.279, 0));
+                spawnMapEditObject("model", "com_trafficcone02", (3587, 467.222, 89.7255), (0, -25, 0));
+                spawnMapEditObject("model", "com_trafficcone02", (3558, 529.514, 90.216), (0, -158.767, 0));
+                spawnMapEditObject("model", "com_trafficcone02", (3610.93, 452, 89.9191), (0, -100.38, 0));
+                spawnMapEditObject("model", "com_trafficcone02", (3641, 379.901, 110), (0, 102.597, 0));
+
+                spawnMapEditObject("invisiblewall", (2534.702, -27.41552, 100.2292), (3519.319, 583.3395, 250));
+                spawnMapEditObject("invisiblewall", (3669.49, 341.3356, 100.5753), (3519.319, 583.3395, 250));
+
+                spawnMapEditObject("randombox", (3013.579, -1096.201, 129.1245), (0, 143.3842, 0), (3785.007, -750.7286, 131.19), (0, -60.42862, 0));
+                spawnMapEditObject("gambler", (3576.009, -406.3971, 126.0621), (0, -60.07156, 0));
+                spawnMapEditObject("bank", (3639.34, 332.7869, 140.6156), (90, 169.3449, 0));
+                spawnMapEditObject("ammo", (3175.794, -228.7069, 120.9573), (0, -54.31473, 0));
+                spawnMapEditObject("killstreak", (3355.216, -38.37386, 120.9573), (0, -60.11002, 0));
+                spawnMapEditObject("pap", (3554.906, 468.8546, 103.12099), (0, -59.34097, 0));
+                spawnMapEditObject("power", (3087.046, 81.16693, 84.83474), (0, -152.8181, 0));
+                spawnMapEditObject("perk1", (3294.96, -717.5992, 133.0938), (90, 117.0006, 0));
+                spawnMapEditObject("perk2", (2800.694, -732.6396,114.92171), (90, -35.23148, 0));
+                spawnMapEditObject("perk3", (3412.921, -1375.412, 186.1513), (90, 98.95005, 0));
+                spawnMapEditObject("perk4", (2826.134, 109.1207, 98.92206), (90, -129.7578, 0));
+                spawnMapEditObject("perk5", (2769.584, -313.3836, 108.14931), (90, 32.55966, 0));
+                spawnMapEditObject("perk6", (3331.596, -928.7404, 132.3798), (90, -150.6868, 0));
+                spawnMapEditObject("perk7", (3931.56, -983.355, 150), (90, 167.197, 0));
+                spawnMapEditObject("spawn", (3158.199, -613.1039, 95.10172), (3.113422, 114.4517, 0));
+                spawnMapEditObject("zombiespawn", (3845.666, -1171.01, 129.0749), (0, 125.2568, 0));
+                spawnMapEditObject("zombiespawn", (3509.739, -1391.584, 130.2114), (0, 124.5372, 0));
+                spawnMapEditObject("zombiespawn", (2947.002, -1135.521, 136.6083), (0, 54.19174, 0));
+                spawnMapEditObject("zombiespawn", (2771.567, -498.6594, 85.3782), (0, -4.250031, 0));
+                spawnMapEditObject("maxWave", 30);
+                spawnMapEditObject("mapname", "Abandoned Factory");
             }
         break;
         case "mp_italy":
@@ -3145,100 +3193,101 @@ loadMapEdits()
         break;
         case "mp_terminal":
         case "mp_terminal_cls":
-            if (level._mapname == "mp_terminal" || (level.classicMapsEnabled && randomInt(100) > 50))
-            {
-                spawnMapEditObject("invisiblewall", (2295, 4425, 210), (2695, 4435, 400.2));
-                spawnMapEditObject("invisiblewall", (1802,4782, 216),(605, 4781, 267));
-                spawnMapEditObject("invisiblewall", (407,4646, 207),(304, 4648, 293));
-                spawnMapEditObject("invisiblewall", (1858,4435, 324),(1858, 4046, 419));
-                spawnMapEditObject("invisiblewall", (1858,3935, 326),(1858, 3554, 418));
-                spawnMapEditObject("invisiblewall", (1913,3429, 200),(2151, 3191, 295));
-                spawnMapEditObject("invisiblecrate", (2209,4257,315),(0,180,0));
-                spawnMapEditObject("invisiblecrate", (1453,4440,315),(0,0,0));
-                spawnMapEditObject("invisiblecrate", (1505,4439,315),(0,0,0));
-
-                spawnMapEditObject("elevator", (1595,3988,315),(0,0,0),(1617,3050,197),(1617,3000,197));//Zipline
-                spawnMapEditObject("elevator", (1401,4040,315),(0,90,0),(619,3836,357),(619,3775,357));//Zipline2
-                spawnMapEditObject("elevator",(1771,3938,42),(0,0,0),(1791,3945,306), (1726.971, 3997, 306));
-
-                spawnMapEditObject("randombox", (1840,4339,179),(0,90,0));
-                spawnMapEditObject("power", (1658,2948,195),(0,190,0));
-                spawnMapEditObject("bank", (2038,3294,136),(0,316,0));
-                spawnMapEditObject("ammo", (715,2893,56),(0,0,0));
-                spawnMapEditObject("gambler", (610,4202,218),(0,180,0));
-                spawnMapEditObject("killstreak", (983,4142,51),(0,90,0));
-                spawnMapEditObject("pap", (609,2763,213),(0,180,0),(607,2808,213));
-                spawnMapEditObject("ramp", (1739.2, -2213.0, 0), (1741.3, -2479, 190.1));
-                spawnMapEditObject("perk1", (1761,4215,448),(0,90,0));
-                spawnMapEditObject("perk2", (1392,4730,55),(0,90,0));
-                spawnMapEditObject("perk3", (550,3062,213),(0,90,0));
-                spawnMapEditObject("perk4", (354,4595,201),(0,0,0));
-                spawnMapEditObject("perk5", (550,3527,213),(0,90,0));
-                spawnMapEditObject("perk6", (673,3059,213),(0,90,0));
-                spawnMapEditObject("perk7", (674,4020,213),(0,90,0));
-                spawnMapEditObject("spawn", (1503,4095,184), (0, 0, 0));
-                spawnMapEditObject("spawn", (1586,4094,184), (0, 0, 0));
-                spawnMapEditObject("spawn", (1700,4084,184), (0, 0, 0));
-                spawnMapEditObject("spawn", (1773,4079,184), (0, 0, 0));
-                spawnMapEditObject("spawn", (1693,4231,184), (0, 0, 0));
-                spawnMapEditObject("spawn", (1582,4237,184), (0, 0, 0));
-                spawnMapEditObject("zombiespawn", (2814,2838,63), (0, 0, 0));
-                spawnMapEditObject("zombiespawn", (45,4253,51), (0, 0, 0));
-                spawnMapEditObject("zombiespawn", (11,4157,51), (0, 0, 0));
-                spawnMapEditObject("zombiespawn", (2917,3983,95), (0, 0, 0));
-                spawnMapEditObject("zombiespawn", (2426,4398,198), (0, 0, 0));
-                spawnMapEditObject("mapname", "Airport Invasion");
-                spawnMapEditObject("maxWave", 30);
-                level.mapVariation = 0;
-                return;
-            }
             if (level.mapVariation == 0)
             {
-                spawnMapEditObject("invisiblewall", (1840.927, 4799.125, 192.125), (602.5479, 4792.131, 300.1762));
-                spawnMapEditObject("invisiblewall", (290.1553, 4673.125, 192.125), (422.2553, 4666.125, 301.1136));
-                spawnMapEditObject("invisiblewall", (2275.014, 4400.125, 224.125), (2691.735, 4400.125, 292.9139));
-                spawnMapEditObject("invisiblewall", (2240.585, 4247.875, 274.123), (2184.566, 4247.861, 296.8596));
-                spawnMapEditObject("invisiblewall", (1887.615, 4053.125, 308.125), (1886.905, 4435.866, 411.859));
-                spawnMapEditObject("invisiblewall", (1885.125, 4549.125, 308.125), (1875.625, 4721.875, 409.875));
-                spawnMapEditObject("invisiblewall", (712.5687, 3700.58, 272.4049), (712.5981, 3650.694, 303.1044));
-                spawnMapEditObject("invisiblewall", (1599.215, 4440.039, 304.125), (1372.862, 4437.242, 352.6452));
-                spawnMapEditObject("invisiblewall", (1867.991, 3928.875, 182.125), (1867.603, 3554.125, 409.8424));
-                spawnMapEditObject("wall", (1564.913, 4442.386, 304.125), (1379.761, 4440.539, 312.125));
-                spawnMapEditObject("randombox", (1840.875, 4346.175, 183.125), (0, -91.08215, 0), (1314.078, 3675.125, 55.125), (0, 179.8077, 0), (2437.526, 3340.875, 63.125), (0, -0.9228516, 0));
-                spawnMapEditObject("gambler", (612.4559, 4175.171, 218.625), (0, 0.8843994, 0));
-                spawnMapEditObject("bank", (404.8736, 2707.825, 70.125), (90, 179.4397, 0));
-                spawnMapEditObject("ammo", (714.8166, 2888.963, 55.125), (0, -0.1922607, 0));
-                spawnMapEditObject("killstreak", (983.3201, 4159.703, 55.125), (0, 89.62646, 0));
-                spawnMapEditObject("pap", (612.2808, 2763.94, 217.625), (0, -176.9513, 0));
-                spawnMapEditObject("power", (1656.062, 2960.48, 199.125), (0, -168.2886, 0));
-                spawnMapEditObject("elevator", (1733.861, 3954.416, 36.12388), (0, 1.257935, 0), (1733.861, 3954.416, 317.5), (1726.971, 3997.306, 304.125));
-                spawnMapEditObject("perk1", (1752.475, 4216.479, 467.125), (90, 179.4452, 0));
-                spawnMapEditObject("perk2", (1392.874, 4753.224, 74.125), (90, 179.4397, 0));
-                spawnMapEditObject("perk3", (550.1259, 3056.958, 233.625), (90, -0.1977539, 0));
-                spawnMapEditObject("perk4", (2023.333, 3299.212, 150.125), (90, -135.8295, 0));
-                spawnMapEditObject("perk5", (550.1253, 3514.623, 233.625), (90, -1.642456, 0));
-                spawnMapEditObject("perk6", (673.8747, 3060.715, 233.625), (90, 179.8022, 0));
-                spawnMapEditObject("perk7", (673.8749, 4019.227, 233.625), (90, -179.8407, 0));
-                spawnMapEditObject("spawn", (1603.571, 4231.952, 168.125), (4.915161, -2.005005, 0));
-                spawnMapEditObject("zombiespawn", (2869.875, 3984.578, 84.125), (0, 179.0771, 0));
-                spawnMapEditObject("zombiespawn", (21.68769, 4159.032, 40.125), (0, -36.63391, 0));
-                spawnMapEditObject("zombiespawn", (29.15979, 4260.635, 40.125), (0, 0.5273438, 0));
-                spawnMapEditObject("zombiespawn", (2429.905, 4486.164, 192.125), (0, -88.93433, 0));
-                spawnMapEditObject("zombiespawn", (2754.289, 2901.905, 76.125), (0, 178.0005, 0));
-                spawnMapEditObject("maxWave", 30);
-                spawnMapEditObject("mapname", "Death Row");
-                spawnMapEditObject("invisiblewall", (7.125029, 4797.857, 209.125), (103.875, 4790.625, 285.875));
-                spawnMapEditObject("invisiblewall", (713.9955, 3729.535, 282.6621), (711.9826, 3677.362, 344.9545));
-                spawnMapEditObject("ramp", (1478.975, 4123.909, 304.125), (1592.477, 4128.236, 332.2146));
-                spawnMapEditObject("model", "cs_handrail_128_double_yel", (2300, 4435, 190), (0, 90, 0));
-                spawnMapEditObject("model", "cs_handrail_128_double_yel", (2400, 4435, 190), (0, 90, 0));
-                spawnMapEditObject("model", "cs_handrail_128_double_yel", (2500, 4435, 190), (0, 90, 0));
-                spawnMapEditObject("model", "cs_handrail_128_double_yel", (2600, 4435, 190), (0, 90, 0));
+                if (level.classicMapsEnabled && randomInt(100) > 50)
+                {
+                    spawnMapEditObject("invisiblewall", (2295, 4425, 210), (2695, 4435, 400.2));
+                    spawnMapEditObject("invisiblewall", (1802,4782, 216),(605, 4781, 267));
+                    spawnMapEditObject("invisiblewall", (407,4646, 207),(304, 4648, 293));
+                    spawnMapEditObject("invisiblewall", (1858,4435, 324),(1858, 4046, 419));
+                    spawnMapEditObject("invisiblewall", (1858,3935, 326),(1858, 3554, 418));
+                    spawnMapEditObject("invisiblewall", (1913,3429, 200),(2151, 3191, 295));
+                    spawnMapEditObject("invisiblecrate", (2209,4257,315),(0,180,0));
+                    spawnMapEditObject("invisiblecrate", (1453,4440,315),(0,0,0));
+                    spawnMapEditObject("invisiblecrate", (1505,4439,315),(0,0,0));
+
+                    spawnMapEditObject("elevator", (1595,3988,315),(0,0,0),(1617,3050,197),(1617,3000,197));//Zipline
+                    spawnMapEditObject("elevator", (1401,4040,315),(0,90,0),(619,3836,357),(619,3775,357));//Zipline2
+                    spawnMapEditObject("elevator",(1771,3938,42),(0,0,0),(1791,3945,306), (1726.971, 3997, 306));
+
+                    spawnMapEditObject("randombox", (1840,4339,179),(0,90,0));
+                    spawnMapEditObject("power", (1658,2948,195),(0,190,0));
+                    spawnMapEditObject("bank", (2038,3294,136),(0,316,0));
+                    spawnMapEditObject("ammo", (715,2893,56),(0,0,0));
+                    spawnMapEditObject("gambler", (610,4202,218),(0,180,0));
+                    spawnMapEditObject("killstreak", (983,4142,51),(0,90,0));
+                    spawnMapEditObject("pap", (609,2763,213),(0,180,0),(607,2808,213));
+                    spawnMapEditObject("ramp", (1739.2, -2213.0, 0), (1741.3, -2479, 190.1));
+                    spawnMapEditObject("perk1", (1761,4215,448),(0,90,0));
+                    spawnMapEditObject("perk2", (1392,4730,55),(0,90,0));
+                    spawnMapEditObject("perk3", (550,3062,213),(0,90,0));
+                    spawnMapEditObject("perk4", (354,4595,201),(0,0,0));
+                    spawnMapEditObject("perk5", (550,3527,213),(0,90,0));
+                    spawnMapEditObject("perk6", (673,3059,213),(0,90,0));
+                    spawnMapEditObject("perk7", (674,4020,213),(0,90,0));
+                    spawnMapEditObject("spawn", (1503,4095,184), (0, 0, 0));
+                    spawnMapEditObject("spawn", (1586,4094,184), (0, 0, 0));
+                    spawnMapEditObject("spawn", (1700,4084,184), (0, 0, 0));
+                    spawnMapEditObject("spawn", (1773,4079,184), (0, 0, 0));
+                    spawnMapEditObject("spawn", (1693,4231,184), (0, 0, 0));
+                    spawnMapEditObject("spawn", (1582,4237,184), (0, 0, 0));
+                    spawnMapEditObject("zombiespawn", (2814,2838,63), (0, 0, 0));
+                    spawnMapEditObject("zombiespawn", (45,4253,51), (0, 0, 0));
+                    spawnMapEditObject("zombiespawn", (11,4157,51), (0, 0, 0));
+                    spawnMapEditObject("zombiespawn", (2917,3983,95), (0, 0, 0));
+                    spawnMapEditObject("zombiespawn", (2426,4398,198), (0, 0, 0));
+                    spawnMapEditObject("mapname", "Airport Invasion");
+                    spawnMapEditObject("maxWave", 30);
+                }
+                else
+                {
+                    spawnMapEditObject("invisiblewall", (1840.927, 4799.125, 192.125), (602.5479, 4792.131, 300.1762));
+                    spawnMapEditObject("invisiblewall", (290.1553, 4673.125, 192.125), (422.2553, 4666.125, 301.1136));
+                    spawnMapEditObject("invisiblewall", (2275.014, 4400.125, 224.125), (2691.735, 4400.125, 292.9139));
+                    spawnMapEditObject("invisiblewall", (2240.585, 4247.875, 274.123), (2184.566, 4247.861, 296.8596));
+                    spawnMapEditObject("invisiblewall", (1887.615, 4053.125, 308.125), (1886.905, 4435.866, 411.859));
+                    spawnMapEditObject("invisiblewall", (1885.125, 4549.125, 308.125), (1875.625, 4721.875, 409.875));
+                    spawnMapEditObject("invisiblewall", (712.5687, 3700.58, 272.4049), (712.5981, 3650.694, 303.1044));
+                    spawnMapEditObject("invisiblewall", (1599.215, 4440.039, 304.125), (1372.862, 4437.242, 352.6452));
+                    spawnMapEditObject("invisiblewall", (1867.991, 3928.875, 182.125), (1867.603, 3554.125, 409.8424));
+                    spawnMapEditObject("wall", (1564.913, 4442.386, 304.125), (1379.761, 4440.539, 312.125));
+                    spawnMapEditObject("randombox", (1840.875, 4346.175, 183.125), (0, -91.08215, 0), (1314.078, 3675.125, 55.125), (0, 179.8077, 0), (2437.526, 3340.875, 63.125), (0, -0.9228516, 0));
+                    spawnMapEditObject("gambler", (612.4559, 4175.171, 218.625), (0, 0.8843994, 0));
+                    spawnMapEditObject("bank", (404.8736, 2707.825, 70.125), (90, 179.4397, 0));
+                    spawnMapEditObject("ammo", (714.8166, 2888.963, 55.125), (0, -0.1922607, 0));
+                    spawnMapEditObject("killstreak", (983.3201, 4159.703, 55.125), (0, 89.62646, 0));
+                    spawnMapEditObject("pap", (612.2808, 2763.94, 217.625), (0, -176.9513, 0));
+                    spawnMapEditObject("power", (1656.062, 2960.48, 199.125), (0, -168.2886, 0));
+                    spawnMapEditObject("elevator", (1733.861, 3954.416, 36.12388), (0, 1.257935, 0), (1733.861, 3954.416, 317.5), (1726.971, 3997.306, 304.125));
+                    spawnMapEditObject("perk1", (1752.475, 4216.479, 467.125), (90, 179.4452, 0));
+                    spawnMapEditObject("perk2", (1392.874, 4753.224, 74.125), (90, 179.4397, 0));
+                    spawnMapEditObject("perk3", (550.1259, 3056.958, 233.625), (90, -0.1977539, 0));
+                    spawnMapEditObject("perk4", (2023.333, 3299.212, 150.125), (90, -135.8295, 0));
+                    spawnMapEditObject("perk5", (550.1253, 3514.623, 233.625), (90, -1.642456, 0));
+                    spawnMapEditObject("perk6", (673.8747, 3060.715, 233.625), (90, 179.8022, 0));
+                    spawnMapEditObject("perk7", (673.8749, 4019.227, 233.625), (90, -179.8407, 0));
+                    spawnMapEditObject("spawn", (1603.571, 4231.952, 168.125), (4.915161, -2.005005, 0));
+                    spawnMapEditObject("zombiespawn", (2869.875, 3984.578, 84.125), (0, 179.0771, 0));
+                    spawnMapEditObject("zombiespawn", (21.68769, 4159.032, 40.125), (0, -36.63391, 0));
+                    spawnMapEditObject("zombiespawn", (29.15979, 4260.635, 40.125), (0, 0.5273438, 0));
+                    spawnMapEditObject("zombiespawn", (2429.905, 4486.164, 192.125), (0, -88.93433, 0));
+                    spawnMapEditObject("zombiespawn", (2754.289, 2901.905, 76.125), (0, 178.0005, 0));
+                    spawnMapEditObject("maxWave", 30);
+                    spawnMapEditObject("mapname", "Death Row");
+                    spawnMapEditObject("invisiblewall", (7.125029, 4797.857, 209.125), (103.875, 4790.625, 285.875));
+                    spawnMapEditObject("invisiblewall", (713.9955, 3729.535, 282.6621), (711.9826, 3677.362, 344.9545));
+                    spawnMapEditObject("ramp", (1478.975, 4123.909, 304.125), (1592.477, 4128.236, 332.2146));
+                    spawnMapEditObject("model", "cs_handrail_128_double_yel", (2300, 4435, 190), (0, 90, 0));
+                    spawnMapEditObject("model", "cs_handrail_128_double_yel", (2400, 4435, 190), (0, 90, 0));
+                    spawnMapEditObject("model", "cs_handrail_128_double_yel", (2500, 4435, 190), (0, 90, 0));
+                    spawnMapEditObject("model", "cs_handrail_128_double_yel", (2600, 4435, 190), (0, 90, 0));
+                }
             }
             else if (level.mapVariation == 1)
             {
                 spawnMapEditObject("yLimit", 2594, 5500);
-                spawnMapEditObject("xLimit", -1834, -34);
+                spawnMapEditObject("xLimit", -1800, -34);
                 spawnMapEditObject("bank", (-1261.142, 4915.723, 70.125), (90, 225.1648, 0));
                 spawnMapEditObject("ammo", (-529.6664, 4146.249, 55.125), (0, -88.98376, 0));
                 spawnMapEditObject("killstreak", (-1184.858, 4124.071, 55.125), (0, -181.0547, 0));
@@ -4905,6 +4954,44 @@ loadMapEdits()
                 spawnMapEditObject("mapname", "Der Riese");
                 spawnMapEditObject("maxWave", 0);//Infinite rounds
                 spawnMapEditObject("hellMap", false);
+            }
+        break;
+        case "so_deltacamp":
+            if (level.mapVariation == 0)
+            {
+                spawnMapEditObject("wallweapon", (39.2011, -1548.86, 106.5), (0, -17, 90), "iw5_ak74u_mp", 1500);
+                spawnMapEditObject("door", (-98.3217, -1200, -100), (-98.3217, -1200, 75), (90, -90, 0), 6, 2, 100, 1000);
+                spawnMapEditObject("door", (-327.182, 385, -100), (-327.182, 385, 25), (90, 0, 0), 4, 2, 100, 1500);
+                spawnMapEditObject("crate", (-301.729, 551.155, 50), (0, -117, 0));
+                spawnMapEditObject("crate", (-335.95, 232.068, 50), (0, 90, 0));
+                spawnMapEditObject("crate", (-301.729, 551.155, 85), (0, -117, 0));
+                spawnMapEditObject("crate", (-335.95, 232.068, 85), (0, 90, 0));
+                spawnMapEditObject("wall", (-432.875, 298.966, 0), (-359.307, 295.875, 100));
+                spawnMapEditObject("door", (532.118, -641.508, 0), (532.118, -641.508, 300), (90, 180, 0), 3, 1, 100, 2500);
+                spawnMapEditObject("wall", (306.755, -1321.61, 68.7166), (347.469, -1486.9, 200));
+                spawnMapEditObject("wall", (697.634, -1081.54, 245.093), (796.376, -1083.59, 350));
+                spawnMapEditObject("invisiblewall", (-232.875, -783.541, 225),  (213.311, -782.94, 350));
+                spawnMapEditObject("invisiblewall", (234.875, -492.8, 225), (-232.875, -497.249, 350));
+                spawnMapEditObject("zipline", (750.493, -1037.13, 242.145), (0,180,0), (738.92, -1038.93, 494.112), (643.672, -1318.35, 494.112), (288.818, -1400.89, 494.112), (-116.84, -1492.36, 494.112), (-116.84, -1492.36, 64.1249));
+                spawnMapEditObject("invisiblewall", (-690, -16, 192), (-690, -440, 250));
+                spawnMapEditObject("invisiblewall", (-975, -16, 192), (-975, -440, 250));
+
+                spawnMapEditObject("randombox", (-816.875, 518.446, 15), (0, 90, 0), (-215.016, -240.875, 14), (0, 75, 0), (-124.112, -1684.23, 75), (0, 150, 0), (186.14, -532.889, 207), (0, 0, 0));
+                spawnMapEditObject("gambler", (-513.125, -1259.27, 120), (0, -86, 0));
+                spawnMapEditObject("bank", (527.125, -918.724, 297.481), (90, 0, 0));
+                spawnMapEditObject("ammo", (372.61, 327.516, 15), (0, 100, 0));
+                spawnMapEditObject("killstreak", (-357.475, -743.791, 203), (0, 180, 0));
+                //spawnMapEditObject("pap", (880.875, -561.992, 270), (0, -90, 0));
+                spawnMapEditObject("power", (-766.829, 176.976, 203), (0, 0, 0));
+                spawnMapEditObject("spawn", (-215.302, -1527.82, 65.2036), (0, 76.9302, 0));
+                spawnMapEditObject("spawn", (-45.5087, -1523.27, 65.9313), (0, 95.1016, 0));
+                spawnMapEditObject("spawn", (-129.609, -1661.5, 64.4276), (0, 85.3237, 0));
+                spawnMapEditObject("spawn", (72.6265, -1436.81, 64.125), (0, 148.308, 0));
+                spawnMapEditObject("maxWave", 30);
+                spawnMapEditObject("mapname", "Death In Training");
+                spawnMapEditObject("hellMap", false);
+
+                maps\mp\gametypes\_aiz_deltacamp::initDeltaCamp();
             }
         break;
     }

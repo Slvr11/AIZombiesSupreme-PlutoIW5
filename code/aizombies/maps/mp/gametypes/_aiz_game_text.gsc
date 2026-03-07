@@ -111,7 +111,7 @@ initGameStrings()
     strings[strings.size] = &"AIZ_DOUBLE_TAP_DESC";
     strings[strings.size] = &"AIZ_STALKER_DESC";
     strings[strings.size] = &"AIZ_AUTO_REVIVE_DESC";
-    strings[strings.size] = &"NULL_EMPTY";
+    strings[strings.size] = &"AIZ_DELTACAMP";
     strings[strings.size] = &"MPUI_LOCKDOWN";
     strings[strings.size] = &"MPUI_BOOTLEG";
     strings[strings.size] = &"MPUI_MISSION";
@@ -240,8 +240,8 @@ initGameStrings()
     strings[strings.size] = &"NULL_EMPTY";
     strings[strings.size] = &"AIZ_DEFCON_IS_AT_LEVEL_N";
     strings[strings.size] = &"NULL_EMPTY";
-    strings[strings.size] = &"NULL_EMPTY";//&"AIZ_GIFTED_CASH_TO";
-    strings[strings.size] = &"NULL_EMPTY";//&"AIZ_RECIEVED_CASH_FROM";
+    strings[strings.size] = &"AIZ_GIFTED_CASH_TO";
+    strings[strings.size] = &"AIZ_RECIEVED_CASH_FROM";
     strings[strings.size] = &"AIZ_NOT_ENOUGH_CASH_FOR_RANDOM_WEAPON_SALE";
     strings[strings.size] = &"AIZ_NOT_ENOUGH_CASH_FOR_RANDOM_WEAPON";
     strings[strings.size] = &"AIZ_RANDOM_WEAPON";

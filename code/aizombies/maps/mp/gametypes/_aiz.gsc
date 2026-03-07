@@ -1,15 +1,12 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
-//Intervention is missing scope in upgrade
 //Optimize player code?
-//Add pap to hand gun?
 //Dog hitboxes are rotated oddly. They still are valid for the upper 2/3 of the dog
 //Fix dog movement run to walk logic
 
 //Rework onPlayerDisconnect. Cannot check weapon ownership there
 //Sentry does not barrel spin
-//Enable gifting?
 //Upgrade can break if another player uses right as the gun comes up
 
 init()
@@ -26,7 +23,7 @@ init()
 
     if (getDvar("g_gametype") != "aiz")
     {
-        setDvar("g_gametype", "aiz");
+        makeDvarServerInfo("g_gametype", "aiz");
         map_restart(false);
         return;
     }
@@ -73,7 +70,7 @@ init()
     //level.maxPlayerHealth_Jugg = 251;
     level.powerActivated = false;
     level.tempPowerActivated = false;
-    level.version = "1.31";
+    level.version = "1.4";
     level.dev = "Slvr99";
 
     level.pauseMenu = "class";
@@ -540,6 +537,9 @@ onPrecacheGameType()
     preCacheShader("iw5_cardicon_nuke");
     preCacheShader("line_horizontal");
     preCacheShader("hud_iw5_divider");
+    preCacheShader("logo_cod4");
+    preCacheShader("logo_mw2");
+    preCacheShader("logo_blackops");
     preCacheShader("headicon_heli_extract_point");
     preCacheShader("specialty_light_armor");//Juggernog
     preCacheShader("specialty_longersprint_upgrade");//Stamin-up
@@ -637,7 +637,7 @@ onPrecacheGameType()
     preCacheMpAnim(level.botAnims["crawlerAnim_attack"]);
     preCacheMpAnim(level.botAnims["crawlerAnim_walk"]);
     preCacheMpAnim(level.botAnims["crawlerAnim_death"]);
-    if (array_contains(level.wawMaps, level._mapname))
+    if (level.hasDogCrawlers)
     {
         preCacheMpAnim(level.botAnims["dog_idle"]);
         preCacheMpAnim(level.botAnims["dog_attack"]);
@@ -833,19 +833,17 @@ onPlayerConnect()
         player thread postPlayerConnect();
 
         //Valentines day code
-        /*
-        if (isDefined(level.allowGifting))
+        if (isDefined(level.allowGifting) && level.allowGifting)
         {
-            giftTrigger = spawn("script_model", player.origin);
-            giftTrigger setModel("tag_origin");
+            giftTrigger = spawn("script_origin", player.origin);
+            //giftTrigger setModel("tag_origin");
             giftTrigger linkTo(player);
             giftTrigger.owner = player;
-            giftTrigger.range = 40;
+            giftTrigger.range = 40 * 40;
             giftTrigger.usabletype = "giftTrigger";
             player.giftTrigger = giftTrigger;
             level.usables[level.usables.size] = giftTrigger;
         }
-        */
     }
 }
 postPlayerConnect()
@@ -881,6 +879,9 @@ checkPlayerSpawn()
         self setClientDvar("g_scriptMainMenu", level.pauseMenu);
         self closeMenu("team_marinesopfor");
         self iPrintLnBold(level.gameStrings[18]);
+
+        self setLowerMessage("usable_message", level.gameStrings[18]);
+
         self setPlayerAsSpectator();
     }
 }
@@ -1122,6 +1123,13 @@ watchDevSay()
             player updatePlayerWeaponsList(weapon);
             player thread switchToWeapon_delay(weapon, .2);
         }
+        else if (isSubStr(message, "giveCash "))
+        {
+            tokens = strTok(message, " ");
+            cashToGive = int(tokens[1]);
+            player.cash += cashToGive;
+            player maps\mp\gametypes\_aiz_hud::scorePopup(cashToGive);
+        }
         else if (isSubStr(message, "setWave "))
         {
             tokens = strTok(message, " ");
@@ -1150,30 +1158,6 @@ watchDevSay()
         {
             level.nukeOffsetScalar = 0;
             level notify("zombie_nuke");
-        }
-        else if (message == "/listmapents")
-        {
-            for (i = 0; i < 2046; i++)
-            {
-                ent = getEntByNum(i);
-                if (!isDefined(ent))
-                    continue;
-
-                targetName = ent.targetname;
-                if (!isDefined(targetname))
-                    targetname = "";
-                className = ent.classname;
-                if (!isDefined(classname))
-                    classname = "";
-                model = ent.model;
-                if (!isDefined(model))
-                    model = "";
-                target = ent.target;
-                if (!isDefined(target))
-                    target = "";
-                origin = ent.origin;
-                printLn("Entity " + i + ": origin = " + origin + " ; classname = " + classname + " ; targetname = " + targetname + " ; target = " + target +  " ; model = " + model);
-            }
         }
         else if (message == "/viewpos")
         {
@@ -1220,6 +1204,10 @@ playIntroVO()
     wait(1);
 
     self playLocalSound("US_1mc_aizombies");
+
+    wait(3);
+
+    self playLocalSound("US_1mc_aizombies_intro");
 }
 
 initGameNotifies()
@@ -1998,7 +1986,7 @@ specialWeaponFunction(weapon)
                     damage = 3000;
                 else
                     damage = 1500;
-                hitbox notify("damage", (damage - distance(bot.origin, playerOrigin)), self, (0, 0, 0), bot.origin, "MOD_IMPACT", "", "", "", 0, "bomb_site_mp");
+                hitbox notify("damage", (damage - distance(bot.origin, playerOrigin)), self, (0, 0, 0), bot.origin, "MOD_IMPACT", "", "", "", 0, "destructible_toy");
             }
         }
     }
@@ -2798,6 +2786,7 @@ loadConfig()
     setDvarIfUninitialized("aiz_damageGracePeriod", 0.25);
     setDvarIfUninitialized("aiz_variedZombieSpeed", 2);
     setDvarIfUninitialized("aiz_randomZombieModels", 2);
+    setDvarIfUninitialized("aiz_allowCashGifting", 0);
 
     setGameDvars();
 }
@@ -2830,6 +2819,7 @@ setGameDvars()
     level.damageGracePeriod = getDvarFloat("aiz_damageGracePeriod") * 1000;
     level.variedBotSpeed = getDvarInt("aiz_variedZombieSpeed");
     level.randomBotModels = getDvarInt("aiz_randomZombieModels");
+    level.allowGifting = getDvarInt("aiz_allowCashGifting") != 0;
 }
 
 clipSpaces(input)
@@ -3152,7 +3142,6 @@ getWeaponUpgrade(weapon)
     else if (weapon == "t5_raygun_mp") return "t5_raygunupgraded_mp";
     else if (weapon == "iw5_raygun_mp_eotechsmg_scope7") return "iw5_raygun_mp_eotechsmg_xmags_scope7";
     else if (weapon == "riotshield_mp") return "iw5_riotshield_mp";
-    else if (weapon == "scrambler_mp") return "iw5_riotshieldjugg_mp";
     else if (weapon == "thundergun_mp") return "thundergunupgraded_mp";
     else if (weapon == "t5_thundergun_mp") return "t5_thundergunupgraded_mp";
     else if (weapon == "iw5_ak74u_mp") return "iw5_ak74u_mp_reflexsmg_xmags_camo11";
@@ -3339,6 +3328,19 @@ isGlowstick()
     return isGlowstick;
 }
 
+isIW4Weapon(weapon)
+{
+    return isSubStr(weapon, "iw4_") || weapon == "m79_mp" || weapon == "iw5_deserteagletactical_mp";
+}
+isIW3Weapon(weapon)
+{
+    return isSubStr(weapon, "iw3_") || weapon == "iw5_deserteagletactical_mp_camo01" || weapon == "iw4_colt45_mp" || weapon == "iw4_colt45upgraded_mp" || weapon == "iw5_ak47_mp_xmags_camo01";
+}
+isT5Weapon(weapon)
+{
+    return isSubStr(weapon, "t5_");
+}
+
 getWeaponAttachments(weapon)
 {
     attachments = [];
@@ -3368,7 +3370,7 @@ getWeaponAttachments(weapon)
 isWeaponAttachment(attachment)
 {
     attachments = ["reflex", "reflexlmg", "reflexsmg", "acog", "acogsmg", "acoglmg", "grip", "akimbo", "thermal", "thermalsmg", "thermallmg", "shotgun", "heartbeat", "xmags", "rof", "eotech", "eotechsmg", "eotechlmg", "tactical", "vzscope", "scopevz", "gl", "gp25", "m320", "silencer", "silencer02", "silencer03", "hamrhybrid", "hybrid",
-    "dragunovscope", "dragunovscopevz", "as50scope", "as50scopevz", "msrscope", "msrscopevz", "l96a1scope", "l96a1scopevz", "rsassscope", "rsassscopevz", "barrettscope", "barrettscopevz"];
+    "dragunovscope", "dragunovscopevz", "as50scope", "as50scopevz", "msrscope", "msrscopevz", "l96a1scope", "l96a1scopevz", "rsassscope", "rsassscopevz", "barrettscope", "barrettscopevz", "cheytacscope", "cheytacscope2"];
     if (array_contains(attachments, attachment))
         return true;
     else return false;
@@ -4061,6 +4063,9 @@ getPlayerModelsForLevel(head)
         case "mp_shipbreaker":
             if (!head) return "mp_body_pmc_africa_assault_a";
             return "head_pmc_africa_a";
+        case "so_deltacamp":
+            if (!head) return "coop_body_delta";
+            return "coop_head_delta";
         default:
             if (!head) return "mp_body_delta_elite_smg_a";
             return "head_delta_elite_a";
@@ -4142,6 +4147,9 @@ getBotModelsForLevel(head)
         case "mp_radar":
             if (!head) return ["mp_body_russian_military_assault_a_arctic", "mp_body_russian_military_lmg_a_arctic", "mp_body_russian_military_shotgun_a_arctic", "mp_body_russian_military_smg_a_arctic"];
             return ["head_russian_military_aa_arctic", "head_russian_military_b_arctic", "head_russian_military_d_arctic", "head_russian_military_dd_arctic", "head_russian_military_a", "head_russian_military_f"];
+        case "so_deltacamp":
+            if (!head) return ["mp_body_delta_elite_assault_bb"];
+            return ["head_delta_elite_a", "head_hero_truck_headgear", "head_hero_grinch_delta", "head_hero_sandman_delta"];
         default:
             if (!head) return ["mp_body_russian_military_assault_a", "mp_body_russian_military_lmg_a", "mp_body_russian_military_shotgun_a", "mp_body_russian_military_smg_a"];
             return ["head_russian_military_aa", "head_russian_military_b", "head_russian_military_dd", "head_russian_military_f"];
@@ -4214,6 +4222,8 @@ getCrawlerModelForLevel()
             return "mp_body_opforce_ghillie_africa_militia_sniper";
         case "mp_roughneck"://Ally since there's no opforce model loaded
             return "mp_body_ally_ghillie_urban_sniper";
+        case "so_deltacamp":
+            return "mp_body_delta_elite_assault_bb";
         default:
             return "mp_body_opforce_ghillie_desert_sniper";
     }
