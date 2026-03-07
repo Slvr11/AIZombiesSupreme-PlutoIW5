@@ -268,6 +268,7 @@ init()
     level thread onPlayerConnect();
 
     if (getDvarInt("aiz_useMW2Visions") > 0) level.vision = getMW2Vision();
+    if (level._mapname == "so_deltacamp") level.vision = "so_deltacamp";
 
     level.levelHeight = getEnt("airstrikeheight", "targetname");
     if (isDefined(level.levelHeight)) level.heliHeight = level.levelHeight.origin[2];
