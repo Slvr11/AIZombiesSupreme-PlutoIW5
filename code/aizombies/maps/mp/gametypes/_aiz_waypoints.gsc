@@ -793,6 +793,17 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (675.0354,-834.9918,149.0804);
             waypoints[waypoints.size] = (302.5191,-280.1024,100.7017);
         }
+        else if (level.mapVariation == 1)
+        {
+            waypoints[waypoints.size] = (3462.7, -1281.51, 124.893);
+            waypoints[waypoints.size] = (3706.14, -1092.02, 122.533);
+            waypoints[waypoints.size] = (3401.88, -699.186, 104.601);
+            waypoints[waypoints.size] = (3099.12, -587.264, 92.8132);
+            waypoints[waypoints.size] = (2886.82, -207.077, 77.6644);
+            waypoints[waypoints.size] = (2999.64, -28.1074, 105.125);
+            waypoints[waypoints.size] = (3284.58, 336.31, 81.6938);
+            waypoints[waypoints.size] = (3094.42, -967.882, 106.869);
+        }
         break;
         case "mp_italy":
         if (level.mapVariation == 0)
