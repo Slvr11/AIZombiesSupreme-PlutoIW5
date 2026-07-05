@@ -69,6 +69,8 @@ AIZombies Supreme includes a list of dvars that can tweak the experience. These 
 - `aiz_variedZombieSpeed`: enables or disables zombie walking speeds being randomized or not. Valid options are `0` (zombie speeds are always the same as they are in the TeknoMW3 mod), `1` (zombie speeds are randomized on all maps), and `2` (zombie speeds are randomized on MW2 maps only)
 - `aiz_randomZombieModels`: enables or disables zombies using random models. Valid options are `0` (zombies will use a single model like they do in the TeknoMW3 mod), `1` (zombies will always use a random body and head model), and `2` (zombies will use a random body and head model on MW2 maps only)
 - `aiz_allowCashGifting`: enables or disables the ability for players to gift cash to each other
+- `aiz_showWaypointIcons`: enables or disables having a waypoint icon above most usables like in the MW2 mod. Valid options are `0` (waypoint icons are disabled), `1` (waypoint icons are always enabled), and `2` (waypoint icons only show on MW2 maps)
+- `aiz_advancedPathfinding`: enables or disables bots using advanced pathfinding to better path to nearby players. Valid options are `0` (advanced pathfinding is disabled), `1` (advanced pathfinding is always enabled), and `2` (advanced pathfinding is only enabled on MW2 maps)
 
 ## Building The Mod
 This mod uses several tools and files to build itself. You will need extensive knowledge on these tools and how to make mods for PlutoIW5 to build this mod.
