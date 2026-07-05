@@ -939,9 +939,9 @@ makeType( var_0 )
         case "vehicle_van_sas_dark_destructable":
             vehicle_van_iw5( "vehicle_van_sas_dark" );
             break;
-        case "vehicle_van_sas_dark_destructable_gas":
-            vehicle_van_iw5_gas( "vehicle_van_sas_dark" );
-            break;
+        //case "vehicle_van_sas_dark_destructable_gas":
+            //vehicle_van_iw5_gas( "vehicle_van_sas_dark" );
+            //break;
         case "vehicle_uk_police_van_destructable":
             vehicle_van_iw5( "vehicle_uk_police_van" );
             break;
@@ -4092,7 +4092,7 @@ vehicle_van_iw5( var_0 )
     common_scripts\_destructible::destructible_part( "tag_mirror_right", var_0 + "_mirror_rf", 40, undefined, undefined, undefined, undefined, 1.0 );
     common_scripts\_destructible::destructible_physics();
 }
-
+/*
 vehicle_van_iw5_gas( var_0 )
 {
     common_scripts\_destructible::destructible_create( var_0 + "_destructable_gas", "tag_body", 250, undefined, 32, "no_melee" );
@@ -4177,6 +4177,7 @@ vehicle_van_iw5_gas( var_0 )
     common_scripts\_destructible::destructible_part( "tag_mirror_right", var_0 + "_mirror_rf", 40, undefined, undefined, undefined, undefined, 1.0 );
     common_scripts\_destructible::destructible_physics();
 }
+*/
 
 vehicle_delivery_theme_park_truck_destructible( var_0 )
 {

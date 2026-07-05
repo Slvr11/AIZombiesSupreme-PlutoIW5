@@ -1,13 +1,14 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
-//Optimize player code?
-//Dog hitboxes are rotated oddly. They still are valid for the upper 2/3 of the dog
+#define KILLSTREAK_TABLE "mp/killstreakTable.csv"
+
 //Fix dog movement run to walk logic
 
-//Rework onPlayerDisconnect. Cannot check weapon ownership there
 //Sentry does not barrel spin
 //Upgrade can break if another player uses right as the gun comes up
+
+//Fix GLs not working for controller
 
 init()
 {
@@ -70,7 +71,7 @@ init()
     //level.maxPlayerHealth_Jugg = 251;
     level.powerActivated = false;
     level.tempPowerActivated = false;
-    level.version = "1.4";
+    level.version = "1.5";
     level.dev = "Slvr99";
 
     level.pauseMenu = "class";
@@ -81,16 +82,17 @@ init()
     level.mapHeight = 0;
     level.totalWaves = 30;
 
-    level.currentRayguns = 0;
+    level.currentRayguns = [];
     level.maxRayguns = 2;
-    level.currentThunderguns = 0;
+    level.currentThunderguns = [];
     level.maxThunderguns = 1;
-    level.currentZappers = 0;
+    level.currentZappers = [];
+    level.maxZappers = 1;
 
     level.freezerActivated = false;
 
-    maps\mp\gametypes\_aiz_bot_util::init();
     maps\mp\gametypes\_aiz_hud::init();
+    maps\mp\gametypes\_aiz_bot_util::init();
     maps\mp\gametypes\_aiz_killstreaks::init();
     maps\mp\gametypes\_aiz_map_edits::init();
     maps\mp\gametypes\_aiz_round_system::init();
@@ -234,7 +236,7 @@ init()
     //-Lock CPU threads-
     setDvar("sys_lockThreads", "all");
     //-Prevent game from attempting to slow time for frames-
-    setDvar("com_maxFrameTime", 100);
+    //setDvar("com_maxFrameTime", 1000);
     //-Enable turning anims on players-
     setDvar("player_turnAnims", 1);
     setDvar("bg_legYawTolerance", 50);
@@ -720,37 +722,17 @@ onPlayerConnect()
         setDvar("g_hardcore", 1);
         level.hardcoreMode = false;
 
-        //player setClientDvar("g_hardcore", 1);
-        player setClientDvar("cg_crosshairDynamic", 1);
-        player setClientDvar("cg_drawCrosshair", 1);
-        player setClientDvar("ui_drawCrosshair", 1);
-        player setClientDvar("g_TeamName_Allies", level.gameStrings[17]);
-        player setClientDvar("g_TeamName_Axis", &"NULL_EMPTY");
-        player setClientDvar("g_TeamIcon_Allies", "iw5_cardicon_soap");
-        player setClientDvar("g_TeamIcon_MyAllies", "iw5_cardicon_soap");
-        player setClientDvar("g_TeamIcon_EnemyAllies", "iw5_cardicon_soap");
-        player setClientDvar("g_TeamIcon_Axis", "weapon_missing_image");
-        player setClientDvar("g_TeamIcon_MyAxis", "weapon_missing_image");
-        player setClientDvar("g_TeamIcon_EnemyAxis", "weapon_missing_image");
-        //player setClientDvar("cl_demo_recordPrivateMatch", 0);
-        //player setClientDvar("cl_demo_enabled", 0);
         player setClientDvar("cg_drawDamageFlash", 1);
         player setClientDvar("ui_hud_showdeathicons", 0);
         player setClientDvar("cg_scoreboardWidth", "600");
         player setClientDvar("cg_scoreboardFont", 0);
-        //player setClientDvar("cg_watersheeting", 0);
-        player setClientDvar("cg_waterSheeting_distortionScaleFactor", "0.08 1 0 0");
         player setClientDvar("maxVoicePacketsPerSec", "2000");
         player setClientDvar("maxVoicePacketsPerSecForServer", "1000");
         player setClientDvar("bg_viewKickScale", 0.2);
-        player setClientDvar("cg_hudGrenadeIconMaxRangeFrag", 0);
         player setClientDvar("perk_diveViewRollSpeed", 0.0000001);
         player setClientDvar("perk_diveGravityScale", 0.4);
-        //player setClientDvar("cg_weaponCycleDelay", 750);//Weapon swap delay has been fixed finally
-        //player setClientDvar("gameMode", "so");
         player setClientDvar("useRelativeTeamColors", 1);
         player setClientDvar("bg_legYawTolerance", "50");
-        player setClientDvar("player_turnAnims", 1);
         
         player.newGunReady = true; // feature to give 2 guns or a fix
         player.perksBought = []; // set perks to not used for buying
@@ -786,21 +768,9 @@ onPlayerConnect()
 
         level.rankedMatch = true;//Setting this on connect to ensure it stays this way
         player.usingOnlineDataOffline = false;
-
-        //Reset certain dvars that some servers may have set and not restored
         
-        player setClientDvar("waypointIconHeight", "36");
-        player setClientDvar("waypointIconWidth", "36");
-        
-        //player setClientDvar("ui_gametype", "^2AIZombies Supreme");
-        //player setClientDvar("ui_customModeName", "^2AIZombies Supreme");
         player setClientDvar("ui_mapname", getZombieMapname());
-        //player setClientDvar("party_gametype", "^2AIZombies Supreme");
-        player setClientDvar("didyouknow", "^1AIZombies Supreme Made by ^2Slvr99");
-        player setClientDvar("motd", "^1AIZombies Supreme Made by ^2Slvr99");
-        player setClientDvar("g_motd", "^1AIZombies Supreme Made by ^2Slvr99");
         player setClientDvar( "cg_objectiveText", "Survive " + level.totalWaves + " waves.");
-        player setClientDvars("ui_allow_teamchange", 0, "ui_allow_classchange", 0);
         
         //if (level.isHellMap && !level.visionRestored) player visionSetNakedForPlayer(level.hellVision);
         //else player visionSetNakedForPlayer(level.vision);
@@ -957,15 +927,9 @@ onPlayerSpawn()
     self visionSetThermalForPlayer(level._mapname, 0);
     self setClientDvar("thermalBlurFactorScope", 0);//Clear up thermal scope
     self setClientDvar("g_hardcore", 1);
-    self setClientDvar("cg_drawCrosshair", 1);
-    self setClientDvar("ui_drawCrosshair", 1);
     //self setClientDvar("compassRotation", false);
-    //self setClientDvar("g_compassShowEnemies", 1);
-    //self setClientDvar("cg_objectiveText", formatString(level.gameStrings[19], level.totalWaves));
-    self setClientDvar("ui_gametype", "^2AIZombies Supreme");
     self setClientDvar("ui_mapname", getZombieMapname());
     self setClientDvar("g_scriptMainMenu", level.pauseMenu);
-    self setClientDvars("ui_allow_teamchange", 0, "ui_allow_classchange", 0);
     self setViewKickScale(4);
 
     if (level.zState != "intermission")
@@ -1032,8 +996,6 @@ onPlayerSpawn()
     self.ammoMatic = false;
 
     self thread maps\mp\gametypes\_aiz_map_edits::trackUsablesForPlayer();
-
-    self thread watchPlayerDamage();
 
     //killstreaks init
     self.kills = 0;
@@ -1177,10 +1139,10 @@ onPlayerDisconnect()
     //Reset our netcode so we don't ruin other server performance for the player
     //self setClientDvars("sv_fps", 20, "snaps", 20, "rate", 20000);
 
-    //These special weapon checks are disabled since we cannot check for player weapon ownership once they leave
-    //TODO: Rework this into a user field and check that way instead
-    //if (self hasRayGun()) level.currentRayguns--;
-    //else if (self hasThunderGun()) level.currentThunderguns--;
+    //Check special weapon ownership here
+    self removeSpecialWeapon("raygun");
+    self removeSpecialWeapon("thundergun");
+    self removeSpecialWeapon("zapper");
 
     if (isDefined(self.bot)) self thread maps\mp\gametypes\_aiz_killstreaks::killPlayerBot();
     if (isDefined(self.barbed_wire)) self.barbed_wire maps\mp\gametypes\_aiz_killstreaks::destroyBarbedWire();
@@ -1193,7 +1155,6 @@ onPlayerDisconnect()
     if (isDefined(self.giftTrigger))
     {
         if (array_contains(level.usables, self.giftTrigger)) self.giftTrigger maps\mp\gametypes\_aiz_map_edits::removeUsable();
-        self.giftTrigger delete();
         self.giftTrigger = undefined;
     }
 
@@ -1263,117 +1224,9 @@ watchGrenadeFire()
 
         self maps\mp\gametypes\_aiz_hud::updateAmmoHud(false);
 
-        switch (weapon)
-        {
-            case "lightstick_mp":
-                maps\mp\gametypes\_aiz_bot_util::dropGlowstick(marker.origin);
-                break;
-            case "strike_marker_mp":
-                strikeOwner = marker;
-                if (self.ownsAirstrike)
-                {
-                    strikeOwner = self;
-                    //strikeOwner teamSplash("used_ac130");
-                    //marker.type = "strike";
-                    marker.owner = strikeOwner;
-
-                    self thread takeWeaponAfterWait(0.5, "strike_marker_mp");
-                }
-                marker thread watchForMarkerStick(3);
-                break;
-            case "airdrop_mega_marker_mp":
-                megaOwner = marker;
-
-                if (self.ownsEmergencyAirdrop)
-                {
-                    megaOwner = self;
-                    megaOwner teamSplash("used_airdrop_mega");
-                    //marker.type = "mega";
-                    marker.owner = megaOwner;
-                    //direction = megaOwner getPlayerAngles();
-                    //megaMarker.direction = (0, direction[1], 0);
-
-                    self thread takeWeaponAfterWait(0.5, "airdrop_mega_marker_mp");
-                }
-
-                marker thread watchForMarkerStick(0);
-                break;
-            case "airdrop_marker_mp":
-                owner = marker;
-                //marker.deleted = 0;
-
-                if (self.ownsAirdrop)
-                {
-                    owner = self;
-                    //marker.type = "care";
-                    marker.owner = owner;
-
-                    self thread takeWeaponAfterWait(0.5, "airdrop_marker_mp");
-                }
-
-                marker thread watchForMarkerStick(1);
-                break;
-            case "deployable_vest_marker_mp":
-                ammoOwner = marker;
-
-                if (self.ownsExpAmmo)
-                {
-                    ammoOwner = self;
-                    //marker.type = "ammo";
-                    marker.owner = ammoOwner;
-                    marker setModel("weapon_oma_pack");
-
-                    self thread takeWeaponAfterWait(0.5, "deployable_vest_marker_mp");
-                }
-
-                marker thread watchForMarkerStick(2);
-                break;
-            case "claymore_mp":
-                claymoreOwner = marker;
-
-                if (self.ownsMapStreak)
-                {
-                    claymoreOwner = self;
-                    //claymoreOwner teamSplash("used_airdrop_mega");
-                    marker.owner = claymoreOwner;
-
-                    self thread takeWeaponAfterWait(0.5, "claymore_mp");
-                }
-
-                self maps\mp\gametypes\_aiz_killstreaks::spawnBarbWire(marker, claymoreOwner.origin);
-                break;
-            case "airdrop_juggernaut_def_mp":
-                oilOwner = marker;
-
-                if (self.ownsMapStreak)
-                {
-                    oilOwner = self;
-                    //marker.type = "ammo";
-                    marker.owner = oilOwner;
-
-                    self thread takeWeaponAfterWait(0.5, "airdrop_juggernaut_def_mp");
-                }
-
-                trail = spawn("script_model", marker.origin);
-                trail setModel("tag_origin");
-                trail linkTo(marker);
-
-                marker thread watchForMarkerStick(4);
-                trail thread deleteOnMarkerStick(marker);
-
-                waitframe();
-
-                playFXOnTag(level.fx_trailFX, trail, "tag_origin");
-
-                break;
-        }
+        if (weapon == "lightstick_mp")
+            maps\mp\gametypes\_aiz_bot_util::dropGlowstick(marker.origin);
     }
-}
-deleteOnMarkerStick(marker)
-{
-    marker waittill_any_timeout( 5, "missile_stuck" );
-
-    self delete();
 }
 /*
 watchMoonJump()
@@ -1452,10 +1305,8 @@ watchWeaponSwitch()
 
             if (isWeaponDeathMachine(newWeap))
             {
-                //self givePerk("specialty_extendedmags", false);
                 self setWeaponAmmoClip(newWeap, 999);
                 self setWeaponAmmoStock(newWeap, 0);
-                //self _unSetPerk("specialty_extendedmags");
             }
         }
     }
@@ -1496,7 +1347,8 @@ watchWeaponChange()
 
         self maps\mp\gametypes\_aiz_hud::updateAmmoHud(true, weapon);
 
-        self maps\mp\gametypes\_aiz_killstreaks::executeKillstreak(weapon);
+        if (isKillstreakWeapon(weapon))
+            self maps\mp\gametypes\_aiz_killstreaks::executeKillstreak(weapon);
         
         self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
 
@@ -1550,7 +1402,8 @@ watchWeaponChange()
 
         if (weapon == "iw5_riotshield_mp")
             self givePerk("specialty_fastermelee", false);
-        else if (self _hasPerk("specialty_fastermelee")) self _unSetPerk("specialty_fastermelee");
+        else if (self _hasPerk("specialty_fastermelee"))
+            self _unSetPerk("specialty_fastermelee");
 
         if (weapon == "stinger_mp")
             self zapper_runFX();
@@ -1894,10 +1747,6 @@ specialWeaponFunction(weapon)
 
     self maps\mp\gametypes\_aiz_hud::updateAmmoHud(false);
 
-    //if (self getAmmoCount(weapon) == 0) return;
-    //isFiring = self attackButtonPressed();
-    //if (!isFiring) return;
-
     if (weapon == "iw5_usp45_mp_akimbo_silencer02" || weapon == "iw4_berettaupgraded_mp" || weapon == "iw4_colt45upgraded_mp")
     {
         angles = self getPlayerAngles();
@@ -2041,7 +1890,7 @@ specialWeaponFunction(weapon)
     }
 
     if (isRayGun(weapon) && weapon != "t5_raygun_mp" && weapon != "t5_raygunupgraded_mp")
-            self playSound("whizby_far_00_L");
+        self playSound("whizby_far_00_L");
     if (weaponIsUpgrade(weapon) && !isWeaponDeathMachine(weapon) && weapon != "t5_raygunupgraded_mp")
         self playSound("whizby_far_05_L");
 }
@@ -2158,42 +2007,6 @@ deleteAfterTime(time)
     wait(time);
 
     self delete();
-}
-watchForMarkerStick(type)
-{
-    self waittill_any_timeout( 5, "missile_stuck" );
-    self onMissileStuck(type);
-}
-
-onMissileStuck(type)
-{
-    //if (!isDefined(self.type) || self.type == "") return;
-    dropPos = self.origin;
-    switch (type)
-    {
-        case 0:
-            playFX(level.fx_carePackage, dropPos, anglesToForward(self.angles), anglesToRight(self.angles));
-            self playSound("smokegrenade_explode_default");
-            maps\mp\gametypes\_aiz_killstreaks::callEmergencyAirdrop(self, dropPos);
-            break;
-        case 1:
-            playFX(level.fx_carePackage, dropPos, anglesToForward(self.angles), anglesToRight(self.angles));
-            self playSound("smokegrenade_explode_default");
-            maps\mp\gametypes\_aiz_killstreaks::callAirdrop(self, dropPos);
-            break;
-        case 2:
-            maps\mp\gametypes\_aiz_killstreaks::deployableExpAmmo(self, dropPos);
-            break;
-        case 3:
-            self maps\mp\gametypes\_aiz_killstreaks::airStrike(dropPos);
-            break;
-        case 4:
-            maps\mp\gametypes\_aiz_killstreaks::spawnOilSpill(self, dropPos);
-            break;
-        default:
-            break;
-    }
-    //self.type = undefined;
 }
 
 startIntermission()
@@ -2339,23 +2152,6 @@ doIntro()
         intro destroy();
     }
 }
-
-watchPlayerDamage()
-{
-    level endon("game_ended");
-    self endon("disconnect");
-    self endon("death");
-
-    while (true)
-    {
-        self waittill("damage");
-
-        time = getTime();
-        self.lastDamageTime = time;
-
-        self thread onPlayerDamage(time);
-    }
-}
 onPlayerDamage(time)
 {
     level endon("game_ended");
@@ -2392,10 +2188,9 @@ onNormalDeath(victim, attacker, lifeId)
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, lifeId)
 {
-    if (self hasThunderGun())
-        level.currentThunderguns--;
-    else if (self hasRayGun())
-        level.currentRayguns--;
+    self removeSpecialWeapon("raygun");
+    self removeSpecialWeapon("thundergun");
+    self removeSpecialWeapon("zapper");
 
     self takeAllWeapons();
 
@@ -2466,20 +2261,28 @@ onPlayerLastStand(inflictor, attacker, damage, mod, weapon, dir, hitLoc, timeOff
                     if (isDefined(self.perk4weapon) && self hasWeapon(self.perk4weapon))
                     {
                         perk4weapon = self.perk4weapon;
+
+                        if (isRayGun(perk4weapon))
+                            self removeSpecialWeapon("raygun");
                         if (isThunderGun(perk4weapon))
-                            level.currentThunderguns--;
-                        else if (isRayGun(perk4weapon))
-                            level.currentRayguns--;
+                            self removeSpecialWeapon("thundergun");
+                        if (perk4weapon == "stinger_mp")
+                            self removeSpecialWeapon("zapper");
+
                         self takeWeapon(perk4weapon);
                         self updatePlayerWeaponsList(perk4weapon, true);
                     }
                     else
                     {
                         currentWeapon = self getCurrentWeapon();
+
+                        if (isRayGun(currentWeapon))
+                            self removeSpecialWeapon("raygun");
                         if (isThunderGun(currentWeapon))
-                            level.currentThunderguns--;
-                        else if (isRayGun(currentWeapon))
-                            level.currentRayguns--;
+                            self removeSpecialWeapon("thundergun");
+                        if (currentWeapon == "stinger_mp")
+                            self removeSpecialWeapon("zapper");
+
                         self takeWeapon(currentWeapon);
                         self updatePlayerWeaponsList(currentWeapon, true);
                     }
@@ -2539,8 +2342,8 @@ startDeathCountdown(reviveIcon, reviver)
 
         if (level.gameEnded || !isDefined(self))
         {
-            reviveIcon destroy();
-            reviver delete();
+            if (isDefined(reviveIcon)) reviveIcon destroy();
+            if (isDefined(reviver)) reviver delete();
             return;
         }
 
@@ -2587,7 +2390,7 @@ startDeathCountdown(reviveIcon, reviver)
         if (!self.isAlive)//Check for death after suicide
         {
             reviver maps\mp\gametypes\_aiz_map_edits::removeUsable();
-            reviveIcon destroy();
+            if (isDefined(reviveIcon)) reviveIcon destroy();
             break;
         }
 
@@ -2788,6 +2591,8 @@ loadConfig()
     setDvarIfUninitialized("aiz_variedZombieSpeed", 2);
     setDvarIfUninitialized("aiz_randomZombieModels", 2);
     setDvarIfUninitialized("aiz_allowCashGifting", 0);
+    setDvarIfUninitialized("aiz_showWaypointIcons", 2);
+    setDvarIfUninitialized("aiz_advancedPathfinding", 2);
 
     setGameDvars();
 }
@@ -2821,6 +2626,8 @@ setGameDvars()
     level.variedBotSpeed = getDvarInt("aiz_variedZombieSpeed");
     level.randomBotModels = getDvarInt("aiz_randomZombieModels");
     level.allowGifting = getDvarInt("aiz_allowCashGifting") != 0;
+    level.showWaypointIcons = getDvarInt("aiz_showWaypointIcons");
+    level.useNewPathing = getDvarInt("aiz_advancedPathfinding");
 }
 
 clipSpaces(input)
@@ -2847,7 +2654,9 @@ getPlayerWithMostKills()
             currentPlayer = player;
         }
     }
-    if (isDefined(currentPlayer)) return currentPlayer;
+    
+    if (isDefined(currentPlayer))
+        return currentPlayer;
     else
         return getEnt("mp_global_intermission", "classname");
 }
@@ -2905,7 +2714,7 @@ getZombieMapname()
         else if (level._mapname == "mp_nola") return level.gameStrings[143];
         else if (level._mapname == "mp_moab") return level.gameStrings[144];
         else if (level._mapname == "mp_boardwalk") return level.gameStrings[86];
-        else return level.gameStrings[72];
+        else return "^1Unknown Map!";
     }
 }
 
@@ -3063,7 +2872,6 @@ weaponIsUpgrade(weapon)
     else if (weapon == "rsass_hybrid_mp") return true;
     else if (weapon == "rsass_hybrid_reflex_mp") return true;
     else if (weapon == "alt_rsass_hybrid_mp") return true;
-    else if (weapon == "alt_rsass_hybrid_reflex_mp") return true;
     else if (weapon == "iw5_sa80_mp_reflexlmg_xmags_camo11") return true;
     else if (weapon == "iw5_mg36_mp_grip_xmags_camo11") return true;
     else if (weapon == "iw5_pecheneg_mp_thermal_xmags_camo11") return true;
@@ -3188,6 +2996,14 @@ getWeaponUpgradeModel(weapon)
     else if (isSubStr(weapon, "iw4_")) return getWeaponModel(getWeaponUpgrade(weapon), 0);
     else return getWeaponModel(weapon, 11);
 }
+getKillstreakFromWeapon(weapon)
+{
+    if (weapon == level.mapStreakWeapon)
+        return "map_killstreak";
+
+    retVal = tableLookup(KILLSTREAK_TABLE, 12, weapon, 1);
+    return retVal;
+}
 /*
 getWeaponClipModel(weapon)
 {
@@ -3276,6 +3092,93 @@ hasThunderGun()
     return self hasWeapon("thundergun_mp") || self hasWeapon("thundergunupgraded_mp") || self hasWeapon("t5_thundergun_mp") || self hasWeapon("t5_thundergunupgraded_mp");
 }
 
+addSpecialWeapon(type)
+{
+    if (type == "raygun")
+    {
+        if (array_contains(level.currentRayguns, self))
+            return;//Already added
+
+        for (i = 0; i < level.maxRayguns; i++)
+        {
+            if (!isDefined(level.currentRayguns[i]))
+                level.currentRayguns[i] = self;
+        }
+    }
+    else if (type == "thundergun")
+    {
+        if (array_contains(level.currentThunderguns, self))
+            return;//Already added
+
+        for (i = 0; i < level.maxThunderguns; i++)
+        {
+            if (!isDefined(level.currentThunderguns[i]))
+                level.currentThunderguns[i] = self;
+        }
+    }
+    else if (type == "zapper")
+    {
+        if (array_contains(level.currentZappers, self))
+            return;//Already added
+
+        for (i = 0; i < level.maxZappers; i++)
+        {
+            if (!isDefined(level.currentZappers[i]))
+                level.currentZappers[i] = self;
+        }
+    }
+}
+hasSpecialWeapon(type)
+{
+    if (type == "raygun")
+    {
+        if (array_contains(level.currentRayguns, self))
+            return true;
+    }
+    else if (type == "thundergun")
+    {
+        if (array_contains(level.currentThunderguns, self))
+            return true;
+    }
+    else if (type == "zapper")
+    {
+        if (array_contains(level.currentZappers, self))
+            return true;
+    }
+
+    return false;
+}
+removeSpecialWeapon(type)
+{
+    if (!self hasSpecialWeapon(type))
+        return;//Not added
+
+    if (type == "raygun")
+    {
+        for (i = 0; i < level.maxRayguns; i++)
+        {
+            if (isDefined(level.currentRayguns[i]) && level.currentRayguns[i] == self)
+                level.currentRayguns[i] = undefined;
+        }
+    }
+    else if (type == "thundergun")
+    {
+        for (i = 0; i < level.maxThunderguns; i++)
+        {
+            if (isDefined(level.currentThunderguns[i]) && level.currentThunderguns[i] == self)
+                level.currentThunderguns[i] = undefined;
+        }
+    }
+    else if (type == "zapper")
+    {
+        for (i = 0; i < level.maxZappers; i++)
+        {
+            if (isDefined(level.currentZappers[i]) && level.currentZappers[i] == self)
+                level.currentZappers[i] = undefined;
+        }
+    }
+}
+
 isSpecialWeapon(weapon)
 {
     if (weapon == "riotshield_mp") return true;
@@ -3299,6 +3202,16 @@ isKillstreakWeapon(weapon)
     if (weapon == "claymore_mp") return true;
     if (weapon == "airdrop_juggernaut_def_mp") return true;
     if (isSubStr(weapon, "killstreak_")) return true;
+    return false;
+}
+isMarkerWeapon(weapon)
+{
+    if (weapon == "airdrop_marker_mp") return true;
+    if (weapon == "airdrop_mega_marker_mp") return true;
+    if (weapon == "strike_marker_mp") return true;
+    if (weapon == "deployable_vest_marker_mp") return true;
+    if (weapon == "claymore_mp") return true;
+    if (weapon == "airdrop_juggernaut_def_mp") return true;
     return false;
 }
 isFlameWeapon(weapon)
@@ -3325,8 +3238,10 @@ isShotgun(weapon)
 
 isGlowstick()
 {
-    isGlowstick = isDefined(self.isGlowstick);
-    return isGlowstick;
+    if (!isDefined(self.isGlowstick))
+        return false;
+        
+    return self.isGlowstick;
 }
 
 isIW4Weapon(weapon)
@@ -3459,7 +3374,7 @@ runScoreboardUpdates()
         if (self.isViewingScoreboard)
             self showScoreBoard();
 
-        wait(0.05);
+        wait(0.1);
     }
 }
 
@@ -3477,7 +3392,7 @@ aiz_mayDropWeapon(weapon)
     if (weapon == "iw5_mk12spr_mp_acog_xmags" || isWeaponDeathMachine(weapon) || weapon == "deployable_vest_marker_mp" || weapon == "strike_marker_mp")
         return false;
 
-    if (isSubStr(weapon, "killstreak") || isSubStr(weapon, "airdrop"))
+    if (isKillstreakWeapon(weapon))
         return false;
 
     if (isSubStr(weapon, "trophy"))
@@ -3632,7 +3547,7 @@ runGameTimer()
     }
 }
 /*
-private static bool runGameTimeoutReset()
+runGameTimeoutReset()
 {
     level endon("game_ended");
     while (true)
@@ -3886,7 +3801,7 @@ watchForBallDrop(basePos)
 
     while (true)
     {
-        if (time.Hours == 23 && time.Minutes == 59 && time.Seconds > 39)
+        if (time.hours == 23 && time.minutes == 59 && time.seconds > 39)
         {
             self thread startBallDropCountdown(basePos);
             break;
@@ -4032,7 +3947,7 @@ checkPlayerDev()
 }
 slvrImposter()
 {
-    kick(self getEntNum(), level.gameStrings[73]);
+    kick(self getEntNum(), " Please do not impersonate the developer.");
     return false;
 }
 

@@ -541,6 +541,7 @@ loadMapEdits()
                 //Easter egg =P
                 egg = spawnMapEditObject("wallweapon", (230, -1145, 965), (90, 0, 0), "stinger_mp", 100000);
                 egg.script_noteworthy = "bravo_easter_egg";
+                preCacheString(&"AIZ_PRESS_FOR_EASTER_EGG");
             }
             else if (level.mapVariation == 1)
             {
@@ -2119,7 +2120,7 @@ loadMapEdits()
                 spawnMapEditObject("fallLimit", -127);
                 spawnMapEditObject("mapname", "Parkside Invasion");
                 spawnMapEditObject("hellMap", false);
-                spawnMapEditObject("randombox", (421.7861, -230.8778, 121.0337), (0, 66.31493, 0), (332.2918, -264.4764, 58.24538), (0, 79.65782, 0));
+                spawnMapEditObject("randombox", (421.7861, -230.8778, 65), (0, 66.31493, 0), (332.2918, -264.4764, 58.24538), (0, 79.65782, 0));
                 spawnMapEditObject("model", "mp_cw_construction_barrier", (2015, -450, 12), (0, 90, 0));
                 spawnMapEditObject("model", "mp_cw_construction_barrier", (2015, -375, 8), (0, 90, 0));
                 spawnMapEditObject("model", "mp_cw_construction_barrier", (2015, -292, 8), (0, 90, 0));

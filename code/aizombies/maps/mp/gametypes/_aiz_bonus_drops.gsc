@@ -412,6 +412,7 @@ doNuke(bonus)
 }
 doFreezer(bonus)
 {
+    bonus show();
     bonus moveTo(bonus.origin + (0, 0, 3000), 5);
     wait(5);
     playSoundAtPos(bonus.origin, "exp_airstrike_bomb_layer");
@@ -505,18 +506,16 @@ giveRandomPerk(perk)
                 self.lastBoughtPerk = "waypoint_revive";
                 
             break;
-        case 7:
-            self givePerk("specialty_scavenger", false);
-            self.lastBoughtPerk = "specialty_scavenger_upgrade";
-            break;
     }
 
-    if (perk != 6) self.perksBought[perk] = true;
-    else self.perksBought[perk] += 1;
+    if (perk == 6)
+        self.perksBought[perk] += 1; 
+    else
+        self.perksBought[perk] = true;
 
     perkIcon = NewClientHudElem(self);
-    perkIcon[0] = 0 * perk;
-    perkIcon[1] = -54;
+    perkIcon.x = (0 * perk);
+    perkIcon.y = (-54);
     perkIcon.alignX = "left";
     perkIcon.alignY = "bottom";
     perkIcon.vertAlign = "bottom_adjustable";

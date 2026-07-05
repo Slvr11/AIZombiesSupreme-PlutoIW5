@@ -58,6 +58,17 @@ bakeWaypoints()
         }
     }
     */
+
+    /#
+    if (GetDvarInt("aiz_debugWaypoints") == 1)
+    {
+        foreach (p in level.waypoints)
+        {
+            debug = spawn("script_model", p.origin);
+            debug setModel("test_sphere_silver");
+        }
+    }
+    #/
 }
 validateWaypoints(badPoints)
 {
@@ -291,6 +302,10 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (583.5759,-1208.752,985.8169);
             waypoints[waypoints.size] = (313.8668,-1204.368,971.0732);
             waypoints[waypoints.size] = (-180.8494,-1878.95,1114);
+            waypoints[waypoints.size] = (338.123,-2049.52,1112.82);
+            waypoints[waypoints.size] = (308.559,-1770.48,1064.76);
+            waypoints[waypoints.size] = (588.714,-1754.5,1078.13);
+            waypoints[waypoints.size] = (793.109,-1625.05,1085.98);
         }
         else if (level.mapVariation == 1)
         {
@@ -510,7 +525,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (5.727349,1458.807,-290.875);
             waypoints[waypoints.size] = (136.2413,820.1141,-309.0848);
             waypoints[waypoints.size] = (-604.6086,83.37051,-413.8297);
-            waypoints[waypoints.size] = (-220.3642,183.4029,-398.7145);
+            waypoints[waypoints.size] = (-220.3642,183.4029,-395);
             waypoints[waypoints.size] = (-85.66466,648.6254,-354.7658);
             waypoints[waypoints.size] = (-136.5737,47.70163,-390.375);
             waypoints[waypoints.size] = (164.7923,154.8896,-390.375);
@@ -529,6 +544,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (386.6993,2061.878,-254.875);
             waypoints[waypoints.size] = (750.8327,2236.435,-254.875);
             waypoints[waypoints.size] = (652.9404,1854.689,-235.7291);
+            waypoints[waypoints.size] = (266.963, 2070.63, -254.875);
         }
         else if (level.mapVariation == 1)
         {
@@ -578,6 +594,7 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (317.1668,-118.8957,-390.375);
             waypoints[waypoints.size] = (146.4815,184.6393,-390.375);
             waypoints[waypoints.size] = (-618.005,121.0368,-415.8227);
+            waypoints[waypoints.size] = (-805.945, 359.88, -411.875);
         }
         else if (level.mapVariation == 3)
         {
@@ -1469,6 +1486,8 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (-6457.48,2935.736,1330.296);
             waypoints[waypoints.size] = (-7258.608,2926.655,1287.406);
             waypoints[waypoints.size] = (-6941.542,2768.419,1298.016);
+            waypoints[waypoints.size] = (-6590.02, 4406.37, 1333.2);
+            waypoints[waypoints.size] = (-6140.35, 3497.81, 1344.91);
         }
         break;
         case "mp_restrepo_ss":
@@ -2685,11 +2704,13 @@ getWaypointsForMap()
             waypoints[waypoints.size] = (15.2143, -2085.17, 136.057);
             waypoints[waypoints.size] = (-280.987, -2136.96, 156.125);
             waypoints[waypoints.size] = (-101.854, -2087.35, 160.744);
-            waypoints[waypoints.size] = (49.215, -1009.32, 64.125);
-            waypoints[waypoints.size] = (282.75, -1007.95, 54.982);
+            waypoints[waypoints.size] = (282.75, -1007.95, 80);
             waypoints[waypoints.size] = (129.713, -1393.74, 50);
             waypoints[waypoints.size] = (122.441, -1139.17, 50);
-            waypoints[waypoints.size] = (66.5237, -1002.98, 64.125);
+            waypoints[waypoints.size] = (38.6214, -607.971, 145.001);
+            waypoints[waypoints.size] = (38.0424, -694.374, 143.505);
+            waypoints[waypoints.size] = (314.607, -388.428, 62.9544);
+            waypoints[waypoints.size] = (755.3, 543.052, 52.6833);
         }
         break;
         case "mp_base":

@@ -13,7 +13,7 @@ init()
     level.mapStreakKills = undefined;
     level.mapStreakWeapon = "killstreak_double_uav_mp";
     level.mapStreakIcon = "white";
-    level.mapStreakName = level.gameStrings[215];
+    level.mapStreakName = "";
     level.littlebirdOut = false;
     level.overwatchOut = false;
     level.airstrikeOut = false;
@@ -52,6 +52,26 @@ init()
 
     level.visionRestored = false;
 
+    level.killstreakFuncs = [];
+    level.killstreakFuncs["predator_missile"] = ::tryLaunchMissile;
+    level.killstreakFuncs["sentry"] = ::tryUseSentry;
+    level.killstreakFuncs["gl_turret"] = ::tryUseGLSentry;
+    level.killstreakFuncs["emp"] = ::tryUseVisionRestore;
+    level.killstreakFuncs["emp_2"] = ::tryUseVisionRestore;
+    level.killstreakFuncs["airstrike"] = ::tryUseAirstrike;
+    level.killstreakFuncs["airstrike_legacy"] = ::tryUseMW2Airstrike;
+    level.killstreakFuncs["super_airstrike"] = ::tryUseSuperAirstrike;
+    level.killstreakFuncs["nuke"] = ::tryUseNuke;
+    level.killstreakFuncs["remote_uav"] = ::tryUseLittlebird;
+    level.killstreakFuncs["overwatch"] = ::tryUseOverwatch;
+    level.killstreakFuncs["bot_smg"] = ::tryUseSubBot;
+    level.killstreakFuncs["bot_lmg"] = ::tryUseLMGBot;
+    level.killstreakFuncs["airdrop_assault"] = ::tryUseAirdrop;
+    level.killstreakFuncs["airdrop_mega"] = ::tryUseMegaAirdrop;
+    level.killstreakFuncs["heli_sniper"] = ::tryUseHeliSniper;
+    level.killstreakFuncs["deployable_exp_ammo"] = ::tryUseDeployableExpAmmo;
+    level.killstreakFuncs["map_killstreak"] = ::tryUseMapStreak;
+
     thread monitorAllHeliSnipers();
 
     if (level.classicKillstreaks == 1 || (level.classicKillstreaks == 2 && array_contains(level.classicMaps, level._mapname)))
@@ -71,6 +91,7 @@ checkKillstreak()
         self giveWeapon("killstreak_predator_missile_mp", 0, false);
         self setActionSlot(4, "weapon", "killstreak_predator_missile_mp");
         self.ownsPredator = true;
+        self shuffleStreaks();
     }
     else if (streak == 100)
     {
@@ -79,6 +100,7 @@ checkKillstreak()
         self giveWeapon("killstreak_sentry_mp", 0, false);
         self setActionSlot(5, "weapon", "killstreak_sentry_mp");
         self.ownsSentry = true;
+        self shuffleStreaks();
     }
     else if (streak == 125 && (level.classicKillstreaks == 1 || (level.classicKillstreaks == 2 && array_contains(level.classicMaps, level._mapname))))
     {
@@ -87,6 +109,7 @@ checkKillstreak()
         self giveWeapon("killstreak_airstrike_mp", 0, false);
         self setActionSlot(5, "weapon", "killstreak_airstrike_mp");
         self.ownsMW2Airstrike = true;
+        self shuffleStreaks();
     }
     else if (streak == 150)
     {
@@ -95,6 +118,7 @@ checkKillstreak()
         self giveWeapon("airdrop_marker_mp", 0, false);
         self setActionSlot(5, "weapon", "airdrop_marker_mp");
         self.ownsAirdrop = true;
+        self shuffleStreaks();
     }
     else if (streak == level.empKills)
     {
@@ -106,6 +130,7 @@ checkKillstreak()
         self giveWeapon("killstreak_emp_mp", 0, false);
         self setActionSlot(6, "weapon", "killstreak_emp_mp");
         self.ownsEMP = true;
+        self shuffleStreaks();
     }
     else if (streak == 200)
     {
@@ -114,6 +139,7 @@ checkKillstreak()
         self giveWeapon("strike_marker_mp", 0, false);
         self setActionSlot(5, "weapon", "strike_marker_mp");
         self.ownsAirstrike = true;
+        self shuffleStreaks();
     }
     else if (streak == 250)
     {
@@ -122,6 +148,7 @@ checkKillstreak()
         self giveWeapon("killstreak_remote_turret_mp", 0, false);
         self setActionSlot(5, "weapon", "killstreak_remote_turret_mp");
         self.ownsSentryGL = true;
+        self shuffleStreaks();
     }
     else if (streak == 275 && (level.classicKillstreaks == 1 || (level.classicKillstreaks == 2 && array_contains(level.classicMaps, level._mapname))))
     {
@@ -130,6 +157,7 @@ checkKillstreak()
         self giveWeapon("killstreak_super_airstrike_mp", 0, false);
         self setActionSlot(7, "weapon", "killstreak_super_airstrike_mp");
         self.ownsSuperAirstrike = true;
+        self shuffleStreaks();
     }
     else if (streak == 300)
     {
@@ -138,6 +166,7 @@ checkKillstreak()
         self giveWeapon("deployable_vest_marker_mp", 0, false);
         self setActionSlot(6, "weapon", "deployable_vest_marker_mp");
         self.ownsExpAmmo = true;
+        self shuffleStreaks();
     }
     else if (streak == 400)
     {
@@ -146,6 +175,7 @@ checkKillstreak()
         self giveWeapon("airdrop_mega_marker_mp", 0, false);
         self setActionSlot(7, "weapon", "airdrop_mega_marker_mp");
         self.ownsEmergencyAirdrop = true;
+        self shuffleStreaks();
     }
     else if (streak == 450 && (level.classicKillstreaks == 1 || (level.classicKillstreaks == 2 && array_contains(level.classicMaps, level._mapname))))
     {
@@ -154,6 +184,7 @@ checkKillstreak()
         self giveWeapon("killstreak_helicopter_flares_mp", 0, false);
         self setActionSlot(4, "weapon", "killstreak_helicopter_flares_mp");
         self.ownsOverwatch = true;
+        self shuffleStreaks();
     }
     else if (streak == 500)
     {
@@ -162,6 +193,7 @@ checkKillstreak()
         self giveWeapon("killstreak_helicopter_mp", 0, false);
         self setActionSlot(7, "weapon", "killstreak_helicopter_mp");
         self.ownsNuke = true;
+        self shuffleStreaks();
     }
     else if (streak == 750)
     {
@@ -170,6 +202,7 @@ checkKillstreak()
         self giveWeapon("killstreak_uav_mp", 0, false);
         self setActionSlot(4, "weapon", "killstreak_uav_mp");
         self.ownsLittlebird = true;
+        self shuffleStreaks();
     }
     else if (streak == 800)
     {
@@ -178,6 +211,7 @@ checkKillstreak()
         self giveWeapon("killstreak_ims_mp", 0, false);
         self setActionSlot(4, "weapon", "killstreak_ims_mp");
         self.ownsHeliSniper = true;
+        self shuffleStreaks();
     }
     /*
     else if (streak == 1000 && level._mapname != "mp_carbon" && level._mapname != "mp_cement" && level._mapname != "mp_underpass" && !self.ownsBot)
@@ -187,6 +221,7 @@ checkKillstreak()
         self spawnBotForPlayer();
         wait(1);
         self iPrintLnBold(level.gameStrings[217]);
+        self shuffleStreaks();
     }
     */
     else if (streak == 350/* && level._mapname != "mp_carbon" && level._mapname != "mp_cement" && level._mapname != "mp_underpass"*/ && !self.ownsSubBot)
@@ -197,6 +232,7 @@ checkKillstreak()
         self giveWeapon("killstreak_triple_uav_mp", 0, false);
         self setActionSlot(6, "weapon", "killstreak_triple_uav_mp");
         self.ownsSubBot = true;
+        self shuffleStreaks();
     }
     else if (streak == 600/* && level._mapname != "mp_carbon" && level._mapname != "mp_cement" && level._mapname != "mp_underpass"*/ && !self.ownsLMGBot)
     {
@@ -206,6 +242,7 @@ checkKillstreak()
         self giveWeapon("killstreak_counter_uav_mp", 0, false);
         self setActionSlot(7, "weapon", "killstreak_counter_uav_mp");
         self.ownsLMGBot = true;
+        self shuffleStreaks();
     }
     else if (isDefined(level.mapStreakKills) && streak == level.mapStreakKills)
     {
@@ -214,8 +251,8 @@ checkKillstreak()
         self setActionSlot(7, "weapon", level.mapStreakWeapon);
         self showHudSplash(level.mapStreakName, 0, streak);
         self.ownsMapStreak = true;
+        self shuffleStreaks();
     }
-    self shuffleStreaks();//update HUD
 }
 
 giveKillstreak(streak)
@@ -314,188 +351,37 @@ getKillstreakCrateIcon(streak)
     return "white";
 }
 
-executeKillstreak(newWeap)
+executeKillstreak(weapon)
 {
     if (!isDefined(self.isDown)) return;
 
-    self maps\mp\gametypes\_aiz_hud::updateAmmoHud(false);
-    //killstreaks
-    if (newWeap != self getCurrentWeapon()) return;
+    //self maps\mp\gametypes\_aiz_hud::updateAmmoHud(false);
 
-    if (self.ownsPredator && newWeap == "killstreak_predator_missile_mp")
-    {
-        self thread launchMissile();
-        self thread takeWeaponAfterWait(0.75, "killstreak_predator_missile_mp");
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
-    else if (self.ownsSentry && newWeap == "killstreak_sentry_mp")
-    {
-        self spawnSentry(false);
-        //sentryModel = self spawnSentry();
-        //if (isDefined(sentryModel))
-        //self thread sentryHoldWatcher(sentryModel, true);
-        self switchToWeapon(self.lastDroppableWeapon);
-        //self disableWeapons();
-    }
-    else if (self.ownsSentryGL && newWeap == "killstreak_remote_turret_mp")
-    {
-        self spawnSentry(true);
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
-    else if (self.ownsLittlebird && newWeap == "killstreak_uav_mp")
-    {
-        if (!level.littlebirdOut)
-        {
-            littlebirdModel = self spawnLittlebird();
-            if (isDefined(littlebirdModel))
-                self thread holdLittlebird(littlebirdModel);
-            else return;
-        }
-        else
-        {
-            self iPrintLnBold(level.gameStrings[220]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            self enableWeapons();
-            return;
-        }
-        self switchToWeapon(self.lastDroppableWeapon);
-        self disableWeapons();
-    }
-    else if (self.ownsEMP && newWeap == "killstreak_emp_mp")
-    {
-        self thread visionRestore();
-        self.ownsEMP = false;
-        self thread takeWeaponAfterWait(1.25, "killstreak_emp_mp");
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
-    else if (self.ownsNuke && newWeap == "killstreak_helicopter_mp")
-    {
-        success = self nuke();
+    streakName = getKillstreakFromWeapon(weapon);
 
-        if (!success)
+    if (!isDefined(streakName))
+    {
+        self switchToWeapon(self.lastDroppableWeapon);
+        return;
+    }
+
+    if (self [[ level.killstreakFuncs[streakName] ]]())
+    {
+        if (!isMarkerWeapon(weapon))
         {
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
+            waitTime = 1.25;
+            if (streakName == "predator_missile" || streakName == level.mapStreakName)
+                waitTime = 0.75;
+
+            if (streakName != "sentry_gun" && streakName != "gl_turret" && streakName != "remote_uav")
+                self thread takeWeaponAfterWait(waitTime, weapon);
         }
 
-        self.ownsNuke = false;
-        self thread takeWeaponAfterWait(1.25, "killstreak_helicopter_mp");
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
-    else if (self.ownsHeliSniper && newWeap == "killstreak_ims_mp")
-    {
-        if (isDefined(self.isCurrentlyTeleported) && self.isCurrentlyTeleported)
-        {
-            self iPrintLnBold(level.gameStrings[221]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
-        }
-        origin = self getOrigin();
-        pos = origin + (randomFloatRange(-100, 100), randomFloatRange(-100, 100), 0);
-        if (canCallInHeliSniper(pos))
-        {
-            angles = self getPlayerAngles();
-            self teamSplash("used_heli_sniper");
-            self callHeliSniper(pos);
-            self.ownsHeliSniper = false;
-            self playSound("US_1mc_use_heli_sniper");
-            self thread takeWeaponAfterWait(1.25, "killstreak_ims_mp");
-            self switchToWeapon(self.lastDroppableWeapon);
-        }
-        else
-        {
-            self iPrintLnBold(level.gameStrings[222]);
-            self switchToWeapon(self.lastDroppableWeapon);
-        }
-    }
-    else if (self.ownsMapStreak && newWeap == level.mapStreakWeapon)
-    {
-        if (level._mapname == "mp_bravo" ||
-            level._mapname == "mp_carbon" ||
-            level._mapname == "mp_roughneck")//Mapstreaks without an instant call-in
-            return;
-
-        success = self tryUseMapStreak();
-        lastWeapon = self.lastDroppableWeapon;
-
-        if (!success)
-        {
-            self iPrintLnBold(level.gameStrings[223], getFriendlyMapStreakName());
-            self switchToWeapon(lastWeapon);
-            return;
-        }
-
-        self.ownsMapStreak = false;
         self shuffleStreaks();
-        self thread takeWeaponAfterWait(0.75, level.mapStreakWeapon);
-        self switchToWeapon(lastWeapon);
     }
-    else if (self.ownsSubBot && newWeap == "killstreak_triple_uav_mp")
-    {
-        if (isDefined(self.bot))
-        {
-            self iPrintLnBold(level.gameStrings[219]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
-        }
 
-        self spawnBotForPlayer(level.botWeapon_subBot, 120);
+    if (!isMarkerWeapon(weapon))
         self switchToWeapon(self.lastDroppableWeapon);
-        self thread takeWeaponAfterWait(1.25, "killstreak_triple_uav_mp");
-    }
-    else if (self.ownsLMGBot && newWeap == "killstreak_counter_uav_mp")
-    {
-        if (isDefined(self.bot))
-        {
-            self iPrintLnBold(level.gameStrings[219]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
-        }
-
-        self spawnBotForPlayer(level.botWeapon_LMGBot, 90);
-        self switchToWeapon(self.lastDroppableWeapon);
-        self thread takeWeaponAfterWait(1.25, "killstreak_counter_uav_mp");
-    }
-    else if (self.ownsMW2Airstrike && newWeap == "killstreak_airstrike_mp")
-    {
-        if (level.airstrikeOut)
-        {
-            self iPrintLnBold(level.gameStrings[220]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
-        }
-
-        self mw2AirStrike();
-        self thread takeWeaponAfterWait(1.25, "killstreak_airstrike_mp");
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
-    else if (self.ownsSuperAirstrike && newWeap == "killstreak_super_airstrike_mp")
-    {
-        if (level.airstrikeOut)
-        {
-            self iPrintLnBold(level.gameStrings[220]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
-        }
-
-        self superAirStrike();
-        self thread takeWeaponAfterWait(1.25, "killstreak_super_airstrike_mp");
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
-    else if (self.ownsOverwatch && newWeap == "killstreak_helicopter_flares_mp")
-    {
-        if (level.overwatchOut)
-        {
-            self iPrintLnBold(level.gameStrings[220]);
-            self switchToWeapon(self.lastDroppableWeapon);
-            return;
-        }
-
-        self callOverwatch();
-        self.ownsOverwatch = false;
-        self thread takeWeaponAfterWait(1.25, "killstreak_helicopter_flares_mp");
-        self switchToWeapon(self.lastDroppableWeapon);
-    }
 }
 
 shuffleStreaks()
@@ -624,6 +510,28 @@ shuffleStreaks()
     }
 }
 
+tryUseSentry()
+{
+    if (!self.ownsSentry)
+        return false;
+    if (self.isCarryingSentry)
+        return false;
+
+    self spawnSentry(false);
+
+    return true;
+}
+tryUseGLSentry()
+{
+    if (!self.ownsSentryGL)
+        return false;
+    if (self.isCarryingSentry)
+        return false;
+
+    self spawnSentry(true);
+
+    return true;
+}
 spawnSentry(isGL)
 {
     if (self.isCarryingSentry) return;
@@ -641,13 +549,13 @@ spawnSentry(isGL)
     turret.baseModel = model;
     //turret.health = 1000;
     //turret setCanDamage(true);
-    turret makeTurretInOperable();
+    turret makeTurretInoperable();
     turret setRightArc(80);
     turret setLeftArc(80);
     turret setBottomArc(50);
-    turret makeUnUsable();
+    turret makeUnusable();
     turret setDefaultDropPitch(-89.0);
-    if (isGL) turret setConvergenceTime(1);
+    if (isGL) turret setConvergenceTime(1, "yaw");
     turret setTurretModeChangeWait(true);
     turret setMode("sentry_offline");
     turret.owner = self;
@@ -665,7 +573,7 @@ spawnSentry(isGL)
     turret.canBePlaced = true;
     turret.timeLeft = 90;
     if (isGL) turret.timeLeft = 120;
-    turret.target = turret;
+    turret.targetEnt = undefined;
     turret.sentryType = "sentry_minigun";
     turret.momentum = 0;
     trigger = spawn("script_origin", turret.origin);
@@ -923,13 +831,19 @@ destroySentry()
     self delete();
 }
 
+tryLaunchMissile()
+{
+    if (!self.ownsPredator)
+        return false;
+
+    self thread launchMissile();
+    return true;
+}
 launchMissile()
 {
     self scoreMessage(level.gameStrings[302]);
     self.ownsPredator = false;
-    //foreach (player in level.players) 
     self playSound("US_1mc_use_predator");
-    self shuffleStreaks();
 
     if (level.botsInPlay.size != 0) randomTarget = randomInt(level.botsInPlay.size);
     else randomTarget = undefined;
@@ -963,6 +877,15 @@ launchMissile()
     fx delete();
 }
 
+tryUseVisionRestore()
+{
+    if (!self.ownsEMP)
+        return false;
+
+    self thread visionRestore();
+
+    return true;
+}
 visionRestore()
 {
     if (level.isHellMap)
@@ -971,7 +894,6 @@ visionRestore()
         self teamSplash("used_emp");
         
     self.ownsEMP = false;
-    self shuffleStreaks();
     if (level.isHellMap)
     {
         level.visionRestored = true;
@@ -987,6 +909,7 @@ visionRestore()
             player visionSetNakedForPlayer("end_game2", 0.5);
 
             wait(0.8);
+
             if (!player.isDown && !level.isBossWave) player visionSetNakedForPlayer(level.vision);
             else if (!player.isDown && level.isBossWave) player visionSetNakedForPlayer(level.bossVision);
             else player visionSetNakedForPlayer("cheat_bw");
@@ -1018,14 +941,51 @@ unJamPlayerAfterTime()
     self setEMPJammed(false);
 }
 
-airStrike(pos)
+tryUseAirstrike()
+{
+    if (!self.ownsAirstrike)
+        return;
+
+    self thread watchAirdropMarkerUsage("airstrike", "strike_marker_mp");
+
+    return true;
+}
+tryUseMW2Airstrike()
+{
+    if (!self.ownsMW2Airstrike)
+        return;
+    if (level.airstrikeOut)
+    {
+        self iPrintLnBold(level.gameStrings[220]);
+        return false;
+    }
+
+    self mw2AirStrike();
+
+    return true;
+}
+tryUseSuperAirstrike()
+{
+    if (!self.ownsSuperAirstrike)
+        return;
+    if (level.airstrikeOut)
+    {
+        self iPrintLnBold(level.gameStrings[220]);
+        return false;
+    }
+
+    self superAirStrike();
+
+    return true;
+}
+airStrike()
 {
     if (isDefined(self.owner)) owner = self.owner;
     else return;
 
+    pos = self.origin;
     self delete();
     owner.ownsAirstrike = false;
-    owner shuffleStreaks();
     owner playSound("US_1mc_use_airstrike");
     level thread doAirstrike(pos, owner);
 }
@@ -1064,7 +1024,6 @@ initMW2Airstrike()
 mw2AirStrike()
 {
     self.ownsMW2Airstrike = false;
-    self shuffleStreaks();
     self playSound("US_1mc_use_airstrike");
     self teamSplash("used_airstrike_legacy");
     self scoreMessage(level.gameStrings[315]);
@@ -1073,7 +1032,6 @@ mw2AirStrike()
 superAirStrike()
 {
     self.ownsSuperAirstrike = false;
-    self shuffleStreaks();
     self playSound("US_1mc_use_airstrike");
     self teamSplash("used_super_airstrike");
     self scoreMessage(level.gameStrings[339]);
@@ -1243,10 +1201,24 @@ mw2AirstrikeTargeting(owner, isSuper)
     level.airstrikeOut = false;
     self delete();
 }
+
+tryUseOverwatch()
+{
+    if (!self.ownsOverwatch)
+        return false;
+    if (level.overwatchOut)
+    {
+        self iPrintLnBold(level.gameStrings[220]);
+        return false;
+    }
+
+    self callOverwatch();
+
+    return true;
+}
 callOverwatch()
 {
     self.ownsOverwatch = false;
-    self shuffleStreaks();
     self playSound("US_1mc_use_littlebird");
     self teamSplash("used_overwatch");
     self scoreMessage(level.gameStrings[129]);
@@ -1421,15 +1393,23 @@ overwatch_spin()
 	}
 }
 
-nuke()
+tryUseNuke()
 {
+    if (!self.ownsNuke)
+        return false;
     if (level.gameEnded) return false;
-
     if (level.nukeInbound)
     {
         self iPrintLnBold(level.gameStrings[224]);
         return false;
     }
+
+    self nuke();
+
+    return true;
+}
+nuke()
+{
     level.nukeInbound = true;
     level thread playNukeWhoosh();
     self thread detonateNukeAfterTime(11, true);
@@ -1437,7 +1417,6 @@ nuke()
 
     self teamSplash("used_nuke");
     self.ownsNuke = false;
-    self shuffleStreaks();
 
     nukeTimer = newTeamHudElem("allies");
     nukeTimer.x = 0;
@@ -1463,8 +1442,6 @@ nuke()
 
     foreach (player in level.players)
         player thread nuke_restorePlayerVision();
-
-    return true;
 }
 detonateNukeAfterTime(time, isStreak)
 {
@@ -1509,11 +1486,14 @@ nukeCountdown(nukeTimer)
         level.nukeTime--;
         playSoundAtPos((0, 0, 0), "mp_killstreak_nuclearstrike");
 
-        wait(1);
-
-        if (level.nukeTime > 0) continue;
+        if (level.nukeTime > 0)
+        {
+            wait(1);
+            continue;
+        }
         else
         {
+            wait(0.25);
             nukeTimer destroy();
             break;
         }
@@ -1523,9 +1503,10 @@ nuke_fontPulse(nukeTimer)
 {
     nukeTimer changeFontScaleOverTime(0.2);
     nukeTimer.fontScale = 1.25;
-    wait(.2f);
 
-    if (level.nukeTime > 0) nukeTimer setValue(level.nukeTime);
+    wait(0.2);
+
+    nukeTimer setValue(level.nukeTime);
     nukeTimer changeFontScaleOverTime(0.2);
     nukeTimer.fontScale = 1;
 }
@@ -1543,9 +1524,25 @@ nuke_restorePlayerVision()
     else self visionSetNakedForPlayer(level.vision, 5);
 }
 
+tryUseLittlebird()
+{
+    if (!self.ownsLittlebird)
+        return false;
+    if (level.littlebirdOut)
+    {
+        self iPrintLnBold(level.gameStrings[220]);
+        return false;
+    }
+    if (self.isCarryingSentry)
+        return false;
+
+    self spawnLittlebird();
+
+    return true;
+}
 spawnLittlebird()
 {
-    if (self.isCarryingSentry) return undefined;
+    if (self.isCarryingSentry) return;
 
     angleToForward = anglesToForward((0, self getPlayerAngles()[1], 0));
     //turret = spawn("script_model", self.origin + angleToForward * 50);
@@ -1572,19 +1569,21 @@ spawnLittlebird()
     visual.angles = turret.angles;
     visual linkTo(turret, "tag_origin");
     turret.visual = visual;
-    return turret;
+
+    if (isDefined(turret))
+        turret thread holdLittlebird(self);
 }
-holdLittlebird(bird)
+holdLittlebird(player)
 {
-    bird.isBeingCarried = true;
-    self.isCarryingSentry = true;
-    bird.canBePlaced = true;
-    self disableWeapons();
-    bird setSentryCarrier(self);
-    bird setCanDamage(false);
-    self thread littlebirdHoldWatcher(bird);
+    self.isBeingCarried = true;
+    self.canBePlaced = true;
+    player.isCarryingSentry = true;
+    player disableWeapons();
+    self setSentryCarrier(player);
+    self setCanDamage(false);
+    self thread littlebirdHoldWatcher(player);
 }
-littlebirdHoldWatcher(bird)
+littlebirdHoldWatcher(player)
 {
     level endon("game_ended");
 
@@ -1592,50 +1591,50 @@ littlebirdHoldWatcher(bird)
     {
         wait(0.1);
 
-        if (level.gameEnded || !self.isAlive)
+        if (level.gameEnded || !player.isAlive)
         {
-            bird setSentryCarrier(undefined);
-            bird.visual delete();
-            bird delete();
+            self setSentryCarrier(undefined);
+            self.visual delete();
+            self delete();
             break;
         }
 
-        birdVisual = bird.visual;
-        anglesToForward = anglesToForward((0, self getPlayerAngles()[1], 0));
-        traceOrigin = self.origin + (anglesToForward * 75);
+        birdVisual = self.visual;
+        anglesToForward = anglesToForward((0, player getPlayerAngles()[1], 0));
+        traceOrigin = player.origin + (anglesToForward * 75);
         trace = sightTracePassed(traceOrigin + (0, 0, 25), traceOrigin + (0, 0, 500), false, birdVisual);
 
         if (trace && birdVisual.model == "test_vehicle_little_bird_toy_placement_failed")
         {
             birdVisual setModel("test_vehicle_little_bird_toy_placement");
-            bird.canBePlaced = true;
+            self.canBePlaced = true;
         }
         else if (!trace && birdVisual.model == "test_vehicle_little_bird_toy_placement")
         {
             birdVisual setModel("test_vehicle_little_bird_toy_placement_failed");
-            bird.canBePlaced = false;
+            self.canBePlaced = false;
         }
 
-        if (self.isAlive && self attackButtonPressed() && bird.canBePlaced && self.isCarryingSentry)
+        if (player.isAlive && player attackButtonPressed() && self.canBePlaced && player.isCarryingSentry)
         {
-            self enableWeapons();
-            self thread takeWeaponAfterWait(0.75, "killstreak_uav_mp");
-            lastWeapon = self.lastDroppableWeapon;
-            self switchToWeapon(lastWeapon);
-            self.ownsLittlebird = false;
-            self playSound("US_1mc_use_dragonfly");
-            self shuffleStreaks();
-            self.isCarryingSentry = false;
-            bird setSentryCarrier(undefined);
-            bird.isBeingCarried = false;
-            bird playSound("sentry_gun_plant");
-            self teamSplash("used_remote_uav");
-            playerAngleY = self getPlayerAngles()[1];
+            player enableWeapons();
+            player thread takeWeaponAfterWait(0.75, "killstreak_uav_mp");
+            lastWeapon = player.lastDroppableWeapon;
+            player switchToWeapon(lastWeapon);
+            player.ownsLittlebird = false;
+            player shuffleStreaks();
+            player playSound("US_1mc_use_dragonfly");
+            player.isCarryingSentry = false;
+            self setSentryCarrier(undefined);
+            self.isBeingCarried = false;
+            self playSound("sentry_gun_plant");
+            player teamSplash("used_remote_uav");
+            playerAngleY = player getPlayerAngles()[1];
             angleToForward = anglesToForward((0, playerAngleY, 0));
             sentryAngles = (0, playerAngleY, 0);
-            origin = self.origin + angleToForward * 50;
-            self spawnRemoteUAV(origin, sentryAngles);
-            bird delete();
+            origin = player.origin + angleToForward * 50;
+            player spawnRemoteUAV(origin, sentryAngles);
+            self delete();
             birdVisual delete();
             break;
         }
@@ -1893,6 +1892,34 @@ destroyLittlebird()
     fx delete();
 }
 
+tryUseSubBot()
+{
+    if (!self.ownsSubBot)
+        return false;
+    if (isDefined(self.bot))
+    {
+        self iPrintLnBold(level.gameStrings[219]);
+        return false;
+    }
+
+    self spawnBotForPlayer(level.botWeapon_subBot, 120);
+
+    return true;
+}
+tryUseLMGBot()
+{
+    if (!self.ownsLMGBot)
+        return false;
+    if (isDefined(self.bot))
+    {
+        self iPrintLnBold(level.gameStrings[219]);
+        return false;
+    }
+
+    self spawnBotForPlayer(level.botWeapon_LMGBot, 90);
+
+    return true;
+}
 spawnBotForPlayer(weapon, time)
 {
     if (weapon == level.botWeapon_subBot)
@@ -1905,7 +1932,6 @@ spawnBotForPlayer(weapon, time)
         self.ownsLMGBot = false;
         self teamSplash("used_bot_lmg");
     }
-    self shuffleStreaks();
 
     bot = spawn("script_model", self.origin);
     bot.angles = self.angles;
@@ -2329,6 +2355,28 @@ killPlayerBot(time)
     bot delete();
 }
 
+tryUseHeliSniper()
+{
+    if (!self.ownsHeliSniper)
+        return false;
+    if (isDefined(self.isCurrentlyTeleported) && self.isCurrentlyTeleported)
+    {
+        self iPrintLnBold(level.gameStrings[221]);
+        return false;
+    }
+
+    origin = self getOrigin();
+    pos = origin + (randomFloatRange(-100, 100), randomFloatRange(-100, 100), 0);
+    if (!canCallInHeliSniper(pos))
+    {
+        self iPrintLnBold(level.gameStrings[222]);
+        return false;
+    }
+
+    self callHeliSniper(pos);
+
+    return true;
+}
 canCallInHeliSniper(pos)
 {
     if (level.heliHeight > pos[2] && level.heliHeight - pos[2] > 500)
@@ -2337,9 +2385,10 @@ canCallInHeliSniper(pos)
     
     return sightTracePassed(pos + (0, 0, 15), endPos, false, undefined);
 }
-
 callHeliSniper(location)
 {
+    self.ownsHeliSniper = false;
+
     if (level.heliHeight > location[2] && level.heliHeight - location[2] > 500)
         pathStart = (location[0] - 10000, location[1], level.heliHeight);
     else pathStart = location + (-10000, 0, 2000);
@@ -2362,7 +2411,8 @@ callHeliSniper(location)
     lb.readyForEnter = false;
     lb.heliTime = 120;
     self.ownsHeliSniper = false;
-    self shuffleStreaks();
+    self playSound("US_1mc_use_heli_sniper");
+    self teamSplash("used_heli_sniper");
     thread heliSniper_flyIn(self, lb, location);
     thread heliSniper_leaveOnPlayerDeath(self, lb);
 }
@@ -2696,11 +2746,86 @@ monitorAllHeliSnipers()
     }
 }
 
-callAirdrop(marker, location)
+tryUseAirdrop()
 {
-    if (isDefined(marker.owner)) owner = marker.owner;
+    if (!self.ownsAirdrop)
+        return false;
+
+    self thread watchAirdropMarkerUsage("airdrop_assault", "airdrop_marker_mp");
+
+    return true;
+}
+tryUseMegaAirdrop()
+{
+    if (!self.ownsEmergencyAirdrop)
+        return false;
+
+    self thread watchAirdropMarkerUsage("airdrop_mega", "airdrop_mega_marker_mp");
+
+    return true;
+}
+watchAirdropMarkerUsage(dropType, dropWeapon)
+{
+    self endon("disconnect");
+    self endon("death");
+    self endon("weapon_change");
+
+    while (true)
+    {
+        self waittill("grenade_fire", marker, weapon);
+
+        if (weapon != dropWeapon)
+            continue;
+
+        marker.owner = self;
+
+        self thread takeWeaponAfterWait(0.5, weapon);
+        marker thread watchForMarkerStick(dropType);
+    }
+
+}
+watchForMarkerStick(type)
+{
+    self waittill_any_timeout(5, "missile_stuck");
+
+    self onMarkerStuck(type);
+}
+onMarkerStuck(type)
+{
+    switch (type)
+    {
+        case "airdrop_assault":
+            playFX(level.fx_carePackage, self.origin, anglesToForward(self.angles), anglesToRight(self.angles));
+            self playSound("smokegrenade_explode_default");
+            self callAirdrop();
+            break;
+        case "airdrop_mega":
+            playFX(level.fx_carePackage, self.origin, anglesToForward(self.angles), anglesToRight(self.angles));
+            self playSound("smokegrenade_explode_default");
+            self callEmergencyAirdrop();
+            break;
+        case "deployable_exp_ammo":
+            self deployableExpAmmo();
+            break;
+        case "airstrike":
+            self airStrike();
+            break;
+        case "oil_spill":
+            self spawnOilSpill();
+            break;
+        case "barbed_wire":
+            self spawnBarbWire();
+            break;
+    }
+
+    self.owner shuffleStreaks();
+}
+callAirdrop()
+{
+    if (isDefined(self.owner)) owner = self.owner;
     else return;
 
+    location = self.origin;
     pathStart = location + (-10000, 0, 1800);
     angles = vectorToAngles(location - pathStart);
     forward = anglesToForward(angles);
@@ -2711,11 +2836,10 @@ callAirdrop(marker, location)
     //lb enableLinkTo();
     lb vehicle_setSpeed(375, 225, 75);
     lb setTurningAbility(.3);
-    marker delete();
+    self delete();
     owner.ownsAirdrop = false;
-    owner shuffleStreaks();
     owner playSound("US_1mc_use_carepackage");
-    lb airdropFly(owner, location);
+    lb thread airdropFly(owner, location);
 }
 airdropFly(owner, dropLocation)
 {
@@ -2742,11 +2866,12 @@ airdropFly(owner, dropLocation)
     self delete();
 }
 
-callEmergencyAirdrop(marker, location)
+callEmergencyAirdrop()
 {
-    if (isDefined(marker.owner)) owner = marker.owner;
+    if (isDefined(self.owner)) owner = self.owner;
     else return;
 
+    location = self.origin;
     yaw = vectorToAngles(location - owner.origin);
     direction = (0, yaw[1], 0);
     forward = anglesToForward(direction);
@@ -2759,9 +2884,8 @@ callEmergencyAirdrop(marker, location)
 		return;
 
     c130.angles = direction;
-    marker delete();
+    self delete();
     owner.ownsEmergencyAirdrop = false;
-    owner shuffleStreaks();
     owner playSound("US_1mc_use_airdrop");
     c130 thread emergencyAirdropFly(owner, location, forward);
 }
@@ -2870,27 +2994,35 @@ watchCrateUsage()
         self maps\mp\gametypes\_aiz_map_edits::removeUsable();
 }
 
-deployableExpAmmo(marker, pos)
+tryUseDeployableExpAmmo()
 {
-    if (isDefined(marker.owner)) owner = marker.owner;
+    if (!self.ownsExpAmmo)
+        return false;
+
+    self thread watchAirdropMarkerUsage("deployable_exp_ammo", "deployable_vest_marker_mp");
+
+    return true;
+}
+deployableExpAmmo()
+{
+    if (isDefined(self.owner)) owner = self.owner;
     else
     {
-        marker delete();
+        self delete();
         return;
     }
 
     owner teamSplash("used_deployable_exp_ammo");
-    box = spawn("script_model", pos);
-    box.angles = (0, 0, 90);
+    box = spawn("script_model", self.origin);
+    box.angles = (0, self.angles[1], 90);
     box.owner = owner;
     box.range = 75;
     box.usabletype = "expAmmo";
     box setModel("weapon_oma_pack");
     box playSoundToTeam("mp_vest_deployed_ui", "allies");
     box playSound("exp_ammo_box");
-    marker delete();
+    self delete();
     owner.ownsExpAmmo = false;
-    owner shuffleStreaks();
     box maps\mp\gametypes\_aiz_map_edits::addUsable("expAmmo", 75);
     curObjID = maps\mp\gametypes\_gameobjects::getNextObjID();
     Objective_Add(curObjID, "active", box.origin, "compass_objpoint_deploy_friendly");
@@ -2938,17 +3070,22 @@ initMapKillstreak()
         case "mp_alpha":
             level.mapStreakIcon = "objpoint_default";
             level.mapStreakName = "defcon_trigger";//Each use lowers defcon number, Defcon 1 triggers multiple package drops
+            level.mapStreakLocalizedName = &"AIZ_DEFCON_TRIGGER_SYSTEM";
             level.mapStreakKills = 175;
             level.defcon = 6;
+
+            preCacheString(&"AIZ_DEFCON_IS_AT_LEVEL_N");
             break;
         case "mp_bootleg":
             level.mapStreakIcon = "ac130_overlay_grain";
             level.mapStreakName = "acid_rain";
+            level.mapStreakLocalizedName = &"AIZ_ACID_RAIN";
             level.mapStreakKills = 475;
             break;
         case "mp_bravo":
             level.mapStreakIcon = "viper_locked_box";
             level.mapStreakName = "barbed_wire";
+            level.mapStreakLocalizedName = &"AIZ_KILLSTREAK_BARBED_WIRE";
             level.mapStreakKills = 175;
             level.mapStreakWeapon = "claymore_mp";
             break;
@@ -2956,6 +3093,7 @@ initMapKillstreak()
         case "mp_roughneck":
             level.mapStreakIcon = "specialty_c4death";
             level.mapStreakName = "oil_spill";
+            level.mapStreakLocalizedName = &"AIZ_KILLSTREAK_OIL_SPILL";
             level.mapStreakKills = 175;
             level.mapStreakWeapon = "airdrop_juggernaut_def_mp";
 
@@ -2963,20 +3101,23 @@ initMapKillstreak()
             break;
         case "mp_dome":
             level.mapStreakName = "tank";
+            level.mapStreakLocalizedName = &"KILLSTREAKS_TANK";
             level.mapStreakIcon = "killstreak_tank";
             level.mapStreakKills = 650;
 
             level.fx_tankExplode = loadFX("explosions/helicopter_explosion_pavelow");
             break;
         case "mp_paris":
-            level.mapStreakName = "poison_gas";//Poison Gas Attack
+            level.mapStreakName = "poison_gas";
+            level.mapStreakLocalizedName = &"AIZ_KILLSTREAK_POISON_GAS";
             level.mapStreakIcon = "death_moab";
             level.mapStreakKills = 325;
 
             loadFX("smoke/airdrop_flare_mp_effect_now");
             break;
         case "mp_plaza2":
-            level.mapStreakName = "mobile_mortar";//Mortar Team
+            level.mapStreakName = "mobile_mortar";
+            level.mapStreakLocalizedName = &"KILLSTREAKS_MOBILE_MORTAR";
             level.mapStreakIcon = "killstreak_mobile_mortar";
             level.mapStreakKills = 325;
 
@@ -2984,17 +3125,22 @@ initMapKillstreak()
             loadFX("explosions/artilleryexp_dirt_brown");
             break;
         case "mp_radar":
-            level.mapStreakName = "blizzard";//Blizzard
+            level.mapStreakName = "blizzard";
+            level.mapStreakLocalizedName = &"AIZ_KILLSTREAK_BLIZZARD";
             level.mapStreakIcon = "ac130_overlay_grain";
             level.mapStreakKills = 425;
             break;
         case "mp_courtyard_ss":
-            level.mapStreakName = "volcano_eruption";//Volcanic Eruption
+            level.mapStreakName = "volcano_eruption";
+            level.mapStreakLocalizedName = &"AIZ_KILLSTREAK_VOLCANIC_ERUPTION";
             level.mapStreakIcon = "death_nuke";
             level.mapStreakKills = 1000;
+
+            preCacheString(&"AIZ_VOLCANO_ALREADY_ERUPTED");
             break;
         case "mp_hillside_ss":
-            level.mapStreakName = "assault_boats";//Assault Boats
+            level.mapStreakName = "assault_boats";
+            level.mapStreakLocalizedName = &"AIZ_KILLSTREAK_ASSAULT_BOATS";
             level.mapStreakIcon = "objective_friendly";
             level.mapStreakKills = 550;
 
@@ -3002,6 +3148,7 @@ initMapKillstreak()
             break;
         case "mp_burn_ss":
             level.mapStreakIcon = "killstreak_a10_support";
+            level.mapStreakLocalizedName = &"KILLSTREAKS_A10_SUPPORT";
             level.mapStreakName = "a10_support";
             level.mapStreakKills = 850;
 
@@ -3015,78 +3162,67 @@ initMapKillstreak()
     }
 
     preCacheShader(level.mapStreakIcon);
-}
-getFriendlyMapStreakName()
-{
-    switch (level.mapStreakName)
-    {
-        case "defcon_trigger":
-            return level.gameStrings[231];
-        case "acid_rain":
-            return level.gameStrings[234];
-        case "barbed_wire":
-            return "Barbed Wire";
-        case "oil_spill":
-            return "Oil Spill";
-        case "tank":
-            return level.gameStrings[230];
-        case "poison_gas":
-            return "Poison Gas Attack";
-        case "mobile_mortar":
-            return "Mortar Team";
-        case "blizzard":
-            return "Blizzard";
-        case "volcano_eruption":
-            return "Volcano Eruption";
-        case "assault_boats":
-            return "Assault Boats";
-        case "a10_support":
-            return level.gameStrings[232];
-    }
-
-    return level.mapStreakName;
+    preCacheString(level.mapStreakLocalizedName);
 }
 tryUseMapStreak()
 {
     if (level._mapname == "mp_alpha")
-    {
         self decrementDefconLevel();
-    }
     else if (level._mapname == "mp_bootleg")
     {
         if (!level.mapStreakOut) self startAcidRain();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
-    //else if (level._mapname == "mp_bravo")
-        //self spawnBarbWire();
-    //else if (level._mapname == "mp_carbon")
-        //spawnOilSpill();
+    else if (level._mapname == "mp_bravo")
+        self tryUseBarbedWire();
+    else if (level._mapname == "mp_carbon")
+        self tryUseOilSpill();
     else if (level._mapname == "mp_dome")
     {
         if (!level.mapStreakOut) self spawnTanks();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
     else if (level._mapname == "mp_paris")
     {
         if (!level.mapStreakOut) self startPoisonGas();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
     else if (level._mapname == "mp_plaza2")
     {
         if (!level.mapStreakOut) self startMortarTeam();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
     else if (level._mapname == "mp_radar")
     {
         if (!level.mapStreakOut) self startBlizzard();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
     else if (level._mapname == "mp_courtyard_ss")
     {
         if (!level.mapStreakOut) self startVolcanoEruption();
         else
         {
-            self iPrintLnBold(level.gameStrings[340]);
+            self iPrintLnBold(&"AIZ_VOLCANO_ALREADY_ERUPTED");
             self.cash += 10000;
             self scorePopup(10000);
             return true;
@@ -3095,26 +3231,34 @@ tryUseMapStreak()
     else if (level._mapname == "mp_hillside_ss")
     {
         if (!level.mapStreakOut) self spawnAssaultBoats();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
     else if (level._mapname == "mp_burn_ss")
     {
         if (!level.mapStreakOut) self spawnA10();
-        else return false;
+        else
+        {
+            self iPrintLnBold(level.gameStrings[223], level.mapStreakLocalizedName);
+            return false;
+        }
     }
     else
     {
         return false;
     }
 
-    self shuffleStreaks();
     return true;
 }
 
 decrementDefconLevel()
 {
+    self.ownsMapStreak = false;
     level.defcon--;
-    announcement(level.gameStrings[236], level.defcon);
+    announcement(&"AIZ_DEFCON_IS_AT_LEVEL_N", level.defcon);
 
     if (level.defcon == 3)
     {
@@ -3164,6 +3308,7 @@ doDefconDrop()
 
 startAcidRain()
 {
+    self.ownsMapStreak = false;
     self teamSplash("used_acid_rain");
     level.mapStreakOut = true;
 
@@ -3219,15 +3364,24 @@ runAcidRain()
         fx delete();
 }
 
-spawnBarbWire(marker, position)
+tryUseBarbedWire()
 {
-    if (isDefined(marker.owner)) owner = marker.owner;
+    if (!self.ownsMapStreak)
+        return false;
+
+    self thread watchAirdropMarkerUsage("barbed_wire", "claymore_mp");
+
+    return true;
+}
+spawnBarbWire()
+{
+    if (isDefined(self.owner)) owner = self.owner;
     else return;
 
-    marker delete();
+    position = self.origin;
+    self delete();
 
     owner.ownsMapStreak = false;
-    owner shuffleStreaks();
 
     angles = owner.angles;
     forward = anglesToForward(angles) * 40;
@@ -3312,15 +3466,24 @@ destroyBarbedWire()
     self delete();
 }
 
-spawnOilSpill(marker, pos)
+tryUseOilSpill()
 {
-    if (isDefined(marker.owner)) owner = marker.owner;
+    if (!self.ownsMapStreak)
+        return false;
+
+    self thread watchAirdropMarkerUsage("oil_spill", "airdrop_juggernaut_def_mp");
+
+    return true;
+}
+spawnOilSpill()
+{
+    if (isDefined(self.owner)) owner = self.owner;
     else return;
 
-    marker delete();
+    pos = self.origin;
+    self delete();
 
     owner.ownsMapStreak = false;
-    owner shuffleStreaks();
 
     if (level._mapname == "mp_carbon") oilFire = loadFX("fire/flame_refinery_small_far_3");
     else if (level._mapname == "mp_roughneck") oilFire = loadFX("maps/mp_roughneck/mp_rn_rigpipefire");
@@ -3359,6 +3522,7 @@ runOilSpill(fireSound, owner)
 
 startPoisonGas()
 {
+    self.ownsMapStreak = false;
     self teamSplash("used_poison_gas");
     level.mapStreakOut = true;
 
@@ -3417,6 +3581,7 @@ runPoisonGas()
 
 spawnTanks()
 {
+    self.ownsMapStreak = false;
     self teamSplash("used_tank");
     level.mapStreakOut = true;
 
@@ -3714,6 +3879,7 @@ tank_destroyTank(pos)
 
 startMortarTeam()
 {
+    self.ownsMapStreak = false;
     self teamSplash("used_mobile_mortar");
     
     level.mapStreakOut = true;
@@ -3764,6 +3930,7 @@ launchMortar()
 
 startBlizzard()
 {
+    self.ownsMapStreak = false;
     self teamSplash("used_blizzard");
     level.mapStreakOut = true;
 
@@ -3809,6 +3976,7 @@ runBlizzard()
 
 startVolcanoEruption()
 {
+    self.ownsMapStreak = false;
     self teamSplash("used_volcano_eruption");
     playSoundAtPos((0, 0, 0), "mp_lose_flag");
     level.mapStreakOut = true;
@@ -3882,8 +4050,9 @@ doVolcanoEruption()
 
 spawnAssaultBoats()
 {
-    level.mapStreakOut = true;
+    self.ownsMapStreak = false;
     self teamSplash("used_assault_boats");
+    level.mapStreakOut = true;
 
     level thread resetMapStreakAfterTime(70);
 
@@ -4022,6 +4191,7 @@ spawnA10()
     //Sanity check
     if (level._mapname != "mp_burn_ss") return;
 
+    self.ownsMapStreak = false;
     level.mapStreakOut = true;
 
     a10 = spawnHelicopter(self, (-25000, 0, level.heliHeight + 5000), (0, 0, 0), "harrier_mp", "vehicle_a10_warthog");//spawnPlane(self, "script_model", (-15000, 0, level.heliHeight), "compass_objpoint_reaper_friendly", "compass_objpoint_reaper_enemy");
@@ -4135,7 +4305,8 @@ a10_uturn()
 
     if (!isDefined(self.owner)) return;//In case it left during this part of the uturn
 
-    turnDirector[1] = turnDirector[1] - (right[1] * 4000);
+    currentYaw = turnDirector[1];
+    turnDirector[1] = currentYaw - (right[1] * 4000);
     self setVehGoalPos(turnDirector, false);
 
     wait(3);

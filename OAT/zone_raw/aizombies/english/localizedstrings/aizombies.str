@@ -5,9 +5,6 @@ FILENOTES		""
 REFERENCE		AIZ_25_KILLSTREAK
 LANG_ENGLISH		"25 Killstreak!"
 
-REFERENCE		AIZ_A10_SUPPORT
-LANG_ENGLISH		"A-10 Support"
-
 REFERENCE		AIZ_ACID_RAIN
 LANG_ENGLISH		"Acid Rain"
 
@@ -65,20 +62,11 @@ LANG_ENGLISH		"Completed Boss Wave!"
 REFERENCE		AIZ_BOSS_WAVE_SURVIVED
 LANG_ENGLISH		"Boss Wave Survived!"
 
+REFERENCE		AIZ_CANNOT_UPGRADE
+LANG_ENGLISH		"^1This weapon cannot be upgraded!"
+
 REFERENCE		AIZ_CARBON_DESC
 LANG_ENGLISH		"A once lively oil refinery"
-
-REFERENCE		AIZ_CRATE_DEATH_MACHINE
-LANG_ENGLISH		"Death Machine"
-
-REFERENCE		AIZ_CRATE_DOUBLE_POINTS
-LANG_ENGLISH		"Double Points"
-
-REFERENCE		AIZ_CRATE_INSTAKILL
-LANG_ENGLISH		"Insta-Kill"
-
-REFERENCE		AIZ_CRATE_NUKE
-LANG_ENGLISH		"Nuke"
 
 REFERENCE		AIZ_CRAWLER_WAVE_COMPLETED
 LANG_ENGLISH		"Max Ammo Awarded!"
@@ -110,14 +98,8 @@ LANG_ENGLISH		"Defcon is at level &&1"
 REFERENCE		AIZ_DEFCON_TRIGGER_SYSTEM
 LANG_ENGLISH		"Defcon Trigger System"
 
-REFERENCE		AIZ_DEFEAT
-LANG_ENGLISH		"Defeat!"
-
 REFERENCE		AIZ_DELTACAMP
 LANG_ENGLISH		"Delta Camp"
-
-REFERENCE		AIZ_DEVELOPER_IMPERSONATOR
-LANG_ENGLISH		" Please do not impersonate the developer."
 
 REFERENCE		AIZ_DOME_DESC
 LANG_ENGLISH		"An abandoned outpost in the desert"
@@ -187,9 +169,6 @@ LANG_ENGLISH		"^2Your results will display in 10 seconds."
 
 REFERENCE		AIZ_GETAWAY_DESC
 LANG_ENGLISH		"Vacation spot that turned\ninto a nightmare"
-
-REFERENCE		AIZ_GET_READY
-LANG_ENGLISH		"Get ready for the attack in:"
 
 REFERENCE		AIZ_GIFTED_CASH_TO
 LANG_ENGLISH		" Gifted $500 to &&1!"
@@ -266,9 +245,6 @@ LANG_ENGLISH		"Juggernog"
 REFERENCE		AIZ_JUGG_DESC
 LANG_ENGLISH		"More health"
 
-REFERENCE		AIZ_KILLSTREAK_AIRSTRIKE
-LANG_ENGLISH		"Airstrike"
-
 REFERENCE		AIZ_KILLSTREAK_AMMO
 LANG_ENGLISH		"Ammo"
 
@@ -287,20 +263,11 @@ LANG_ENGLISH		"Blizzard"
 REFERENCE		AIZ_KILLSTREAK_EXPLOSIVE_AMMO
 LANG_ENGLISH		"Deployable Explosive Ammo"
 
-REFERENCE		AIZ_KILLSTREAK_GL_TURRET
-LANG_ENGLISH		"Grenade Launcher Turret"
-
-REFERENCE		AIZ_KILLSTREAK_HELI_SNIPER
-LANG_ENGLISH		"Heli Sniper"
-
 REFERENCE		AIZ_KILLSTREAK_LITTLEBIRD_DRONE
 LANG_ENGLISH		"Littlebird Drone"
 
 REFERENCE		AIZ_KILLSTREAK_MISSILE
 LANG_ENGLISH		"Missile"
-
-REFERENCE		AIZ_KILLSTREAK_MOAB
-LANG_ENGLISH		"M.O.A.B."
 
 REFERENCE		AIZ_KILLSTREAK_OIL_SPILL
 LANG_ENGLISH		"Oil Spill"
@@ -310,9 +277,6 @@ LANG_ENGLISH		"Poison Gas Attack"
 
 REFERENCE		AIZ_KILLSTREAK_POWER_SURGE
 LANG_ENGLISH		"Power Surge"
-
-REFERENCE		AIZ_KILLSTREAK_SENTRY
-LANG_ENGLISH		"Sentry Gun"
 
 REFERENCE		AIZ_KILLSTREAK_VISION_RESTORER
 LANG_ENGLISH		"Vision Restorer"
@@ -343,9 +307,6 @@ LANG_ENGLISH		"Lose"
 
 REFERENCE		AIZ_LOSS_REASON
 LANG_ENGLISH		"Zombies ate the humans"
-
-REFERENCE		AIZ_MAP_KILLSTREAK
-LANG_ENGLISH		"Map Killstreak"
 
 REFERENCE		AIZ_MAX_AMMO
 LANG_ENGLISH		"Max Ammo!"
@@ -393,10 +354,7 @@ REFERENCE		AIZ_NOT_ENOUGH_CASH_FOR_AMMO
 LANG_ENGLISH		"^1Not enough money for Ammo. Need ^2$&&1"
 
 REFERENCE		AIZ_NOT_ENOUGH_CASH_FOR_RANDOM_WEAPON
-LANG_ENGLISH		"^1Not enough money for a Random Weapon. Need ^2$950"
-
-REFERENCE		AIZ_NOT_ENOUGH_CASH_FOR_RANDOM_WEAPON_SALE
-LANG_ENGLISH		"^1Not enough money for a Random Weapon. Need ^2$10"
+LANG_ENGLISH		"^1Not enough money for a Random Weapon. Need ^2$&&1"
 
 REFERENCE		AIZ_NUKE
 LANG_ENGLISH		"Nuke!"
@@ -462,16 +420,13 @@ REFERENCE		AIZ_PRESS_FOR_RANDOM_KILLSTREAK
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to buy a random killstreak [Cost: 200 ^5Bonus Points^7]"
 
 REFERENCE		AIZ_PRESS_FOR_RANDOM_WEAPON
-LANG_ENGLISH		"Press ^3[{+activate}] ^7for a Random Weapon [Cost: 950]"
-
-REFERENCE		AIZ_PRESS_FOR_RANDOM_WEAPON_SALE
-LANG_ENGLISH		"Press ^3[{+activate}] ^7for a Random Weapon [Cost: 10]"
+LANG_ENGLISH		"Press ^3[{+activate}] ^7for a Random Weapon [Cost: &&1]"
 
 REFERENCE		AIZ_PRESS_FOR_WEAPON
 LANG_ENGLISH		"Press ^3[{+activate}] ^7for Weapon [Cost: &&1]"
 
-REFERENCE		AIZ_PRESS_N_FOR_COST
-LANG_ENGLISH		"Press ^3[{+activate}] ^7for &&1 ^7[Cost: &&2]"
+REFERENCE		AIZ_PRESS_FOR_ZIPLINE
+LANG_ENGLISH		"Hold ^3[{+activate}]^7 to use Zipline[^2$^35000^7]"
 
 REFERENCE		AIZ_PRESS_TO_ACTIVATE_POWER
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to activate Power [Cost: 10000]"
@@ -522,7 +477,7 @@ REFERENCE		AIZ_PRESS_TO_OPEN_DOOR
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to open the door [Cost: &&1]"
 
 REFERENCE		AIZ_PRESS_TO_TAKE_UPGRADE
-LANG_ENGLISH		"Press ^3[{+activate}] ^7to take ^2your new upgraded weapon"
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to take ^1&&1"
 
 REFERENCE		AIZ_PRESS_TO_TELEPORT
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to teleport"
@@ -531,7 +486,7 @@ REFERENCE		AIZ_PRESS_TO_TRADE_WEAPONS
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to trade Weapons: "
 
 REFERENCE		AIZ_PRESS_TO_UPGRADE
-LANG_ENGLISH		"Press ^3[{+activate}] ^7to upgrade your ^1Current Weapon ^7[Cost: 5000]"
+LANG_ENGLISH		"Press ^3[{+activate}] ^7to upgrade your &&1 ^7[Cost: 5000]"
 
 REFERENCE		AIZ_PRESS_TO_USE_ELEVATOR
 LANG_ENGLISH		"Press ^3[{+activate}] ^7to use the elevator [Cost: 500]"
@@ -611,9 +566,6 @@ LANG_ENGLISH		"Extra damage"
 REFERENCE		AIZ_SUB_TEAM
 LANG_ENGLISH		"Sub Team"
 
-REFERENCE		AIZ_TANK_BARRAGE
-LANG_ENGLISH		"Tank Barrage"
-
 REFERENCE		AIZ_TELEPORTER_COOLING_DOWN
 LANG_ENGLISH		"The teleporter is cooling down."
 
@@ -628,9 +580,6 @@ LANG_ENGLISH		"Too many bots deployed."
 
 REFERENCE		AIZ_UNDERGROUND_DESC
 LANG_ENGLISH		"Subway station used as an\nevacuation route"
-
-REFERENCE		AIZ_UNKNOWN_MAP
-LANG_ENGLISH		"^1Unknown Map!"
 
 REFERENCE		AIZ_U_TURN_DESC
 LANG_ENGLISH		"Desert freeway unsafe from the undead"

@@ -178,10 +178,12 @@ init()
     level.wawMaps = [];
     level.wawMaps[level.wawMaps.size] = "mp_factory_sh";
     level.wawMaps[level.wawMaps.size] = "mp_base";
+    //level.wawMaps[level.wawMaps.size] = "mp_asylum";
 
     level.wawMapNames = [];
     level.wawMapNames[level.wawMapNames.size] = &"Der Riese";
     level.wawMapNames[level.wawMapNames.size] = &"Nacht Der Untoten";
+    //level.wawMapNames[level.wawMapNames.size] = &"Verruckt";
 }
 
 createPlayerHud()
@@ -340,7 +342,7 @@ createPlayerHud()
     stalker.sort = 8;
 
     perk7 = self createIcon("white", 40, 40);
-    perk7 setPoint("BOTTOM MIDDLE", "BOTTOM MIDDLE", 400, -5);
+    perk7 setPoint("BOTTOM RIGHT", "BOTTOM RIGHT", -5, -5);
     perk7.hideWhenInMenu = true;
     perk7.hideWhenDead = true;
     perk7.foreground = true;
@@ -350,7 +352,7 @@ createPlayerHud()
 
     //Score hud
     scoreHud = self createFontString("hudsmall", 1);
-    scoreHud setPoint("TOP LEFT", "TOP LEFT", 660, 10);
+    scoreHud setPoint("TOP RIGHT", "TOP RIGHT", -10, 10);
     scoreHud.hideWhenInMenu = true;
     scoreHud.foreground = true;
     scoreHud.archived = true;
@@ -363,7 +365,7 @@ createPlayerHud()
     scoreHud.sort = 10;
 
     pointHud = self createFontString("hudsmall", 1);
-    pointHud setPoint("TOP LEFT", "TOP LEFT", 660, 24);
+    pointHud setPoint("TOP RIGHT", "TOP RIGHT", -10, 24);
     pointHud.hideWhenInMenu = true;
     pointHud.foreground = true;
     pointHud.archived = true;
@@ -1633,6 +1635,7 @@ scorePopup(amount)
 }
 checkForScoreChainEnd(score, scoreLine)
 {
+    level endon("game_ended");
     self endon("score_chain");
     self endon("disconnect");
 
@@ -1667,8 +1670,6 @@ updatePerksHud(reset, instant)
 
     perk = self.lastBoughtPerk;
 
-    //_hasPerk7 = self.autoRevive;
-
     if (reset)
     {
         for (i = 0; i < 7; i++)
@@ -1686,7 +1687,7 @@ updatePerksHud(reset, instant)
             if (isDefined(instant) && instant)
                 self setPerkHudSlot(6, perk);
             else
-                self thread updatePerkHudSlotAfterWait(9, 6, perk);
+                self thread updatePerkHudSlotAfterWait(6, perk);
             self.perkHudsDone[6] = true;
             self.lastBoughtPerk = "";
             return;
@@ -1696,11 +1697,10 @@ updatePerksHud(reset, instant)
         {
             if (!self.perkHudsDone[i])
             {
-                //These are timed to the popup animation when given.
                 if (instant)
                     self setPerkHudSlot(i, perk);
                 else
-                    self thread updatePerkHudSlotAfterWait(9, i, perk);
+                    self thread updatePerkHudSlotAfterWait(i, perk);
                 self.perkHudsDone[i] = true;
                 break;
             }
@@ -1709,11 +1709,11 @@ updatePerksHud(reset, instant)
 
     }
 }
-updatePerkHudSlotAfterWait(waitTime, slot, perk)
+updatePerkHudSlotAfterWait(slot, perk)
 {
     self endon("disconnect");
 
-    wait(waitTime);
+    self waittill_any_timeout(9, "perk_" + slot + "_done");
 
     self setPerkHudSlot(slot, perk);
 }
@@ -1725,8 +1725,19 @@ setPerkHudSlot(slot, perk)
     perkIcon.alpha = 1;
 }
 
+//This still does not work well with any resolution other than 16:9
 showBoughtPerk(name, imageName, index)
 {
+    perkSlot = 0;
+    for (i = 0; i < 6; i++)
+    {
+        if (!self.perkHudsDone[i])
+        {
+            perkSlot = i;
+            break;
+        }
+    }
+
     desc = self createFontString("hudsmall", 1.5);
     desc.label = level.perkDescs[index];
     if (array_contains(level.classicMaps, level._mapname))
@@ -1779,7 +1790,7 @@ showBoughtPerk(name, imageName, index)
     perkName.alpha = 1;
     image.alpha = 1;
 
-    wait(5);
+    self waittill_any_timeout(5, "perk_bought");
 
     desc fadeOverTime(0.6);
     desc.alpha = 0;
@@ -1800,6 +1811,8 @@ showBoughtPerk(name, imageName, index)
     wait(2.3);
 
     image destroy();
+
+    self notify("perk_" + perkSlot + "_done");
 }
 
 roundStartHud()
@@ -2004,7 +2017,7 @@ endGame(win)
         if (isDefined(player.bot)) player thread maps\mp\gametypes\_aiz_killstreaks::killPlayerBot();
 
         player.sessionTeam = "allies";
-        player.sessionState = "spectating";
+        player.sessionState = "spectator";
         player setClientDvar("g_scriptMainMenu", "endgameupdate");
 
         //if (win) player playLocalSound("victory_music");
@@ -2130,9 +2143,7 @@ endGame(win)
 
         maxMapsCount = 36;
         if (!level.dlcEnabled) maxMapsCount = 16;
-        //map(level.mapList[randomInt(0, maxMapsCount)]);
-        //exitLevel(false);
-        //cmdexec("map " + level.mapList[randomInt(maxMapsCount)]);
+        //map(level.mapList[randomInt(maxMapsCount)]);
         maps\mp\gametypes\_aiz_external_utils::map(level.mapList[randomInt(maxMapsCount)]);
     }
 }
@@ -2261,11 +2272,11 @@ createEndGameScreen(win, endText)
     outcomeText setPulseFX(100, 60000, 1000);
 
     leftIcon = newHudElem();
+    leftIcon.elemType = "icon";
     leftIcon.children = [];
     leftIcon setShader("iw5_cardicon_soap", 70, 70);
     leftIcon.parent = outcomeText;
     leftIcon setPoint("top", "bottom", -60, 60);
-    //leftIcon setShader("cardicon_soap", 70, 70);
     leftIcon.foreground = true;
     leftIcon.hideWhenInMenu = false;
     leftIcon.archived = false;
@@ -2274,11 +2285,11 @@ createEndGameScreen(win, endText)
     leftIcon.alpha = 1;
 
     rightIcon = newHudElem();
+    rightIcon.elemType = "icon";
     rightIcon.children = [];
     rightIcon setShader("iw5_cardicon_nuke", 70, 70);
     rightIcon.parent = outcomeText;
     rightIcon setPoint("top", "bottom", 60, 60);
-    //rightIcon setShader("cardicon_nuke", 70, 70);
     rightIcon.foreground = true;
     rightIcon.hideWhenInMenu = false;
     rightIcon.archived = false;
@@ -2413,7 +2424,7 @@ showPowerUpHud(type)
 
         if (self.deathHud) return;
         self.deathHud = true;
-        icon = newClientHudElem(self);//createServerFontString("hudbig", 1.5);
+        icon = newClientHudElem(self);
         icon.archived = false;
         icon.foreground = true;
         icon.hideWhenInMenu = true;
@@ -2482,6 +2493,7 @@ startDeathMachineHudFlash(icon)
         flashCount++;
         if (flashCount >= 10)
         {
+            icon destroy();
             self.deathHud = false;
             break;
         }
@@ -2492,11 +2504,6 @@ startDeathMachineHudFlash(icon)
 deathMachineHudFlash(icon)
 {
     if (level.gameEnded) return;
-    if (!self.deathHud)
-    {
-        icon destroy();
-        return;
-    }
 
     icon fadeOverTime(.5);
     icon.alpha = 1;

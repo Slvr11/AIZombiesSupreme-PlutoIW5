@@ -24,7 +24,7 @@ init()
     level.maxActiveBots = 25;
     level.botInactiveTime = 120000;
     level.botMaxMoveSpeed = 170;
-    if (level._mapname == "mp_factory_sh")
+    if (level._mapname == "mp_factory_sh")//Hack to ensure bots in Der Riese don't get stranded too long since waypointing can't be relied on
         level.botInactiveTime = 30000;
 
     level.botSpawns = [];
@@ -69,6 +69,7 @@ init()
     level.nukeOffsetScalar = 1;
 
     level.hasDogCrawlers = array_contains(level.wawMaps, level._mapname) || level._mapname == "so_deltacamp";
+    level.alternateSpawnThread = false;
 }
 
 startBotSpawn()
@@ -94,6 +95,7 @@ startBotSpawn()
                 if (maps\mp\gametypes\_aiz_bots::spawnBossBot(randomSpawn))
                 {
                     wait(0.5);
+
                     continue;
                 }
                 else break;
@@ -103,6 +105,10 @@ startBotSpawn()
                 if (maps\mp\gametypes\_aiz_bots::spawnBot(randomSpawn, true))
                 {
                     wait(0.5);
+                    if (level.alternateSpawnThread)
+                        waitframe();
+                    level.alternateSpawnThread = !level.alternateSpawnThread;
+
                     continue;
                 }
                 else break;
@@ -110,6 +116,10 @@ startBotSpawn()
             else if(maps\mp\gametypes\_aiz_bots::spawnBot(randomSpawn, false))
             {
                 wait(0.5);
+                if (level.alternateSpawnThread)
+                    waitframe();
+                level.alternateSpawnThread = !level.alternateSpawnThread;
+
                 continue;
             }
             else break;
@@ -161,14 +171,14 @@ killBotAndRespawn()
         wait(0.5);
         self moveTo(self.origin + (0, 0, 2500), 5);
     }
+    
     wait(5);
+
     self despawnBot(isCrawler, isBoss);
     level.botsInPlay = array_remove(level.botsInPlay, self);
 
     level notify("bot_death");
     self notify("zombie_death");
-
-    //onBotUpdate();
 
     if (level.botsForWave == level.spawnedBots)
     {
@@ -178,6 +188,7 @@ killBotAndRespawn()
     else level.spawnedBots--;
 
     wait(1.5);
+
     maps\mp\gametypes\_aiz_round_system::checkForCompass();//Re-apply compass if needed
 }
 
@@ -310,6 +321,12 @@ createBot(isCrawler)
     {
         xAngleOffset = 90;
         xOffset = -30;
+
+        if (level.hasDogCrawlers)
+        {
+            xAngleOffset = 45;
+            xOffset = -15;
+        }
     }
     else
     {
@@ -345,7 +362,6 @@ createBot(isCrawler)
     bot.isSpawned = false;
     bot.primedForNuke = false;
     bot.moveSpeed = 100;
-    botHitbox.canBeDamaged = true;
 
     botHitbox thread onBotDamage(isCrawler, false, false);
     bot thread killBotOnNuke(isCrawler, false);
@@ -382,7 +398,6 @@ createBot_boss()
     bot.isSpawned = false;
     bot.primedForNuke = false;
     bot.moveSpeed = 170;
-    botHitbox.canBeDamaged = true;
 
     bot thread killBotOnNuke(false, true);
     botHitbox thread onBotDamage(false, true, false);
@@ -516,7 +531,7 @@ onBotDamage(isCrawler, isBoss, isHeadshot)
                     player.cash += pointGain;
                     player maps\mp\gametypes\_aiz_hud::scorePopup(pointGain);
                 }
-                player thread maps\mp\gametypes\_rank::giveRankXP( "kill", pointGain, weapon, type);
+                player thread maps\mp\gametypes\_rank::giveRankXP("kill", pointGain, weapon, type);
 
                 if ((level.botDeathVoice == 1 || (level.botDeathVoice == 2 && array_contains(level.classicMaps, level._mapname))) && !isCrawler && type != "MOD_BLEEDOUT" && type != "MOD_HEADSHOT" && level.instaKillTime == 0)
                     currentBot playSound("generic_death_russian_" + randomIntRange(1, 9));
@@ -685,12 +700,6 @@ killBotOnNuke(isCrawler, boss)
 
 doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
 {
-    if (!isDefined(botHitbox.canBeDamaged) || !botHitbox.canBeDamaged)
-    {
-        printLn("a bot was damaged when it wasn't allowed to be.");
-        //return;
-    }
-
     hitDamage = 0;
     if (weaponIsUpgrade(weapon)) hitDamage = damage / 2;//Base upgraded damage
     else if (level.isHellMap) hitDamage = damage / 4;//Hellmap damage
@@ -710,7 +719,9 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
         if (isSniper(weapon) || isSubStr(weapon, "iw5_dragunov_mp"))//Sniper damage
         {
             mult = 6;
-            if (isSubStr(weapon, "iw5_dragunov_mp") || isSubStr(weapon, "iw5_rsass_mp") || weapon == "rsass_hybrid_mp" || weapon == "rsass_hybrid_reflex_mp")
+            if (isSubStr(weapon, "iw5_dragunov_mp") || isSubStr(weapon, "iw5_rsass_mp"))
+                mult = 2;
+            else if (weapon == "rsass_hybrid_mp" || weapon == "rsass_hybrid_reflex_mp" || weapon == "alt_rsass_hybrid_mp")
                 mult = 2;
             else if (weaponIsUpgrade(weapon))
                 mult = 4;
@@ -722,8 +733,6 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
                 hitDamage = (hitDamage * 4);
             else
                 hitDamage = (hitDamage * 8);//Shotgun multiplier
-
-            botHitbox thread bot_setCanDamage();//Shotgun pellet delay. This fixes the bug where shotgun hits count every pellet for score
         }
 
         if (weapon == "gl_mp" || weapon == "iw4_ak47thermalupgraded_gl_mp") hitDamage = 10000;//GL
@@ -762,7 +771,7 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
         if (level.instaKillTime == 0) botHitbox thread runBotBleedout(player);
     }
 
-    if (!botHitbox.parent.primedForNuke && isDefined(player))
+    if (!botHitbox.parent.primedForNuke && isPlayer(player))
     {
         pointGain = 5;
         if (level.isHellMap) pointGain = 10;
@@ -778,13 +787,6 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
 
     if (weapon == "claymore_mp")
     {
-        /*
-        wireFeedback = player.hud_damageFeedback;
-        wireFeedback.Alpha = 1;
-        player playLocalSound("melee_knife_hit_other");
-        wireFeedback fadeOverTime(1);
-        wireFeedback.Alpha = 0;
-        */
         player maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
         player playLocalSound("melee_knife_hit_other");
         return;
@@ -792,14 +794,7 @@ doBotDamage(damage, player, weapon, botHitbox, MOD, point, skipFeedback)
 
     if ((isDefined(skipFeedback) && skipFeedback)) return;
 
-    /*
-    combatHighFeedback = player.hud_damageFeedback;
-    combatHighFeedback.Alpha = 1;
-    player playLocalSound("MP_hit_alert");
-    combatHighFeedback fadeOverTime(1);
-    combatHighFeedback.Alpha = 0;
-    */
-    player maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
+    if (isPlayer(player)) player maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 }
 
 runBotBleedout(player)
@@ -943,6 +938,12 @@ playAnimOnBot(animName, animIndex)
         {
             xAngleOffset = 90;
             xOffset = -30;
+
+            if (level.hasDogCrawlers)
+            {
+                xAngleOffset = 45;
+                xOffset = -15;
+            }
         }
         else
         {
@@ -960,6 +961,12 @@ playAnimOnBot(animName, animIndex)
         {
             xAngleOffset = 90;
             xOffset = -30;
+
+            if (level.hasDogCrawlers)
+            {
+                xAngleOffset = 45;
+                xOffset = -15;
+            }
         }
         else
         {
@@ -976,6 +983,110 @@ playAnimOnBot(animName, animIndex)
         self.head scriptModelPlayAnim(animName);
     }
     */
+}
+
+getNextWaypoint()
+{
+    if (isDefined(self.visibleWaypoints))
+    {
+        visibleWaypoints = self.visibleWaypoints;
+
+        if (level.useNewPathing == 1 || (level.useNewPathing == 2 && !array_contains(level.classicMaps, level._mapname)))
+        {
+            if (randomInt(100) > 90)//10% chance the bot just goes another route, to try to combat them getting stuck in small waypoint loops
+            {
+                return visibleWaypoints[randomInt(visibleWaypoints.size)];
+            }
+
+            closestDist = undefined;
+            closestPlayer = undefined;
+
+            foreach (p in level.players)
+            {
+                if (!isDefined(p) || p.sessionTeam != "allies" || !p.isAlive || p.isDown) continue;
+                if (p.notTargetable) continue;
+
+                playerOrigin = p.origin;
+                currentDist = distanceSquared(playerOrigin, self.origin);
+                
+                isClosest = !isDefined(closestDist) || currentDist < closestDist;
+                if (isClosest)
+                {
+                    closestDist = currentDist;
+                    closestPlayer = p;
+                }
+            }
+            
+            if (isDefined(closestPlayer))
+            {
+                playerHeadTag = closestPlayer getTagOrigin("j_head");
+
+                closestDist = undefined;
+                bestWaypointToPlayer = undefined;
+                foreach (waypoint in visibleWaypoints)
+                {
+                    if (isDefined(self.lastWaypoint) && waypoint == self.lastWaypoint)
+                        continue;
+
+                    playerOrigin = closestPlayer.origin;
+                    currentDist = distanceSquared(playerOrigin, waypoint.origin);
+                    
+                    isClosest = !isDefined(closestDist) || currentDist < closestDist;
+                    //Check for sight as well to fix some issues with close quarters bots going back and forth through walls
+                    if (currentDist < 360000)
+                    {
+                        sightOrigin = waypoint.origin + (0, 0, 60);
+                        if (isDefined(self.head))
+                            canSeePlayer = sightTracePassed(sightOrigin, playerHeadTag, false, self, self.head);
+                        else canSeePlayer = sightTracePassed(sightOrigin, playerHeadTag, false, self);
+
+                        if (canSeePlayer)
+                        {
+                            //If the bot can see a player from one of the next waypoints, proritize that one
+                            bestWaypointToPlayer = waypoint;
+                            break;
+                        }
+                    }
+                    if (isClosest)
+                    {
+                        closestDist = currentDist;
+                        bestWaypointToPlayer = waypoint;
+                    }
+                }
+
+                if (isDefined(bestWaypointToPlayer))
+                {
+                    return bestWaypointToPlayer;
+                }
+                else
+                {
+                    return visibleWaypoints[randomInt(visibleWaypoints.size)];
+                }
+            }
+            else
+            {
+                return visibleWaypoints[randomInt(visibleWaypoints.size)];
+            }
+        }
+        else
+        {
+            return visibleWaypoints[randomInt(visibleWaypoints.size)];
+        }
+    }
+    else//Recalculate point
+    {
+        foreach (v in level.waypoints)
+        {
+            if (!isDefined(v))
+                continue;
+
+            //Check for waypoints
+            if (sightTracePassed(self.origin + (0, 0, 60), v.origin, false, self))
+                return v;
+        }
+    }
+
+    return undefined;
 }
 
 dropGlowstick(position)
@@ -1018,16 +1129,4 @@ removeGlowstick()
         self.effect = undefined;
     }
     self delete();
-}
-
-bot_setCanDamage(delay)
-{
-    self.canBeDamaged = false;
-
-    if (isDefined(delay))
-        wait(delay);
-    else
-        wait(0.05);
-
-    self.canBeDamaged = true;
 }

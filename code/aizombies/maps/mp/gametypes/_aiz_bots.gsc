@@ -22,6 +22,7 @@ spawnBot(spawnLoc, isCrawler)
     
     bot.isSpawned = true;
     bot.currentWaypoint = undefined;
+    bot.lastWaypoint = undefined;
     bot.origin = level.botSpawns[spawnLoc] + (randomInt(20), randomInt(20), 0);
     bot.angles = level.botSpawnAngles[spawnLoc];
 
@@ -63,7 +64,6 @@ spawnBot(spawnLoc, isCrawler)
         botHitbox.currentHealth = 100;
     }
     botHitbox.damageTaken = 0;
-    botHitbox.canBeDamaged = true;
     botHitbox setCanDamage(true);
     botHitbox setCanRadiusDamage(true);
     //botHitbox show();
@@ -147,6 +147,7 @@ spawnBossBot(spawnLoc)
     random = randomInt(20);
     bot.isSpawned = true;
     bot.currentWaypoint = undefined;
+    bot.lastWaypoint = undefined;
     bot.origin = level.botSpawns[spawnLoc] + (random, random, 0);
     bot.angles = level.botSpawnAngles[spawnLoc];
     bot show();
@@ -226,26 +227,24 @@ botAI(botHitbox, isCrawler, isBoss)
     self endon("zombie_death");
     level endon("game_ended");
 
-    ai = self;
-
     while(self.isAlive)
     {
         wait(0.1);
 
-        if (!ai.isAlive || !array_contains(level.botsInPlay, ai) || botHitbox.currentHealth <= botHitbox.damageTaken) return;
-        ai killBotIfUnderMap();
-        if (!ai.isAlive)
+        if (!self.isAlive || !array_contains(level.botsInPlay, self) || botHitbox.currentHealth <= botHitbox.damageTaken) return;
+        self killBotIfUnderMap();
+        if (!self.isAlive)
             return;//Do another check after height check
 
         //check time inactivity
-        if (getTime() > ai.lastActiveTime + level.botInactiveTime && !isBoss && !level.freezerActivated)
+        if (getTime() > self.lastActiveTime + level.botInactiveTime && !isBoss && !level.freezerActivated)
         {
-            ai thread killBotAndRespawn();
+            self thread killBotAndRespawn();
             return;
         }
 
         target = undefined;
-        botOrigin = ai.origin;
+        botOrigin = self.origin;
         botHeadTag = self.origin + (0, 0, 60);
 
         //-START TARGETING-//
@@ -257,23 +256,19 @@ botAI(botHitbox, isCrawler, isBoss)
                     continue;
 
                 if (level.freezerActivated) break;
-                if (isDefined(ai.currentWaypoint) && ai.currentWaypoint isGlowstick()) 
+                if (isDefined(self.currentWaypoint) && self.currentWaypoint isGlowstick()) 
                 {
-                     target = ai.currentWaypoint; 
+                     target = self.currentWaypoint; 
                      break; 
                 }
                 if (distanceSquared(botOrigin, g.origin) > 250000) continue;
                 if (sightTracePassed(botHeadTag, g.origin, false, botHitbox))
                 {
                     target = g;
-                    ai.currentWaypoint = g;
-                    ai.visibleWaypoints = undefined;
+                    self.currentWaypoint = g;
+                    self.visibleWaypoints = undefined;
                     break;
                 }
-                //else
-                //{
-                    //logPrint("No trace available");
-                //}
             }
         }
         if (!isDefined(target) && !level.freezerActivated)//If we haven't found a glowstick, find a real target. This has been modified slighty for PlutoIW5 to optimize game performance
@@ -300,8 +295,8 @@ botAI(botHitbox, isCrawler, isBoss)
                 if (currentDist > targetDistance) continue;
 
                 //Attacking players
-                if (distanceSquared(botHitbox.origin, playerOrigin) <= 2500 && !ai.isAttacking)
-                    ai thread ai_attackPlayer(p, isCrawler, isBoss);
+                if (distanceSquared(botHitbox.origin, playerOrigin) <= 2500 && !self.isAttacking)
+                    self thread ai_attackPlayer(p, isCrawler, isBoss);
                 //End attacking
                 
                 isClosest = currentDist < closestDist;
@@ -331,13 +326,15 @@ botAI(botHitbox, isCrawler, isBoss)
                 else
                 {
                     if (!isCrawler && !isBoss)
-                        trace = sightTracePassed(botHeadTag, playerHeadTag, false, ai, ai.head);
-                    else trace = sightTracePassed(botHeadTag, playerHeadTag, false, ai);
+                        trace = sightTracePassed(botHeadTag, playerHeadTag, false, self, self.head);
+                    else trace = sightTracePassed(botHeadTag, playerHeadTag, false, self);
                 }
 
                 if (trace)
                 {
                     target = closestPlayer;
+                    self.currentWaypoint = undefined;
+                    self.visibleWaypoints = undefined;
                 }
                 else if (isDefined(secondClosestPlayer))
                 {
@@ -349,64 +346,55 @@ botAI(botHitbox, isCrawler, isBoss)
                     else
                     {
                         if (!isCrawler && !isBoss)
-                            trace = sightTracePassed(botHeadTag, playerHeadTag, false, ai, ai.head);
-                        else trace = sightTracePassed(botHeadTag, playerHeadTag, false, ai);
+                            trace = sightTracePassed(botHeadTag, playerHeadTag, false, self, self.head);
+                        else trace = sightTracePassed(botHeadTag, playerHeadTag, false, self);
                     }
 
                     if (trace)
                     {
                         target = secondClosestPlayer;
+                        self.currentWaypoint = undefined;
+                        self.visibleWaypoints = undefined;
                     }
                 }
             }
 
             if (!isDefined(target))//No players, find a waypoint
             {
-                if (isDefined(ai.visibleWaypoints))
+                if (isDefined(self.currentWaypoint))
                 {
-                    //currentWaypoint = ai.currentWaypoint;
-                    if (!isDefined(ai.currentWaypoint) && isDefined(ai.visibleWaypoints))
+                    if (distanceSquared(botOrigin, self.currentWaypoint.origin) < 2500)
                     {
-                        visibleWaypoints = ai.visibleWaypoints;
-                        ai.currentWaypoint = visibleWaypoints[randomInt(visibleWaypoints.size)];
+                        self.visibleWaypoints = self.currentWaypoint.visiblePoints;
+                        
+                        lastWaypoint = self.currentWaypoint;
+                        self.currentWaypoint = self getNextWaypoint();
+                        self.lastWaypoint = lastWaypoint;
                     }
-                    else if (isDefined(ai.currentWaypoint) && distanceSquared(botOrigin, ai.currentWaypoint.origin) < 2500)
-                    {
-                        ai.visibleWaypoints = ai.currentWaypoint.visiblePoints;
-                        ai.currentWaypoint = undefined;
-                        continue;
-                    }
+
+                    target = self.currentWaypoint;
                 }
-                else//Recalculate point
+                else
                 {
-                    foreach (v in level.waypoints)
-                    {
-                        if (!isDefined(v))
-                            continue;
-                        //Check for waypoints
-                        if (sightTracePassed(botHeadTag, v.origin, false, ai))
-                        {
-                            ai.currentWaypoint = v;//Set the first seen one as current
-                            ai.visibleWaypoints = v.visiblePoints;
-                            break;
-                        }
-                    }
+                    self.currentWaypoint = self getNextWaypoint();
+                    self.lastWaypoint = self.currentWaypoint;
+
+                    target = self.currentWaypoint;
                 }
-                if (isDefined(ai.currentWaypoint)) target = ai.currentWaypoint;
             }
         }
         //-END TARGETING-//
         //Now we are done targeting, do the action for the target
 
         //-START MOTION-//
-        if (ai.isAttacking) continue;//Stop moving to attack.
+        if (self.isAttacking) continue;//Stop moving to attack.
         
         if (!level.freezerActivated && isDefined(target) && isPlayer(target))
         {
             hasCollidedWithOtherBot = false;
             foreach (bot in level.botsInPlay)//Prevent bots from combining into each other
             {
-                if (ai == bot) continue;
+                if (self == bot) continue;
                 closeOrigin = bot.origin;
                 if (distanceSquared(botOrigin, closeOrigin) < 256)//Move away from the bot and recalc
                 {
@@ -415,8 +403,8 @@ botAI(botHitbox, isCrawler, isBoss)
                         dir = (randomFloat(1), randomFloat(1), 0);
                     forward = anglesToForward((0, dir[1], 0));
                     awayPos = botOrigin + (forward * 50);
-                    ai moveTo(awayPos, distance(botOrigin, awayPos) / 120);
-                    ai rotateTo((0, dir[1], 0), 0.3, 0.1, 0.1);
+                    self moveTo(awayPos, distance(botOrigin, awayPos) / 120);
+                    self rotateTo((0, dir[1], 0), 0.3, 0.1, 0.1);
                     hasCollidedWithOtherBot = true;
                     break;
                 }
@@ -427,11 +415,11 @@ botAI(botHitbox, isCrawler, isBoss)
 
         ground = getGroundPosition(botOrigin, 12)[2];
 
-        if (isDefined(target) && level.glowsticks.size == 0)//Move to our target if there are no glowsticks
+        if (isDefined(target))//Move to our target if there are no glowsticks
         {
             targetOrigin = target.origin;
             angleY = vectorToAngles(targetOrigin - botOrigin)[1];
-            ai rotateTo((0, angleY, 0), 0.3, 0.1, 0.1);
+            self rotateTo((0, angleY, 0), 0.3, 0.1, 0.1);
 
             if (distance2D(botOrigin, targetOrigin) < 100 || ground == botOrigin[2]) ground = targetOrigin[2];
             if ((level._mapname == "mp_checkpoint" && level.mapVariation == 0) || (level._mapname == "mp_fuel2" && level.mapVariation == 0) || level._mapname == "mp_rust" || level._mapname == "mp_invasion")//Quick fix for maps that have no floor
@@ -446,137 +434,84 @@ botAI(botHitbox, isCrawler, isBoss)
                     ground = -50;
             }
 
-            speed = ai.moveSpeed;
+            speed = self.moveSpeed;
             distance = distance(botOrigin, targetOrigin);
 
-            if (((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) && !isDefined(ai.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler && isPlayer(target)))
+            if (((botHitbox isInPeril() && !isDefined(self.hasBeenCrippled)) && !isDefined(self.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler && isPlayer(target)))
                 speed = 170;
-            else if (isDefined(ai.hasBeenCrippled))
+            else if (isDefined(self.hasBeenCrippled))
                 speed = 30;
-            else if (isDefined(ai.inBarbedWire) || (level._mapname == "mp_radar" && level.mapStreakOut))
+            else if (isDefined(self.inBarbedWire) || (level._mapname == "mp_radar" && level.mapStreakOut))
                 speed = 50;
             groundDist = ground - botOrigin[2];
             groundDist *= 8;//Overcompensate to move faster and track along ground in a better way
             if (ground == targetOrigin[2]) groundDist = 0;//Fix 'jumping bots'
 
-            ai moveTo((targetOrigin[0], targetOrigin[1], ground + groundDist), distance / speed);
-
-            state = ai.state;
-            if ((state == "idle" || state == "dancing") && state != "hurt" && state != "attacking")
+            if (target isGlowstick())
             {
-                if (isCrawler || isDefined(ai.hasBeenCrippled))
+                if (distanceSquared(botOrigin, targetOrigin) > 2500)
                 {
-                    if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled) && isPlayer(target)) ai playAnimOnBot("dog_run");
-                    else if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_walk");
-                    else ai playAnimOnBot("crawlerAnim_walk");
+                    self moveTo((targetOrigin[0], targetOrigin[1], Ground + groundDist), distance / speed);
+
+                    if (self.state == "idle")
+                    {
+                        if (isCrawler || isDefined(self.hasBeenCrippled))
+                        {
+                            if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled) && isPlayer(target)) self playAnimOnBot("dog_run");
+                            else if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled)) self playAnimOnBot("dog_walk");
+                            else self playAnimOnBot("crawlerAnim_walk");
+                        }
+                        else if (isBoss) self playAnimOnBot("z_run");
+                        else
+                        {
+                            if (speed > 120) self playAnimOnBot("z_run");
+                            else self playAnimOnBot("z_walk");
+                        }
+                        self.state = "moving";
+                    }
                 }
-                else if (isBoss) ai playAnimOnBot("z_run");
-                else
+                else if (self.state != "dancing")
                 {
-                    if (speed > 120) ai playAnimOnBot("z_run");
-                    else ai playAnimOnBot("z_walk");
+                    self.origin = botOrigin;
+                    if (level.hasDogCrawlers && isCrawler) self playAnimOnBot("dog_lose");
+                    else self playAnimOnBot("z_lose");
+                    self.state = "dancing";
                 }
-                ai.state = "moving";
-            }
-        }
-        else if (isDefined(target) && (level.glowsticks.size > 0 && target isGlowstick()))//Move towards a glowstick and dance
-        {
-            targetOrigin = target.origin;
-            if (ground == botOrigin[2]) ground = targetOrigin[2];
-            angleY = vectorToAngles(targetOrigin - botOrigin)[1];
-            ai rotateTo((0, angleY, 0), 0.3, 0.1, 0.1);
-            state = ai.state;
-
-            speed = ai.moveSpeed;
-            if (distanceSquared(botOrigin, targetOrigin) > 2500)
-            {
-                distance = distance(botOrigin, targetOrigin);
-
-                if (((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) && !isDefined(ai.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler))
-                    speed = 170;
-                else if (isDefined(ai.hasBeenCrippled))
-                    speed = 30;
-                else if (isDefined(ai.inBarbedWire) || (level._mapname == "mp_radar" && level.mapStreakOut))
-                    speed = 50;
-                groundDist = ground - botOrigin[2];
-                groundDist *= 8;//Overcompansate to move faster and track along ground in a better way
-                if (ground == targetOrigin[2]) groundDist = 0;//Fix 'jumping bots'
-
-                ai moveTo((targetOrigin[0], targetOrigin[1], Ground + groundDist), distance / speed);
-            }
-            else if (state != "dancing")
-            {
-                ai.origin = botOrigin;
-                if (level.hasDogCrawlers && isCrawler) ai playAnimOnBot("dog_lose");
-                else ai playAnimOnBot("z_lose");
-                ai.state = "dancing";
+                
                 continue;
             }
-            if (state == "idle" && state != "hurt" && state != "attacking")
+
+            self moveTo((targetOrigin[0], targetOrigin[1], ground + groundDist), distance / speed);
+
+            if ((self.state == "idle" || self.state == "dancing") && self.state != "hurt" && self.state != "attacking")
             {
-                if (isCrawler)
+                if (isCrawler || isDefined(self.hasBeenCrippled))
                 {
-                    if (level.hasDogCrawlers) ai playAnimOnBot("dog_run");
-                    else ai playAnimOnBot("crawlerAnim_walk");
+                    if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled) && isPlayer(target)) self playAnimOnBot("dog_run");
+                    else if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled)) self playAnimOnBot("dog_walk");
+                    else self playAnimOnBot("crawlerAnim_walk");
                 }
-                else if (speed > 120) ai playAnimOnBot("z_run");
-                else ai playAnimOnBot("z_walk");
-                ai.state = "moving";
-            }
-        }
-        else if (isDefined(target) && (level.glowsticks.size > 0 && !target isGlowstick()))//Move towards a player while a glowstick is out but not in sight
-        {
-            targetOrigin = target.origin;
-            if (ground == botOrigin[2]) ground = targetOrigin[2];
-            angleY = VectorToAngles(targetOrigin - botOrigin)[1];
-            ai rotateTo((0, angleY, 0), 0.3, 0.1, 0.1);
-
-            speed = ai.moveSpeed;
-            distance = distance(botOrigin, targetOrigin);
-
-            if ((botHitbox isInPeril() && !isDefined(ai.hasBeenCrippled)) || isBoss || (level.hasDogCrawlers && isCrawler && isPlayer(target)))
-                speed = 170;
-            else if (isDefined(ai.hasBeenCrippled))
-                speed = 30;
-            else if (isDefined(ai.inBarbedWire) || (level._mapname == "mp_radar" && level.mapStreakOut))
-                speed = 50;
-            groundDist = ground - botOrigin[2];
-            groundDist *= 8;//Overcompansate to move faster and track along ground in a better way
-            if (ground == targetOrigin[2]) groundDist = 0;//Fix 'jumping bots'
-
-            ai moveTo((targetOrigin[0], targetOrigin[1], Ground + groundDist), distance / speed);
-
-            state = ai.state;
-            if ((state == "idle" || state == "dancing") && state != "hurt" && state != "attacking")
-            {
-                if (isCrawler || isDefined(ai.hasBeenCrippled))
-                {
-                    if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled) && isPlayer(target)) ai playAnimOnBot("dog_run");
-                    else if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_walk");
-                    else ai playAnimOnBot("crawlerAnim_walk");
-                }
-                else if (isBoss) ai playAnimOnBot("z_run");
+                else if (isBoss) self playAnimOnBot("z_run");
                 else
                 {
-                    if (speed > 120) ai playAnimOnBot("z_run");
-                    else ai playAnimOnBot("z_walk");
+                    if (speed > 120) self playAnimOnBot("z_run");
+                    else self playAnimOnBot("z_walk");
                 }
-                ai.state = "moving";
+                self.state = "moving";
             }
         }
         else//failsafe, just stand still if there is no other options
         {
-            ai moveTo((botOrigin[0], botOrigin[1], ground), 1);
-            state = ai.state;
-            if (state != "idle" && state != "hurt" && state != "attacking")
+            self moveTo((botOrigin[0], botOrigin[1], ground), 1);
+            if (self.state != "idle" && self.state != "hurt" && self.state != "attacking")
             {
-                if (isCrawler || isDefined(ai.hasBeenCrippled))
+                if (isCrawler || isDefined(self.hasBeenCrippled))
                 {
-                    if (level.hasDogCrawlers && !isDefined(ai.hasBeenCrippled)) ai playAnimOnBot("dog_idle");
-                    else ai playAnimOnBot("crawlerAnim_idle");
+                    if (level.hasDogCrawlers && !isDefined(self.hasBeenCrippled)) self playAnimOnBot("dog_idle");
+                    else self playAnimOnBot("crawlerAnim_idle");
                 }
-                else ai playAnimOnBot("z_idle");
-                ai.state = "idle";
+                else self playAnimOnBot("z_idle");
+                self.state = "idle";
             }
         }
         //-END MOTION-//
@@ -615,31 +550,40 @@ ai_attackPlayer(target, isCrawler, isBoss)
 
     wait(0.2);
 
-    time = getTime();
-    hitRange = randomFloatRange(2500, 5000);
-    if (distanceSquared(self.hitbox.origin, target.origin) <= hitRange && time > target.lastDamageTime + level.damageGracePeriod)//Only connect the attack if the player is close enough to the bot at this point and after a grace period.
+    if (target.isAlive)
     {
-        target.lastDamageTime = time;
-        playFX(level.fx_blood, target.origin + (0, 0, 30));
-
-        dir = vectorToAngles(self.origin - target.origin);
-        dir = vectorNormalize(dir);
-        hitDir = dir[1] - target getPlayerAngles()[1];
-
-        targetCurrentWeapon = target getCurrentWeapon();
-        if ((target hasWeapon("riotshield_mp") || target hasWeapon("iw5_riotshield_mp")) && ((targetCurrentWeapon != "riotshield_mp" && targetCurrentWeapon != "iw5_riotshield_mp" && hitDir > -80 && hitDir < 80) || (targetCurrentWeapon == "riotshield_mp" || targetCurrentWeapon == "iw5_riotshield_mp")))
+        time = getTime();
+        hitRange = randomFloatRange(2500, 5000);
+        if (distanceSquared(self.hitbox.origin, target.origin) <= hitRange && time > target.lastDamageTime + level.damageGracePeriod)//Only connect the attack if the player is close enough to the bot at this point and after a grace period.
         {
-            target playSound("melee_hit");
-            target finishPlayerDamage(level, level, int(level.botDmg / 2), 0, "MOD_FALLING", "none", target.origin, dir, "none", 0, 0);
+            target.lastDamageTime = time;
+            playFX(level.fx_blood, target.origin + (0, 0, 30));
+
+            dir = vectorToAngles(self.origin - target.origin);
+            dir = vectorNormalize(dir);
+            hitDir = dir[1] - target getPlayerAngles()[1];
+
+            targetCurrentWeapon = target getCurrentWeapon();
+            if ((target hasWeapon("riotshield_mp") || target hasWeapon("iw5_riotshield_mp")) && ((targetCurrentWeapon != "riotshield_mp" && targetCurrentWeapon != "iw5_riotshield_mp" && hitDir > -80 && hitDir < 80) || (targetCurrentWeapon == "riotshield_mp" || targetCurrentWeapon == "iw5_riotshield_mp")))
+            {
+                target playSound("melee_hit");
+                target finishPlayerDamage(level, level, int(level.botDmg / 2), 0, "MOD_FALLING", "none", target.origin, dir, "none", 0, 0);
+
+                target.lastDamageTime = time;
+                target thread onPlayerDamage(time);
+            }
+            else
+            {
+                target playSound("melee_punch_other");
+                target finishPlayerDamage(level, level, level.botDmg, 0, "MOD_FALLING", "none", target.origin, dir, "none", 0, 0);
+                
+                target.lastDamageTime = time;
+                target thread onPlayerDamage(time);
+            }
         }
-        else
-        {
-            target playSound("melee_punch_other");
-            target finishPlayerDamage(level, level, level.botDmg, 0, "MOD_FALLING", "none", target.origin, dir, "none", 0, 0);
-        }
+
+        wait(0.5);
     }
-
-    wait(0.5);
 
     if ((isCrawler || isDefined(self.hasBeenCrippled)) && self.isAlive)
     {

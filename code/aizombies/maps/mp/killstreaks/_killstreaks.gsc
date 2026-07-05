@@ -3,7 +3,7 @@
 
 init()
 {
-    level.killstreakfuncs = [];
+    //level.killstreakfuncs = [];
     level.killstreaksetupfuncs = [];
     level.killstreakweapons = [];
     level.killstreakweildweapons = [];

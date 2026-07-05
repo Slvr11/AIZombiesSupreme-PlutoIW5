@@ -9,6 +9,7 @@ init()
     level.playerSpawnAngles = [];
     level.boxLocations = [];
     level.boxMaxUses = 15;
+    level.boxCost = 950;
     level.randomMap = 0;
 
     //level.easterEggStep = 0;
@@ -725,10 +726,10 @@ executeUsable(type, player, ent)
             player useDoor(ent);
             break;
         case "randombox":
-            player thread useBox(ent);
+            player useBox(ent);
             break;
         case "pap":
-            player thread usePapBox(ent, player getCurrentWeapon());
+            player usePapBox(ent, player getCurrentWeapon());
             break;
         case "gambler":
             player useGambler(ent);
@@ -767,13 +768,13 @@ executeUsable(type, player, ent)
             player usePower(ent);
             break;
         case "killstreak":
-            player useKillstreak(ent);
+            player useKillstreakBox(ent);
             break;
         case "linker":
-            player thread linkTeleporter(ent);
+            player linkTeleporter(ent);
             break;
         case "teleporter":
-            player thread useTeleporter(ent);
+            player useTeleporter(ent);
             break;
         case "elevator":
             player useElevator(ent);
@@ -818,10 +819,12 @@ removeUsable()
     if (isDefined(self.objID))
     {
         _objective_delete(self.objID);
+        self.objID = undefined;
     }
     if (isDefined(self.icon))
     {
         self.icon destroy();
+        self.icon = undefined;
     }
 
     //trigger = self.trigger;
@@ -848,8 +851,6 @@ trackUsablesForPlayer()
     self endon ("death");
     self endon ("disconnect");
     self endon("track_usables");
-
-    self thread handleUsableMessage();
     
     triggerHelper = spawn("script_origin", self.origin);
     triggerHelper setCursorHint("HINT_NOICON");
@@ -858,6 +859,8 @@ trackUsablesForPlayer()
     triggerHelper thread notUsableForJoiningPlayers(self);
     triggerHelper linkTo(self, "tag_origin", (0, 0, 15), (0,0,0));
     triggerHelper thread deleteTriggerHelperOnDeath(self);
+
+    self thread trackUsableMessagesForPlayer();
 
     while(isDefined(triggerHelper))
     {
@@ -874,51 +877,26 @@ deleteTriggerHelperOnDeath(player)
     self delete();
 }
 
-handleUsableMessage()
+trackUsableMessagesForPlayer()
 {
     self notify("track_usable_messages");
 
     level endon ("game_ended");
     self endon ("death");
     self endon ("disconnect");
-    self endon ("track_usable_messages");
-
-    self clearLowerMessage("usable_message");
+    self endon("track_usable_messages");
 
     while (true)
     {
-        wait(0.25);
+        wait(0.1);
 
-        if (self.hasMessageUp)
-            continue;
-
-        foreach (usable in level.usables)
-        {
-            if (usable.usabletype == "giftTrigger") continue;
-
-            if (distanceSquared(self.origin, usable.origin) < usable.range)
-            {
-                self displayUsableHintMessage(usable);
-                break;
-            }
-        }
-        if (level.allowGifting && !self.hasMessageUp)//Check gift triggers last so it can't interfere with other usables
-        {
-            foreach (usable in level.usables)
-            {
-                if (usable.usabletype != "giftTrigger") continue;
-                if (usable.owner == self) continue;
-
-                if (distanceSquared(self.origin, usable.origin) < usable.range)
-                {
-                    self displayUsableHintMessage(usable);
-                    break;
-                }
-            }
-        }
+        usable = self getClosestUsableFromPlayer();
+        if (isDefined(usable))
+            self displayUsableHintMessage(usable);
+        else
+            self clearUsableHintMessage();
     }
 }
-
 setLowerMessageParams(messageParams)
 {
     if (!isDefined(messageParams) || messageParams.size == 0)
@@ -947,44 +925,26 @@ displayUsableHintMessage(usable)
         self setLowerMessage("usable_message", usableText[0]);
         self setLowerMessageParams(usableText);
     }
-
-    self thread watchPlayerLeaveUsable(usable);
 }
-watchPlayerLeaveUsable(usable)
+clearUsableHintMessage()
 {
-    level endon ("game_ended");
-    self endon ("death");
-    self endon ("disconnect");
-    self endon ("left_usable");
+    if (!self.hasMessageUp)
+        return;
 
-    while (true)
-    {
-        if (!isDefined(usable))
-        {
-            self clearLowerMessage("usable_message");
-            self.hasMessageUp = false;
-            self notify("left_usable");
-        }
-
-        //message setText(getUsableText(usable, self));
-        usableText = usable getUsableText(self);
-        if (usableText.size > 0)
-            self setLowerMessageParams(usableText);
-
-        if (distanceSquared(self.origin, usable.origin) > usable.range)
-        {
-            //message.alpha = 0;
-            //message setText(&"NULL_EMPTY");
-            self clearLowerMessage("usable_message");
-            self.hasMessageUp = false;
-            self notify("left_usable");
-        }
-
-        wait(0.25);
-    }
+    //message.alpha = 0;
+    //message setText(&"NULL_EMPTY");
+    self clearLowerMessage("usable_message");
+    self.hasMessageUp = false;
+    self notify("left_usable");
 }
 
 checkPlayerUsables()
+{
+    usable = self getClosestUsableFromPlayer();
+    if (isDefined(usable))
+        executeUsable(usable.usabletype, self, usable);
+}
+getClosestUsableFromPlayer()
 {
     //Check revive triggers first
     foreach (usable in level.usables)
@@ -993,8 +953,7 @@ checkPlayerUsables()
 
         if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
         {
-            executeUsable(usable.usabletype, self, usable);
-            return;//We found a revive usable close enough, get out of this loop
+            return usable;//We found a revive usable close enough, get out of this loop
         }
     }
     foreach (usable in level.usables)
@@ -1003,8 +962,7 @@ checkPlayerUsables()
 
         if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
         {
-            executeUsable(usable.usabletype, self, usable);
-            return;//We found a usable close enough, get out of this loop
+            return usable;//We found a usable close enough, get out of this loop
         }
     }
     if (level.allowGifting)
@@ -1016,11 +974,12 @@ checkPlayerUsables()
 
             if (isDefined(usable.range) && distanceSquared(self.origin, usable.origin) < usable.range)
             {
-                executeUsable(usable.usabletype, self, usable);
-                return;//We found a gift trigger close enough, get out of this loop
+                return usable;//We found a gift trigger close enough, get out of this loop
             }
         }
     }
+
+    return undefined;
 }
 
 //-SPECIAL USABLE LOGIC-//
@@ -1358,7 +1317,7 @@ givePlayerCash(recipient)
 //-END SPECIAL USABLE LOGIC-//
 
 //-START STRUCTURE CREATORS-//
-randomWeaponCrate(origin, angles, objID, currentLoc)
+randomWeaponCrate(origin, angles, currentLoc)
 {
     if (!isDefined(currentLoc))
         currentLoc = 0;
@@ -1371,27 +1330,18 @@ randomWeaponCrate(origin, angles, objID, currentLoc)
     }
     else
         crate = spawnCrate(origin, angles, false, false);
+
     curObjID = undefined;
-    //if (isDefined(objId))
-        //curObjID = objID;
-    //else
-        curObjID = maps\mp\gametypes\_gameobjects::getNextObjID();
+    curObjID = maps\mp\gametypes\_gameobjects::getNextObjID();
     objective_add(curObjID, "invisible", (0, 0, 0));
     objective_position(curObjId, crate.origin);
     objective_team(curObjID, "allies");
     objective_state(curObjId, "active");
     objective_icon(curObjId, "weapon_colt_45");
     crate.objID = curObjID;
-    /*
-    HeadIcon = newHudElem();
-    HeadIcon[0] = origin[0];
-    HeadIcon[1] = origin[1];
-    HeadIcon[2] = origin[2] + 40;
-    HeadIcon.alpha = 0.85f;
-    HeadIcon setShader("weapon_colt_45", 10, 10);
-    HeadIcon setWaypoint(true, false, false);
-    crate.icon = HeadIcon;
-    */
+    
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        crate setUsableWaypointIcon("weapon_colt_45");
 
     crate.state = "idle";
     crate.weapon = 0;
@@ -1402,9 +1352,14 @@ randomWeaponCrate(origin, angles, objID, currentLoc)
     weapon = spawn("script_model", crate.origin + (0, 0, 20));
     weapon setModel("viewmodel_metal_gear_gun");
     if (array_contains(level.wawMaps, level._mapname))
+    {
         weapon setModel("tag_origin");
-    weapon hidePart("tag_silencer");
-    weapon hidePart("tag_knife");
+    }
+    else
+    {
+        weapon hidePart("tag_silencer");
+        weapon hidePart("tag_knife");
+    }
     crate.weaponEnt = weapon;
 
     if (!array_contains(level.wawMaps, level._mapname)) crate thread rotateWeaponCrateWeapon();
@@ -1497,15 +1452,10 @@ papCrate(origin, angles)
     objective_team(curObjID, "allies");
     objective_state(curObjId, "active");
     objective_icon(curObjId, "cardicon_brassknuckles");
-    /*
-    HeadIcon = newHudElem();
-    HeadIcon.x = origin[0];
-    HeadIcon.y = origin[1];
-    HeadIcon.z = origin[2] + 40;
-    HeadIcon.alpha = 0.85f;
-    HeadIcon setShader("cardicon_brassknuckles", 10, 10);
-    HeadIcon setWaypoint(true, false, false);
-    */
+    
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        crate setUsableWaypointIcon("cardicon_brassknuckles");
+
     crate.state = "idle";
     crate.weapon = "";
     crate.player = undefined;
@@ -1546,15 +1496,10 @@ gamblerCrate(origin, angles)
     objective_team(curObjID, "allies");
     objective_state(curObjId, "active");
     objective_icon(curObjId, "cardicon_8ball");
-    /*
-    HeadIcon = newHudElem();
-    HeadIcon.x = origin[0];
-    HeadIcon.y = origin[1];
-    HeadIcon.z = origin[2] + 40;
-    HeadIcon.alpha = 0.85f;
-    HeadIcon setShader("cardicon_8ball", 10, 10);
-    HeadIcon setWaypoint(true, false, false);
-    */
+    
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        crate setUsableWaypointIcon("cardicon_8ball");
+
     crate addUsable("gambler", 75);
     //return crate;
 }
@@ -1664,15 +1609,9 @@ ammoCrate(origin, angles)
     objective_team(curObjID, "allies");
     objective_state(curObjId, "active");
     objective_icon(curObjId, "waypoint_ammo_friendly");
-    /*
-    HeadIcon = newHudElem();
-    HeadIcon[0] = origin[0];
-    HeadIcon[1] = origin[1];
-    HeadIcon[2] = origin[2] + 40;
-    HeadIcon.alpha = 0.85f;
-    HeadIcon setShader("airdrop_icon", 10, 10);
-    HeadIcon setWaypoint(true, false, false);
-    */
+    
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        crate setUsableWaypointIcon("airdrop_icon");
 
     ammoBox = spawn("script_model", origin + (0, 0, 20));
     ammoBox.angles = (0, 0, 0);
@@ -1699,15 +1638,10 @@ killstreakCrate(origin, angles)
     objective_team(curObjID, "allies");
     objective_state(curObjId, "active");
     objective_icon(curObjId, "cardicon_aircraft_01");
-    /*
-    HeadIcon = newHudElem();
-    HeadIcon[0] = origin[0];
-    HeadIcon[1] = origin[1];
-    HeadIcon[2] = origin[2] + 40;
-    HeadIcon.alpha = 0.85f;
-    HeadIcon setShader("cardicon_brassknuckles", 10, 10);
-    HeadIcon setWaypoint(true, false, false);
-    */
+    
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        crate setUsableWaypointIcon("cardicon_aircraft_01");
+
     remote = spawn("script_model", origin + (0, 0, 20));
     remote.angles = (0, 0, 0);
     remote setModel("viewmodel_uav_radio");
@@ -1738,16 +1672,9 @@ powerCrate(origin, angles)
     objective_state(curObjId, "active");
     objective_icon(curObjId, "cardicon_bulb");
     crate.objID = curObjID;
-    /*
-    HeadIcon = newHudElem();
-    HeadIcon[0] = origin[0];
-    HeadIcon[1] = origin[1];
-    HeadIcon[2] = origin[2] + 40;
-    HeadIcon.alpha = 0.85f;
-    HeadIcon setShader("cardicon_bulb", 10, 10);
-    HeadIcon setWaypoint(true, false, false);
-    */
-    //crate.icon = HeadIcon;
+
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        crate setUsableWaypointIcon("cardicon_bulb");
 
     crate.fx = spawnFX(level.fx_glow, crate.origin + (0, 0, 20));
     crate.fx2 = spawnFX(level.fx_glow2, crate.origin + (0, 0, 30));
@@ -1779,25 +1706,16 @@ wallWeapon(origin, angles, weapon, price)
     if (weapon == "frag_grenade_mp")
         model = "weapon_m67_grenade";
     wep setModel(model);
-    if (isSubStr("iw4_", weapon))
+    if (isSubStr(weapon, "iw4_"))
     {
-        wep hideAllParts();
-        wep showPart("tag_weapon");
-        wep showPart("tag_clip");
-        if (weapon == "iw4_m4reflex_mp" || weapon == "iw4_m16_mp")
-            wep showPart("tag_red_dot");
-        else if (weapon == "iw4_m4silencer_mp")
-            wep showPart("tag_silencer");
-        else if (weapon == "iw4_m21_mp" || weapon == "iw4_wa2000_mp")
-            wep showPart("tag_acog_2");
-        else if (weapon == "iw4_dragunov_mp")
-            wep showPart("tag_dragunov_scope");
-        else if (weapon == "iw4_barrett_mp")
-            wep showPart("tag_m82_scope");
-        else if (weapon == "iw4_raygun_mp")
-            wep showPart("tag_eotech");
-        else wep showPart("tag_sight_on");
+        hideTags = getWeaponHideTags(weapon);
+        if (isDefined(hideTags))
+        {
+            foreach (tag in hideTags)
+                wep hidePart(tag);
+        }
     }
+
     wep.angles = angles;
     wep.price = price;
     wep.weapon = weapon;
@@ -2055,6 +1973,8 @@ watchElevator(enter, exit)
 {
     level endon("game_ended");
 
+    level waittill("connected");
+
     while(true)
     {
         foreach (player in level.players)
@@ -2148,14 +2068,10 @@ createTeleporter(startPos, startAngles, endPos, endAngles, linkerPos, linkerAngl
     linker.angles = linkerAngles;
     linker setModel("weapon_radar");
     linker.teleporter = teleporter;
-    //HeadIcon = HudElem.NewHudElem();
-    //HeadIcon[0] = linkerPos[0];
-    //HeadIcon[1] = linkerPos[1];
-    //HeadIcon[2] = linkerPos[2] + 75;
-    //HeadIcon.Alpha = 0.85f;
-    //HeadIcon setShader("cardicon_illuminati", 3, 3);
-    //HeadIcon setWaypoint(true, false);
-    //linker.icon = HeadIcon;
+
+    //if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && array_contains(level.classicMaps, level._mapname)))
+        //linker setUsableWaypointIcon("cardicon_illuminati");
+    
     linker addUsable("linker", 75);
     teleporter addUsable("teleporter", 80);
 }
@@ -2344,17 +2260,17 @@ useBox(box)
         if (isRayGun(name))
         {
             box playSound("copycat_steal_class");
-            level.currentRayguns++;
+            self addSpecialWeapon("raygun");
         }
         else if (isThunderGun(name))
         {
             box playSound("copycat_steal_class");
-            level.currentThunderguns++;
+            self addSpecialWeapon("thundergun");
         }
         else if (name == "stinger_mp")
         {
             box playSound("copycat_steal_class");
-            level.currentZappers++;
+            self addSpecialWeapon("zapper");
         }
 
         if (!array_contains(level.classicMaps, level._mapname))
@@ -2364,11 +2280,11 @@ useBox(box)
         }
 
         if (isThunderGun(currentWeapon))
-            level.currentThunderguns--;
+            self removeSpecialWeapon("thundergun");
         else if (isRayGun(currentWeapon))
-            level.currentRayguns--;
+            self removeSpecialWeapon("raygun");
         else if (currentWeapon == "stinger_mp")
-            level.currentZappers--;
+            self removeSpecialWeapon("zapper");
 
         if (!self hasWeapon(name) && !self.newGunReady)
         {
@@ -2400,152 +2316,136 @@ useBox(box)
         }
         else self maps\mp\gametypes\_aiz_hud::updateAmmoHud(false);
         self playLocalSound("ammo_crate_use");
-        weaponEnt = box.weaponEnt;
-        //weaponEnt hide();
-        weaponEnt setModel("viewmodel_metal_gear_gun");
-        if (array_contains(level.wawMaps, level._mapname))
-            weaponEnt setModel("tag_origin");
-
-        weaponEnt showAllParts();
-        weaponEnt hidePart("tag_silencer");
-        weaponEnt hidePart("tag_knife");
-        weaponEnt moveTo(box.origin + (0, 0, 20), 1, 0.3, 0.6);
-        box.destroyed = true;
-        box.state = "post_pickup";
-
-        if (array_contains(level.wawMaps, level._mapname))
-        {
-            box.boxLid rotateRoll(-90, 0.75);
-            wait(0.5);
-            box playSound("aiz_mystery_box_close");
-        }
 
         box notify("weapon_taken");
 
-        wait(2);
-        box.state = "idle";
+        box thread box_reset();
         return;
     }
 
     if (box.state != "idle") return;
 
-    if (self.cash < 10 && level.sale)
+    if (self.cash < level.boxCost)
     {
-        self iPrintLn(level.gameStrings[240]);
-        return;
-    }
-    else if (self.cash < 950 && !level.sale)
-    {
-        self iPrintLn(level.gameStrings[241]);
+        self iPrintLn(level.gameStrings[241], level.boxCost);
         return;
     }
 
     if (box.state == "idle")
     {
-        if (level.sale)
-        {
-            self.cash -= 10;
-            self maps\mp\gametypes\_aiz_hud::scorePopup(-10);
-        }
-        else
-        {
-            self.cash -= 950;
-            self maps\mp\gametypes\_aiz_hud::scorePopup(-950);
-        }
+        self.cash -= level.boxCost;
+        self maps\mp\gametypes\_aiz_hud::scorePopup(-level.boxCost);
         self maps\mp\gametypes\_aiz_hud::scoreMessage(level.gameStrings[242]);
+
+        box thread box_spinBox(self);
     }
-    box.state = "inuse";
-    self playLocalSound("achieve_bomb");
-    weapon = box.weaponEnt;
-    //weapon.origin = box.origin;
-    //weapon show();
+}
+box_spinBox(player)
+{
+    self.state = "inuse";
+    player playLocalSound("achieve_bomb");
+    weapon = self.weaponEnt;
     weapon setModel(level.weaponModels[0]);
-    //weapon.angles = angles;
-    weapon rotateTo(box.angles, 1, 0, .5);
-    box.destroyed = false;
+    weapon rotateTo(self.angles, 1, 0, .5);
+    self.destroyed = false;
 
     if (array_contains(level.wawMaps, level._mapname))
     {
-        box playSound("aiz_mystery_box_open");
-        box playSound("aiz_mystery_box_music");
-        box.boxLid rotateRoll(90, 0.75);
+        self playSound("aiz_mystery_box_open");
+        self playSound("aiz_mystery_box_music");
+        self.boxLid rotateRoll(90, 0.75);
     }
 
     weapon.boxCounter = 0;
     weapon.boxIndex = 0;
 
-    weapon moveTo(box.origin + (0, 0, 40), 3, 0, 0.5);
+    weapon moveTo(self.origin + (0, 0, 40), 5, 0, 2.5);
 
     weapon thread box_rollWeapon();
 
-    wait(3);
+    wait(5);
 
     if (level.boxLocations.size > 1)//Fix box getting bear with 1 location available
     {
         isBear = randomInt(level.boxMaxUses) == level.boxMaxUses - 1;//Random number is max
-        if (isBear && level.boxMaxUses < 13 && !level.sale && self.hasUsedBox)
+        if (isBear && level.boxMaxUses < 13 && !level.sale && player.hasUsedBox)
         {
             weapon.angles -= (0, 90, 0);
-            box thread moveWeaponBox(weapon);
+            self thread box_moveWeaponBox(weapon);
             //give player back their 'hard earned' moo-lah
-            self.cash += 950;
-            self maps\mp\gametypes\_aiz_hud::scorePopup(950);
+            player.cash += level.boxCost;
+            player maps\mp\gametypes\_aiz_hud::scorePopup(level.boxCost);
             return;
         }
         else if (!level.sale) level.boxMaxUses--;
     }
 
-    self.hasUsedBox = true;
+    player.hasUsedBox = true;
 
-    if ((isRayGun(level.weaponNames[weapon.boxIndex]) && (level.currentRayguns >= level.maxRayguns || self hasRayGun()))
-    || (isThunderGun(level.weaponNames[weapon.boxIndex]) && (level.currentThunderguns >= level.maxThunderguns || self hasThunderGun()))
-    || (level.weaponNames[weapon.boxIndex] == "stinger_mp" && level.currentZappers > 0))
+    if ((isRayGun(level.weaponNames[weapon.boxIndex]) && (level.currentRayguns.size >= level.maxRayguns || player hasRayGun()))
+    || (isThunderGun(level.weaponNames[weapon.boxIndex]) && (level.currentThunderguns.size >= level.maxThunderguns || player hasThunderGun()))
+    || (level.weaponNames[weapon.boxIndex] == "stinger_mp" && level.currentZappers.size >= level.maxZappers))
     {
         weapon.boxIndex = randomInt(level.weaponModels.size);
         weapon setModel(level.weaponModels[weapon.boxIndex]);
-    }
 
-    if (self hasWeapon(level.weaponNames[weapon.boxIndex]) || self hasUpgradedWeapon(getWeaponUpgrade(level.weaponNames[weapon.boxIndex])))//Just reroll
-    {
-        weapon.boxIndex = randomInt(level.weaponModels.size);
-        weapon setModel(level.weaponModels[weapon.boxIndex]);
-        if (self hasWeapon(level.weaponNames[weapon.boxIndex]) || self hasUpgradedWeapon(getWeaponUpgrade(level.weaponNames[weapon.boxIndex])))//If again, reroll
+        if (isSubStr(level.weaponNames[weapon.boxIndex], "iw4_"))
         {
-            weapon.boxIndex = randomInt(level.weaponModels.size);
-            weapon setModel(level.weaponModels[weapon.boxIndex]);
+            hideTags = getWeaponHideTags(level.weaponNames[weapon.boxIndex]);
+            if (isDefined(hideTags))
+            {
+                foreach (tag in hideTags)
+                    weapon hidePart(tag);
+            }
         }
     }
 
-    box.state = "waiting";
-    box.weapon = weapon.boxIndex;
-    weapon setModel(level.weaponModels[weapon.boxIndex]);
-    if (isSubStr(level.weaponNames[weapon.boxIndex], "iw4_") && level.weaponNames[weapon.boxIndex] != "iw4_onemanarmy_mp")
+    if (player hasWeapon(level.weaponNames[weapon.boxIndex]) || player hasUpgradedWeapon(getWeaponUpgrade(level.weaponNames[weapon.boxIndex])))//Just reroll
     {
-        weapon hideAllParts();
-        weapon showPart("tag_weapon");
-        weapon showPart("tag_clip");
-        if (level.weaponNames[weapon.boxIndex] == "iw4_m4reflex_mp" || level.weaponNames[weapon.boxIndex] == "iw4_m16_mp")
-            weapon showPart("tag_red_dot");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_m4silencer_mp" || level.weaponNames[weapon.boxIndex] == "iw4_tmpsilencer_mp")
-            weapon showPart("tag_silencer");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_m21_mp" || level.weaponNames[weapon.boxIndex] == "iw4_wa2000_mp")
-            weapon showPart("tag_acog_2");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_dragunov_mp")
-            weapon showPart("tag_dragunov_scope");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_barrett_mp")
-            weapon showPart("tag_m82_scope");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_raygun_mp")
-            weapon showPart("tag_eotech");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_striker_mp")
-            weapon showPart("tag_foregrip");
-        else if (level.weaponNames[weapon.boxIndex] == "iw4_colt45_mp")
-            weapon showPart("j_pistol_grip");
-        else weapon showPart("tag_sight_on");
-    }
-    weapon moveTo(box.origin + (0, 0, 20), 10, 0, 1);
-    box.player = self;
+        weapon.boxIndex = randomInt(level.weaponModels.size);
+        weapon setModel(level.weaponModels[weapon.boxIndex]);
+        if (isSubStr(level.weaponNames[weapon.boxIndex], "iw4_"))
+        {
+            hideTags = getWeaponHideTags(level.weaponNames[weapon.boxIndex]);
+            if (isDefined(hideTags))
+            {
+                foreach (tag in hideTags)
+                    weapon hidePart(tag);
+            }
+        }
 
-    box thread box_waitForWeapon(weapon);
+        if (player hasWeapon(level.weaponNames[weapon.boxIndex]) || player hasUpgradedWeapon(getWeaponUpgrade(level.weaponNames[weapon.boxIndex])))//If again, reroll
+        {
+            weapon.boxIndex = randomInt(level.weaponModels.size);
+            weapon setModel(level.weaponModels[weapon.boxIndex]);
+            if (isSubStr(level.weaponNames[weapon.boxIndex], "iw4_"))
+            {
+                hideTags = getWeaponHideTags(level.weaponNames[weapon.boxIndex]);
+                if (isDefined(hideTags))
+                {
+                    foreach (tag in hideTags)
+                        weapon hidePart(tag);
+                }
+            }
+        }
+    }
+
+    self.state = "waiting";
+    self.weapon = weapon.boxIndex;
+    weapon setModel(level.weaponModels[weapon.boxIndex]);
+    if (isSubStr(level.weaponNames[weapon.boxIndex], "iw4_"))
+    {
+        hideTags = getWeaponHideTags(level.weaponNames[weapon.boxIndex]);
+        if (isDefined(hideTags))
+        {
+            foreach (tag in hideTags)
+                weapon hidePart(tag);
+        }
+    }
+    weapon moveTo(self.origin + (0, 0, 20), 10, 0, 1);
+    self.player = player;
+
+    self thread box_waitForWeapon(weapon);
 }
 box_waitForWeapon(weapon)
 {
@@ -2585,16 +2485,59 @@ box_rollWeapon()
     level endon("game_ended");
     self endon("death");
 
+    waitTime = 0.05;
+
     while (self.boxCounter < 60)
     {
         self.boxIndex = randomInt(level.weaponModels.size);
         self setModel(level.weaponModels[self.boxIndex]);
+
+        hideTags = getWeaponHideTags(level.weaponNames[self.boxIndex]);
+        if (isDefined(hideTags))
+        {
+            foreach (tag in hideTags)
+                self hidePart(tag);
+        }
+
         self.boxCounter++;
-        wait(0.05);
+
+        if (self.boxCounter > 56)
+            waitTime = 0.25;
+        else if (self.boxCounter > 30)
+            waitTime = 0.1;
+
+        wait(waitTime);
     }
 }
+box_reset()
+{
+    weaponEnt = self.weaponEnt;
+    weaponEnt setModel("viewmodel_metal_gear_gun");
+    if (array_contains(level.wawMaps, level._mapname))
+        weaponEnt setModel("tag_origin");
 
-moveWeaponBox(bear)
+    weaponEnt showAllParts();
+    weaponEnt hidePart("tag_silencer");
+    weaponEnt hidePart("tag_knife");
+    weaponEnt moveTo(self.origin + (0, 0, 20), 1, 0.3, 0.6);
+    self.destroyed = true;
+
+    self.state = "post_pickup";
+
+    if (array_contains(level.wawMaps, level._mapname))
+    {
+        self.boxLid rotateRoll(-90, 0.75);
+
+        wait(0.5);
+
+        self playSound("aiz_mystery_box_close");
+    }
+
+    wait(2);
+    self.state = "idle";
+}
+
+box_moveWeaponBox(bear)
 {
     self notSolid();
     self setContents(0);
@@ -2634,7 +2577,7 @@ moveWeaponBox(bear)
 
         level.boxMaxUses = 15;//Reset uses
         wait(1.5);
-        randomWeaponCrate(level.boxLocations[newLoc][0], level.boxLocations[newLoc][1], objID, newLoc);
+        randomWeaponCrate(level.boxLocations[newLoc][0], level.boxLocations[newLoc][1], newLoc);
         return;
     }
 
@@ -2646,26 +2589,23 @@ moveWeaponBox(bear)
 
     wait(.4);
 
-    self thread rotateBoxLoop();//800
+    self thread box_rotateBoxLoop();
 
     wait(4.6);
 
     self.isRotating = undefined;
     PlayFX(level.fx_disappear, self.origin);
-    objID = self.objID;
-    _objective_delete(objID);
-    //_objIDs.Remove(box);//Removing from internal list only to avoid overwrite
     newLoc = randomInt(level.boxLocations.size);
     if (newLoc == self.lastLocation)//Reroll
         newLoc = randomInt(level.boxLocations.size);
         
-    self delete();
+    self removeUsable();
 
     level.boxMaxUses = 15;//Reset uses
     wait(1.5);
-    randomWeaponCrate(level.boxLocations[newLoc][0], level.boxLocations[newLoc][1], objID, newLoc);
+    randomWeaponCrate(level.boxLocations[newLoc][0], level.boxLocations[newLoc][1], newLoc);
 }
-rotateBoxLoop()
+box_rotateBoxLoop()
 {
     level endon("game_ended");
     self endon("death");
@@ -2697,96 +2637,86 @@ usePapBox(box, currentGun)
 
         self updatePlayerWeaponsList(gun);
 
-        if (self.perk4weapon == box.oldWeapon) self.perk4weapon = gun;
+        if (isDefined(self.perk4weapon))
+        {
+            if (self.perk4weapon == box.oldWeapon)
+                self.perk4weapon = gun;
+        }
 
         self playLocalSound("oldschool_pickup");
-        weaponEnt = box.weaponEnt;
-        attachments = box.attachments;
-        foreach (a in attachments) 
-        {
-            a setModel("tag_origin");
-            a hide(); 
-        }
-        weaponEnt setModel("tag_origin");
-        weaponEnt hide();
+
         box notify("weapon_taken");
 
-        wait(1);//Wait a second until being ready again to fix the rapid upgrade bug
+        box thread pap_reset();
 
-        box.state = "idle";
-        box.player = undefined;
         return;
     }
 
-    currentWeapon = self getCurrentWeapon();
     if (!level.powerActivated || self.isDown) return;
     if (self isSwitchingWeapon()) return;
-    if (currentWeapon == "" || currentWeapon == "none") return;//If we have no gun, no PAP
-    if (isSubStr(currentWeapon, "killstreak")) return;
+    if (currentGun == "" || currentGun == "none") return;//If we have no gun, no PAP
+    if (isSubStr(currentGun, "killstreak")) return;
 
     if (box.state != "idle") return;
     if (self.cash < 5000) return;
-    if (getWeaponUpgrade(currentGun) == "") return;//Don't PAP already PAPed guns
+    if (getWeaponUpgrade(currentGun) == "") 
+    {
+        self iPrintLnBold(level.gameStrings[240]);
+        return;//Don't PAP already PAPed guns
+    }
     if (self hasWeapon(getWeaponUpgrade(currentGun))) return;//Don't allow PAP if the player already has this PAP. Fixes double PAPs taking away a weapon slot
+
     if (box.state == "idle")
     {
         self.cash -= 5000;
         self maps\mp\gametypes\_aiz_hud::scorePopup(-5000);
         self maps\mp\gametypes\_aiz_hud::scoreMessage(level.gameStrings[243]);
+
+        box thread pap_upgradeWeapon(self, currentGun);
+        
+        self updatePlayerWeaponsList(currentGun, true);
+        self takeWeapon(currentGun);
+        if (self.weaponsList.size != 0)
+            self switchToWeapon(self.weaponsList[0]);
     }
-    box.state = "inuse";
-    box.player = self;
-    weapon = box.weaponEnt;
-    weapon.angles = box.angles;
-    weaponModel = getWeaponModel(currentGun);
+}
+pap_upgradeWeapon(player, baseWeapon)
+{
+    self.state = "inuse";
+    self.player = player;
+    weapon = self.weaponEnt;
+    weapon.angles = self.angles;
+    weaponModel = getWeaponModel(baseWeapon);
     weapon show();
     weapon setModel(weaponModel);
-    weapon.origin = box.origin + (0, 0, 40);
+    weapon.origin = self.origin + (0, 0, 40);
     if (array_contains(level.wawMaps, level._mapname))
-        weapon.origin = box.origin + (0, -20, 60);
-    upgradeWeapon = getWeaponUpgrade(currentGun);
+        weapon.origin = self.origin + (0, -20, 60);
+    upgradeWeapon = getWeaponUpgrade(baseWeapon);
     if (weaponHasOptic(upgradeWeapon) && upgradeWeapon != "iw5_raygun_mp_eotechsmg_xmags_scope7" && upgradeWeapon != "iw5_m60jugg_mp_thermal_silencer_camo08" && upgradeWeapon != "gl_mp") upgradeWeapon += "_scope" + randomIntRange(1, 6);
-    box.weaponName = upgradeWeapon;
-    box.oldWeapon = currentWeapon;
-    self updatePlayerWeaponsList(currentWeapon, true);
-    self takeWeapon(currentWeapon);
-    //self.newGunReady = true;
-    if (self.weaponsList.size != 0)
-        self switchToWeapon(self.weaponsList[0]);
-    box playSound("aiz_upgrade_start");
+    self.weaponName = upgradeWeapon;
+    self.oldWeapon = baseWeapon;
+    self playSound("aiz_upgrade_start");
 
-    if (isSubStr(upgradeWeapon, "iw4_") && currentGun != "iw4_onemanarmy_mp")
+    if (isSubStr(baseWeapon, "iw4_"))
     {
-        weapon hideAllParts();
-        weapon showPart("tag_weapon");
-        weapon showPart("tag_clip");
-        if (currentGun == "iw4_m4reflex_mp" || currentGun == "iw4_m16_mp")
-            weapon showPart("tag_red_dot");
-        else if (currentGun == "iw4_m4silencer_mp" || currentGun == "iw4_tmpsilencer_mp")
-            weapon showPart("tag_silencer");
-        else if (currentGun == "iw4_m21_mp" || currentGun == "iw4_wa2000_mp")
-            weapon showPart("tag_acog_2");
-        else if (currentGun == "iw4_dragunov_mp")
-            weapon showPart("tag_dragunov_scope");
-        else if (currentGun == "iw4_barrett_mp")
-            weapon showPart("tag_m82_scope");
-        else if (currentGun == "iw4_raygun_mp")
-            weapon showPart("tag_eotech");
-        else if (currentGun == "iw4_striker_mp")
-            weapon showPart("tag_foregrip");
-        else if (currentGun == "iw4_colt45_mp")
-            weapon showPart("j_pistol_grip");
-        else weapon showPart("tag_sight_on");
+        hideTags = getWeaponHideTags(baseWeapon);
+        if (isDefined(hideTags))
+        {
+            foreach (tag in hideTags)
+                weapon hidePart(tag);
+        }
     }
 
-    tag = "tag_origin";
-    tagOffset = (0, 0, 0);
-    model = "tag_origin";
-    tokenizedWeapon = strTok(currentGun, "_");
-    attachEnts = box.attachments;
+    tokenizedWeapon = strTok(baseWeapon, "_");
+    attachEnts = self.attachments;
 
-    foreach (a in getWeaponAttachments(currentGun))
+    foreach (a in getWeaponAttachments(baseWeapon))
     {
+        tag = "tag_origin";
+        tagOffset = (0, 0, 0);
+        model = "tag_origin";
+
         switch (a)
         {
             case "reflex":
@@ -2898,63 +2828,51 @@ usePapBox(box, currentGun)
                 break;
         }
 
-        tagOrigin = weapon getTagOrigin(tag);
-        tagAngles = weapon getTagAngles(tag);
+        if (tag != "tag_origin")
+        {
+            tagOrigin = weapon getTagOrigin(tag);
+            tagAngles = weapon getTagAngles(tag);
 
-        if (attachEnts[0].model == "tag_origin")
-        {
-            attachEnts[0] show();
-            attachEnts[0] unlink();
-            attachEnts[0].angles = tagAngles;
-            attachEnts[0] setModel(model);
-            attachEnts[0].origin = tagOrigin + tagOffset;
-            attachEnts[0] linkTo(weapon, tag, tagOffset, (0, 0, 0));
-        }
-        else
-        {
-            attachEnts[1] show();
-            attachEnts[1] unlink();
-            attachEnts[1].angles = tagAngles;
-            attachEnts[1] setModel(model);
-            attachEnts[1].origin = tagOrigin + tagOffset;
-            attachEnts[1] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+            if (attachEnts[0].model == "tag_origin")
+            {
+                attachEnts[0] show();
+                attachEnts[0] unlink();
+                attachEnts[0].angles = tagAngles;
+                attachEnts[0] setModel(model);
+                attachEnts[0].origin = tagOrigin + tagOffset;
+                attachEnts[0] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+            }
+            else
+            {
+                attachEnts[1] show();
+                attachEnts[1] unlink();
+                attachEnts[1].angles = tagAngles;
+                attachEnts[1] setModel(model);
+                attachEnts[1].origin = tagOrigin + tagOffset;
+                attachEnts[1] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+            }
         }
     }
 
     wait(1);
 
-    box playLoopSound("aiz_upgrade_loop");
+    self playLoopSound("aiz_upgrade_loop");
     if (array_contains(level.wawMaps, level._mapname))
-        weapon moveTo(box.origin + (0, 20, 60), 2);
+        weapon moveTo(self.origin + (0, 20, 60), 2);
     else
-        weapon moveTo(box.origin + (0, 0, 10), 2);
+        weapon moveTo(self.origin + (0, 0, 10), 2);
 
     wait(2);
 
-    weapon setModel(getWeaponUpgradeModel(currentGun));
+    weapon setModel(getWeaponUpgradeModel(baseWeapon));
 
-    if ((isSubStr(upgradeWeapon, "iw4_") && upgradeWeapon != "iw4_onemanarmy_mp") || upgradeWeapon == "rsass_hybrid_mp")
+    if (isSubStr(upgradeWeapon, "iw4_") || upgradeWeapon == "rsass_hybrid_mp")
     {
-        weapon hideAllParts();
-        weapon showPart("tag_weapon");
-        weapon showPart("tag_clip");
-        if (upgradeWeapon == "iw4_pp2000upgraded2_mp" || upgradeWeapon == "iw4_ak47thermalupgraded_mp") weapon showPart("tag_thermal_scope");
-        if (upgradeWeapon == "iw4_pp2000upgraded_mp" || upgradeWeapon == "iw4_krissupgraded_mp" || upgradeWeapon == "iw4_masadaupgraded_mp" || upgradeWeapon == "iw4_falupgraded_mp") weapon showPart("tag_red_dot");
-        if (upgradeWeapon == "iw4_augupgraded2_mp") weapon showPart("tag_steyr_scope");
-        if (upgradeWeapon == "iw4_sa80upgraded2_mp") weapon showPart("tag_sa80_scope");
-        if (upgradeWeapon == "iw4_fn2000upgraded_mp") weapon showPart("tag_fn2000_scope");
-        if (upgradeWeapon == "iw4_tavorupgraded_mp") weapon showPart("tag_tavor_scope");
-        if (upgradeWeapon == "iw4_augupgraded2_mp" || upgradeWeapon == "iw4_pp2000upgraded2_mp" || upgradeWeapon == "iw4_uziupgraded_mp" || upgradeWeapon == "iw4_tmpsilencerupgraded_mp" || upgradeWeapon == "iw4_m4silencerupgraded_mp" || upgradeWeapon == "iw4_tmpsilencerupgraded_mp" || upgradeWeapon == "iw4_krissupgraded2_mp") weapon showPart("tag_silencer");
-        if (upgradeWeapon == "iw4_uziupgraded_mp" || upgradeWeapon == "iw4_dragunovupgraded_mp" || upgradeWeapon == "iw4_wa2000upgraded_mp" || upgradeWeapon == "iw4_famasupgraded_mp" || upgradeWeapon == "iw4_barrettupgraded_mp" || upgradeWeapon == "iw4_m21upgraded_mp" || upgradeWeapon == "iw4_m4silencerupgraded_mp") weapon showPart("tag_acog_2");
-        if (upgradeWeapon == "iw4_mg4upgraded_mp" || upgradeWeapon == "iw4_m240upgraded_mp" || upgradeWeapon == "iw4_rpdupgraded_mp" || upgradeWeapon == "iw4_ump45upgraded_mp" || upgradeWeapon == "iw4_m16upgraded_mp" || upgradeWeapon == "iw4_m4reflexupgraded_mp" || upgradeWeapon == "iw4_augupgraded_mp" || upgradeWeapon == "iw4_scarupgraded_mp" || upgradeWeapon == "iw4_raygunupgraded_mp") weapon showPart("tag_eotech");
-        if (upgradeWeapon == "iw4_rpdupgraded_mp" || upgradeWeapon == "iw4_sa80upgraded_mp" || upgradeWeapon == "iw4_aa12upgraded_mp" || upgradeWeapon == "iw4_spas12upgraded_mp" || upgradeWeapon == "iw4_striker_mp") weapon showPart("tag_foregrip");
-        if (upgradeWeapon == "iw4_m4reflexupgraded_mp") weapon showPart("tag_shotgun");
-        if (upgradeWeapon == "iw4_ak47thermalupgraded_mp") weapon showPart("tag_gp25");
-        if (upgradeWeapon == "iw4_colt45upgraded_mp") weapon showPart("j_pistol_grip");
-        if (upgradeWeapon == "rsass_hybrid_mp")
+        hideTags = getWeaponHideTags(upgradeWeapon);
+        if (isDefined(hideTags))
         {
-            weapon showPart("tag_thermal_scope");
-            weapon showPart("tag_red_dot");
+            foreach (tag in hideTags)
+                weapon hidePart(tag);
         }
     }
 
@@ -2964,6 +2882,10 @@ usePapBox(box, currentGun)
 
     foreach (a in getWeaponAttachments(upgradeWeapon))
     {
+        tag = "tag_origin";
+        tagOffset = (0, 0, 0);
+        model = "tag_origin";
+
         switch (a)
         {
             case "reflex":
@@ -3075,26 +2997,29 @@ usePapBox(box, currentGun)
                 break;
         }
 
-        tagOrigin = weapon getTagOrigin(tag);
-        tagAngles = weapon getTagAngles(tag);
+        if (tag != "tag_origin")
+        {
+            tagOrigin = weapon getTagOrigin(tag);
+            tagAngles = weapon getTagAngles(tag);
 
-        if (attachEnts[0].model == "tag_origin")
-        {
-            attachEnts[0] show();
-            attachEnts[0] unlink();
-            attachEnts[0].angles = tagAngles;
-            attachEnts[0] setModel(model);
-            attachEnts[0].origin = tagOrigin + tagOffset;
-            attachEnts[0] linkTo(weapon, tag, tagOffset, (0, 0, 0));
-        }
-        else
-        {
-            attachEnts[1] show();
-            attachEnts[1] unlink();
-            attachEnts[1].angles = tagAngles;
-            attachEnts[1] setModel(model);
-            attachEnts[1].origin = tagOrigin + tagOffset;
-            attachEnts[1] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+            if (attachEnts[0].model == "tag_origin")
+            {
+                attachEnts[0] show();
+                attachEnts[0] unlink();
+                attachEnts[0].angles = tagAngles;
+                attachEnts[0] setModel(model);
+                attachEnts[0].origin = tagOrigin + tagOffset;
+                attachEnts[0] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+            }
+            else
+            {
+                attachEnts[1] show();
+                attachEnts[1] unlink();
+                attachEnts[1].angles = tagAngles;
+                attachEnts[1] setModel(model);
+                attachEnts[1].origin = tagOrigin + tagOffset;
+                attachEnts[1] linkTo(weapon, tag, tagOffset, (0, 0, 0));
+            }
         }
     }
 
@@ -3106,7 +3031,6 @@ usePapBox(box, currentGun)
 
         tagOrigin = weapon getTagOrigin(tag);
         tagAngles = weapon getTagAngles(tag);
-        attachEnts = box.attachments;
 
         if (attachEnts[0].model == "tag_origin")
         {
@@ -3114,34 +3038,36 @@ usePapBox(box, currentGun)
             attachEnts[0] unlink();
             attachEnts[0].angles = tagAngles;
             attachEnts[0] setModel(model);
-            attachEnts[0] hideAllParts();
-            attachEnts[0] showPart("tag_weapon");
-            attachEnts[0] showPart("tag_clip");
-            if (upgradeWeapon == "iw4_colt45upgraded_mp") attachEnts[0] showPart("j_pistol_grip");
+            hideTags = getWeaponHideTags(upgradeWeapon);
+            if (isDefined(hideTags))
+            {
+                foreach (tag in hideTags)
+                    attachEnts[0] hidePart(tag);
+            }
             attachEnts[0].origin = tagOrigin + tagOffset;
             attachEnts[0] linkTo(weapon, tag, tagOffset, (0, 0, 0));
         }
     }
 
     if (array_contains(level.wawMaps, level._mapname))
-        weapon moveTo(box.origin + (0, -20, 60), 2);
+        weapon moveTo(self.origin + (0, -20, 60), 2);
     else
-        weapon moveTo(box.origin + (0, 0, 60), 2);
+        weapon moveTo(self.origin + (0, 0, 60), 2);
         
     wait(1);
 
-    box stopLoopSound();
-    box playSound("aiz_upgrade_end");
+    self stopLoopSound();
+    self playSound("aiz_upgrade_end");
     wait(1);
 
-    box playSound("aiz_upgrade_ding");
-    box.state = "waiting";
+    self playSound("aiz_upgrade_ding");
+    self.state = "waiting";
     if (array_contains(level.wawMaps, level._mapname))
-        weapon moveTo(box.origin + (0, 15, 60), 10);
+        weapon moveTo(self.origin + (0, 15, 60), 10);
     else
-        weapon moveTo(box.origin + (0, 0, 25), 10);
+        weapon moveTo(self.origin + (0, 0, 25), 10);
 
-    box thread pap_waitForWeapon(self);
+    self thread pap_waitForWeapon(player);
 }
 pap_waitForWeapon(player)
 {
@@ -3159,6 +3085,25 @@ pap_waitForWeapon(player)
     self.state = "idle";
     self.player = undefined;
     player.newGunReady = true;
+}
+pap_reset()
+{
+    weaponEnt = self.weaponEnt;
+    attachments = self.attachments;
+    foreach (a in attachments) 
+    {
+        a setModel("tag_origin");
+        a hide(); 
+    }
+    weaponEnt setModel("tag_origin");
+    weaponEnt hide();
+
+    self.state = "reset";
+
+    wait(1);//Wait a second until being ready again to fix the rapid upgrade bug
+
+    self.state = "idle";
+    self.player = undefined;
 }
 
 useGambler(box)
@@ -3303,30 +3248,38 @@ gamblerRoll(box)
                     self _unSetPerk("specialty_quickdraw");
                     self.perksBought[2] = false;
                 }
-                if (self.perksBought[3])
+                if (self.perksBought[3] && (level.classicPerks == 0 || (level.classicPerks == 2 && !array_contains(level.classicMaps, level._mapname))))
                 {
                     if (isDefined(self.perk4weapon) && self hasWeapon(self.perk4weapon))
                     {
                         perk4weapon = self.perk4weapon;
+
+                        if (isRayGun(perk4weapon))
+                            self removeSpecialWeapon("raygun");
                         if (isThunderGun(perk4weapon))
-                            level.currentThunderguns--;
-                        else if (isRayGun(perk4weapon))
-                            level.currentRayguns--;
+                            self removeSpecialWeapon("thundergun");
+                        if (perk4weapon == "stinger_mp")
+                            self removeSpecialWeapon("zapper");
+
                         self takeWeapon(perk4weapon);
                         self updatePlayerWeaponsList(perk4weapon, true);
                     }
                     else
                     {
                         currentWeapon = self getCurrentWeapon();
+
+                        if (isRayGun(currentWeapon))
+                            self removeSpecialWeapon("raygun");
                         if (isThunderGun(currentWeapon))
-                            level.currentThunderguns--;
-                        else if (isRayGun(currentWeapon))
-                            level.currentRayguns--;
+                            self removeSpecialWeapon("thundergun");
+                        if (currentWeapon == "stinger_mp")
+                            self removeSpecialWeapon("zapper");
+                        
                         self takeWeapon(currentWeapon);
                         self updatePlayerWeaponsList(currentWeapon, true);
                     }
                     self.perksBought[3] = false;
-                    self.perk4weapon = undefined;
+                    self.perk4weapon = "";
                     self.ammoMatic = false;
                 }
                 if (self.perksBought[4])
@@ -3378,30 +3331,38 @@ gamblerRoll(box)
                     self _unSetPerk("specialty_quickdraw");
                     self.perksBought[2] = false;
                 }
-                if (self.perksBought[3])
+                if (self.perksBought[3] && (level.classicPerks == 0 || (level.classicPerks == 2 && !array_contains(level.classicMaps, level._mapname))))
                 {
                     if (isDefined(self.perk4weapon) && self hasWeapon(self.perk4weapon))
                     {
                         perk4weapon = self.perk4weapon;
+                        
+                        if (isRayGun(perk4weapon))
+                            self removeSpecialWeapon("raygun");
                         if (isThunderGun(perk4weapon))
-                            level.currentThunderguns--;
-                        else if (isRayGun(perk4weapon))
-                            level.currentRayguns--;
+                            self removeSpecialWeapon("thundergun");
+                        if (perk4weapon == "stinger_mp")
+                            self removeSpecialWeapon("zapper");
+                        
                         self takeWeapon(perk4weapon);
                         self updatePlayerWeaponsList(perk4weapon, true);
                     }
                     else
                     {
                         currentWeapon = self getCurrentWeapon();
+
+                        if (isRayGun(currentWeapon))
+                            self removeSpecialWeapon("raygun");
                         if (isThunderGun(currentWeapon))
-                            level.currentThunderguns--;
-                        else if (isRayGun(currentWeapon))
-                            level.currentRayguns--;
+                            self removeSpecialWeapon("thundergun");
+                        if (currentWeapon == "stinger_mp")
+                            self removeSpecialWeapon("zapper");
+                        
                         self takeWeapon(currentWeapon);
                         self updatePlayerWeaponsList(currentWeapon, true);
                     }
                     self.perksBought[3] = false;
-                    self.perk4weapon = undefined;
+                    self.perk4weapon = "";
                     self.ammoMatic = false;
                 }
                 if (self.perksBought[4])
@@ -3448,10 +3409,13 @@ gamblerRoll(box)
             }
 
             currentWeapon = self getCurrentWeapon();
+            
+            if (isRayGun(currentWeapon))
+                self removeSpecialWeapon("raygun");
             if (isThunderGun(currentWeapon))
-                level.currentThunderguns--;
-            else if (isRayGun(currentWeapon))
-                level.currentRayguns--;
+                self removeSpecialWeapon("thundergun");
+            if (currentWeapon == "stinger_mp")
+                self removeSpecialWeapon("zapper");
 
             self takeWeapon(currentWeapon);
             self updatePlayerWeaponsList(currentWeapon, true);
@@ -3506,12 +3470,20 @@ gamblerRoll(box)
             break;
         case 20:
             self iPrintLnBold(level.gameStrings[250], "your current weapon");
-            if (aiz_mayDropWeapon(self getCurrentWeapon()) && self.weaponsList.size > 1)
+
+            currentWeapon = self getCurrentWeapon();
+            if (aiz_mayDropWeapon(currentWeapon) && self.weaponsList.size > 1)
             {
-                self updatePlayerWeaponsList(self getCurrentWeapon(), true);
-                if (isRayGun(self getCurrentWeapon())) level.currentRayguns--;
-                else if (isThunderGun(self getCurrentWeapon())) level.currentThunderguns--;
-                self takeWeapon(self getCurrentWeapon());
+                self updatePlayerWeaponsList(currentWeapon, true);
+                
+                if (isRayGun(currentWeapon))
+                    self removeSpecialWeapon("raygun");
+                if (isThunderGun(currentWeapon))
+                    self removeSpecialWeapon("thundergun");
+                if (currentWeapon == "stinger_mp")
+                    self removeSpecialWeapon("zapper");
+                
+                self takeWeapon(currentWeapon);
                 self thread switchToWeapon_delay(self.weaponsList[0], 0.4);
                 self.newGunReady = true;
             }
@@ -3674,7 +3646,7 @@ useAmmo(box)
     wait(1);//Wait a second to allow using after a delay
 }
 
-useKillstreak(box)
+useKillstreakBox(box)
 {
     if (!level.powerActivated) return;
     if (self.SessionTeam != "allies") return;
@@ -3756,11 +3728,28 @@ linkTeleporter(linker)
     linker.teleporter.isLinked = true;
     playFX(level.fx_sparks, linker.origin, (0, linker.origin[1], 90));
 
+    linker thread activateTeleporterLink();
+}
+activateTeleporterLink()
+{
     wait(1);
 
-    linker.teleporter playSound("item_nightvision_on");
-    foreach (floor in linker.teleporter.floorsActive)
+    self.teleporter playSound("item_nightvision_on");
+    foreach (floor in self.teleporter.floorsActive)
         floor show();
+}
+deactivateTeleporterLink()
+{
+    wait(1);
+
+    //self.isLinked = false;
+    foreach (floor in self.floorsActive)
+        floor hide();
+
+    wait(self.teleTime);
+
+    self.isLinked = false;
+    self.state = 0;
 }
 
 playTeleporterSounds()
@@ -3794,16 +3783,7 @@ useTeleporter(teleporter)
         if (distanceSquared(player.origin, teleporter.origin) < 6400 && self.isAlive) player thread teleportPlayer(teleporter);
     }
 
-    wait(1);
-
-    //teleporter.isLinked = false;
-    foreach (floor in teleporter.floorsActive)
-        floor hide();
-
-    wait(teleporter.teleTime);
-
-    teleporter.isLinked = false;
-    teleporter.state = 0;
+    teleporter thread deactivateTeleporterLink();
 }
 teleportPlayer(teleporter)
 {
@@ -3888,18 +3868,16 @@ useElevator(elevator)
         playFXOnTag(level.fx_rayGunUpgrade, fx[3], "tag_origin");
     }
     */
-    start = elevator.startPos;
-    end = elevator.endPos;
-    drop = elevator.dropPos;
-    self playerLinkTo(elevator, "tag_origin", 0, 180, 180, 180, 180, true);
-    elevator moveTo(end, 5, 1, 1);
+
+    elevator thread elevator_ridePath(self, elevator.startPos, elevator.dropPos);
+}
+elevator_ridePath(player, start, drop)
+{
+    player playerLinkTo(self, "tag_origin", 0, 180, 180, 180, 180, true);
+    self moveTo(self.endPos, 5, 1, 1);
 
     wait(5);
 
-    elevator thread elevator_dropOffPlayer(self, start, drop);
-}
-elevator_dropOffPlayer(player, start, drop)
-{
     self moveTo(start, 5, 1, 1);
 
     if (player.isAlive)
@@ -4067,11 +4045,6 @@ usePerk(box, perk)
                 icon = "waypoint_revive";
             }
             break;
-        case 8:
-            name = level.gameStrings[273];
-            perks[perks.size] = "specialty_scavenger";
-            icon = "specialty_scavenger_upgrade";
-            break;
     }
     self.cash -= cost;
     self maps\mp\gametypes\_aiz_hud::scorePopup(-cost);
@@ -4107,22 +4080,21 @@ usePerk(box, perk)
     if (perk != 7) self.perksBought[perk-1] = true;
     else if (perk == 7) self.perksBought[6]++;
 
+    self notify("perk_bought");
     self.totalPerkCount++;
     self.lastBoughtPerk = icon;
     self playLocalSound("earn_perk");
     self thread maps\mp\gametypes\_aiz_hud::showBoughtPerk(name, icon, perk-1);
 
-    //wait(0.05);
-
     self maps\mp\gametypes\_aiz_hud::updatePerksHud(false, false);
 }
 setPerkBlur()
 {
-    self setBlurForPlayer(10, 0.3f);
+    self setBlurForPlayer(10, 0.3);
 
-    wait (0.7f);
+    wait (0.7);
 
-    self setBlurForPlayer(0, 0.3f);
+    self setBlurForPlayer(0, 0.3);
 }
 
 usePower(box)
@@ -4219,26 +4191,30 @@ powerBoxActivate(player)
 useDoor(door)
 {
     if (!self.isAlive) return;
-    if (self.SessionTeam == "allies")
+    if (self.sessionTeam != "allies") return;
+
+    if (door.state != "close") return;
+    cost = door.cost;
+    if (self.cash < cost) return;
+    door.state = "open";
+    self.cash -= cost;
+    self maps\mp\gametypes\_aiz_hud::scorePopup(-cost);
+    self maps\mp\gametypes\_aiz_hud::scoreMessage(level.gameStrings[276]);
+
+    door thread door_moveDoor();
+}
+door_moveDoor()
+{
+    self moveTo(self.open, 1);
+    if (isDefined(self.spawn) && isDefined(self.spawnAngles))
     {
-        if (door.state != "close") return;
-        cost = door.cost;
-        if (self.cash < cost) return;
-        door.state = "open";
-        self.cash -= cost;
-        self maps\mp\gametypes\_aiz_hud::scorePopup(-cost);
-        self maps\mp\gametypes\_aiz_hud::scoreMessage(level.gameStrings[276]);
-        door moveTo(door.open, 1);
-        if (isDefined(door.spawn) && isDefined(door.spawnAngles))
-        {
-            level.botSpawns[level.botSpawns.size] = door.spawn;
-            level.botSpawnAngles[level.botSpawnAngles.size] = door.spawnAngles;
-        }
-
-        wait (1.1);
-
-        door removeUsable();
+        level.botSpawns[level.botSpawns.size] = self.spawn;
+        level.botSpawnAngles[level.botSpawnAngles.size] = self.spawnAngles;
     }
+
+    wait (1.1);
+
+    self removeUsable();
 }
 
 useWallWeapon(box)
@@ -4256,13 +4232,16 @@ useWallWeapon(box)
         weapon = box.weapon;
         if (!self.newGunReady && !self hasWeapon(weapon) && weapon != "frag_grenade_mp")
         {
-            if (isThunderGun(self getCurrentWeapon()))
-                level.currentThunderguns--;
-            else if (isRayGun(self getCurrentWeapon()))
-                level.currentRayguns--;
+            currentWeapon = self getCurrentWeapon();
+            if (isRayGun(currentWeapon))
+                self removeSpecialWeapon("raygun");
+            if (isThunderGun(currentWeapon))
+                self removeSpecialWeapon("thundergun");
+            if (currentWeapon == "stinger_mp")
+                self removeSpecialWeapon("zapper");
 
-            self updatePlayerWeaponsList(self getCurrentWeapon(), true);
-            self takeWeapon(self getCurrentWeapon());
+            self updatePlayerWeaponsList(currentWeapon, true);
+            self takeWeapon(currentWeapon);
         }
         self giveWeapon(weapon);
         self giveMaxAmmo(weapon);
@@ -4288,7 +4267,7 @@ getUsableText(player)
     {
         case "sentryPickup":
             if (self.turret.isBeingCarried || self.turret.owner != player) return [&"NULL_EMPTY"];
-            return [level.gameStrings[338], "^3[{+activate}]^7"];
+            return [level.gameStrings[338], "[{+activate}]"];
         case "revive":
             downed = self.player;
             if (player == downed || (isDefined(self.user) && self.user == player)) return [&"NULL_EMPTY"];
@@ -4311,18 +4290,25 @@ getUsableText(player)
                     return [level.gameStrings[279], level.localizedWeaponNames[self.weapon]];
                 return [&"NULL_EMPTY"];
             }
-            if (level.sale) return [level.gameStrings[280]];
-            else return [level.gameStrings[281]];
+            else return [level.gameStrings[281], &"NULL_EMPTY", level.boxCost];
         case "pap":
             if (!level.powerActivated) return [level.gameStrings[282]];
             if (self.state == "inuse") return [&"NULL_EMPTY"];
             if (self.state == "waiting")
             {
                 if (self.player == player)
-                    return [level.gameStrings[283]];
+                {
+                    weaponName = maps\mp\gametypes\_aiz_hud::getWeaponName(self.weaponName);
+                    return [level.gameStrings[283], weaponName];
+                }
                 return [&"NULL_EMPTY"];
             }
-            return [level.gameStrings[284]];
+            
+            if (getWeaponUpgrade(player getCurrentWeapon()) == "")
+                return [level.gameStrings[240]];
+
+            weaponName = maps\mp\gametypes\_aiz_hud::getWeaponName(player getCurrentWeapon());
+            return [level.gameStrings[284], weaponName];
         case "gambler":
             if (!player.gamblerInUse) return [level.gameStrings[285]];
             else return [&"NULL_EMPTY"];
@@ -4480,16 +4466,14 @@ getUsableText(player)
             }
             return [level.gameStrings[316], streak];
         case "wallweapon":
-            if (isDefined(self.script_noteworthy)) return [level.gameStrings[318]];
+            if (isDefined(self.script_noteworthy)) return [&"AIZ_PRESS_FOR_EASTER_EGG"];
 
             weapon = self.weapon;
             //weaponName = maps\mp\gametypes\_aiz_hud::getWeaponName(weapon);
             //if (weaponName == &"NULL_EMPTY") weaponName = level.gameStrings[317];
             cost = self.price;
 
-            //PLUTOIW5 - There is no great way to do this base string, and this feature is seemingly unused in the base game mode so this is being changed to simply show the weapon name.
-            //if (!player hasWeapon(weapon) && cost != 0) return [&"NULL_EMPTY", "Press ^3[{+activate}] ^7for " + weaponName + " ^7[Cost: " + cost + "]"];
-            /*else */if (!player hasWeapon(weapon) || weapon == "frag_grenade_mp"/* && cost == 0*/) return [level.gameStrings[322], &"NULL_EMPTY", cost];
+            if (!player hasWeapon(weapon) || weapon == "frag_grenade_mp") return [level.gameStrings[322], &"NULL_EMPTY", cost];
             else return [level.gameStrings[321], &"NULL_EMPTY", (cost/2)];
         case "helmet":
             if (isDefined(player.helmet) && player.helmet) return [&"NULL_EMPTY"];
@@ -4497,7 +4481,7 @@ getUsableText(player)
         case "zipline":
             if (!level.powerActivated && (level._mapname != "mp_highrise" && (level._mapname != "mp_terminal_cls" || (level._mapname == "mp_terminal_cls" && level.mapVariation != 0)))) return [level.gameStrings[282]];
             else if (self.isMoving) return [&"NULL_EMPTY"];
-            else return [&"Hold ^3[{+activate}]^7 to use Zipline[^2$^35000^7]"];
+            else return [level.gameStrings[319]];
         default:
             return [&"NULL_EMPTY"];
     }
@@ -4741,6 +4725,7 @@ startSale()
     if (level.sale) return;
 
     level.sale = true;
+    level.boxCost = 10;
 
     level thread endSaleAfterTime();
 
@@ -4769,6 +4754,7 @@ endSaleAfterTime()
     wait (30);
     level notify("sale_ended");
     level.sale = false;
+    level.boxCost = 950;
 }
 populateAllBoxLocations()
 {
@@ -4795,7 +4781,7 @@ populateAllBoxLocations()
         if (i == currentBoxLocationIndex)
             continue;
             
-        box = randomWeaponCrate(level.boxLocations[i][0], level.boxLocations[i][1], 0, i);
+        box = randomWeaponCrate(level.boxLocations[i][0], level.boxLocations[i][1], i);
         box thread removeAfterSale();
     }
 }
@@ -4827,6 +4813,18 @@ addUsable(type, range)
     self.trigger = trigger;
     */
     level.usables[level.usables.size] = self;
+}
+setUsableWaypointIcon(iconName)
+{
+    headIcon = newHudElem();
+    headIcon.x = self.origin[0];
+    headIcon.y = self.origin[1];
+    headIcon.z = self.origin[2] + 40;
+    headIcon.alpha = 0.75;
+    headIcon.archived = false;
+    headIcon setShader(iconName, 8, 8);
+    headIcon setWaypoint(true, false, false);
+    self.icon = headIcon;
 }
 
 spawnMapEditObject(type, origin, angles, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
@@ -5014,7 +5012,7 @@ spawnMapEditObject(type, origin, angles, arg2, arg3, arg4, arg5, arg6, arg7, arg
             createZipline(origin, angles, arg2, arg3, arg4, arg5, arg6);
             break;
         default:
-            printLn(level.gameStrings[326], type);
+            printLn("Unknown mapedit object &&1", type);
             break;
     }
 }

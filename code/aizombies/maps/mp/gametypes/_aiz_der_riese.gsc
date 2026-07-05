@@ -150,7 +150,7 @@ initMysteryBox()
     }
 
     level.boxLocations = boxSpawns;
-    randomWeaponCrate(boxSpawns[0][0], boxSpawns[0][1], 0, 0);
+    randomWeaponCrate(boxSpawns[0][0], boxSpawns[0][1]);
 }
 initPackAPunch()
 {
@@ -346,6 +346,7 @@ initBuyableDoors()
 {
     createDoor((-423.271, -1028.56, 400), (-423.271, -1028.56, 200.625), (90, 90, 0), 2, 2, 75, 1000);//Door to warehouse_top
     createDoor((1047, -1014.61, 400), (1047, -1014.61, 162.125), (90, 0, 0), 3, 2, 75, 1000);//Door to wnuen_bridge
+    createDoor((-900, -1200, 1000), (-900, -1200, 200), (90, 0, 0), 3, 2, 75, 750);//Door to tp_south_zone
 
     outsideWestDoor = getEnt("outside_west_door", "targetname");
     warehouseDoors = getEntArray("warehouse_garage_door", "targetname");
@@ -787,6 +788,10 @@ initNewAdditions()
     objective_team(curObjID, "allies");
     objective_state(curObjId, "active");
     objective_icon(curObjId, "cardicon_aircraft_01");
+
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && maps\mp\gametypes\_aiz::array_contains(level.classicMaps, level._mapname)))
+        killstreak setUsableWaypointIcon("cardicon_aircraft_01");
+        
     killstreak addUsable("killstreak", 100);
 
     gambler = spawn("script_origin", (-304.596, -2322.97, 170));
@@ -802,5 +807,9 @@ initNewAdditions()
     gambler.laptop = laptop;
     gambler.gamblerInUse = false;
     laptop thread rotateEntity();
+
+    if (level.showWaypointIcons == 1 || (level.showWaypointIcons == 2 && maps\mp\gametypes\_aiz::array_contains(level.classicMaps, level._mapname)))
+        gambler setUsableWaypointIcon("cardicon_8ball");
+
     gambler addUsable("gambler", 75);
 }
